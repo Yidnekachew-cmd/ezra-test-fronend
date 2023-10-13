@@ -1,27 +1,12 @@
-import { useState } from "react";
 import TextEditor from "./TextEditor";
-import axios from "axios";
+import PropTypes from "prop-types"
 
-const Form = () => {
-  const [data, setData] = useState({
-    title: "",
-  });
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    axios
-      .post("/course/create", data)
-      .then((res) => {
-        window.location.reload(true);
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-  };
+const Form = ({data, setData}) => {
+
+  
   return (
     <div className="hidden md:block border border-blue-200 w-1/3 h-auto rounded mx-auto ">
-      <form
-        onSubmit={handleSubmit}
-        className="p-3 md:flex flex-col justify-start space-y-3 "
-      >
+     
         <input
           type="text"
           name="title"
@@ -30,15 +15,15 @@ const Form = () => {
           onChange={(e) => setData({ ...data, title: e.target.value })}
         />
         <TextEditor />
-        <button
-          type="submit"
-          className=" bg-blue-500 self-end w-1/3 rounded items-end"
-        >
-          <h3 className="text-white">Create</h3>
-        </button>
-      </form>
+       
     </div>
   );
 };
+
+Form.propTypes = {
+  data: PropTypes.object.isRequired, // Specify the expected data prop as an object
+  setData: PropTypes.func.isRequired, // Specify the expected setData prop as a function
+};
+
 
 export default Form;
