@@ -14,6 +14,7 @@ function App() {
         <Header />
         <div className="container flex justify-between px-12  space-x-12 mt-12">
           <AddCourse />
+          
           {/* <DisplayCourse />
           <Form /> */}
         </div>
