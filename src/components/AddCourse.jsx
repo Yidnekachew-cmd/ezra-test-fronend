@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DisplayCourse from "./DisplayCourse";
 import Form from "./Form";
 import AddCourseImage from "./AddCourseImage";
