@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const DisplayCourse = () => {
+const GetCourses = () => {
   const [data, setData] = useState([]);
 
   //get all courses
@@ -23,10 +23,19 @@ const DisplayCourse = () => {
       {data.map((course, index) => {
         return (
           <div key={index}>
-            <h1>{course.title[0].title1}</h1>
-            <h1>{course.title[0].title2}</h1>
-            <h1>{course.sub[0].sub1}</h1>
-            <h1>{course.sub[0].sub2}</h1>
+            {course.title.map((title, idx) => (
+              <h1
+                key={`${title.key}-${idx}`}
+                className="text-2xl font-bold text-blue-500"
+              >
+                {title.value}
+              </h1>
+            ))}
+            {course.sub.map((sub, idx) => (
+              <h1 key={`${sub.key}-${idx}`} className="text-lg text-gray-700">
+                {sub.value}
+              </h1>
+            ))}
           </div>
         );
       })}
@@ -34,4 +43,4 @@ const DisplayCourse = () => {
   );
 };
 
-export default DisplayCourse;
+export default GetCourses;
