@@ -4,7 +4,7 @@ import Header from "./components/Header";
 // import Form from './components/Form'
 import AddCourse from "./components/AddCourse";
 // import DisplayCourse from './components/DisplayCourse'
-
+import FormDevotional from './components/FormDevotional'
 function App() {
   // const [count, setCount] = useState(0)
 
@@ -14,7 +14,7 @@ function App() {
         <Header />
         <div className="container flex justify-between px-12  space-x-12 mt-12">
           <AddCourse />
-          
+          <FormDevotional />
           {/* <DisplayCourse />
           <Form /> */}
         </div>
