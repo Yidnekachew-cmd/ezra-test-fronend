@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .title-class {
+      @apply text-lg font-bold text-blue-500;
+    }
+    .sub-class {
+      @apply text-lg text-gray-700;
+    }
+  }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const GetCourses = () => {
+const ImgMap = () => {
   const [data, setData] = useState([]);
 
   //get all courses
@@ -25,16 +25,10 @@ const GetCourses = () => {
           <div key={index}>
             {course.elements.map((element, idx) => (
               <div key={`${element.id}-${idx}`}>
-                {element.type === "img" ? (
-                  <img src={element.img} alt={element.id} />
+                {element.type === "image" ? (
+                  <img src={element.file} alt={element.id} />
                 ) : (
-                  <h1
-                    className={
-                      element.type === "title" ? "title-class" : "sub-class"
-                    }
-                  >
-                    {element.value}
-                  </h1>
+                  <h1>{element.value}</h1>
                 )}
               </div>
             ))}
@@ -45,4 +39,4 @@ const GetCourses = () => {
   );
 };
 
-export default GetCourses;
+export default ImgMap;

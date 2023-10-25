@@ -6,23 +6,23 @@ function SubTitle() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = elements.reduce(
-      (acc, el) => {
-        if (el.type === "title") {
-          acc.title = [...acc.title, { [el.id]: el.value }];
-        } else if (el.type === "sub") {
-          acc.sub = [...acc.sub, { [el.id]: el.value }];
-        }
-        return acc;
-      },
-      { title: [], sub: [] }
-    );
+    console.log(elements);
+    const formData = new FormData();
+    elements.forEach((element) => {
+      if (element.type === "img") {
+        formData.append(element.id, element.value);
+      } else {
+        // Stringify the element before appending it to the FormData instance
+        formData.append(element.id, JSON.stringify(element));
+      }
+    });
     console.log(formData);
-    // Send the formData object to the backend
+
+    // Send the elements array to the backend
     axios
       .post("/course/create", formData)
       .then((res) => {
-        window.location.reload(true);
+        // window.location.reload(true);
         console.log(res);
       })
       .catch((err) => console.log(err));
@@ -46,9 +46,24 @@ function SubTitle() {
     setElements((prevElements) => [...prevElements, newElement]);
   };
 
+  const handleImgButton = () => {
+    const newElement = {
+      type: "img",
+      id: `img${elements.filter((el) => el.type === "img").length + 1}`,
+      value: "",
+    };
+    setElements((prevElements) => [...prevElements, newElement]);
+  };
+
   const handleInputChange = (id, value) => {
     setElements((prevElements) =>
       prevElements.map((el) => (el.id === id ? { ...el, value: value } : el))
+    );
+  };
+
+  const handleFileChange = (id, file) => {
+    setElements((prevElements) =>
+      prevElements.map((el) => (el.id === id ? { ...el, value: file } : el))
     );
   };
 
@@ -66,22 +81,43 @@ function SubTitle() {
       >
         Add Sub
       </button>
+      <button
+        className="bg-blue-500 rounded px-2 md:px-2 md:py-1 text-white"
+        onClick={handleImgButton}
+      >
+        Add Image
+      </button>
       <form
         onSubmit={handleSubmit}
         className="p-3 md:flex flex-col justify-start space-y-3"
       >
         {elements.map((element) => (
-          <input
-            key={element.id}
-            type="text"
-            name={element.id}
-            placeholder={`${
-              element.type.charAt(0).toUpperCase() + element.type.slice(1)
-            } ${element.id.slice(-1)}`}
-            className="px-2 border border-blue-100 rounded outline-slate-500 my-2"
-            value={element.value}
-            onChange={(e) => handleInputChange(element.id, e.target.value)}
-          />
+          <div key={element.id}>
+            <label>{element.id}</label>
+            {element.type === "img" ? (
+              <input
+                key={element.id}
+                type="file"
+                name={element.id}
+                className="px-2 border border-blue-100 rounded outline-slate-500 my-2"
+                onChange={(e) =>
+                  handleFileChange(element.id, e.target.files[0])
+                }
+              />
+            ) : (
+              <input
+                key={element.id}
+                type="text"
+                name={element.id}
+                placeholder={`${
+                  element.type.charAt(0).toUpperCase() + element.type.slice(1)
+                } ${element.id.slice(-1)}`}
+                className="px-2 border border-blue-100 rounded outline-slate-500 my-2"
+                value={element.value}
+                onChange={(e) => handleInputChange(element.id, e.target.value)}
+              />
+            )}
+          </div>
         ))}
         <button
           type="submit"
