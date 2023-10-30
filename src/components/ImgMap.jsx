@@ -1,37 +1,52 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const ImgMap = () => {
+const GetCourse = () => {
   const [data, setData] = useState([]);
 
-  //get all courses
   useEffect(() => {
+    // Fetch the course data from the backend
     axios
       .get("/course/getall")
       .then((res) => {
-        if (res.status === 200) {
-          setData(res.data);
-        } else {
-          alert("Error");
-        }
+        console.log(res);
+        setData(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
   return (
-    <div className="bg-gray-100 w-2/3 p-3 rounded">
-      {data.map((course, index) => {
+    <div>
+      {data.map((course) => {
         return (
-          <div key={index}>
-            {course.elements.map((element, idx) => (
-              <div key={`${element.id}-${idx}`}>
-                {element.type === "image" ? (
-                  <img src={element.file} alt={element.id} />
-                ) : (
-                  <h1>{element.value}</h1>
-                )}
-              </div>
-            ))}
+          <div key={course._id}>
+            {course.elements.map((element) => {
+              // Check the type of the element and render it accordingly
+              if (element.type === "title") {
+                return (
+                  <h1 key={element._id} className="title-class">
+                    {element.value}
+                  </h1>
+                );
+              } else if (element.type === "sub") {
+                return (
+                  <h2 key={element._id} className="sub-class">
+                    {element.value}
+                  </h2>
+                );
+              } else if (element.type === "img") {
+                return (
+                  <img
+                    key={element._id}
+                    src={`http://localhost:5000/images/${element.value}`}
+                    alt={element.id}
+                    className="img-class"
+                  />
+                );
+              } else {
+                return null;
+              }
+            })}
           </div>
         );
       })}
@@ -39,4 +54,4 @@ const ImgMap = () => {
   );
 };
 
-export default ImgMap;
+export default GetCourse;

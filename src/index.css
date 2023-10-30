@@ -9,4 +9,7 @@
     .sub-class {
       @apply text-lg text-gray-700;
     }
+    .img-class {
+      @apply rounded-lg w-[20%] m-1;
+    }
   }

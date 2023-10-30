@@ -6,23 +6,25 @@ function SubTitle() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(elements);
     const formData = new FormData();
+    const imageIds = []; // Create an array to store the ids of image elements
+
     elements.forEach((element) => {
       if (element.type === "img") {
-        formData.append(element.id, element.value);
+        formData.append("images", element.value); // Add the image file to "images" field
+        imageIds.push(element.id); // Add the id of the image to the "imageIds" array
       } else {
-        // Stringify the element before appending it to the FormData instance
-        formData.append(element.id, JSON.stringify(element));
+        formData.append(element.id, element.value); // Add the value of the element to the corresponding id field
       }
     });
-    console.log(formData);
+
+    // Append the "imageIds" array to the FormData
+    formData.append("imageIds", JSON.stringify(imageIds));
 
     // Send the elements array to the backend
     axios
       .post("/course/create", formData)
       .then((res) => {
-        // window.location.reload(true);
         console.log(res);
       })
       .catch((err) => console.log(err));
@@ -61,9 +63,15 @@ function SubTitle() {
     );
   };
 
-  const handleFileChange = (id, file) => {
+  const handleImageChange = (id, img) => {
+    const imageObject = {
+      type: "img",
+      id: id,
+      value: img,
+      img: img, // Add the img object to the element
+    };
     setElements((prevElements) =>
-      prevElements.map((el) => (el.id === id ? { ...el, value: file } : el))
+      prevElements.map((el) => (el.id === id ? { ...el, ...imageObject } : el))
     );
   };
 
@@ -101,7 +109,7 @@ function SubTitle() {
                 name={element.id}
                 className="px-2 border border-blue-100 rounded outline-slate-500 my-2"
                 onChange={(e) =>
-                  handleFileChange(element.id, e.target.files[0])
+                  handleImageChange(element.id, e.target.files[0])
                 }
               />
             ) : (
