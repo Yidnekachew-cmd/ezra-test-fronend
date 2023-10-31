@@ -1,9 +1,9 @@
 import React from 'react'
 
-const DevotionDisplay = ({ form }) => {
+const DevotionDisplay = ({ form, paragraphs }) => {
   return (
     <div  className='w-[70%]  flex space-x-12  bg-gray-100 container mx-auto'>
-      <div className='flex flex-col border-2 rounded h-[13%] p-3 w-[20%] justify-center items-center border-amber-500 mt-8'>
+      <div className='flex flex-col border-2 rounded h-24 p-3 w-[20%] justify-center items-center border-amber-500 mt-8'>
         <p className=' font-customBold text-4xl'>
           {form.month}
         </p>
@@ -21,9 +21,10 @@ const DevotionDisplay = ({ form }) => {
         <p className='font-customLight text-xl'>
           {form.verse}
         </p>
-        <p className='font-customLight text-1xl'>
-          {form.body}
-        </p>
+
+        {paragraphs.map((para, paragraphIndex) => (
+          <p className='font-customLight text-1xl' key={paragraphIndex}>{para}</p>
+        ))}
         <p className='font-customBold text-1xl border-2 border-amber-400 p-2 rounded'>
           {form.prayer}
         </p>

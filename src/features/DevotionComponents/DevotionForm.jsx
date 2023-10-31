@@ -1,9 +1,41 @@
+import AddParagraph from "./AddParagraph"
 
-
-const DevotionForm = ({form, handleChange, handleSubmit }) => {
+const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChange, paragraphs }) => {
  
   return (
     <form onSubmit={handleSubmit} className='w-[30%] bg-gray-300 p-3 rounded pb-4 space-y-2'>
+      <label >
+        Month:
+      </label>
+      <select className="  py-2 rounded" name="month" value={form.month} onChange={handleChange}>
+        <option value="" disabled>-- ምረጥ --</option>
+        <option value="መስከረም">መስከረም</option>
+        <option value="ጥቅምት">ጥቅምት</option>
+        <option value="ህዳር">ህዳር</option>
+        <option value="ታህሳስ">ታህሳስ</option>
+        <option value="ጥር">ጥር</option>
+        <option value="የካቲት">የካቲት</option>
+        <option value="መጋቢት">መጋቢት</option>
+        <option value="ሚያዚያ">ሚያዚያ</option>
+        <option value="ግንቦት">ግንቦት</option>
+        <option value="ሰኔ">ሰኔ</option>
+        <option value="ሐምሌ">ሐምሌ</option>
+        <option value="ነሀሴ">ነሀሴ</option>
+      </select>
+      <label className="ml-1">
+        Day:
+      </label>
+      <input 
+        type="number"
+        name='day' 
+        min="1"
+        max="31"
+        placeholder='day'
+        className='cursor-pointer border-2 border-gray-300 rounded-md px-2 py-1'
+        value={form.day}
+        onChange={handleChange}
+      />
+      <br />
       <label >
         Title:
       </label>
@@ -40,16 +72,12 @@ const DevotionForm = ({form, handleChange, handleSubmit }) => {
         onChange={handleChange}
       />
       <br />
-      <label >
-        Body:
-      </label>
-      <textarea 
-        type="text"
-        name='body' 
-        placeholder='body'
-        className='w-full border-2 border-gray-300 rounded-md px-2 py-1'
-        value={form.body}
-        onChange={handleChange}
+      <AddParagraph
+        form={form} 
+        handleChange={handleChange} 
+        addPara={addPara}
+        handleParaChange={handleParaChange}
+        paragraphs={paragraphs}
       />
       <br />
       <label >
@@ -73,39 +101,6 @@ const DevotionForm = ({form, handleChange, handleSubmit }) => {
         placeholder='image'
         className='cursor-pointer border-2 border-gray-300 rounded px-2 py-1'
         value={form.image}
-        onChange={handleChange}
-      />
-      <br />
-    
-      <label >
-        Choose a month:
-      </label>
-      <select name="month" value={form.month} onChange={handleChange}>
-        <option value="መስከረም">መስከረም</option>
-        <option value="ጥቅምት">ጥቅምት</option>
-        <option value="ህዳር">ህዳር</option>
-        <option value="ታህሳስ">ታህሳስ</option>
-        <option value="ጥር">ጥር</option>
-        <option value="የካቲት">የካቲት</option>
-        <option value="መጋቢት">መጋቢት</option>
-        <option value="ሚያዚያ">ሚያዚያ</option>
-        <option value="ግንቦት">ግንቦት</option>
-        <option value="ሰኔ">ሰኔ</option>
-        <option value="ሐምሌ">ሐምሌ</option>
-        <option value="ነሀሴ">ነሀሴ</option>
-      </select>
-      <br />
-      <label >
-        Day:
-      </label>
-      <input 
-        type="number"
-        name='day' 
-        min="1"
-        max="31"
-        placeholder='day'
-        className='cursor-pointer border-2 border-gray-300 rounded-md px-2 py-1'
-        value={form.day}
         onChange={handleChange}
       />
       <br />
