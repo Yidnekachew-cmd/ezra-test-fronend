@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .title-class {
+      @apply text-lg font-bold text-blue-500;
+    }
+    .sub-class {
+      @apply text-lg text-gray-700;
+    }
+    .img-class {
+      @apply rounded-lg w-[20%] m-1;
+    }
+  }
