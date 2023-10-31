@@ -38,11 +38,33 @@ const Devotion = () => {
       updatedParagraphs[index] = e.target.value;
       setParagraphs(updatedParagraphs);
     };
+
+  // useState for Photo preview
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState('');
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        setPreviewUrl(reader.result);
+      };
+
+      reader.readAsDataURL(file);
+    } else {
+      setPreviewUrl('');
+    }
+  };
   return (
     <div className="mt-12 flex bg-gray-200">
       <DevotionDisplay
         form={form}
         paragraphs={paragraphs}
+        previewUrl={previewUrl}
       />
       <DevotionForm
         form={form} 
@@ -51,6 +73,8 @@ const Devotion = () => {
         handleSubmit={handleSubmit}
         paragraphs={paragraphs}
         addPara={addPara}
+        handleFileChange={handleFileChange}
+        
       />
     </div>
   )

@@ -1,6 +1,7 @@
 import AddParagraph from "./AddParagraph"
+import PhotoUploader from "./PhotoUploader"
 
-const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChange, paragraphs }) => {
+const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChange, paragraphs, handleFileChange }) => {
  
   return (
     <form onSubmit={handleSubmit} className='w-[30%] bg-gray-300 p-3 rounded pb-4 space-y-2'>
@@ -92,7 +93,10 @@ const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChan
         onChange={handleChange}
       />
       <br />
-      <label >
+      <PhotoUploader 
+        handleFileChange={handleFileChange}
+      />
+      {/* <label >
         Image:
       </label>
       <input 
@@ -102,7 +106,7 @@ const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChan
         className='cursor-pointer border-2 border-gray-300 rounded px-2 py-1'
         value={form.image}
         onChange={handleChange}
-      />
+      /> */}
       <br />
       <button className=' bg-blue-500 text-white px-4 py-2 rounded-md '>
         Submit

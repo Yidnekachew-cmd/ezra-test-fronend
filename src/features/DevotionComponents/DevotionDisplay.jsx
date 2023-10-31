@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DevotionDisplay = ({ form, paragraphs }) => {
+const DevotionDisplay = ({ form, paragraphs, previewUrl  }) => {
   return (
     <div  className='w-[70%]  flex space-x-12  bg-gray-100 container mx-auto'>
       <div className='flex flex-col border-2 rounded h-24 p-3 w-[20%] justify-center items-center border-amber-500 mt-8'>
@@ -29,8 +29,8 @@ const DevotionDisplay = ({ form, paragraphs }) => {
           {form.prayer}
         </p>
       </div>
-      <div className='w-[25%]'>
-        <img src={form.image} alt="" />
+      <div className='w-[25%] mt-12'>
+      {previewUrl && <img src={previewUrl} alt="Preview" />}
       </div>
       
 
