@@ -23,7 +23,7 @@ const DevotionDisplay = ({ form, paragraphs, previewUrl  }) => {
         </p>
 
         {paragraphs.map((para, paragraphIndex) => (
-          <p className='font-customLight text-1xl' key={paragraphIndex}>{para}</p>
+          <p className='font-customLight text-1xl text-justify' key={paragraphIndex}>{para}</p>
         ))}
         <p className='font-customBold text-1xl border-2 border-amber-400 p-2 rounded'>
           {form.prayer}
