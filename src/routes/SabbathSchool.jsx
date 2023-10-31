@@ -2,7 +2,9 @@ import React from 'react'
 
 const SabbathSchool = () => {
   return (
-    <div>SabbathSchool</div>
+    <div className=' mt-56 font-bold text-6xl text-center'>
+      Sabbath School
+    </div>
   )
 }
 

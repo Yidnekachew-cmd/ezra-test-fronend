@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'customBold': ['NokiaPureBold, inter, sans-serif'],
+      'customLight': ['NokiaPureLight, inter, sans-serif'],
+    }
   },
   plugins: [],
 }

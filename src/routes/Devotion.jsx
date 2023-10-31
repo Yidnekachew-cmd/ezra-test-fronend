@@ -2,7 +2,9 @@ import React from 'react'
 
 const Devotion = () => {
   return (
-    <div>Devotion</div>
+    <div className=' mt-56 font-bold text-6xl text-center'>
+      Devotion
+    </div>
   )
 }
 
