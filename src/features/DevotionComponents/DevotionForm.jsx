@@ -1,25 +1,9 @@
-import { useState } from 'react'
 
-const DevotionForm = () => {
-  const [form, setForm] = useState({
-    month: '',
-    day: '',
-    title: '',
-    chapter: '',
-    verse: '',
-    body: '',
-    prayer: '',
-    image: '',
-  })
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    })
-  }
+const DevotionForm = ({form, handleChange, handleSubmit }) => {
+ 
   return (
-    <form className='w-[30%] bg-gray-300 p-3 rounded pb-4'>
+    <form onSubmit={handleSubmit} className='w-[30%] bg-gray-300 p-3 rounded pb-4 space-y-2'>
       <label >
         Title:
       </label>
@@ -27,9 +11,9 @@ const DevotionForm = () => {
         type="text"
         name='title' 
         placeholder='Title'
-        className=' border-2 border-gray-300 rounded-md px-2 py-1'
+        className='w-full border-2 border-gray-300 rounded-md px-2 py-1'
         value={form.title}
-        onChange={() => handleChange}
+        onChange={handleChange}
       />
       <br />
       <label >
@@ -39,9 +23,9 @@ const DevotionForm = () => {
         type="text"
         name='chapter' 
         placeholder='chapter'
-        className=' border-2 border-gray-300 rounded-md px-2 py-1'
+        className='w-full border-2 border-gray-300 rounded-md px-2 py-1'
         value={form.chapter}
-        onChange={() => handleChange}
+        onChange={handleChange}
       />
       <br />
       <label >
@@ -51,59 +35,83 @@ const DevotionForm = () => {
         type="text"
         name='verse' 
         placeholder='verse'
-        className=' border-2 border-gray-300 rounded-md px-2 py-1'
+        className='w-full border-2 border-gray-300 rounded-md px-2 py-1'
         value={form.verse}
-        onChange={() => handleChange}
+        onChange={handleChange}
       />
       <br />
       <label >
         Body:
       </label>
-      <input 
+      <textarea 
         type="text"
         name='body' 
         placeholder='body'
-        className=' border-2 border-gray-300 rounded-md px-2 py-1'
+        className='w-full border-2 border-gray-300 rounded-md px-2 py-1'
         value={form.body}
-        onChange={() => handleChange}
+        onChange={handleChange}
       />
       <br />
       <label >
         Prayer:
       </label>
-      <input 
+      <textarea 
         type="text"
         name='prayer' 
         placeholder='prayer'
-        className=' border-2 border-gray-300 rounded-md px-2 py-1'
+        className='w-full border-2 border-gray-300 rounded-md px-2 py-1'
         value={form.prayer}
-        onChange={() => handleChange}
+        onChange={handleChange}
       />
       <br />
       <label >
         Image:
       </label>
       <input 
-        type="text"
+        type="file"
         name='image' 
         placeholder='image'
-        className=' border-2 border-gray-300 rounded-md px-2 py-1'
+        className='cursor-pointer border-2 border-gray-300 rounded px-2 py-1'
         value={form.image}
-        onChange={() => handleChange}
+        onChange={handleChange}
       />
+      <br />
+    
+      <label >
+        Choose a month:
+      </label>
+      <select name="month" value={form.month} onChange={handleChange}>
+        <option value="መስከረም">መስከረም</option>
+        <option value="ጥቅምት">ጥቅምት</option>
+        <option value="ህዳር">ህዳር</option>
+        <option value="ታህሳስ">ታህሳስ</option>
+        <option value="ጥር">ጥር</option>
+        <option value="የካቲት">የካቲት</option>
+        <option value="መጋቢት">መጋቢት</option>
+        <option value="ሚያዚያ">ሚያዚያ</option>
+        <option value="ግንቦት">ግንቦት</option>
+        <option value="ሰኔ">ሰኔ</option>
+        <option value="ሐምሌ">ሐምሌ</option>
+        <option value="ነሀሴ">ነሀሴ</option>
+      </select>
       <br />
       <label >
-        Month:
+        Day:
       </label>
       <input 
-        type="date"
-        name='month' 
-        placeholder='month'
-        className=' border-2 border-gray-300 rounded-md px-2 py-1'
-        value={form.month}
-        onChange={() => handleChange}
+        type="number"
+        name='day' 
+        min="1"
+        max="31"
+        placeholder='day'
+        className='cursor-pointer border-2 border-gray-300 rounded-md px-2 py-1'
+        value={form.day}
+        onChange={handleChange}
       />
       <br />
+      <button className=' bg-blue-500 text-white px-4 py-2 rounded-md '>
+        Submit
+      </button>
     </form>
   )
 }

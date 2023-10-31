@@ -15,6 +15,10 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      customBold: ["Nokia Pure Headline Bold","Inter", "sans-serif"], 
+      customLight: ["Nokia Pure Headline Light","Inter", "sans-serif"], 
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
