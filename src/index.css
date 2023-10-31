@@ -13,3 +13,13 @@
       @apply rounded-lg w-[20%] m-1;
     }
   }
+
+@font-face {
+    font-family: 'NokiaPureBold';
+    src: url(../public/fonts/NOKIAPUREHEADLINE_BD.TTF) format('truetype');
+}
+
+@font-face {
+  font-family: 'NokiaPureLight';
+  src: url(../public/fonts/NokiaPureHeadline_ULt.ttf) format('truetype');
+}
