@@ -1,8 +1,9 @@
+import props from 'prop-types'
 import AddParagraph from "./AddParagraph"
 import PhotoUploader from "./PhotoUploader"
 
 const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChange, paragraphs, handleFileChange }) => {
- 
+
   return (
     <form onSubmit={handleSubmit} className='w-[30%] bg-gray-300 p-3 rounded pb-4 space-y-2'>
       <label >
@@ -26,9 +27,9 @@ const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChan
       <label className="ml-1">
         Day:
       </label>
-      <input 
+      <input
         type="number"
-        name='day' 
+        name='day'
         min="1"
         max="31"
         placeholder='day'
@@ -40,9 +41,9 @@ const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChan
       <label >
         Title:
       </label>
-      <input 
+      <input
         type="text"
-        name='title' 
+        name='title'
         placeholder='Title'
         className='w-full border-2 border-gray-300 rounded-md px-2 py-1'
         value={form.title}
@@ -52,9 +53,9 @@ const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChan
       <label >
         Chapter:
       </label>
-      <input 
+      <input
         type="text"
-        name='chapter' 
+        name='chapter'
         placeholder='chapter'
         className='w-full border-2 border-gray-300 rounded-md px-2 py-1'
         value={form.chapter}
@@ -64,9 +65,9 @@ const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChan
       <label >
         verse:
       </label>
-      <input 
+      <input
         type="text"
-        name='verse' 
+        name='verse'
         placeholder='verse'
         className='w-full border-2 border-gray-300 rounded-md px-2 py-1'
         value={form.verse}
@@ -74,8 +75,8 @@ const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChan
       />
       <br />
       <AddParagraph
-        form={form} 
-        handleChange={handleChange} 
+        form={form}
+        handleChange={handleChange}
         addPara={addPara}
         handleParaChange={handleParaChange}
         paragraphs={paragraphs}
@@ -84,24 +85,24 @@ const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChan
       <label >
         Prayer:
       </label>
-      <textarea 
+      <textarea
         type="text"
-        name='prayer' 
+        name='prayer'
         placeholder='prayer'
         className='w-full border-2 border-gray-300 rounded-md px-2 py-1'
         value={form.prayer}
         onChange={handleChange}
       />
       <br />
-      <PhotoUploader 
+      <PhotoUploader
         handleFileChange={handleFileChange}
       />
       {/* <label >
         Image:
       </label>
-      <input 
+      <input
         type="file"
-        name='image' 
+        name='image'
         placeholder='image'
         className='cursor-pointer border-2 border-gray-300 rounded px-2 py-1'
         value={form.image}
@@ -113,6 +114,16 @@ const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChan
       </button>
     </form>
   )
+}
+
+DevotionForm.propTypes = {
+  form: props.object,
+  handleChange: props.func,
+  handleSubmit: props.func,
+  addPara: props.func,
+  handleParaChange: props.func,
+  paragraphs: props.array,
+  handleFileChange: props.func
 }
 
 export default DevotionForm

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import DevotionForm from '../features/DevotionComponents/DevotionForm';
 import DevotionDisplay from '../features/DevotionComponents/DevotionDisplay';
+import axios from 'axios';
 const Devotion = () => {
   const [form, setForm] = useState({
     month: '',
@@ -20,10 +21,56 @@ const Devotion = () => {
     })
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // console.log(form);
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const formData = new FormData();
+
+    // Append form data to the FormData object
+    Object.entries(form).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    // Append paragraphs data to the FormData object
+    paragraphs.forEach((paragraph, index) => {
+      formData.append(`paragraph${index + 1}`, paragraph);
+    });
+
+    // Append the selected file to the FormData object
+    if (selectedFile) {
+      formData.append('image', selectedFile);
+    }
+
+    // Send a POST request to the backend API
+    const response = await axios.post('/devotion/create', formData);
+
+    // Handle the response from the backend if needed
+    console.log(response.data);
+
+    // Reset the form after successful submission
+    setForm({
+      month: '',
+      day: '',
+      title: '',
+      chapter: '',
+      verse: '',
+      body: '',
+      prayer: '',
+      image: '',
+    });
+
+    // Clear the paragraphs
+    setParagraphs([]);
+
+    // Clear the selected file and preview URL
+    setSelectedFile(null);
+    setPreviewUrl('');
+  } catch (error) {
+    // Handle the error if the request fails
+    console.error(error);
   }
+};
 
   // useState for adding multiple paragraphs
   const [paragraphs, setParagraphs] = useState([]);
@@ -67,14 +114,14 @@ const Devotion = () => {
         previewUrl={previewUrl}
       />
       <DevotionForm
-        form={form} 
-        handleParaChange={handleParaChange} 
-        handleChange={handleChange} 
+        form={form}
+        handleParaChange={handleParaChange}
+        handleChange={handleChange}
         handleSubmit={handleSubmit}
         paragraphs={paragraphs}
         addPara={addPara}
         handleFileChange={handleFileChange}
-        
+
       />
     </div>
   )

@@ -1,4 +1,4 @@
-import React from 'react'
+import PropTypes from 'prop-types';
 
 const DevotionDisplay = ({ form, paragraphs, previewUrl  }) => {
   return (
@@ -32,11 +32,17 @@ const DevotionDisplay = ({ form, paragraphs, previewUrl  }) => {
       <div className='w-[25%] mt-12'>
       {previewUrl && <img src={previewUrl} alt="Preview" />}
       </div>
-      
 
-     
+
+
     </div>
   )
+}
+
+DevotionDisplay.propTypes = {
+  form: PropTypes.object.isRequired,
+  paragraphs: PropTypes.array.isRequired,
+  previewUrl: PropTypes.string
 }
 
 export default DevotionDisplay
