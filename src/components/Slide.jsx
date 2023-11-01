@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SlideItems } from "./SlideItems";
 
-export const Slide = () => {
+const Slide = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const items = [
     {
@@ -30,57 +30,68 @@ export const Slide = () => {
     setActiveIndex(newIndex);
   };
   return (
-    <div className="carousel">
-      <div
-        className="inner"
-        style={{ transform: `translate(-${activeIndex * 100}%)` }}
-      >
-        {items.map((item, index) => {
-          return <SlideItems key={index} item={item} width={"100%"} />;
-        })}
-      </div>
-
-      <div className="carousel-buttons">
-        <button
-          className="button-arrow"
-          onClick={() => {
-            updateIndex(activeIndex - 1);
-          }}
-        >
-          <span className="material-symbols-outlined">arrow_back_ios</span>{" "}
-        </button>
-        <div className="indicators">
-          {items.map((item, index) => {
-            return (
-              <button
-                key={index}
-                className="indicator-buttons"
-                onClick={() => {
-                  updateIndex(index);
-                }}
-              >
-                <span
-                  className={`material-symbols-outlined ${
-                    index === activeIndex
-                      ? "indicator-symbol-active"
-                      : "indicator-symbol"
-                  }`}
+    <div className="flex justify-center flex-col items-center h-screen bg-blue-300">
+      <div className="flex">
+        {/* buttons */}
+        <div className="flex flex-col justify-evenly ml-6">
+          <button
+            className="bg-transparent border-none cursor-pointer mt-[20px]"
+            onClick={() => {
+              updateIndex(activeIndex - 1);
+            }}
+          >
+            <span className="material-symbols-outlined text-white font-bold text-3xl">
+              arrow_upward
+            </span>
+          </button>
+          <div className="flex flex-col justify-around items-center mt-[20px]">
+            {items.map((item, index) => {
+              return (
+                <button
+                  key={index}
+                  className="border-none cursor-pointer bg-white my-2 p-2"
+                  onClick={() => {
+                    updateIndex(index);
+                  }}
                 >
-                  radio_button_checked
-                </span>
-              </button>
-            );
-          })}
+                  <span
+                    className={`${
+                      index === activeIndex
+                        ? "text-blue-500 font-bold"
+                        : "text-gray-900"
+                    }`}
+                  >
+                    {item.title}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+          <button
+            className="bg-transparent border-none cursor-pointer mt-[20px]"
+            onClick={() => {
+              updateIndex(activeIndex + 1);
+            }}
+          >
+            <span className="material-symbols-outlined text-white font-bold text-3xl">
+              arrow_downward
+            </span>
+          </button>
         </div>
-        <button
-          className="button-arrow"
-          onClick={() => {
-            updateIndex(activeIndex + 1);
-          }}
-        >
-          <span className="material-symbols-outlined">arrow_forward_ios</span>
-        </button>
+        {/* slides */}
+        <div className="overflow-hidden w-[70%] flex flex-col justify-center items-center mx-auto">
+          <div
+            className="whitespace-nowrap transition-transform duration-300 shadow-md"
+            style={{ transform: `translate(-${activeIndex * 100}%)` }}
+          >
+            {items.map((item, index) => {
+              return <SlideItems key={index} item={item} width={"100%"} />;
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
+
+export default Slide;
