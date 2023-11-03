@@ -79,14 +79,9 @@ const Slide = () => {
           </button>
         </div>
         {/* slides */}
-        <div className="overflow-hidden w-[70%] flex flex-col justify-center items-center mx-auto">
-          <div
-            className="whitespace-nowrap transition-transform duration-300 shadow-md"
-            style={{ transform: `translate(-${activeIndex * 100}%)` }}
-          >
-            {items.map((item, index) => {
-              return <SlideItems key={index} item={item} width={"100%"} />;
-            })}
+        <div className="overflow-hidden w-[70%] justify-center items-center mx-auto">
+          <div className="flex flex-col whitespace-nowrap transition-transform duration-300 shadow-md">
+            <SlideItems item={items[activeIndex]} />
           </div>
         </div>
       </div>

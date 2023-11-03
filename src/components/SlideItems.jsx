@@ -1,12 +1,8 @@
 import PropTypes from "prop-types";
 
-export const SlideItems = ({ item, width }) => {
+export const SlideItems = ({ item }) => {
   return (
-    <div
-      className="inline-flex flex-col items-center justify-center h-[490px] bg-white"
-      style={{ width: width }}
-    >
-      <div></div>
+    <div className="inline-flex flex-col items-center justify-center h-[490px] bg-white">
       {/* <img className="carousel-img" src={item.image} /> */}
       <div className="text-[1.15rem] font-bold mt-[10px] mb-[10px] px-[20px] whitespace-normal text-blue-500">
         {item.title}
@@ -24,5 +20,4 @@ SlideItems.propTypes = {
     description: PropTypes.string.isRequired,
     // image: PropTypes.string.isRequired,
   }).isRequired,
-  width: PropTypes.string.isRequired,
 };
