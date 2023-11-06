@@ -1,11 +1,12 @@
-import props from 'prop-types'
+// import Devotion from "@/routes/Devotion";
 import AddParagraph from "./AddParagraph"
 import PhotoUploader from "./PhotoUploader"
+import PropTypes from 'prop-types';
 
-const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChange, paragraphs, handleFileChange }) => {
+const DevotionForm = ({ form, handleChange, handleSubmit, addPara, handleParaChange, paragraphs, handleFileChange, deletePara }) => {
 
   return (
-    <form onSubmit={handleSubmit} className='w-[30%] bg-gray-300 p-3 rounded pb-4 space-y-2'>
+    <form onSubmit={handleSubmit} className='w-[30%]  p-3 rounded pb-4 space-y-3'>
       <label >
         Month:
       </label>
@@ -80,6 +81,7 @@ const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChan
         addPara={addPara}
         handleParaChange={handleParaChange}
         paragraphs={paragraphs}
+        deletePara={deletePara}
       />
       <br />
       <label >
@@ -96,20 +98,10 @@ const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChan
       <br />
       <PhotoUploader
         handleFileChange={handleFileChange}
+        form={form}
       />
-      {/* <label >
-        Image:
-      </label>
-      <input
-        type="file"
-        name='image'
-        placeholder='image'
-        className='cursor-pointer border-2 border-gray-300 rounded px-2 py-1'
-        value={form.image}
-        onChange={handleChange}
-      /> */}
       <br />
-      <button className=' bg-blue-500 text-white px-4 py-2 rounded-md '>
+      <button className=' bg-gray-600 text-white px-4 py-2 rounded-md '>
         Submit
       </button>
     </form>
@@ -117,13 +109,14 @@ const DevotionForm = ({form, handleChange, handleSubmit, addPara, handleParaChan
 }
 
 DevotionForm.propTypes = {
-  form: props.object,
-  handleChange: props.func,
-  handleSubmit: props.func,
-  addPara: props.func,
-  handleParaChange: props.func,
-  paragraphs: props.array,
-  handleFileChange: props.func
+  form: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  addPara: PropTypes.func.isRequired,
+  handleParaChange: PropTypes.func.isRequired,
+  paragraphs: PropTypes.array.isRequired,
+  handleFileChange: PropTypes.func.isRequired,
+  deletePara: PropTypes.func.isRequired
 }
 
 export default DevotionForm

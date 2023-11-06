@@ -1,33 +1,46 @@
-import { useState } from 'react';
-import DevotionForm from '../features/DevotionComponents/DevotionForm';
-import DevotionDisplay from '../features/DevotionComponents/DevotionDisplay';
-import axios from 'axios';
+import { useState } from "react";
+import axios from "axios";
+import DevotionForm from "../features/DevotionComponents/DevotionForm";
+import DevotionDisplay from "../features/DevotionComponents/DevotionDisplay";
 const Devotion = () => {
+  // useState for adding multiple paragraphs
+  const [paragraphs, setParagraphs] = useState([]);
+  const addPara = () => {
+    setParagraphs([...paragraphs, ""]);
+  };
+
+  // Handle changes in the text area for the paragraphs
+  const handleParaChange = (e, index) => {
+    const updatedParagraphs = [...paragraphs];
+    updatedParagraphs[index] = e.target.value;
+    setParagraphs(updatedParagraphs);
+    setForm({
+      ...form,
+      body: updatedParagraphs,
+    });
+  };
+
+  // useState for form
   const [form, setForm] = useState({
-    month: '',
-    day: '',
-    title: '',
-    chapter: '',
-    verse: '',
-    body: '',
-    prayer: '',
-    image: '',
-  })
+    month: "",
+    day: "",
+    title: "",
+    chapter: "",
+    verse: "",
+    prayer: "",
+  });
 
   const handleChange = (e) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  try {
+    e.preventDefault();
+    console.log(form);
     const formData = new FormData();
-
-    // Append form data to the FormData object
     Object.entries(form).forEach(([key, value]) => {
       formData.append(key, value);
     });
@@ -39,56 +52,31 @@ const Devotion = () => {
 
     // Append the selected file to the FormData object
     if (selectedFile) {
-      formData.append('image', selectedFile);
+      formData.append("image", selectedFile);
     }
 
-    // Send a POST request to the backend API
-    const response = await axios.post('/devotion/create', formData);
-
-    // Handle the response from the backend if needed
-    console.log(response.data);
-
-    // Reset the form after successful submission
-    setForm({
-      month: '',
-      day: '',
-      title: '',
-      chapter: '',
-      verse: '',
-      body: '',
-      prayer: '',
-      image: '',
-    });
-
-    // Clear the paragraphs
-    setParagraphs([]);
-
-    // Clear the selected file and preview URL
-    setSelectedFile(null);
-    setPreviewUrl('');
-  } catch (error) {
-    // Handle the error if the request fails
-    console.error(error);
-  }
-};
-
-  // useState for adding multiple paragraphs
-  const [paragraphs, setParagraphs] = useState([]);
-  const addPara = () => {
-      console.log('add para')
-      setParagraphs([...paragraphs, '']);
+    try {
+      const response = await axios.post("/devotion/create", formData);
+      // console.log(formData);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  // Handle changes in the text area for the paragraphs
-  const handleParaChange = (e, index) => {
-      const updatedParagraphs = [...paragraphs];
-      updatedParagraphs[index] = e.target.value;
-      setParagraphs(updatedParagraphs);
-    };
+  const deletePara = (index) => {
+    const newPara = [...paragraphs];
+    newPara.splice(index, 1);
+    setParagraphs(newPara);
+    setForm({
+      ...form,
+      body: newPara,
+    });
+  };
 
   // useState for Photo preview
   const [selectedFile, setSelectedFile] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState('');
+  const [previewUrl, setPreviewUrl] = useState("");
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -99,15 +87,21 @@ const Devotion = () => {
 
       reader.onload = () => {
         setPreviewUrl(reader.result);
+        const newPara = [...paragraphs];
+        setForm({
+          ...form,
+          body: newPara,
+          image: reader.result,
+        });
       };
 
       reader.readAsDataURL(file);
     } else {
-      setPreviewUrl('');
+      setPreviewUrl("");
     }
   };
   return (
-    <div className="mt-12 flex bg-gray-200">
+    <div className=" flex bg-gray-200">
       <DevotionDisplay
         form={form}
         paragraphs={paragraphs}
@@ -121,10 +115,10 @@ const Devotion = () => {
         paragraphs={paragraphs}
         addPara={addPara}
         handleFileChange={handleFileChange}
-
+        deletePara={deletePara}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Devotion
+export default Devotion;

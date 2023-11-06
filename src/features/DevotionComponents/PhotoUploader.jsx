@@ -1,16 +1,21 @@
+import PropTypes from "prop-types";
 
-import PropTypes from 'prop-types';
-
-function PhotoUploader({ handleFileChange }) {
+function PhotoUploader({ handleFileChange, previewUrl }) {
   return (
     <div>
-      <input type="file" accept="image/*" onChange={handleFileChange} />
+      <input
+        type="file"
+        accept="image/*"
+        value={previewUrl}
+        onChange={handleFileChange}
+      />
     </div>
   );
 }
 
 PhotoUploader.propTypes = {
   handleFileChange: PropTypes.func.isRequired,
+  previewUrl: PropTypes.string.isRequired,
 };
 
 export default PhotoUploader;
