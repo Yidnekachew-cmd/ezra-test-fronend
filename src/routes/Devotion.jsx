@@ -92,7 +92,6 @@ const Devotion = () => {
     });
   };
 
-
   const handleDelete = async (id) => {
     try {
       await axios.delete(`/devotion/${id}`);
@@ -102,8 +101,6 @@ const Devotion = () => {
       console.log(error);
     }
   };
-
-
 
   // useState for Photo preview
   const [selectedFile, setSelectedFile] = useState(null);
@@ -134,7 +131,7 @@ const Devotion = () => {
 
   return (
     <div className=" flex bg-gray-200">
-      <DevotionDisplay devotions={devotions}  />
+      <DevotionDisplay devotions={devotions} handleDelete={handleDelete} />
       <DevotionForm
         form={form}
         handleParaChange={handleParaChange}
