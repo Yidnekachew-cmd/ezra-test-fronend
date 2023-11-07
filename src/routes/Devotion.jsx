@@ -47,11 +47,11 @@ const Devotion = () => {
   });
 
   const handleChange = (e) => {
-    const file = e.target.files[0];
+    // const file = e.target.files[0];
     setForm({
       ...form,
       [e.target.name]: e.target.value,
-      image: file,
+      // image: file,
     });
   };
 

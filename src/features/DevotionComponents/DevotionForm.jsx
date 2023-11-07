@@ -105,7 +105,7 @@ const DevotionForm = ({
       <PhotoUploader
         handleFileChange={handleFileChange}
         form={form}
-        previewUrl={form.image}
+        // previewUrl={form.image}
       />
       <br />
       <button className=" bg-gray-600 text-white px-4 py-2 rounded-md ">
