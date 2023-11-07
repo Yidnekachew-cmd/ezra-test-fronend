@@ -1,8 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import DevotionForm from "../features/DevotionComponents/DevotionForm";
 import DevotionDisplay from "../features/DevotionComponents/DevotionDisplay";
+
 const Devotion = () => {
+  const [devotions, setDevotions] = useState([]);
+
+  useEffect(() => {
+    const fetchDevotions = async () => {
+      try {
+        const response = await axios.get("/devotion/show");
+        setDevotions(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchDevotions();
+  }, []);
+
   // useState for adding multiple paragraphs
   const [paragraphs, setParagraphs] = useState([]);
   const addPara = () => {
@@ -31,9 +47,11 @@ const Devotion = () => {
   });
 
   const handleChange = (e) => {
+    const file = e.target.files[0];
     setForm({
       ...form,
       [e.target.name]: e.target.value,
+      image: file,
     });
   };
 
@@ -74,6 +92,19 @@ const Devotion = () => {
     });
   };
 
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`/devotion/${id}`);
+      // Remove the deleted devotion from the devotions array
+      setDevotions(devotions.filter((devotion) => devotion._id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
   // useState for Photo preview
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
@@ -100,13 +131,10 @@ const Devotion = () => {
       setPreviewUrl("");
     }
   };
+
   return (
     <div className=" flex bg-gray-200">
-      <DevotionDisplay
-        form={form}
-        paragraphs={paragraphs}
-        previewUrl={previewUrl}
-      />
+      <DevotionDisplay devotions={devotions}  />
       <DevotionForm
         form={form}
         handleParaChange={handleParaChange}
@@ -116,6 +144,7 @@ const Devotion = () => {
         addPara={addPara}
         handleFileChange={handleFileChange}
         deletePara={deletePara}
+        handleDelete={handleDelete}
       />
     </div>
   );

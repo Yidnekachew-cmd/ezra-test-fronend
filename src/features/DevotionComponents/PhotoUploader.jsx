@@ -15,7 +15,7 @@ function PhotoUploader({ handleFileChange, previewUrl }) {
 
 PhotoUploader.propTypes = {
   handleFileChange: PropTypes.func.isRequired,
-  previewUrl: PropTypes.string.isRequired,
+  previewUrl: PropTypes.string,
 };
 
 export default PhotoUploader;
