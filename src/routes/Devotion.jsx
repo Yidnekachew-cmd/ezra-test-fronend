@@ -77,6 +77,7 @@ const Devotion = () => {
       const response = await axios.post("/devotion/create", formData);
       // console.log(formData);
       console.log(response);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
