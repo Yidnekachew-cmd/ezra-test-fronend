@@ -2,12 +2,12 @@ import PropTypes from "prop-types";
 
 export const SlideItems = ({ item }) => {
   return (
-    <div className="inline-flex flex-col items-center justify-center h-[490px] bg-white">
+    <div className="inline-flex flex-col items-center justify-center h-[490px] border-y-2 border-orange-300">
       {/* <img className="carousel-img" src={item.image} /> */}
-      <div className="text-[1.15rem] font-bold mt-[10px] mb-[10px] px-[20px] whitespace-normal text-blue-500">
+      <div className="text-[1.15rem] font-bold mt-[10px] mb-[10px] px-[20px] whitespace-normal text-white">
         {item.title}
       </div>
-      <div className="text-[1.15rem] mt-[10px] mb-[10px] px-[20px] whitespace-normal text-gray-600">
+      <div className="text-[1.15rem] mt-[10px] mb-[10px] px-[20px] whitespace-normal text-white">
         {item.description}
       </div>
     </div>

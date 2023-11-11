@@ -49,13 +49,16 @@ function Quiz() {
   };
 
   return (
-    <div>
+    <div className="w-[70%] justify-center items-center mx-auto bg-[#955B09BA] rounded-lg">
+      <h1 className="text-white font-bold p-2 border-b-2 border-orange-300">
+        EZRA seminary
+      </h1>
       {data.length > 0 && data[currentQuiz] && (
         <div className="text-center">
-          <h1 className="text-3xl font-bold my-3">Quiz</h1>
-          <h2 className="my-3">Score: {score}</h2>
+          <h1 className="text-3xl font-bold my-3 text-white">Quiz</h1>
+          <h2 className="my-3 text-white">Score: {score}</h2>
           {showResults ? (
-            <div className="mx-auto w-1/2 mt-16 bg-gray-500 p-4 rounded-lg text-white shadow-xl">
+            <div className="mx-auto w-1/2 mt-16 p-4 rounded-lg text-white shadow-xl">
               <h1>Final Results</h1>
               <h2>
                 {score} out of {data[currentQuiz].questions.length} correct - (
@@ -69,7 +72,7 @@ function Quiz() {
               </button>
             </div>
           ) : (
-            <div className="mx-auto w-[80%] h-auto bg-gray-500 p-4 rounded-2xl text-white shadow-xl">
+            <div className="mx-auto w-[80%] h-auto p-4 rounded-2xl text-white shadow-xl">
               <h2 className="my-3 font-bold">
                 Question: {currentQuestion + 1} out of{" "}
                 {data[currentQuiz].questions.length}
@@ -85,7 +88,7 @@ function Quiz() {
                     return (
                       <li
                         key={option.id}
-                        className="mt-2 bg-gray-400 p-3 w-3/4 mx-auto border-2 border-white rounded-3xl text-xl cursor-pointer hover:bg-gray-300"
+                        className="mt-2 bg-orange-400 p-3 w-3/4 mx-auto border-2 border-white rounded-3xl text-xl cursor-pointer hover:bg-orange-300"
                         onClick={() => optionClicked(option.isCorrect)}
                       >
                         {option.text}
