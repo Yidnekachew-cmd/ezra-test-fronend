@@ -3,6 +3,7 @@ import { SlideItems } from "./SlideItems";
 
 const Slide = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [unlockedIndex, setUnlockedIndex] = useState(0); // New state variable to track the unlocked index
   const items = [
     {
       title: "slide1",
@@ -25,6 +26,7 @@ const Slide = () => {
       description: "this is slide5",
     },
   ];
+
   const updateIndex = (newIndex) => {
     if (newIndex < 0) {
       newIndex = 0;
@@ -32,14 +34,19 @@ const Slide = () => {
       newIndex = items.length - 1;
     }
 
+    if (newIndex > unlockedIndex) {
+      setUnlockedIndex(newIndex); // Update the unlocked index
+    }
+
     setActiveIndex(newIndex);
   };
-  //slide number
+
+  // slide number
   const currentDataNumber = activeIndex + 1;
   const totalDataNumber = items.length;
 
-  const isSlideActive = (index) => {
-    return index <= activeIndex;
+  const isSlideUnlocked = (index) => {
+    return index <= unlockedIndex; // Check if the slide is unlocked based on the unlocked index
   };
 
   return (
@@ -52,6 +59,7 @@ const Slide = () => {
             onClick={() => {
               updateIndex(activeIndex - 1);
             }}
+            disabled={activeIndex === 0} // Disable the "Up" button when at the first slide
           >
             <span className="material-symbols-outlined t font-bold text-3xl">
               arrow_upward
@@ -63,14 +71,17 @@ const Slide = () => {
           </div>
           <div className="flex flex-col justify-around items-center mt-[20px]">
             {items.map((item, index) => {
+              const unlocked = isSlideUnlocked(index);
               return (
                 <button
                   key={index}
-                  className="border-b-2 border-orange-300 cursor-pointer py-2"
+                  className={`flex items-center border-b-2 border-orange-300 cursor-pointer py-2 ${
+                    unlocked ? "text-black" : "text-gray-500"
+                  }`} // Locked slide to gray
                   onClick={() => {
                     updateIndex(index);
                   }}
-                  disabled={!isSlideActive(index)}
+                  disabled={!unlocked} // Disable the button if the slide is locked
                 >
                   <span
                     className={`${
@@ -79,6 +90,15 @@ const Slide = () => {
                   >
                     {item.title}
                   </span>
+                  {unlocked ? (
+                    <span className="material-symbols-outlined text-orange-500 pl-4 text-xl">
+                      check_circle
+                    </span>
+                  ) : (
+                    <span className="material-symbols-outlined text-orange-500 pl-4 text-lg">
+                      radio_button_unchecked
+                    </span>
+                  )}
                 </button>
               );
             })}
@@ -88,7 +108,7 @@ const Slide = () => {
             onClick={() => {
               updateIndex(activeIndex + 1);
             }}
-            disabled={activeIndex === items.length - 1}
+            disabled={activeIndex === items.length - 1} // Disable the "Next" button when at the last slide
           >
             <span className="material-symbols-outlined t font-bold text-3xl">
               arrow_downward
@@ -101,11 +121,12 @@ const Slide = () => {
             <h1 className="text-white font-bold p-2">EZRA seminary</h1>
             <SlideItems item={items[activeIndex]} />
             <button
-              className="text-white font-bold my-2 bg-orange-400 w-[10%] rounded-xl mx-auto"
+              className={`text-white font-bold my-2 bg-orange-400 w-[10%] rounded-xl mx-auto ${
+                activeIndex === items.length - 1 ? "hidden" : "block"
+              }`} // hidding the next button for the last slide
               onClick={() => {
                 updateIndex(activeIndex + 1);
               }}
-              disabled={activeIndex === items.length - 1}
             >
               Next
             </button>
