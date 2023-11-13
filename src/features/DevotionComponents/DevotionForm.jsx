@@ -24,6 +24,7 @@ const DevotionForm = ({
         name="month"
         value={form.month}
         onChange={handleChange}
+        required
       >
         <option value="" disabled>
           -- ምረጥ --
@@ -51,6 +52,7 @@ const DevotionForm = ({
         className="cursor-pointer border-2 border-gray-300 rounded-md px-2 py-1"
         value={form.day}
         onChange={handleChange}
+        required
       />
       <br />
       <label>Title:</label>
@@ -61,6 +63,7 @@ const DevotionForm = ({
         className="w-full border-2 border-gray-300 rounded-md px-2 py-1"
         value={form.title}
         onChange={handleChange}
+        required
       />
       <br />
       <label>Chapter:</label>
@@ -71,6 +74,7 @@ const DevotionForm = ({
         className="w-full border-2 border-gray-300 rounded-md px-2 py-1"
         value={form.chapter}
         onChange={handleChange}
+        required
       />
       <br />
       <label>verse:</label>
@@ -81,6 +85,7 @@ const DevotionForm = ({
         className="w-full border-2 border-gray-300 rounded-md px-2 py-1"
         value={form.verse}
         onChange={handleChange}
+        required
       />
       <br />
       <AddParagraph
@@ -90,6 +95,7 @@ const DevotionForm = ({
         handleParaChange={handleParaChange}
         paragraphs={paragraphs}
         deletePara={deletePara}
+        required
       />
       <br />
       <label>Prayer:</label>
@@ -100,11 +106,13 @@ const DevotionForm = ({
         className="w-full border-2 border-gray-300 rounded-md px-2 py-1"
         value={form.prayer}
         onChange={handleChange}
+        required
       />
       <br />
       <PhotoUploader
         handleFileChange={handleFileChange}
         form={form}
+        required
         // previewUrl={form.image}
       />
       <br />
