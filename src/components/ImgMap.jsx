@@ -38,7 +38,7 @@ const GetCourse = () => {
                 return (
                   <img
                     key={element._id}
-                    src={`http://localhost:5000/images/${element.value}`}
+                    src={`https://ezra-seminary-api.onrender.com/images/${element.value}`}
                     alt={element.id}
                     className="img-class"
                   />
