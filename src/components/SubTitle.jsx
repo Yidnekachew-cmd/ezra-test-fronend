@@ -3,58 +3,43 @@ import axios from "axios";
 
 function SubTitle() {
   const [elements, setElements] = useState([]);
+  const [selectedType, setSelectedType] = useState("title");
+
+  const handleTypeChange = (event) => {
+    setSelectedType(event.target.value);
+  };
+
+  const handleAddButton = () => {
+    const newElement = {
+      type: selectedType,
+      id: `${selectedType}${elements.filter((el) => el.type === selectedType).length + 1}`,
+      value: "",
+    };
+    setElements((prevElements) => [...prevElements, newElement]);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
-    const imageIds = []; // Create an array to store the ids of image elements
+    const imageIds = [];
 
     elements.forEach((element) => {
       if (element.type === "img") {
-        formData.append("images", element.value); // Add the image file to "images" field
-        imageIds.push(element.id); // Add the id of the image to the "imageIds" array
+        formData.append("images", element.value);
+        imageIds.push(element.id);
       } else {
-        formData.append(element.id, element.value); // Add the value of the element to the corresponding id field
+        formData.append(element.id, element.value);
       }
     });
 
-    // Append the "imageIds" array to the FormData
     formData.append("imageIds", JSON.stringify(imageIds));
 
-    // Send the elements array to the backend
     axios
       .post("/course/create", formData)
       .then((res) => {
         console.log(res);
       })
       .catch((err) => console.log(err));
-  };
-
-  const handleTitleButton = () => {
-    const newElement = {
-      type: "title",
-      id: `title${elements.filter((el) => el.type === "title").length + 1}`,
-      value: "",
-    };
-    setElements((prevElements) => [...prevElements, newElement]);
-  };
-
-  const handleSubButton = () => {
-    const newElement = {
-      type: "sub",
-      id: `sub${elements.filter((el) => el.type === "sub").length + 1}`,
-      value: "",
-    };
-    setElements((prevElements) => [...prevElements, newElement]);
-  };
-
-  const handleImgButton = () => {
-    const newElement = {
-      type: "img",
-      id: `img${elements.filter((el) => el.type === "img").length + 1}`,
-      value: "",
-    };
-    setElements((prevElements) => [...prevElements, newElement]);
   };
 
   const handleInputChange = (id, value) => {
@@ -68,7 +53,7 @@ function SubTitle() {
       type: "img",
       id: id,
       value: img,
-      img: img, // Add the img object to the element
+      img: img,
     };
     setElements((prevElements) =>
       prevElements.map((el) => (el.id === id ? { ...el, ...imageObject } : el))
@@ -77,24 +62,23 @@ function SubTitle() {
 
   return (
     <div>
-      <button
-        className="bg-blue-500 rounded px-2 md:px-2 md:py-1 text-white mx-2"
-        onClick={handleTitleButton}
-      >
-        Add Title
-      </button>
-      <button
-        className="bg-blue-500 rounded px-2 md:px-2 md:py-1 text-white"
-        onClick={handleSubButton}
-      >
-        Add Sub
-      </button>
-      <button
-        className="bg-blue-500 rounded px-2 md:px-2 md:py-1 text-white"
-        onClick={handleImgButton}
-      >
-        Add Image
-      </button>
+      <div className="flex items-center">
+        <select
+          value={selectedType}
+          onChange={handleTypeChange}
+          className="border p-2 rounded"
+        >
+          <option value="title">Title</option>
+          <option value="sub">Sub</option>
+          <option value="img">Image</option>
+        </select>
+        <button
+          className="bg-blue-500 rounded px-2 md:px-2 md:py-1 text-white mx-2"
+          onClick={handleAddButton}
+        >
+          Add
+        </button>
+      </div>
       <form
         onSubmit={handleSubmit}
         className="p-3 md:flex flex-col justify-start space-y-3"
