@@ -48,24 +48,24 @@ function SlideShow() {
   
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    
     const dataToSend = slides.map((slide) => {
-      const slideData = {};
-      slide.forEach((element) => {
-        slideData[element.type] = element.value;
-      });
-      return slideData;
+    let slideData = {};
+    slide.forEach((element) => {
+    slideData = { ...slideData, [element.type]: slideData[element.type] ? [...slideData[element.type], element.value] : [element.value] };
     });
-
+    return slideData;
+    });
+    
     console.log(JSON.stringify(dataToSend));
-
+    
     axios
-      .post("/course/create", dataToSend)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-  };
+    .post("/course/create", dataToSend)
+    .then((res) => {
+    console.log(res);
+    })
+    .catch((err) => console.log(err));
+    };
 
   const handleImageChange = (slideIndex, elementId, e) => {
     const file = e.target.files[0];
