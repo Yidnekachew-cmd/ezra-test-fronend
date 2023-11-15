@@ -2,152 +2,140 @@ import { useState } from "react";
 import axios from "axios";
 
 function SubTitle() {
-  const [slides, setSlides] = useState([]);
   const [elements, setElements] = useState([]);
-
-  const handleAddSlide = () => {
-    const newSlide = [];
-    setSlides([...slides, newSlide]);
-  };
-
-  const handleRemoveSlide = (index) => {
-    const updatedSlides = slides.filter((_, slideIndex) => slideIndex !== index);
-    setSlides(updatedSlides);
-  };
-
-  const handleAddElement = (slideIndex, elementType) => {
-    const newId = `${elementType}-${slides[slideIndex].length + 1}`;
-    const newElement = {
-      type: elementType,
-      id: newId,
-      value: "",
-    };
-    const updatedSlide = [...slides[slideIndex], newElement];
-    const updatedSlides = [...slides];
-    updatedSlides[slideIndex] = updatedSlide;
-    setSlides(updatedSlides);
-  };
-
-  const handleRemoveElement = (slideIndex, elementId) => {
-    const updatedSlide = slides[slideIndex].filter((el) => el.id !== elementId);
-    const updatedSlides = [...slides];
-    updatedSlides[slideIndex] = updatedSlide;
-    setSlides(updatedSlides);
-  };
-
-  const handleInputChange = (slideIndex, elementId, value) => {
-    const updatedSlide = slides[slideIndex].map((el) =>
-      el.id === elementId ? { ...el, value: value } : el
-    );
-    const updatedSlides = [...slides];
-    updatedSlides[slideIndex] = updatedSlide;
-    setSlides(updatedSlides);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const formData = new FormData();
+    const imageIds = []; // Create an array to store the ids of image elements
 
-    const dataToSend = slides.map((slide) => {
-      const slideData = {};
-      slide.forEach((element) => {
-        slideData[element.type] = element.value;
-      });
-      return slideData;
+    elements.forEach((element) => {
+      if (element.type === "img") {
+        formData.append("images", element.value); // Add the image file to "images" field
+        imageIds.push(element.id); // Add the id of the image to the "imageIds" array
+      } else {
+        formData.append(element.id, element.value); // Add the value of the element to the corresponding id field
+      }
     });
 
-    console.log(JSON.stringify(dataToSend));
+    // Append the "imageIds" array to the FormData
+    formData.append("imageIds", JSON.stringify(imageIds));
 
+    // Send the elements array to the backend
     axios
-      .post("/course/create", dataToSend)
+      .post("/course/create", formData)
       .then((res) => {
         console.log(res);
       })
       .catch((err) => console.log(err));
   };
 
-  const handleImageChange = (slideIndex, elementId, file) => {
-    const updatedSlide = slides[slideIndex].map((el) =>
-      el.id === elementId ? { ...el, value: file } : el
-    );
-    const updatedSlides = [...slides];
-    updatedSlides[slideIndex] = updatedSlide;
-    setSlides(updatedSlides);
+  const handleTitleButton = () => {
+    const newElement = {
+      type: "title",
+      id: `title${elements.filter((el) => el.type === "title").length + 1}`,
+      value: "",
+    };
+    setElements((prevElements) => [...prevElements, newElement]);
   };
 
+  const handleSubButton = () => {
+    const newElement = {
+      type: "sub",
+      id: `sub${elements.filter((el) => el.type === "sub").length + 1}`,
+      value: "",
+    };
+    setElements((prevElements) => [...prevElements, newElement]);
+  };
+
+  const handleImgButton = () => {
+    const newElement = {
+      type: "img",
+      id: `img${elements.filter((el) => el.type === "img").length + 1}`,
+      value: "",
+    };
+    setElements((prevElements) => [...prevElements, newElement]);
+  };
+
+  const handleInputChange = (id, value) => {
+    setElements((prevElements) =>
+      prevElements.map((el) => (el.id === id ? { ...el, value: value } : el))
+    );
+  };
+
+  const handleImageChange = (id, img) => {
+    const imageObject = {
+      type: "img",
+      id: id,
+      value: img,
+      img: img, // Add the img object to the element
+    };
+    setElements((prevElements) =>
+      prevElements.map((el) => (el.id === id ? { ...el, ...imageObject } : el))
+    );
+  };
 
   return (
-    <div className="container mx-auto py-8">
-      <div className="flex justify-center">
-        <div className="w-3/4 border border-gray-300 p-4 rounded-lg">
-          <div className="grid grid-cols-2 gap-4">
-            {slides.map((slide, slideIndex) => (
-              <div key={slideIndex} className="border border-gray-300 p-4 rounded-lg">
-                <div className="mb-4">
-                  <h3 className="text-lg font-semibold mb-2">Slide {slideIndex + 1}</h3>
-                  <button
-                    onClick={() => handleRemoveSlide(slideIndex)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
-                  >
-                    Remove Slide
-                  </button>
-                </div>
-                <div className="space-y-4">
-                  {slide.map((element) => (
-                    <div key={element.id} className="flex items-center">
-                      <label className="mr-2">{element.type.charAt(0).toUpperCase() + element.type.slice(1)}</label>
-                      {element.type === "img" ? (
-                <input
-                  type="file"
-                  onChange={(e) => handleImageChange(slideIndex, element.id, e.target.files[0])}
-                  className="border border-gray-300 rounded px-2 py-1"
-                />
-              ) : (
-                <input
-                  type="text"
-                  value={element.value}
-                  onChange={(e) => handleInputChange(slideIndex, element.id, e.target.value)}
-                  className="border border-gray-300 rounded px-2 py-1"
-                />
-              )}
-                      <button
-                        onClick={() => handleRemoveElement(slideIndex, element.id)}
-                        className="ml-2 bg-red-500 text-white px-2 py-1 rounded"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  ))}
-                  <div className="flex items-center space-x-4">
-                    <select
-                      onChange={(e) => handleAddElement(slideIndex, e.target.value)}
-                      className="border border-gray-300 rounded px-2 py-1"
-                    >
-                      <option value="title">Title</option>
-                      <option value="sub">Sub</option>
-                      <option value="img">Image</option>
-                    </select>
-                    <button
-                      onClick={() => handleAddElement(slideIndex, 'selectedValue')}
-                      className="bg-blue-500 text-white px-2 py-1 rounded"
-                    >
-                      Add
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+    <div>
+      <button
+        className="bg-blue-500 rounded px-2 md:px-2 md:py-1 text-white mx-2"
+        onClick={handleTitleButton}
+      >
+        Add Title
+      </button>
+      <button
+        className="bg-blue-500 rounded px-2 md:px-2 md:py-1 text-white"
+        onClick={handleSubButton}
+      >
+        Add Sub
+      </button>
+      <button
+        className="bg-blue-500 rounded px-2 md:px-2 md:py-1 text-white"
+        onClick={handleImgButton}
+      >
+        Add Image
+      </button>
+      <form
+        onSubmit={handleSubmit}
+        className="p-3 md:flex flex-col justify-start space-y-3"
+      >
+        {elements.map((element) => (
+          <div key={element.id}>
+            <label>{element.id}</label>
+            {element.type === "img" ? (
+              <input
+                key={element.id}
+                type="file"
+                name={element.id}
+                className="px-2 border border-blue-100 rounded outline-slate-500 my-2"
+                onChange={(e) =>
+                  handleImageChange(element.id, e.target.files[0])
+                }
+              />
+            ) : (
+              <input
+                key={element.id}
+                type="text"
+                name={element.id}
+                placeholder={`${
+                  element.type.charAt(0).toUpperCase() + element.type.slice(1)
+                } ${element.id.slice(-1)}`}
+                className="px-2 border border-blue-100 rounded outline-slate-500 my-2"
+                value={element.value}
+                onChange={(e) => handleInputChange(element.id, e.target.value)}
+              />
+            )}
           </div>
-          <div className="flex justify-between mt-4">
-            <button onClick={handleAddSlide} className="bg-green-500 text-white px-4 py-2 rounded">
-              Add Slide
-            </button>
-            <button onClick={handleSubmit} className="bg-blue-500 text-white px-4 py-2 rounded">
-              Submit
-            </button>
-          </div>
-        </div>
-      </div>
+        ))}
+        <button
+          type="submit"
+          className="bg-blue-500 self-end w-1/3 rounded items-end text-white"
+        >
+          Submit
+        </button>
+      </form>
     </div>
   );
-                  }  
+}
+
 export default SubTitle;
