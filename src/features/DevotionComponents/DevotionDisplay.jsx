@@ -2,6 +2,12 @@ import PropTypes from "prop-types";
 import { FaTrash } from "react-icons/fa";
 
 const DevotionDisplay = ({ devotions, handleDelete }) => {
+  const sortedDevotions = devotions.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+
+  const latestDevotion = sortedDevotions.shift();
+
   return (
     <div className="w-[70%] font-nokia-light bg-gray-100 container mx-auto flex flex-col">
       {devotions.map((devotion, index) => (
@@ -42,7 +48,7 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
                 </h1>
                 <FaTrash
                   className="text-gray-700 text-xl cursor-pointer self-center"
-                  onClick={() => handleDelete(devotion._id)}
+                  onClick={() => handleDelete(latestDevotion._id)}
                 />
               </div>
               <h2 className="font-nokia-bold text-lg text-accent-5">
@@ -58,7 +64,7 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
                 {devotion.verse}
               </p>
 
-              {devotion.body.map((paragraph, paragraphIndex) => (
+              {latestDevotion.body.map((paragraph, paragraphIndex) => (
                 <p
                   className="font-customLight text-sm text-justify text-secondary-6"
                   key={paragraphIndex}
@@ -95,7 +101,34 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
             </div>
           </div>
         </div>
-      ))}
+      )}
+
+      {/* Display the other devotions as thumbnails */}
+      <div className="flex flex-wrap justify-center">
+        {sortedDevotions.map((devotion, index) => (
+          <div key={index} className="w-1/4 p-4 thumbnail">
+            <div className="rounded w-full h-40 border-2 bg-[#fff] border-[#EA9215] text-[#3A4750]">
+              <img
+                src={`http://localhost:5000/images/${devotion.image}`}
+                alt="Devotion Image"
+                className="h-[50%] w-[50%] mx-auto mt-4"
+              />
+              <h1 className="font-customBold text-2xl text-justify mt-2">
+                {devotion.title}
+              </h1>
+              <div className="flex justify-between items-center mt-2">
+                <h2 className="font-customBold text-lg text-[#EA9215]">
+                  {devotion.chapter}
+                </h2>
+                <FaTrash
+                  className="text-gray-700 text-xl cursor-pointer"
+                  onClick={() => handleDelete(devotion._id)}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
