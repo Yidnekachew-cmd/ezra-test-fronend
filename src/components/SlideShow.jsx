@@ -17,17 +17,18 @@ function SlideShow() {
 
   const handleAddElement = (slideIndex) => {
     if (!selectedType) return;
-    const newId = `${selectedType}-${slides[slideIndex].length + 1}`;
-    const newElement = {
+  
+    const updatedSlide = slides[slideIndex].concat({
       type: selectedType,
-      id: newId,
+      id: `${selectedType}-${slideIndex + 1}-${slides[slideIndex].length + 1}`,
       value: '',
-    };
-    const updatedSlide = [...slides[slideIndex], newElement];
+    });
+  
     const updatedSlides = [...slides];
     updatedSlides[slideIndex] = updatedSlide;
     setSlides(updatedSlides);
   };
+
   const handleRemoveElement = (slideIndex, elementId) => {
     const updatedSlide = slides[slideIndex].filter((el) => el.id !== elementId);
     const updatedSlides = [...slides];
@@ -66,15 +67,18 @@ function SlideShow() {
       .catch((err) => console.log(err));
   };
 
-  const handleImageChange = (slideIndex, elementId, file) => {
+  const handleImageChange = (slideIndex, elementId, e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+  
     const updatedSlide = slides[slideIndex].map((el) =>
-      el.id === elementId ? { ...el, value: file } : el
+      el.id === elementId ? { ...el, value: file.name } : el
     );
+  
     const updatedSlides = [...slides];
     updatedSlides[slideIndex] = updatedSlide;
     setSlides(updatedSlides);
   };
-
 
   return (
     <div className="container mx-auto py-8">
@@ -97,11 +101,12 @@ function SlideShow() {
                     <div key={element.id} className="flex items-center">
                       <label className="mr-2">{element.type.charAt(0).toUpperCase() + element.type.slice(1)}</label>
                       {element.type === "img" ? (
-                <input
-                  type="file"
-                  onChange={(e) => handleImageChange(slideIndex, element.id, e.target.files[0])}
-                  className="border border-gray-300 rounded px-2 py-1"
-                />
+               <input
+               type="file"
+               onChange={(e) => handleImageChange(slideIndex, element.id, e)}
+               className="border border-gray-300 rounded px-2 py-1"
+             />
+             
               ) : (
                 <input
                   type="text"
