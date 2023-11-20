@@ -1,13 +1,22 @@
 import { useState } from "react";
 import SlideControl from './SlideControl';
 import SlideView from './SlideView';
-import SlideList from './SlideList';
+import ChapterForm from './ChapterForm';
+import ChapterList from './ChapterList';
 
 function SlideShow() {
   const [slides, setSlides] = useState([]);
   const [selectedType, setSelectedType] = useState('');
-  const [selectedSlide, setSelectedSlide] = useState(null);
 
+  const [courses, setCourses] = useState({}); 
+  const [selectedChapter, setSelectedChapter] = useState(null);
+  const [selectedSlide] = useState(null);
+  const [showChapterForm, setChapterForm] = useState(false);
+  
+  const handleAddChapter = (chapterTitle) => {
+    setCourses({...courses, [chapterTitle]: []});
+    setChapterForm(false);
+  }
   const handleAddElement = (slideIndex) => {
     if (!selectedType) return;
   
@@ -60,13 +69,23 @@ const handleRemoveSlide = (index) => {
 
   return (
     <>
-    <div className="container mx-auto py-8 grid grid-cols-3 gap-4">
-    <SlideList slides={slides} setSelectedSlide={setSelectedSlide} />
-      <SlideView selectedSlide={selectedSlide} slides={slides} />
-      <SlideControl slides={slides} setSlides={setSlides} handleAddElement={handleAddElement} removeElement={removeElement} handleInputChange={handleInputChange} handleImageChange={handleImageChange} selectedType={selectedType} setSelectedType={setSelectedType} handleRemoveSlide={handleRemoveSlide}/>
-      </div>
-    
+      <button onClick={() => setChapterForm(!showChapterForm)} className="bg-green-500 text-white px-4 py-2 rounded">
+        { showChapterForm ? 'Hide Chapter Form' : 'Add Chapter' }
+      </button>
+      { showChapterForm ? 
+        <ChapterForm handleAddChapter={handleAddChapter} /> :
+        <div className="container mx-auto py-8 grid grid-cols-3 gap-4">
+          <ChapterList courses={courses} setSelectedChapter={setSelectedChapter} selectedChapter={selectedChapter} />
+          { selectedChapter ?
+            <>
+              <SlideView selectedSlide={selectedSlide} slides={courses[selectedChapter]} />
+              <SlideControl slides={courses[selectedChapter]} setSlides={setSlides} handleAddElement={handleAddElement} removeElement={removeElement} handleInputChange={handleInputChange} handleImageChange={handleImageChange} selectedType={selectedType} setSelectedType={setSelectedType} handleRemoveSlide={handleRemoveSlide}/>
+</>
+            : null
+          }
+        </div>
+      }
     </>
   );
-                  }  
+}  
 export default SlideShow;
