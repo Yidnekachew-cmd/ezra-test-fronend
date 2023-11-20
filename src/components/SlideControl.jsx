@@ -1,7 +1,7 @@
 import axios from "axios";
 import PropTypes from "prop-types";
 
-const SlideControl = ({slides, setSlides, handleInputChange, handleImageChange, selectedType, setSelectedType, handleRemoveSlide, handleAddElement}) => {
+const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputChange, handleImageChange, selectedType, setSelectedType, handleRemoveSlide, handleAddElement}) => {
 
     const handleAddSlide = () => {
         const newSlide = [];
@@ -70,7 +70,8 @@ const SlideControl = ({slides, setSlides, handleInputChange, handleImageChange, 
             <input
               type="text"
               value={element.value}
-              onChange={(e) => handleInputChange(slideIndex, element.id, e.target.value)}
+              onChange={(e) => handleInputChange(slideIndex, element.id, e.target.value, courses[selectedChapter])}
+
               className="border border-gray-300 rounded px-2 py-1"
             />
           )}
@@ -118,6 +119,8 @@ const SlideControl = ({slides, setSlides, handleInputChange, handleImageChange, 
 SlideControl.propTypes = {
     slides: PropTypes.array.isRequired,
     setSlides: PropTypes.func.isRequired,
+    courses: PropTypes.array.isRequired,
+    selectedChapter: PropTypes.array.isRequired,
     handleAddElement: PropTypes.func.isRequired,
     removeElement: PropTypes.func.isRequired,
     handleInputChange: PropTypes.func.isRequired,

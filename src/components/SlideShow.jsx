@@ -3,69 +3,83 @@ import SlideControl from './SlideControl';
 import SlideView from './SlideView';
 import ChapterForm from './ChapterForm';
 import ChapterList from './ChapterList';
+import SlideList from "./SlideList";
 
 function SlideShow() {
-  const [slides, setSlides] = useState([]);
-  const [selectedType, setSelectedType] = useState('');
-
   const [courses, setCourses] = useState({}); 
   const [selectedChapter, setSelectedChapter] = useState(null);
-  const [selectedSlide] = useState(null);
+  const [selectedSlide, setSelectedSlide] = useState(null);
+  const [selectedType, setSelectedType] = useState('');
   const [showChapterForm, setChapterForm] = useState(false);
-  
+
   const handleAddChapter = (chapterTitle) => {
     setCourses({...courses, [chapterTitle]: []});
     setChapterForm(false);
   }
+
   const handleAddElement = (slideIndex) => {
-    if (!selectedType) return;
+    if (!selectedType || !selectedChapter) return;
   
-    const updatedSlide = slides[slideIndex].concat({
-        type: selectedType,
-        id: `${selectedType}-${slideIndex + 1}-${slides[slideIndex].length + 1}`,
-        value: '',
+    const selectedCourse = courses[selectedChapter];
+  
+    const updatedSlide = selectedCourse[slideIndex].concat({
+      type: selectedType,
+      id: `${selectedType}-${slideIndex + 1}-${selectedCourse[slideIndex].length + 1}`,
+      value: '',
     });
-  
-    const updatedSlides = [...slides];
+    const updatedSlides = [...selectedCourse];
     updatedSlides[slideIndex] = updatedSlide;
-    setSlides(updatedSlides);
-};
-
-const handleInputChange = (slideIndex, elementId, value) => {
-  const updatedSlide = slides[slideIndex].map((el) =>
-      el.id === elementId ? { ...el, value: value } : el
-  );
-  const updatedSlides = [...slides];
-  updatedSlides[slideIndex] = updatedSlide;
-  setSlides(updatedSlides);
-};
-
-const removeElement = (slideIndex, elementId) => {
-  const updatedSlide = slides[slideIndex].filter((el) => el.id !== elementId);
-  const updatedSlides = [...slides];
-  updatedSlides[slideIndex] = updatedSlide;
-  setSlides(updatedSlides);
-};
-
-const handleImageChange = (slideIndex, elementId, e) => {
-  const file = e.target.files[0];
-  if (!file) return;
   
-  const updatedSlide = slides[slideIndex].map((el) =>
-      el.id === elementId ? { ...el, value: file.name } : el
-  );
+    setCourses((courses) => ({
+      ...courses,
+      [selectedChapter]: updatedSlides,
+    }));
+  };
   
-  const updatedSlides = [...slides];
-  updatedSlides[slideIndex] = updatedSlide;
-  setSlides(updatedSlides);
-};
+  const handleInputChange = (slideIndex, elementId, value, courseSlides) => {
+    const updatedSlide = courseSlides[slideIndex].map((el) =>
+        el.id === elementId ? { ...el, value: value } : el
+    );
+    const updatedSlides = [...courseSlides];
+    updatedSlides[slideIndex] = updatedSlide;
+    setCourses((courses) => ({
+      ...courses,
+      [selectedChapter]: updatedSlides,
+    }));
+  };
 
-const handleRemoveSlide = (index) => {
-  const updatedSlides = slides.filter((_, slideIndex) => slideIndex !== index);
-  setSlides(updatedSlides);
-};
+  const handleRemoveElement = (slideIndex, elementId) => {
+    const selectedCourse = courses[selectedChapter];
+    const updatedSlide = selectedCourse[slideIndex].filter((el) => el.id !== elementId);
+    const updatedSlides = [...selectedCourse];
+    updatedSlides[slideIndex] = updatedSlide;
+    setCourses((courses) => ({
+      ...courses,
+      [selectedChapter]: updatedSlides,
+    }));
+  };
 
+  const handleImageChange = (slideIndex, elementId, e) => {
+    const file = e.target.files[0];
+    if (!file || !selectedChapter) return;
+    
+    const selectedCourse = courses[selectedChapter];
+    const updatedSlide = selectedCourse[slideIndex].map((el) =>
+        el.id === elementId ? { ...el, value: file.name } : el
+    );
+    
+    const updatedSlides = [...selectedCourse];
+    updatedSlides[slideIndex] = updatedSlide;
+    setCourses((courses) => ({
+      ...courses,
+      [selectedChapter]: updatedSlides,
+    }));
+  };
 
+  const handleRemoveSlide = (index) => {
+    const updatedSlides = courses[selectedChapter].filter((_, slideIndex) => slideIndex !== index);
+    setCourses({ ...courses, [selectedChapter]: updatedSlides });
+  };
 
   return (
     <>
@@ -79,8 +93,23 @@ const handleRemoveSlide = (index) => {
           { selectedChapter ?
             <>
               <SlideView selectedSlide={selectedSlide} slides={courses[selectedChapter]} />
-              <SlideControl slides={courses[selectedChapter]} setSlides={setSlides} handleAddElement={handleAddElement} removeElement={removeElement} handleInputChange={handleInputChange} handleImageChange={handleImageChange} selectedType={selectedType} setSelectedType={setSelectedType} handleRemoveSlide={handleRemoveSlide}/>
-</>
+              <div className="col-span-1">
+                <SlideList setSelectedSlide={setSelectedSlide} slides={courses[selectedChapter]} />
+              </div>
+              <SlideControl
+                courses={courses}
+                selectedChapter={selectedChapter}
+                slides={courses[selectedChapter]}
+                setSlides={(updatedSlides) => setCourses({ ...courses, [selectedChapter]: updatedSlides })}
+                handleAddElement={handleAddElement}
+                removeElement={handleRemoveElement}
+                handleInputChange={handleInputChange}
+                handleImageChange={handleImageChange}
+                selectedType={selectedType}
+                setSelectedType={setSelectedType}
+                handleRemoveSlide={handleRemoveSlide}
+              />
+            </>
             : null
           }
         </div>
@@ -88,4 +117,5 @@ const handleRemoveSlide = (index) => {
     </>
   );
 }  
+
 export default SlideShow;
