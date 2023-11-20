@@ -2,30 +2,23 @@ import PropTypes from "prop-types";
 import { FaTrash } from "react-icons/fa";
 
 const DevotionDisplay = ({ devotions, handleDelete }) => {
-  const sortedDevotions = devotions.sort(
-    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-  );
-
-  const latestDevotion = sortedDevotions.shift();
-
   return (
     <div className="w-[70%] bg-gray-100 container mx-auto">
-      {/* Display the latest added devotion as a big banner */}
-      {latestDevotion && (
-        <div className="mb-6">
+      {devotions.map((devotion, index) => (
+        <div key={index} className="mt-6">
           <h1 className="font-customBold text-3xl text-[#EA9215]">
             Daily Devotional
           </h1>
 
           <div className="flex space-x-12">
-            {latestDevotion.month !== "" || latestDevotion.day !== "" ? (
+            {devotion.month !== "" || devotion.day !== "" ? (
               <div className="rounded w-[20%] h-36 my-1 border-2 bg-[#fff] border-[#EA9215] mt-8 text-[#3A4750]">
                 <div className="w-[95%] mx-auto flex flex-col justify-center items-center border-2 bg-[#3A4750] p-3 rounded">
                   <p className="font-customBold text-3xl text-[#fff]">
-                    {latestDevotion.month}
+                    {devotion.month}
                   </p>
                   <p className="text-7xl font-customBold text-[#fff]">
-                    {latestDevotion.day}
+                    {devotion.day}
                   </p>
                 </div>
               </div>
@@ -33,10 +26,10 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
               <div className="hidden rounded w-[20%] h-36 my-1 border-2 bg-[#fff] border-[#EA9215] mt-8 text-[#3A4750]">
                 <div className="w-[95%] mx-auto flex flex-col justify-center items-center border-2 bg-[#3A4750] p-3 rounded">
                   <p className="font-customBold text-3xl text-[#fff]">
-                    {latestDevotion.month}
+                    {devotion.month}
                   </p>
                   <p className="text-7xl font-customBold text-[#fff]">
-                    {latestDevotion.day}
+                    {devotion.day}
                   </p>
                 </div>
               </div>
@@ -45,27 +38,27 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
             <div className="flex flex-col w-[50%] space-y-2 mt-8">
               <div className="flex width: 100% space-x-12">
                 <h1 className="font-customBold text-4xl text-justify text-[#3A4750]">
-                  {latestDevotion.title}
+                  {devotion.title}
                 </h1>
                 <FaTrash
                   className="text-gray-700 text-xl cursor-pointer self-center"
-                  onClick={() => handleDelete(latestDevotion._id)}
+                  onClick={() => handleDelete(devotion._id)}
                 />
               </div>
               <h2 className="font-customBold text-lg text-[#EA9215]">
-                {latestDevotion.chapter}
+                {devotion.chapter}
               </h2>
-              {latestDevotion.chapter !== "" ? (
+              {devotion.chapter !== "" ? (
                 <hr className="border-[#EA9215]" />
               ) : (
                 <hr className="hidden border-[#3A4750]" />
               )}
 
               <p className="font-customBold text-1xl text-[#3A4750]">
-                {latestDevotion.verse}
+                {devotion.verse}
               </p>
 
-              {latestDevotion.body.map((paragraph, paragraphIndex) => (
+              {devotion.body.map((paragraph, paragraphIndex) => (
                 <p
                   className="font-customLight text-sm text-justify text-[#3A4750]"
                   key={paragraphIndex}
@@ -74,62 +67,35 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
                 </p>
               ))}
 
-              {latestDevotion.prayer !== "" ? (
+              {devotion.prayer !== "" ? (
                 <p className="font-customBold text-1xl text-center border-2 border-[#EA9215] p-2 rounded text-[#EA9215]">
-                  {latestDevotion.prayer}
+                  {devotion.prayer}
                 </p>
               ) : (
                 <p className="hidden font-customBold text-1xl text-center border-2 border-[#EA9215] p-2 rounded text-[#EA9215]">
-                  {latestDevotion.prayer}
+                  {devotion.prayer}
                 </p>
               )}
             </div>
 
             <div className="w-[25%] mt-12 flex flex-col space-y-12">
               {/* {devotion.previewUrl && (
-<img src={devotion.previewUrl} alt="Preview" />
-)}
-{devotion.previewUrl !== "" ? (
-<img src={devotion.advertImage} alt="" className="" />
-) : (
-<img src={devotion.advertImage} alt="" className="hidden" />
-)} */}
+                <img src={devotion.previewUrl} alt="Preview" />
+              )}
+              {devotion.previewUrl !== "" ? (
+                <img src={devotion.advertImage} alt="" className="" />
+              ) : (
+                <img src={devotion.advertImage} alt="" className="hidden" />
+              )} */}
 
               <img
-                src={`http://localhost:5000/images/${latestDevotion.image}`}
+                src={`http://localhost:5000/images/${devotion.image}`}
                 alt="Devotion Image"
               />
             </div>
           </div>
         </div>
-      )}
-
-      {/* Display the other devotions as thumbnails */}
-      <div className="flex flex-wrap justify-center">
-        {sortedDevotions.map((devotion, index) => (
-          <div key={index} className="w-1/4 p-4 thumbnail">
-            <div className="rounded w-full h-40 border-2 bg-[#fff] border-[#EA9215] text-[#3A4750]">
-              <img
-                src={`http://localhost:5000/images/${devotion.image}`}
-                alt="Devotion Image"
-                className="h-[50%] w-[50%] mx-auto mt-4"
-              />
-              <h1 className="font-customBold text-2xl text-justify mt-2">
-                {devotion.title}
-              </h1>
-              <div className="flex justify-between items-center mt-2">
-                <h2 className="font-customBold text-lg text-[#EA9215]">
-                  {devotion.chapter}
-                </h2>
-                <FaTrash
-                  className="text-gray-700 text-xl cursor-pointer"
-                  onClick={() => handleDelete(devotion._id)}
-                />
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      ))}
     </div>
   );
 };
