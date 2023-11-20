@@ -1,17 +1,19 @@
 import PropTypes from 'prop-types';
+import { Button } from "@/components/ui/button"
 
 const SlideList = ({ setSelectedSlide, slides }) => {
   return (
     <div className="col-span-1">
       {slides.map((slide, slideIndex) => (
         slide.length > 0 && slide[0].type === 'title' ? (
-          <button
-            className="block text-left"
+          <Button
+            className="w-26"
+            variant="outline"
             onClick={() => setSelectedSlide(slideIndex)}
-            key={slideIndex} // Use slideIndex as the key
+            key={slideIndex}
           >
             {slide[0].value}
-          </button>
+          </Button>
         ) : null
       ))}
     </div>
