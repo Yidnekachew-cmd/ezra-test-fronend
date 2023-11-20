@@ -1,30 +1,14 @@
 import axios from "axios";
+import PropTypes from "prop-types";
 
-const SlideControl = ({slides, removeElement, handleImageChange, selectedType, setSelectedType, handleRemoveSlide}) => {
- 
+const SlideControl = ({slides, setSlides, handleInputChange, handleImageChange, selectedType, setSelectedType, handleRemoveSlide, handleAddElement}) => {
+
     const handleAddSlide = () => {
         const newSlide = [];
         setSlides([...slides, newSlide]);
     };
     
-    const handleRemoveSlide = (index) => {
-        const updatedSlides = slides.filter((_, slideIndex) => slideIndex !== index);
-        setSlides(updatedSlides);
-    };
-    
-    const handleAddElement = (slideIndex) => {
-        if (!selectedType) return;
-      
-        const updatedSlide = slides[slideIndex].concat({
-            type: selectedType,
-            id: `${selectedType}-${slideIndex + 1}-${slides[slideIndex].length + 1}`,
-            value: '',
-        });
-      
-        const updatedSlides = [...slides];
-        updatedSlides[slideIndex] = updatedSlide;
-        setSlides(updatedSlides);
-    };
+ 
     
     const handleRemoveElement = (slideIndex, elementId) => {
         const updatedSlide = slides[slideIndex].filter((el) => el.id !== elementId);
@@ -33,14 +17,7 @@ const SlideControl = ({slides, removeElement, handleImageChange, selectedType, s
         setSlides(updatedSlides);
     };
     
-    const handleInputChange = (slideIndex, elementId, value) => {
-        const updatedSlide = slides[slideIndex].map((el) =>
-            el.id === elementId ? { ...el, value: value } : el
-        );
-        const updatedSlides = [...slides];
-        updatedSlides[slideIndex] = updatedSlide;
-        setSlides(updatedSlides);
-    };
+  
     
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -63,18 +40,7 @@ const SlideControl = ({slides, removeElement, handleImageChange, selectedType, s
             .catch((err) => console.log(err));
     };
 
-    const handleImageChange = (slideIndex, elementId, e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        
-        const updatedSlide = slides[slideIndex].map((el) =>
-            el.id === elementId ? { ...el, value: file.name } : el
-        );
-        
-        const updatedSlides = [...slides];
-        updatedSlides[slideIndex] = updatedSlide;
-        setSlides(updatedSlides);
-    };
+
 
       return (<div className="col-span-1 border border-gray-300 p-4 rounded-lg"> 
       <div className="grid grid-cols-1 gap-4">
@@ -148,6 +114,18 @@ const SlideControl = ({slides, removeElement, handleImageChange, selectedType, s
       </div>
     </div>)
 }
+
+SlideControl.propTypes = {
+    slides: PropTypes.array.isRequired,
+    setSlides: PropTypes.func.isRequired,
+    handleAddElement: PropTypes.func.isRequired,
+    removeElement: PropTypes.func.isRequired,
+    handleInputChange: PropTypes.func.isRequired,
+    handleImageChange: PropTypes.func.isRequired,
+    selectedType: PropTypes.string.isRequired,
+    setSelectedType: PropTypes.func.isRequired,
+    handleRemoveSlide: PropTypes.func.isRequired,
+  };
 
 export default SlideControl;
 

@@ -1,5 +1,5 @@
 
-const SlideView = ({selectedSlide, slides}) => {
+const SlideView = ({setSelectedSlide, slides}) => {
     <div className="col-span-1"> 
     {
       slides.map((slide, slideIndex) => (

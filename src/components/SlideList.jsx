@@ -1,5 +1,15 @@
+import PropTypes from 'prop-types';
 
 const SlideView = ({selectedSlide, slides}) => {
+
+    const displaySlide = (slide) => (
+        slide.map((element, idx) => (
+          <div key={idx}>
+            <h3> {element.type}:</h3>
+            <p>{element.value}</p>
+          </div>
+        ))
+      );
    return (
    <div className="col-span-2 border border-gray-300 p-4 rounded-lg"> {/* middle column */}
     <div className="flex justify-center w-full">
@@ -9,6 +19,11 @@ const SlideView = ({selectedSlide, slides}) => {
     </div>
   </div>)
 }
+
+SlideView.propTypes = {
+    slides: PropTypes.array.isRequired,
+    selectedSlide: PropTypes.array.isRequired,
+  };
 
 export default SlideView;
 
