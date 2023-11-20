@@ -4,7 +4,17 @@ import axios from "axios";
 function SlideShow() {
   const [slides, setSlides] = useState([]);
   const [selectedType, setSelectedType] = useState('');
+  const [selectedSlide, setSelectedSlide] = useState(null);
 
+  const displaySlide = (slide) => (
+    slide.map((element, idx) => (
+      <div key={idx}>
+        <h3> {element.type}:</h3>
+        <p>{element.value}</p>
+      </div>
+    ))
+  );
+  
   const handleAddSlide = () => {
     const newSlide = [];
     setSlides([...slides, newSlide]);
@@ -44,7 +54,6 @@ function SlideShow() {
     updatedSlides[slideIndex] = updatedSlide;
     setSlides(updatedSlides);
   };
-
   
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -81,10 +90,30 @@ function SlideShow() {
   };
 
   return (
-    <div className="container mx-auto py-8">
-      <div className="flex justify-center">
-        <div className="w-3/4 border border-gray-300 p-4 rounded-lg">
-          <div className="grid grid-cols-2 gap-4">
+    <>
+    <div className="container mx-auto py-8 grid grid-cols-3 gap-4">
+    <div className="col-span-1"> 
+      {
+        slides.map((slide, slideIndex) => (
+          slide.length > 0 && slide[0].type == 'title' ? (
+            <button className="block text-left" onClick={() => setSelectedSlide(slideIndex)} key={slide[0].title}> 
+              {slide[0].value}
+            </button>
+          ) : null
+        ))
+      }
+    </div>
+
+    <div className="col-span-2 border border-gray-300 p-4 rounded-lg"> {/* middle column */}
+      <div className="flex justify-center w-full">
+        <div className="w-3/4">
+          {selectedSlide !== null && slides[selectedSlide] ? displaySlide(slides[selectedSlide]) : null }
+        </div>
+      </div>
+    </div>
+
+    <div className="col-span-1 border border-gray-300 p-4 rounded-lg"> 
+          <div className="grid grid-cols-1 gap-4">
             {slides.map((slide, slideIndex) => (
               <div key={slideIndex} className="border border-gray-300 p-4 rounded-lg">
                 <div className="mb-4">
@@ -155,7 +184,8 @@ function SlideShow() {
           </div>
         </div>
       </div>
-    </div>
+    
+    </>
   );
                   }  
 export default SlideShow;
