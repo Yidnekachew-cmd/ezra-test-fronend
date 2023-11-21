@@ -74,13 +74,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-@font-face {
-  font-family: 'Nokia Pure Headline Bold';
-  src: url(../public/fonts/NOKIAPUREHEADLINE_BD.TTF) format('truetype');
-}
-
-@font-face {
-  font-family: 'Nokia Pure Headline Light';
-  src: url(../public/fonts/NokiaPureHeadline_ULt.ttf) format('truetype');
-}
