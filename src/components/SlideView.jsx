@@ -10,14 +10,13 @@ const SlideView = ({selectedSlide, slides}) => {
           </div>
         ))
       );
-   return (
-   <div className="col-span-2 border border-gray-300 p-4 rounded-lg"> {/* middle column */}
-    <div className="flex justify-center w-full">
-      <div className="w-3/4">
-        {selectedSlide !== null && slides[selectedSlide] ? displaySlide(slides[selectedSlide]) : null }
-      </div>
-    </div>
-  </div>)
+      return (
+        <div className="flex items-center justify-center mx-auto px-4 py-2 my-2 border border-gray-300 bg-white max-w-md rounded overflow-hidden shadow-lg">
+            {selectedSlide !== null && slides[selectedSlide] ? displaySlide(slides[selectedSlide]) : 'Select a slide to display'}
+        </div>
+    );
+
+
 }
 
 SlideView.propTypes = {

@@ -42,78 +42,76 @@ const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputC
 
 
 
-      return (<div className="col-span-1 border border-gray-300 p-4 rounded-lg"> 
-      <div className="grid grid-cols-1 gap-4">
+    return (
+      <div className="col-span-2 bg-white shadow-lg rounded-lg p-6 pt-8">
         {slides.map((slide, slideIndex) => (
-          <div key={slideIndex} className="border border-gray-300 p-4 rounded-lg">
-            <div className="mb-4">
-              <h3 className="text-lg font-semibold mb-2">Slide {slideIndex + 1}</h3>
+          <div key={slideIndex} className="border-t border-gray-200 pt-4">
+            <div className="flex items-center mb-4">
+              <h3 className="text-lg font-semibold flex-grow">Slide {slideIndex + 1}</h3>
               <button
                 onClick={() => handleRemoveSlide(slideIndex)}
-                className="bg-red-500 text-white px-2 py-1 rounded"
+                className="shadow-md bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md"
               >
                 Remove Slide
               </button>
             </div>
-            <div className="space-y-4">
-              {slide.map((element) => (
-                <div key={element.id} className="flex items-center">
-                  <label className="mr-2">{element.type.charAt(0).toUpperCase() + element.type.slice(1)}</label>
-                  {element.type === "img" ? (
-           <input
-           type="file"
-           onChange={(e) => handleImageChange(slideIndex, element.id, e)}
-           className="border border-gray-300 rounded px-2 py-1"
-         />
-         
-          ) : (
-            <input
-              type="text"
-              value={element.value}
-              onChange={(e) => handleInputChange(slideIndex, element.id, e.target.value, courses[selectedChapter])}
-
-              className="border border-gray-300 rounded px-2 py-1"
-            />
-          )}
-                  <button
-                    onClick={() => handleRemoveElement(slideIndex, element.id)}
-                    className="ml-2 bg-red-500 text-white px-2 py-1 rounded"
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))}
-              <div className="flex items-center space-x-4">
-                <select
-                  onChange={(e) => setSelectedType(e.target.value)}
-                  className="border border-gray-300 rounded px-2 py-1"
-                  value={selectedType}
-                >
-                  <option value="">Select Type</option>
-                  <option value="title">Title</option>
-                  <option value="sub">Sub</option>
-                  <option value="img">Image</option>
-                </select>
+            {slide.map((element) => (
+              <div key={element.id} className="flex items-center justify-between mb-3">
+                <label className="text-sm font-semibold">{element.type.charAt(0).toUpperCase() + element.type.slice(1)}</label>
+                {element.type === "img" ? (
+                  <input
+                    type="file"
+                    onChange={(e) => handleImageChange(slideIndex, element.id, e)}
+                    className="shadow-sm border-gray-300 rounded px-2 py-1"
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    value={element.value}
+                    onChange={(e) => handleInputChange(slideIndex, element.id, e.target.value, courses[selectedChapter])}
+                    className="shadow-sm border-gray-300 rounded px-2 py-1"
+                  />
+                )}
                 <button
-                  onClick={() => handleAddElement(slideIndex)}
-                  className="bg-blue-500 text-white px-2 py-1 rounded"
+                  onClick={() => handleRemoveElement(slideIndex, element.id)}
+                  className="shadow-md bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md"
                 >
-                  Add
+                  Remove
                 </button>
               </div>
+            ))}
+            <div className="flex items-center space-x-4">
+              <select
+                onChange={(e) => setSelectedType(e.target.value)}
+                className="shadow-sm border-gray-300 rounded px-2 py-1"
+                value={selectedType}
+              >
+                <option value="">Select Type</option>
+                <option value="title">Title</option>
+                <option value="sub">Sub</option>
+                <option value="img">Image</option>
+              </select>
+              <button
+                onClick={() => handleAddElement(slideIndex)}
+                className="shadow-md bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md"
+              >
+                Add
+              </button>
             </div>
           </div>
         ))}
+        <div className="flex justify-between mt-5">
+          <button onClick={handleAddSlide} className="shadow-md bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
+            Add Slide
+          </button>
+          <button onClick={handleSubmit} className="shadow-md bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
+            Submit
+          </button>
+        </div>
       </div>
-      <div className="flex justify-between mt-4">
-        <button onClick={handleAddSlide} className="bg-green-500 text-white px-4 py-2 rounded">
-          Add Slide
-        </button>
-        <button onClick={handleSubmit} className="bg-blue-500 text-white px-4 py-2 rounded">
-          Submit
-        </button>
-      </div>
-    </div>)
+    );
+    
+    
 }
 
 SlideControl.propTypes = {

@@ -80,7 +80,7 @@ function SlideShow() {
     const updatedSlides = courses[selectedChapter].filter((_, slideIndex) => slideIndex !== index);
     setCourses({ ...courses, [selectedChapter]: updatedSlides });
   };
-
+  
   return (
     <>
       <button onClick={() => setChapterForm(!showChapterForm)} className="bg-green-500 text-white px-4 py-2 rounded">
@@ -115,7 +115,7 @@ function SlideShow() {
         </div>
       }
     </>
-  );
+);
 }  
 
 export default SlideShow;
