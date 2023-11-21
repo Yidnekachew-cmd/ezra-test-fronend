@@ -68,7 +68,6 @@ function SubTitle() {
       type: "img",
       id: id,
       value: img,
-      img: img, // Add the img object to the element
     };
     setElements((prevElements) =>
       prevElements.map((el) => (el.id === id ? { ...el, ...imageObject } : el))
