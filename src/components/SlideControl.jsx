@@ -18,29 +18,41 @@ const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputC
     };
     
   
-    
     const handleSubmit = (event) => {
-        event.preventDefault();
-        
-        const dataToSend = slides.map((slide) => {
-            let slideData = {};
-            slide.forEach((element) => {
-                slideData = { ...slideData, [element.type]: slideData[element.type] ? [...slideData[element.type], element.value] : [element.value] };
-            });
+      event.preventDefault();
+    
+      const dataToSend = Object.entries(courses).map(([chapter, slides]) => {
+        const chapterData = {
+          chapter: chapter,
+          slides: slides.map((slide) => {
+            const slideData = {
+              slide: slide[0].type === 'title' ? slide[0].value : '', // Assuming the first element in each slide is the title
+              elements: slide.slice(1).map((element) => {
+                const elementData = {
+                  type: element.type,
+                  id: element.id,
+                  value: element.value,
+                  subslides: [] // You may add logic here to handle subslides if needed
+                };
+                return elementData;
+              })
+            };
             return slideData;
-        });
-        
-        console.log(JSON.stringify(dataToSend));
-        
-        axios
-            .post("/course/create", dataToSend)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => console.log(err));
+          })
+        };
+        return chapterData;
+      });
+    
+      const finalData = { chapters: dataToSend };
+      console.log(JSON.stringify(finalData, null, 2));
+    
+      // For the actual submission to an API endpoint (using Axios), uncomment the code below:
+      // axios.post("/course/create", finalData)
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .catch((err) => console.log(err));
     };
-
-
 
     return (
       <div className="col-span-2 bg-white shadow-lg rounded-lg p-6 pt-8">

@@ -11,7 +11,7 @@ const SlideView = ({selectedSlide, slides}) => {
         ))
       );
       return (
-        <div className="flex items-center justify-center mx-auto px-4 py-2 my-2 border border-gray-300 bg-white max-w-md rounded overflow-hidden shadow-lg">
+        <div className="flex flex-col items-start justify-center mx-auto px-4 py-2 my-2 border border-gray-300 bg-white max-w-md rounded-lg overflow-hidden shadow-lg">
             {selectedSlide !== null && slides[selectedSlide] ? displaySlide(slides[selectedSlide]) : 'Select a slide to display'}
         </div>
     );

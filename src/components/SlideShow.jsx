@@ -93,9 +93,9 @@ function SlideShow() {
           { selectedChapter ?
             <>
               <SlideView selectedSlide={selectedSlide} slides={courses[selectedChapter]} />
-              <div className="col-span-1">
+              {/* <div className="col-span-1"> */}
                 <SlideList setSelectedSlide={setSelectedSlide} slides={courses[selectedChapter]} />
-              </div>
+              {/* </div> */}
               <SlideControl
                 courses={courses}
                 selectedChapter={selectedChapter}
