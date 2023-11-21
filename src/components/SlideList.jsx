@@ -1,18 +1,23 @@
 import PropTypes from 'prop-types';
-// import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 
 const SlideList = ({ setSelectedSlide, slides }) => {
   return (
-    <div className="grid justify-items-stretch">
-        {slides.map((slide, slideIndex) => (
-            slide.length > 0 && slide[0].type === 'title' ? (
-            <button className={`justify-self-center mx-auto my-1 text-center ${setSelectedSlide === slide? 'bg-gray-300' : ''}`} {...slide[0].value} key={slideIndex} onClick={() => setSelectedSlide(slideIndex)} />
-            ):null
-        ))}
+    <div className="col-span-1">
+      {slides.map((slide, slideIndex) => (
+        slide.length > 0 && slide[0].type === 'title' ? (
+          <Button
+            className="w-26 my-2 flex flex-col"
+            variant="outline"
+            onClick={() => setSelectedSlide(slideIndex)}
+            key={slideIndex}
+          >
+            {slide[0].value}
+          </Button>
+        ) : null
+      ))}
     </div>
-);
-
-
+  );
 };
 
 SlideList.propTypes = {
