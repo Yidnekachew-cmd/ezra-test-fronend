@@ -2,16 +2,19 @@
 import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
-function CreateCourse() {
+function CreateCourse({ setCourseData, setStep }) {
   const [data, setData] = useState({
     title: "",
     description: "",
     image: "",
+    chapters: [],
   });
   //   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setCourseData(data);
+    setStep(2);
     console.log(data);
     const formdata = new FormData();
     formdata.append("title", data.title);
