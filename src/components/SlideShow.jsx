@@ -1,11 +1,12 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import SlideControl from './SlideControl';
 import SlideView from './SlideView';
 import ChapterForm from './ChapterForm';
 import ChapterList from './ChapterList';
 import SlideList from "./SlideList";
 
-function SlideShow() {
+function SlideShow({courseData}) {
   const [courses, setCourses] = useState({}); 
   const [selectedChapter, setSelectedChapter] = useState(null);
   const [selectedSlide, setSelectedSlide] = useState(null);
@@ -108,6 +109,7 @@ function SlideShow() {
                 selectedType={selectedType}
                 setSelectedType={setSelectedType}
                 handleRemoveSlide={handleRemoveSlide}
+                courseData={courseData}
               />
             </>
             : null
@@ -117,5 +119,9 @@ function SlideShow() {
     </>
 );
 }  
+
+SlideShow.propTypes = {
+  courseData: PropTypes.object.isRequired,
+}
 
 export default SlideShow;

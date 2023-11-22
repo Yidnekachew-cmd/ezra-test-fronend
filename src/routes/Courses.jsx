@@ -18,7 +18,7 @@ const Courses = () => {
   return (
     <div>
       {step === 1 && 
-        <CreateCourse setCourseData={setCourseData} setStep={setStep} />}
+        <CreateCourse courseData={courseData} setCourseData={setCourseData} setStep={setStep} />}
       {step === 2 && 
         <AddCourse courseData={courseData} />}
     </div>

@@ -1,5 +1,6 @@
 // import axios from "axios";
 import { useState } from "react";
+import PropTypes from "prop-types";
 // import { useNavigate } from "react-router-dom";
 
 function CreateCourse({ setCourseData, setStep }) {
@@ -81,5 +82,11 @@ function CreateCourse({ setCourseData, setStep }) {
     </div>
   );
 }
+
+CreateCourse.propTypes = {
+  setCourseData: PropTypes.object.isRequired,
+  setStep: PropTypes.object.isRequired,
+}
+
 
 export default CreateCourse;

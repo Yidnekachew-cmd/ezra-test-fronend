@@ -1,7 +1,7 @@
-import axios from "axios";
+// import axios from "axios";
 import PropTypes from "prop-types";
 
-const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputChange, handleImageChange, selectedType, setSelectedType, handleRemoveSlide, handleAddElement}) => {
+const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputChange, handleImageChange, selectedType, setSelectedType, handleRemoveSlide, handleAddElement, courseData}) => {
 
     const handleAddSlide = () => {
         const newSlide = [];
@@ -41,9 +41,18 @@ const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputC
           })
         };
         return chapterData;
+        
       });
+
+      const finalData = courseData ? {
+        name: courseData.title,
+        description: courseData.description,
+        image: courseData.image,
+        chapters: dataToSend
+      } : null;
+
+
     
-      const finalData = { chapters: dataToSend };
       console.log(JSON.stringify(finalData, null, 2));
     
       // For the actual submission to an API endpoint (using Axios), uncomment the code below:
@@ -138,6 +147,7 @@ SlideControl.propTypes = {
     selectedType: PropTypes.string.isRequired,
     setSelectedType: PropTypes.func.isRequired,
     handleRemoveSlide: PropTypes.func.isRequired,
+    courseData: PropTypes.object,
   };
 
 export default SlideControl;
