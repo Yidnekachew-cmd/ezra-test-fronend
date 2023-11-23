@@ -38,7 +38,7 @@ function CoursesAvailable() {
               </p>
               <p className="text-gray-600 m-1">{course.description}</p>
               <Link
-                to={`/courses/chapters/` + course._id}
+                to={`/courses/get/` + course._id}
                 className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-1 px-4 rounded-xl mr-2"
               >
                 ኮርሱን ክፈት
