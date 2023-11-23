@@ -11,6 +11,7 @@ function CreateCourse({ setCourseData, setStep }) {
     chapters: [],
   });
   //   const navigate = useNavigate();
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();

@@ -4,7 +4,6 @@ import CreateCourse from "@/components/CreateCourse";
 import AddCourse from "../components/AddCourse";
 
 const Courses = () => {
- 
   const [step, setStep] = useState(1);
   const [courseData, setCourseData] = useState(null);
   const navigate = useNavigate();
@@ -13,16 +12,18 @@ const Courses = () => {
     if (step === 2) {
       navigate("/course/create/add");
     }
-  }, [step]);
+  }, [step, navigate]);
 
   return (
     <div>
       {step === 1 && 
-        <CreateCourse courseData={courseData} setCourseData={setCourseData} setStep={setStep} />}
-      {step === 2 && 
-        <AddCourse courseData={courseData} />}
+        <CreateCourse setCourseData={setCourseData} setStep={setStep} />}
+      {courseData && 
+        <AddCourse courseData={courseData} setStep={setStep} />}
     </div>
   );
 };
+
+
 
 export default Courses;

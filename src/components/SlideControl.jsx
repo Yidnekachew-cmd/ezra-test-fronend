@@ -1,14 +1,20 @@
 // import axios from "axios";
 import PropTypes from "prop-types";
-
+import { useEffect } from "react";
 const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputChange, handleImageChange, selectedType, setSelectedType, handleRemoveSlide, handleAddElement, courseData}) => {
+
+
+  
 
     const handleAddSlide = () => {
         const newSlide = [];
         setSlides([...slides, newSlide]);
     };
     
- 
+    useEffect(() => {
+      console.log(courseData);
+  }, [courseData]);
+  
     
     const handleRemoveElement = (slideIndex, elementId) => {
         const updatedSlide = slides[slideIndex].filter((el) => el.id !== elementId);
@@ -20,7 +26,7 @@ const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputC
   
     const handleSubmit = (event) => {
       event.preventDefault();
-    
+    console.log (courseData);
       const dataToSend = Object.entries(courses).map(([chapter, slides]) => {
         const chapterData = {
           chapter: chapter,

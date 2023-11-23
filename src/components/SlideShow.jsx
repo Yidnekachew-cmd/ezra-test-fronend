@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import SlideControl from './SlideControl';
 import SlideView from './SlideView';
@@ -12,6 +12,11 @@ function SlideShow({courseData}) {
   const [selectedSlide, setSelectedSlide] = useState(null);
   const [selectedType, setSelectedType] = useState('');
   const [showChapterForm, setChapterForm] = useState(false);
+
+  useEffect(() => {
+    console.log(courseData);
+}, [courseData]);
+
 
   const handleAddChapter = (chapterTitle) => {
     setCourses({...courses, [chapterTitle]: []});
