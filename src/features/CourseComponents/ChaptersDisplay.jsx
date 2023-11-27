@@ -97,8 +97,8 @@ function ChaptersDisplay() {
                       {chapters.chapter}
                     </h1>
                     <Link
-                      to={`/courses/get/${course._id}/chapter/${chapters._id}`}
-                      className="text-white font-bold my-2 p-2 bg-orange-400 w-[20%] rounded-3xl mx-auto"
+                      to={`/courses/get/${course._id}/chapter/${chapters.chapter._id}`}
+                      className="text-white text-center font-bold my-2 p-2 bg-orange-400 w-[20%] rounded-3xl mx-auto"
                     >
                       ትምህርቱን ጀምር
                     </Link>
