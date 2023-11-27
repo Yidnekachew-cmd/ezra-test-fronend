@@ -4,7 +4,6 @@ import { Link, useParams } from "react-router-dom";
 
 function ChaptersDisplay() {
   const [data, setData] = useState([]);
-  const [course, setCourse] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [unlockedIndex, setUnlockedIndex] = useState(0); // New state variable to track the unlocked index
 
@@ -16,7 +15,6 @@ function ChaptersDisplay() {
       .get("/course/get/" + id)
       .then((res) => {
         setData(res.data.chapters);
-        setCourse(res.data);
         console.log(res.data);
       })
       .catch((err) => console.log(err));
@@ -53,7 +51,7 @@ function ChaptersDisplay() {
             CHAPTER {currentDataNumber}/{totalDataNumber}
           </div>
           <div className="flex flex-col justify-around data-center mt-[20px]">
-            {data.map((chapters, index) => {
+            {data.map((chapter, index) => {
               const unlocked = isSlideUnlocked(index);
               return (
                 <button
@@ -67,7 +65,7 @@ function ChaptersDisplay() {
                   }}
                   disabled={!unlocked} // Disable the button if the slide is locked
                 >
-                  <span>{chapters.chapter}</span>
+                  <span>{chapter.chapter}</span>
                   {unlocked ? (
                     <span className="material-symbols-outlined text-orange-500 pl-4 text-xl">
                       check_circle
@@ -86,7 +84,7 @@ function ChaptersDisplay() {
         <div className="overflow-hidden w-[70%] justify-center data-center mx-auto bg-[#955B09BA] rounded-lg">
           <div className="flex flex-col whitespace-nowrap transition-transform duration-300 shadow-md">
             <h1 className="text-white font-bold p-2">EZRA seminary</h1>
-            {data.map((chapters, index) => {
+            {data.map((chapter, index) => {
               if (index === activeIndex) {
                 return (
                   <div
@@ -94,10 +92,10 @@ function ChaptersDisplay() {
                     className="inline-flex flex-col justify-center h-[490px] border-y-2 border-orange-300"
                   >
                     <h1 className="text-[1.15rem] font-bold mt-[10px] mb-[10px] px-[20px] whitespace-normal text-white text-center">
-                      {chapters.chapter}
+                      {chapter.chapter}
                     </h1>
                     <Link
-                      to={`/courses/get/${course._id}/chapter/${chapters.chapter._id}`}
+                      to={`/courses/get/${id}/chapter/${chapter._id}`}
                       className="text-white text-center font-bold my-2 p-2 bg-orange-400 w-[20%] rounded-3xl mx-auto"
                     >
                       ትምህርቱን ጀምር

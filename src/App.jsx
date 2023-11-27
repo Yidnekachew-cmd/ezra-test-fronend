@@ -19,9 +19,9 @@ function App() {
         <Route path="/sabbathSchool" element={<SabbathSchool />} />
         <Route path="/devotion" element={<Devotion />} />
         <Route path="/aboutUs" element={<AboutUs />} />
-        <Route path="/courses/get/:id" element={<ChaptersDisplay />} />
+        <Route path="/courses/get/:courseId" element={<ChaptersDisplay />} />
         <Route
-          path="/courses/get/:id/chapter/:id"
+          path="/courses/get/:courseId/chapter/:chapterId"
           element={<SlidesDisplay />}
         />
         <Route path="*" element={<NotMatch />} />

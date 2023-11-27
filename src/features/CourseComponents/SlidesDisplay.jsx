@@ -7,18 +7,25 @@ function SlidesDisplay() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [unlockedIndex, setUnlockedIndex] = useState(0); // New state variable to track the unlocked index
 
-  const { id } = useParams();
+  const { courseId, chapterId } = useParams(); // Note the two separate parameters
 
   //get all courses
   useEffect(() => {
     axios
-      .get("/course/get/" + id)
+      .get(`/course/get/${courseId}`) // Assuming you will change the endpoint as needed
       .then((res) => {
-        setData(res.data.chapters);
-        console.log(res.data);
+        // Now we need to find the specific chapter within the course
+        const chapter = res.data.chapters.find(
+          (chap) => chap._id === chapterId
+        );
+        if (chapter) {
+          setData(chapter.slides);
+        } else {
+          console.log("Chapter not found");
+        }
       })
       .catch((err) => console.log(err));
-  }, [id]);
+  }, [courseId, chapterId]);
 
   const updateIndex = (newIndex) => {
     if (newIndex < 0) {
