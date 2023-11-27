@@ -14,7 +14,7 @@ function SlidesDisplay() {
     axios
       .get("/course/get/" + id)
       .then((res) => {
-        setData(res.data.chapters);
+        setData(res.data.chapters.chapter);
         console.log(res.data);
       })
       .catch((err) => console.log(err));

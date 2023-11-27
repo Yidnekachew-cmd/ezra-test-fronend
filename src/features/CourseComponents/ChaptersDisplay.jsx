@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function ChaptersDisplay() {
   const [data, setData] = useState([]);
+  const [course, setCourse] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [unlockedIndex, setUnlockedIndex] = useState(0); // New state variable to track the unlocked index
 
@@ -15,6 +16,7 @@ function ChaptersDisplay() {
       .get("/course/get/" + id)
       .then((res) => {
         setData(res.data.chapters);
+        setCourse(res.data);
         console.log(res.data);
       })
       .catch((err) => console.log(err));
@@ -94,9 +96,12 @@ function ChaptersDisplay() {
                     <h1 className="text-[1.15rem] font-bold mt-[10px] mb-[10px] px-[20px] whitespace-normal text-white text-center">
                       {chapters.chapter}
                     </h1>
-                    <button className="text-white font-bold my-2 p-2 bg-orange-400 w-[20%] rounded-3xl mx-auto">
+                    <Link
+                      to={`/courses/get/${course._id}/chapter/${chapters._id}`}
+                      className="text-white font-bold my-2 p-2 bg-orange-400 w-[20%] rounded-3xl mx-auto"
+                    >
                       ትምህርቱን ጀምር
-                    </button>
+                    </Link>
                   </div>
                 );
               } else {

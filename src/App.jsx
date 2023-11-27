@@ -7,6 +7,7 @@ import Devotion from "./routes/Devotion";
 import AboutUs from "./routes/AboutUs";
 import NotMatch from "./routes/NotMatch";
 import ChaptersDisplay from "./features/CourseComponents/ChaptersDisplay";
+import SlidesDisplay from "./features/CourseComponents/SlidesDisplay";
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
         <Route path="/devotion" element={<Devotion />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/courses/get/:id" element={<ChaptersDisplay />} />
+        <Route
+          path="/courses/get/:id/chapter/:id"
+          element={<SlidesDisplay />}
+        />
         <Route path="*" element={<NotMatch />} />
       </Routes>
     </>
