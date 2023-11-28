@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function SlidesDisplay() {
   const [data, setData] = useState([]);
@@ -86,6 +86,16 @@ function SlidesDisplay() {
               );
             })}
           </div>
+          <Link to={`/courses/get/${courseId}`}>
+            <div className="flex justify-between">
+              <button className="text-white font-bold bg-orange-400 hover:bg-orange-500 rounded-xl px-2">
+                ዘግተህ ውጣ
+              </button>
+              <button className="text-white font-bold text-3xl bg-orange-400 hover:bg-orange-500 rounded-[50%] w-[25%] mx-auto">
+                <span className="material-symbols-outlined t">arrow_left</span>
+              </button>
+            </div>
+          </Link>
         </div>
         {/* slides */}
         <div className="overflow-hidden w-[70%] justify-center data-center mx-auto bg-[#955B09BA] rounded-lg">
@@ -101,14 +111,39 @@ function SlidesDisplay() {
                     <h1 className="text-3xl font-bold mt-[10px] mb-[10px] px-[20px] whitespace-normal text-white text-center">
                       {slides.slide}
                     </h1>
-                    {slides.elements.map((element, index) => {
-                      return (
-                        <div key={index}>
-                          <p className="text-white font-bold pl-20">
+                    {slides.elements.map((element) => {
+                      // Check the type of the element and render it accordingly
+                      if (element.type === "title") {
+                        return (
+                          <li
+                            key={element._id}
+                            className="text-white text-2xl font-bold pl-20"
+                          >
                             {element.value}
-                          </p>
-                        </div>
-                      );
+                          </li>
+                        );
+                      } else if (element.type === "sub") {
+                        return (
+                          <h2
+                            key={element._id}
+                            className="text-white font-bold pl-20"
+                          >
+                            {element.value}
+                          </h2>
+                        );
+                      } else if (element.type === "img") {
+                        return (
+                          <img
+                            key={element._id}
+                            // src={`https://ezra-seminary-api.onrender.com/images/${element.value}`}
+                            src={`http://localhost:5000/images/${element.value}`}
+                            alt={element.id}
+                            className="w-[15%]"
+                          />
+                        );
+                      } else {
+                        return null;
+                      }
                     })}
                   </div>
                 );
@@ -117,14 +152,14 @@ function SlidesDisplay() {
               }
             })}
             <button
-              className={`text-white font-bold my-2 bg-orange-400 w-[10%] rounded-xl mx-auto ${
+              className={`text-white font-bold my-2 bg-orange-400 hover:bg-orange-500 w-[10%] rounded-xl mx-auto ${
                 activeIndex === data.length - 1 ? "hidden" : "block"
               }`} // hidding the next button for the last slide
               onClick={() => {
                 updateIndex(activeIndex + 1);
               }}
             >
-              Next
+              ቀጥል
             </button>
           </div>
         </div>

@@ -63,7 +63,6 @@ function ChaptersDisplay() {
                   onClick={() => {
                     updateIndex(index);
                   }}
-                  disabled={!unlocked} // Disable the button if the slide is locked
                 >
                   <span>{chapter.chapter}</span>
                   {unlocked ? (
@@ -94,12 +93,13 @@ function ChaptersDisplay() {
                     <h1 className="text-[1.15rem] font-bold mt-[10px] mb-[10px] px-[20px] whitespace-normal text-white text-center">
                       {chapter.chapter}
                     </h1>
-                    <Link
-                      to={`/courses/get/${courseId}/chapter/${chapter._id}`}
-                      className="text-white text-center font-bold my-2 p-2 bg-orange-400 w-[20%] rounded-3xl mx-auto"
-                    >
-                      ትምህርቱን ጀምር
-                    </Link>
+                    <button className="text-white text-center font-bold my-2 p-2 bg-orange-400 hover:bg-orange-500 w-[20%] rounded-3xl mx-auto">
+                      <Link
+                        to={`/courses/get/${courseId}/chapter/${chapter._id}`}
+                      >
+                        ትምህርቱን ጀምር
+                      </Link>
+                    </button>
                   </div>
                 );
               } else {
