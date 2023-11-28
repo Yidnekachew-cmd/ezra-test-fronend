@@ -98,18 +98,34 @@ function SlidesDisplay() {
                     key={index}
                     className="inline-flex flex-col justify-center h-[490px] border-y-2 border-orange-300"
                   >
-                    <h1 className="text-[1.15rem] font-bold mt-[10px] mb-[10px] px-[20px] whitespace-normal text-white text-center">
+                    <h1 className="text-3xl font-bold mt-[10px] mb-[10px] px-[20px] whitespace-normal text-white text-center">
                       {slides.slide}
                     </h1>
-                    <button className="text-white font-bold my-2 p-2 bg-orange-400 w-[20%] rounded-3xl mx-auto">
-                      ትምህርቱን ጀምር
-                    </button>
+                    {slides.elements.map((element, index) => {
+                      return (
+                        <div key={index}>
+                          <p className="text-white font-bold pl-20">
+                            {element.value}
+                          </p>
+                        </div>
+                      );
+                    })}
                   </div>
                 );
               } else {
                 return null; // Hide the slide if it doesn't match the activeIndex
               }
             })}
+            <button
+              className={`text-white font-bold my-2 bg-orange-400 w-[10%] rounded-xl mx-auto ${
+                activeIndex === data.length - 1 ? "hidden" : "block"
+              }`} // hidding the next button for the last slide
+              onClick={() => {
+                updateIndex(activeIndex + 1);
+              }}
+            >
+              Next
+            </button>
           </div>
         </div>
       </div>

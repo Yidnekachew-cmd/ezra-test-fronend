@@ -7,18 +7,18 @@ function ChaptersDisplay() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [unlockedIndex, setUnlockedIndex] = useState(0); // New state variable to track the unlocked index
 
-  const { id } = useParams();
+  const { courseId } = useParams();
 
-  //get all courses
+  //get single course
   useEffect(() => {
     axios
-      .get("/course/get/" + id)
+      .get(`/course/get/${courseId}`)
       .then((res) => {
         setData(res.data.chapters);
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }, [id]);
+  }, [courseId]);
 
   const updateIndex = (newIndex) => {
     if (newIndex < 0) {
@@ -95,7 +95,7 @@ function ChaptersDisplay() {
                       {chapter.chapter}
                     </h1>
                     <Link
-                      to={`/courses/get/${id}/chapter/${chapter._id}`}
+                      to={`/courses/get/${courseId}/chapter/${chapter._id}`}
                       className="text-white text-center font-bold my-2 p-2 bg-orange-400 w-[20%] rounded-3xl mx-auto"
                     >
                       ትምህርቱን ጀምር
