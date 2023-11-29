@@ -42,13 +42,15 @@ function CreateCourse({ setCourseData, setStep }) {
         <div className="col-span-12 mx-auto">
           <input
             type="file"
-            className="w-full p-24 text-orange-500 leading-tight border border-orange-300 rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full p-24 text-orange-500 font-bold leading-tight border border-orange-300 rounded-md focus:outline-none focus:border-blue-500"
             name="image"
             onChange={(e) => setData({ ...data, image: e.target.files[0] })}
           />
         </div>
         <div className="col-span-12">
-          <label className="block text-orange-500">Course Title</label>
+          <label className="block text-orange-500 font-bold">
+            Course Title
+          </label>
           <input
             type="text"
             className="w-full px-3 py-2 text-orange-500 leading-tight border border-orange-300 rounded-md focus:outline-none focus:border-blue-500"
@@ -59,7 +61,7 @@ function CreateCourse({ setCourseData, setStep }) {
           />
         </div>
         <div className="col-span-12">
-          <label className="block text-orange-500">Description</label>
+          <label className="block text-orange-500 font-bold">Description</label>
           <input
             type="text"
             className="w-full px-3 pt-2 pb-12 text-orange-500 leading-tight border border-orange-300 rounded-md focus:outline-none focus:border-blue-500"
