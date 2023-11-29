@@ -1,11 +1,15 @@
-import AddCourse from "../components/AddCourse";
+// import CreateCourse from "@/components/CreateCourse";
+import CoursesAvailable from "@/features/CourseComponents/CoursesAvailable";
+// import AddCourse from "../components/AddCourse";
 
 const Courses = () => {
   return (
     <div>
-      <AddCourse />
+      <CoursesAvailable />
+      {/* <CreateCourse />
+      <AddCourse /> */}
     </div>
-  )
-}
+  );
+};
 
-export default Courses
+export default Courses;
