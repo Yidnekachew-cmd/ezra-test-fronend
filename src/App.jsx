@@ -6,6 +6,7 @@ import SabbathSchool from "./routes/SabbathSchool";
 import Devotion from "./routes/Devotion";
 import AboutUs from "./routes/AboutUs";
 import NotMatch from "./routes/NotMatch";
+import AddCourse from "./components/AddCourse";
 import ChaptersDisplay from "./features/CourseComponents/ChaptersDisplay";
 import SlidesDisplay from "./features/CourseComponents/SlidesDisplay";
 
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
+        <Route path="/course/create/add" element={<AddCourse />} />
         <Route path="/sabbathSchool" element={<SabbathSchool />} />
         <Route path="/devotion" element={<Devotion />} />
         <Route path="/aboutUs" element={<AboutUs />} />
