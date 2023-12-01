@@ -17,7 +17,6 @@ import Footer from "./components/Footer";
 import AddCourse from "./components/AddCourse";
 import ChaptersDisplay from "./features/CourseComponents/ChaptersDisplay";
 import SlidesDisplay from "./features/CourseComponents/SlidesDisplay";
-import AdminChapter from "./features/CourseComponents/AdminChapter";
 
 function App() {
   const { user } = useAuthContext();
@@ -55,4 +54,5 @@ function App() {
     </>
   );
 }
+
 export default App;
