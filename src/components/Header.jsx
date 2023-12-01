@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import LogoutButton from "./LogoutButton";
 
 const Header = () => {
   return (
@@ -27,6 +28,7 @@ const Header = () => {
               <NavLink to="/aboutUs">About Us</NavLink>
             </li>
           </ul>
+          <LogoutButton />
         </nav>
       </div>
     </header>

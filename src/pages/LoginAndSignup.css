@@ -1,19 +1,103 @@
-:root {
-  --primary: #1aac83;
-  --error: #e7195a;
+/* google font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap");
+
+body {
+  /* background: #f1f1f1;
+  margin: 0; */
+  font-family: "Poppins";
+}
+.nav-bar-header {
+  background: #ea9215;
+  color: #fff;
+}
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
+.login-input {
+  padding: 12px;
+  font-size: 1rem;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+form button {
+  background-color: #ea9215;
+  margin-top: 5%;
+  align-self: center;
+  border: 3px solid;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 10px;
+}
+
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.login input.error {
+  border: 1px solid var(--error);
+}
+
+/* navbar */
+.nav-form {
+  display: flex;
+  gap: 2%;
+  width: 25%;
+  color: #fff;
+}
+nav a {
+  margin-left: 10px;
+}
+
+nav button {
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+  margin-left: 10px;
+}
+
+/* auth forms */
 form.signup,
 form.login {
-  max-width: 400px;
+  max-width: 450px;
   margin: 40px auto;
-  padding: 20px;
   background: #fff;
   border-radius: 4px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
 }
 
 .titles {
   text-align: center;
   font-size: 2.5rem;
   margin: 2% auto 10%;
+}
+
+.logout {
+  color: rgb(146, 100, 14);
+  font-size: large;
 }
