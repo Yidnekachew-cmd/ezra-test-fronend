@@ -11,6 +11,7 @@ import Signup from "./pages/Signup";
 import { useAuthContext } from "./hooks/useAuthContext";
 
 function App() {
+  const { user } = useAuthContext();
   return (
     <>
       <BrowserRouter>
