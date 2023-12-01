@@ -13,8 +13,8 @@ const Signup = () => {
   };
 
   return (
-    <form className="login" onSubmit={handleSubmit}>
-      <h3 className="titles">Signup</h3>
+    <form className="signup" onSubmit={handleSubmit}>
+      <h3 className="titles">Sign Up</h3>
 
       <label>Email:</label>
       <input
@@ -33,6 +33,7 @@ const Signup = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button disabled={isLoading}>Login</button>
+      <button disabled={isLoading}>Sign Up</button>
       {error && <div className="error">{error}</div>}
     </form>
   );
