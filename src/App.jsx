@@ -8,13 +8,14 @@ import AboutUs from "./routes/AboutUs";
 import NotMatch from "./routes/NotMatch";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Navbar from "./components/Navbar";
 import { useAuthContext } from "./hooks/useAuthContext";
 function App() {
   const { user } = useAuthContext();
   return (
     <>
       <BrowserRouter>
-        {user && <Header />}
+        {user ? <Header /> : <Navbar />}
         <Routes>
           <Route
             path="/"
