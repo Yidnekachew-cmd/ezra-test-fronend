@@ -115,7 +115,7 @@ const Devotion = () => {
 
   const handleDelete = async (id) => {
     try {
-      await instance.delete(/devotion/${id});
+      await instance.delete(`/devotion/${id}`);
       // Remove the deleted devotion from the devotions array
       setDevotions(devotions.filter((devotion) => devotion._id !== id));
     } catch (error) {

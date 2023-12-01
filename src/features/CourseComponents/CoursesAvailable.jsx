@@ -15,7 +15,7 @@ function CoursesAvailable() {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [instance]);
 
   return (
     <div className="h-auto flex flex-col w-[90%] md:w-[80%] mt-12 mx-auto space-y-12">
