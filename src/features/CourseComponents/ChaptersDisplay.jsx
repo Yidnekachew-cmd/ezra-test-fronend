@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import useAxiosInstance from "../../api/axiosInstance";
 
 function ChaptersDisplay() {
   const [data, setData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [unlockedIndex, setUnlockedIndex] = useState(0); // New state variable to track the unlocked index
+  const instance = useAxiosInstance();
 
   const { courseId } = useParams();
 
   //get single course
   useEffect(() => {
-    axios
+    instance
       .get(`/course/get/${courseId}`)
       .then((res) => {
         setData(res.data.chapters);
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }, [courseId]);
+  }, [courseId, instance]);
 
   const updateIndex = (newIndex) => {
     if (newIndex < 0) {

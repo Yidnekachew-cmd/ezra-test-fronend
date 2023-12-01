@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import useAxiosInstance from "../api/axiosInstance";
 
 const GetCourse = () => {
   const [data, setData] = useState([]);
+  const instance = useAxiosInstance();
 
   useEffect(() => {
     // Fetch the course data from the backend
-    axios
+    instance
       .get("/course/getall")
       .then((res) => {
         console.log(res);
         setData(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [instance]);
 
   return (
     <div>
@@ -37,7 +38,7 @@ const GetCourse = () => {
               } else if (element.type === "img") {
                 return (
                   <img
-                    // src={`https://ezra-seminary-api.onrender.com/images/${element.value}`}
+                    key={element._id} // Add key prop here
                     src={`http://localhost:5000/images/${element.value}`}
                     alt={element.id}
                     className="w-[15%]"

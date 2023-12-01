@@ -1,8 +1,9 @@
 import { useState } from "react";
-import axios from "axios";
-
+// import axios from "axios";
+import useAxiosInstance from "../api/axiosInstance";
 function SubTitle() {
   const [elements, setElements] = useState([]);
+  const instance = useAxiosInstance();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -22,7 +23,7 @@ function SubTitle() {
     formData.append("imageIds", JSON.stringify(imageIds));
 
     // Send the elements array to the backend
-    axios
+    instance
       .post("/course/create", formData)
       .then((res) => {
         console.log(res);
