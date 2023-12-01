@@ -13,6 +13,7 @@ axios.defaults.baseURL = "http://localhost:5100";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    
     <Provider store={store}>
       <AuthContextProvider>
         <App />
