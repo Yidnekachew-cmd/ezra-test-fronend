@@ -12,21 +12,19 @@ import NotMatch from "./routes/NotMatch";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 // import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import { useAuthContext } from "./hooks/useAuthContext";
-<<<<<<< HEAD
 import Footer from "./components/Footer";
 import AddCourse from "./components/AddCourse";
 import ChaptersDisplay from "./features/CourseComponents/ChaptersDisplay";
 import SlidesDisplay from "./features/CourseComponents/SlidesDisplay";
 
-=======
->>>>>>> 2f2cd23 (Protect the routes if the user is not logged in or is not a user)
 function App() {
   const { user } = useAuthContext();
   return (
     <>
       <BrowserRouter>
-        {user && <Header />}
+        {user ? <Header /> : <Navbar />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
