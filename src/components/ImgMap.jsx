@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const GetCourse = () => {
+const ImgMap = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -55,4 +55,4 @@ const GetCourse = () => {
   );
 };
 
-export default GetCourse;
+export default ImgMap;
