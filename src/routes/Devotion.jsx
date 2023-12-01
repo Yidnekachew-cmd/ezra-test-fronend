@@ -2,14 +2,26 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import DevotionForm from "../features/DevotionComponents/DevotionForm";
 import DevotionDisplay from "../features/DevotionComponents/DevotionDisplay";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Devotion = () => {
+  const { user } = useAuthContext();
+  const token = user?.token; // Get the token from user context
+
+  const instance = axios.create({
+    baseURL: "http://localhost:5000/",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+
   const [devotions, setDevotions] = useState([]);
 
   useEffect(() => {
     const fetchDevotions = async () => {
       try {
-        const response = await axios.get("/devotion/show");
+        const response = await instance.get("/devotion/show"); // use the new instance of Axios
         setDevotions(response.data);
       } catch (error) {
         console.log(error);
@@ -17,7 +29,7 @@ const Devotion = () => {
     };
 
     fetchDevotions();
-  }, []);
+  }, [instance]);
 
   // useState for adding multiple paragraphs
   const [paragraphs, setParagraphs] = useState([]);

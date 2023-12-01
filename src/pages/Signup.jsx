@@ -13,12 +13,13 @@ const Signup = () => {
   };
 
   return (
-    <form className="signup" onSubmit={handleSubmit}>
-      <h3 className="titles">Sign Up</h3>
+    <form className="login" onSubmit={handleSubmit}>
+      <h3 className="titles">Signup</h3>
 
       <label>Email:</label>
       <input
         type="email"
+        className="login-input"
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -26,11 +27,12 @@ const Signup = () => {
       <label>Password:</label>
       <input
         type="password"
+        className="login-input"
         required
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button disabled={isLoading}>Sign Up</button>
+      <button disabled={isLoading}>Login</button>
       {error && <div className="error">{error}</div>}
     </form>
   );
