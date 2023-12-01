@@ -1,4 +1,3 @@
-// store.js
 import { configureStore } from "@reduxjs/toolkit";
 import courseReducer from "./courseSlice";
 
@@ -7,5 +6,7 @@ const store = configureStore({
     course: courseReducer,
   },
 });
+
+console.log(store.getState());
 
 export default store;

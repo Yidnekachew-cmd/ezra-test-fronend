@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setTitle, setDescription, setImage } from "../redux/courseSlice";
@@ -21,14 +21,14 @@ function CreateCourse() {
 
     // Here you should append chapters and other nested data to the formData if needed
 
-    axios
-      .post("/course/create", formData)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    //   axios
+    //     .post("/course/create", formData)
+    //     .then((res) => {
+    //       console.log(res);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
   };
 
   return (
