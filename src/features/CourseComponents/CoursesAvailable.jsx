@@ -21,7 +21,7 @@ function CoursesAvailable() {
       <h2 className="text-orange-500 text-2xl font-bold border-b-4 border-gray-300 pb-1">
         Courses Available
       </h2>
-      <div className="flex flex-wrap justify-center w-full p-5 mx-auto">
+      <div className="grid grid-cols-3 justify-center w-full p-5 mx-auto">
         {data.map((course, index) => {
           return (
             <div
@@ -30,7 +30,7 @@ function CoursesAvailable() {
             >
               <img
                 src={`http://localhost:5000/images/` + course.image}
-                className="w-full rounded-md"
+                className="w-full h-[221px] rounded-md"
                 alt="no_image"
               />
               <p className="text-lg m-1 border-b-2 border-orange-500">

@@ -99,7 +99,7 @@ function SlidesDisplay() {
         </div>
         {/* slides */}
         <div className="overflow-hidden w-[70%] justify-center data-center mx-auto bg-[#955B09BA] rounded-lg">
-          <div className="flex flex-col whitespace-nowrap transition-transform duration-300 shadow-md">
+          <div className="flex flex-col transition-transform duration-300 shadow-md">
             <h1 className="text-white font-bold p-2">EZRA seminary</h1>
             {data.map((slides, index) => {
               if (index === activeIndex) {
