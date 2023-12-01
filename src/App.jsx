@@ -9,13 +9,12 @@ import NotMatch from "./routes/NotMatch";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { useAuthContext } from "./hooks/useAuthContext";
-
 function App() {
   const { user } = useAuthContext();
   return (
     <>
       <BrowserRouter>
-        <Header />
+        {user && <Header />}
         <Routes>
           <Route
             path="/"
