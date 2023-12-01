@@ -24,7 +24,7 @@ const GetCourse = () => {
               // Check the type of the element and render it accordingly
               if (element.type === "title") {
                 return (
-                  <h1 key={element._id} className="title-class">
+                  <h1 key={element._id} className="text-blue-500">
                     {element.value}
                   </h1>
                 );
@@ -37,10 +37,10 @@ const GetCourse = () => {
               } else if (element.type === "img") {
                 return (
                   <img
-                    key={element._id}
-                    src={`http://localhost:5000/${element.value}`}
+                    // src={`https://ezra-seminary-api.onrender.com/images/${element.value}`}
+                    src={`http://localhost:5000/images/${element.value}`}
                     alt={element.id}
-                    className="img-class"
+                    className="w-[15%]"
                   />
                 );
               } else {
