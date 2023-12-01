@@ -2,6 +2,7 @@ import { createContext, useReducer, useEffect } from "react";
 
 export const AuthContext = createContext();
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
@@ -13,6 +14,7 @@ export const authReducer = (state, action) => {
   }
 };
 
+// eslint-disable-next-line react/prop-types
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,

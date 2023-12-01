@@ -6,16 +6,20 @@ import "./index.css";
 import axios from "axios";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { AuthContextProvider } from "./context/AuthContext";
 
 // axios.defaults.baseURL = "https://ezra-seminary-api.onrender.com";
 axios.defaults.baseURL = "http://localhost:5100";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    
     <Provider store={store}>
+    <AuthContextProvider>
       <Router>
         <App />
       </Router>
+      </AuthContextProvider>
     </Provider>
   </React.StrictMode>
 );
