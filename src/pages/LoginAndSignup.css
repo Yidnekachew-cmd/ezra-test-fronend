@@ -1,0 +1,53 @@
+/* Login form container */
+.login-form {
+  background-image: url(../assets/bible\ image.jpg);
+  background-position: center center;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Login form */
+.login-form form {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Login form input fields */
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Login form submit button */
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Login form header */
+.login-form h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Login form error messages */
+.login-form .error {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
