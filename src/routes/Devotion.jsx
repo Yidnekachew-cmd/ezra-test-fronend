@@ -1,22 +1,12 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import DevotionForm from "../features/DevotionComponents/DevotionForm";
 import DevotionDisplay from "../features/DevotionComponents/DevotionDisplay";
-import { useAuthContext } from "../hooks/useAuthContext";
+// import { useAuthContext } from "../hooks/useAuthContext";
+import useAxiosInstance from "../api/axiosInstance";
 
 const Devotion = () => {
-  const { user } = useAuthContext();
-  const token = user?.token; // Get the token from user context
-
-  const instance = axios.create({
-    baseURL: "http://localhost:5000/",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  });
-
   const [devotions, setDevotions] = useState([]);
+  const instance = useAxiosInstance();
 
   useEffect(() => {
     const fetchDevotions = async () => {
@@ -86,7 +76,7 @@ const Devotion = () => {
     }
 
     try {
-      const response = await axios.post("/devotion/create", formData);
+      const response = await instance.post("/devotion/create", formData);
       // console.log(formData);
       console.log(response);
       window.location.reload();
@@ -107,7 +97,7 @@ const Devotion = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/devotion/${id}`);
+      await instance.delete(`/devotion/${id}`);
       // Remove the deleted devotion from the devotions array
       setDevotions(devotions.filter((devotion) => devotion._id !== id));
     } catch (error) {
@@ -117,6 +107,7 @@ const Devotion = () => {
 
   // useState for Photo preview
   const [selectedFile, setSelectedFile] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [previewUrl, setPreviewUrl] = useState("");
 
   const handleFileChange = (event) => {

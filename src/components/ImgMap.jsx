@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import useAxiosInstance from "../api/axiosInstance";
 
 const ImgMap = () => {
   const [data, setData] = useState([]);
+  const instance = useAxiosInstance();
 
   useEffect(() => {
     // Fetch the course data from the backend
-    axios
+    instance
       .get("/course/getall")
       .then((res) => {
         console.log(res);
         setData(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [instance]);
 
   return (
     <div>

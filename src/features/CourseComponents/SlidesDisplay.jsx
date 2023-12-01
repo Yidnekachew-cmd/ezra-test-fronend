@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import useAxiosInstance from "../../api/axiosInstance";
 
 function SlidesDisplay() {
   const [data, setData] = useState([]);
@@ -8,10 +9,11 @@ function SlidesDisplay() {
   const [unlockedIndex, setUnlockedIndex] = useState(0); // New state variable to track the unlocked index
 
   const { courseId, chapterId } = useParams(); // Note the two separate parameters
+  const instance = useAxiosInstance();
 
   //get all courses
   useEffect(() => {
-    axios
+    instance
       .get(`/course/get/${courseId}`) // Assuming you will change the endpoint as needed
       .then((res) => {
         // Now we need to find the specific chapter within the course
