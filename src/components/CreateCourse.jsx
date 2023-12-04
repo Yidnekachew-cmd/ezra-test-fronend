@@ -1,4 +1,3 @@
-// import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setTitle, setDescription, setImage } from "../redux/courseSlice";
@@ -12,39 +11,18 @@ function CreateCourse() {
     dispatch(setImage(file));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("image", image);
-
-    // Here you should append chapters and other nested data to the formData if needed
-
-    //   axios
-    //     .post("/course/create", formData)
-    //     .then((res) => {
-    //       console.log(res);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-  };
-
   return (
     <div className="h-screen pt-9 px-20">
       <h2 className="text-orange-500 text-2xl font-bold border-b-4 border-gray-300 pb-1">
         Create Course
       </h2>
-      <form
-        className="grid grid-cols-1 gap-3 w-1/2 mx-auto mt-3"
-        onSubmit={handleSubmit}
-      >
+      <form className="grid grid-cols-1 gap-3 w-1/2 mx-auto mt-3">
         <div className="col-span-12 mx-auto">
           <input
             type="file"
             className="w-full p-24 text-orange-500 font-bold leading-tight border border-orange-300 rounded-md focus:outline-none focus:border-blue-500"
             name="image"
+            value={image}
             onChange={handleImageChange}
           />
         </div>
