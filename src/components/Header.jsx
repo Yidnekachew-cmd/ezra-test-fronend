@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="container px-12 bg-header-img  bg-bottom bg-cover">
+    <header className="container  bg-header-img  bg-bottom bg-cover">
       <div className=" flex justify-between py-6 items-center text-white font-nokia-bold w-[80%] mx-auto">
         <div className=" cursor-pointer ">
           <h3>
