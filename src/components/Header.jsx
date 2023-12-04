@@ -26,6 +26,15 @@ const Header = () => {
             <li className="hover:text-gray-400">
               <NavLink to="/aboutUs">About Us</NavLink>
             </li>
+            <li className="hover:text-gray-400">
+              <NavLink to="/contactUs">Contact Us</NavLink>
+            </li>
+            <li className="hover:text-gray-400">
+              <NavLink to="/logIn">Log In</NavLink>
+            </li>
+            <li className="hover:text-gray-400">
+              <NavLink to="/createAccount">Create Account</NavLink>
+            </li>
           </ul>
         </nav>
       </div>

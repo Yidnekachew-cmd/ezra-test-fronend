@@ -17,6 +17,13 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        'nokia-bold': ["Nokia Pure Headline Bold", "Inter", "sans-serif"],
+        'nokia-ultraLight': ["Nokia Pure Headline Light", "Inter", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
+        lato: ["Lato", "sans-serif"],
+        sans: ["Public sans", "Inter", "sans-serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
