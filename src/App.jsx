@@ -9,6 +9,7 @@ import ContactUs from "./routes/ContactUs";
 import LogIn from "./routes/LogIn";
 import CreateAccount from "./routes/CreateAccount";
 import NotMatch from "./routes/NotMatch";
+import Footer from "./components/Footer";
 import AddCourse from "./components/AddCourse";
 import ChaptersDisplay from "./features/CourseComponents/ChaptersDisplay";
 import SlidesDisplay from "./features/CourseComponents/SlidesDisplay";
@@ -34,6 +35,7 @@ function App() {
         />
         <Route path="*" element={<NotMatch />} />
       </Routes>
+      <Footer />
     </>
   );
 }
