@@ -22,6 +22,7 @@ function App() {
   const { user } = useAuthContext();
   return (
     <>
+<<<<<<< HEAD
       <BrowserRouter>
         <Header />
         <Routes>
@@ -51,6 +52,26 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
+=======
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route path="/course/create/add" element={<AddCourse />} />
+        <Route path="/sabbathSchool" element={<SabbathSchool />} />
+        <Route path="/devotion" element={<Devotion />} />
+        <Route path="/aboutUs" element={<AboutUs />} />
+        <Route path="/contactUs" element={<ContactUs />} />
+        <Route path="/logIn" element={<LogIn />} />
+        <Route path="/createAccount" element={<CreateAccount />} />
+        <Route path="/courses/get/:courseId" element={<ChaptersDisplay />} />
+        <Route
+          path="/courses/get/:courseId/chapter/:chapterId"
+          element={<SlidesDisplay />}
+        />
+        <Route path="*" element={<NotMatch />} />
+      </Routes>
+>>>>>>> 532ac8e ( Add ContactUs, LogIn and CreateAccount componets.)
     </>
   );
 }
