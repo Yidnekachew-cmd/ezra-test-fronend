@@ -89,6 +89,7 @@
   background-image: url('./src/assets/home-page-img.svg');
   background-size: cover;
   background-repeat: no-repeat;
+  width: 100%;
 
   /* Add any additional styles you need */
 }
