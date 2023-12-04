@@ -84,3 +84,11 @@
   font-family: 'Nokia Pure Headline Light';
   src: url(../public/fonts/NokiaPureHeadline_ULt.ttf) format('truetype');
 }
+
+.home-page-img {
+  background-image: url('./src/assets/home-page-img.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  /* Add any additional styles you need */
+}
