@@ -5,8 +5,8 @@ const Testimonials = () => {
         Testimonials
     </h1>
     <hr className="border-[#EEA63F] border-1 w-[100%] pb-3" />
-    <div className="flex flex-col w-[100%] justify-center items-center  mx-auto space-y-6 md:flex-row md:space-x-4 md:space-y-0" >
-        <div className="flex  flex-col w-[33.%] md:w-[33.3%]">
+    <div className="flex flex-col w-[100%] justify-center items-center  mx-auto space-y-6 md:flex-row md:space-x-4 md:space-y-0 " >
+        <div className="flex  flex-col w-[33.%] md:w-[33.3%] mt-6">
             <div className="mx-auto w-[33.%]">
                 <img  className="rounded-full" src="src/assets/melak.svg" alt="" />
             </div>
