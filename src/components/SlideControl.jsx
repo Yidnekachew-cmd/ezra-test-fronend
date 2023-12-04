@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import PropTypes from "prop-types";
 
 const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputChange, handleImageChange, selectedType, setSelectedType, handleRemoveSlide, handleAddElement}) => {
