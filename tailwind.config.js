@@ -24,6 +24,10 @@ export default {
         lato: ["Lato", "sans-serif"],
         sans: ["Public sans", "Inter", "sans-serif"],
       },
+      backgroundImage: {
+        'header-img': "url('./src/assets/header-img.svg')",
+        // 'footer-texture': "url('/img/footer-texture.png')",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

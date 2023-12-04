@@ -1,19 +1,11 @@
+import Hero from "@/features/HomePageComponents/Hero";
+import Intro from "@/features/HomePageComponents/Intro";
+
 const Home = () => {
   return (
-    <div className="mt-32 container mx-auto space-y-4">
-      <p className="container mx-auto w-[80%] font-nokia-bold">
-        መጽሃፍ ቅዱስን በተለያየ መንገድ ማጥናት ይቻላል። ነገር ግን ፍሪያማ ከሆኑት መንገዶች መካከል የሚከተሉት ወሳኝ
-        ነጥቦችን ይይዛሉ። ከእነዚህም መካከል ሰባቱን አንድ በአንድ … ቪድዮ ጌሞችን ማዘውተር እና የተለያዩ ገጾችን
-        መመልከት የታዳጊ ልጆች የለተለት ተግባር እየሆነ መጥⶆል. ሆኖም ግን ይህ ተግባር በጎም መጥፎም ጎኖች አሉት::
-        በጎ ተግባር ልንላቸው ከምንችለው ነገሮች መሃከል አንዱ ታዳጊዎችን በእውቀት እንዲዳብሩ ይረዳል::
-      </p>
-
-      <p className="container mx-auto w-[80%] font-nokia-ultraLight">
-        መጽሃፍ ቅዱስን በተለያየ መንገድ ማጥናት ይቻላል። ነገር ግን ፍሪያማ ከሆኑት መንገዶች መካከል የሚከተሉት ወሳኝ
-        ነጥቦችን ይይዛሉ። ከእነዚህም መካከል ሰባቱን አንድ በአንድ … ቪድዮ ጌሞችን ማዘውተር እና የተለያዩ ገጾችን
-        መመልከት የታዳጊ ልጆች የለተለት ተግባር እየሆነ መጥⶆል. ሆኖም ግን ይህ ተግባር በጎም መጥፎም ጎኖች አሉት::
-        በጎ ተግባር ልንላቸው ከምንችለው ነገሮች መሃከል አንዱ ታዳጊዎችን በእውቀት እንዲዳብሩ ይረዳል::
-      </p>
+    <div className="flex flex-col space-y-12 md:space-y-">
+      <Hero />
+      <Intro />
     </div>
   );
 };
