@@ -25,6 +25,8 @@ export default {
       "3xl": ["32px", { lineHeight: "48px", letterSpacing: "-0.032em" }],
       "4xl": ["48px", { lineHeight: "64px", letterSpacing: "-0.032em" }],
       "5xl": ["64px", { lineHeight: "80px", letterSpacing: "-0.032em" }],
+      "6xl": ["80px", { lineHeight: "94px", letterSpacing: "-0.032em" }],
+      "7xl": ["96px", { lineHeight: "110px", letterSpacing: "-0.02em" }],
     },
     extend: {
       fontFamily: {
