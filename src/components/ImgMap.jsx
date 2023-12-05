@@ -39,7 +39,7 @@ const GetCourse = () => {
                 return (
                   <img
                     key={element._id} // Add key prop here
-                    src={`http://localhost:5000/images/${element.value}`}
+                    src={`http://localhost:6000/images/${element.value}`}
                     alt={element.id}
                     className="w-[15%]"
                   />

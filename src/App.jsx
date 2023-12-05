@@ -11,7 +11,7 @@ import CreateAccount from "./routes/CreateAccount";
 import NotMatch from "./routes/NotMatch";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Footer from "./components/Footer";
 import AddCourse from "./components/AddCourse";

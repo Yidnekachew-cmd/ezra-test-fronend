@@ -11,8 +11,8 @@ const Testimonials = () => {
                 <img  className="rounded-full" src="src/assets/melak.svg" alt="" />
             </div>
             <div className="text-center py-4 font-nokia-bold">
-                <h2 className="text-[#EA9215] text-2xl pb-2">ፓ/ር መልዓክ አለማየሁ (ዶ/ር)</h2>
-                <p className="text-[#3A4750] font-nokia-ultraLight text-lg mb-4">“መጽሃፍ ቅዱስን ማንበብ ከምንም በላይ ለህይወታችን አስፈላጊው እና ዋነኛው ነገር ነው።መጽሃፍ ቅዱስን ማንበብ ከምንም በላይ ለህይወታችን አስፈላጊው እና ዋነኛው ነገር ነው።”</p>
+                <h2 className="text-accent-5 text-2xl pb-2">ፓ/ር መልዓክ አለማየሁ (ዶ/ር)</h2>
+                <p className="text-[#3A4750] font-nokia-light text-lg mb-4">“መጽሃፍ ቅዱስን ማንበብ ከምንም በላይ ለህይወታችን አስፈላጊው እና ዋነኛው ነገር ነው።መጽሃፍ ቅዱስን ማንበብ ከምንም በላይ ለህይወታችን አስፈላጊው እና ዋነኛው ነገር ነው።”</p>
             </div>
         </div>
         <div className="flex  flex-col w-[33.%] md:w-[33.3%]">
@@ -20,8 +20,8 @@ const Testimonials = () => {
                 <img  className="rounded-full" src="src/assets/janet.svg" alt="" />
             </div>
             <div className="text-center py-4 font-nokia-bold">
-                <h2 className="text-[#EA9215] text-2xl pb-2">ውብገነት ቦጋለ (ጃኔት)</h2>
-                <p className="text-[#3A4750] font-nokia-ultraLight text-lg mb-4">“መጽሃፍ ቅዱስን ማንበብ ከምንም በላይ ለህይወታችን አስፈላጊው እና ዋነኛው ነገር ነው።መጽሃፍ ቅዱስን ማንበብ ከምንም በላይ ለህይወታችን አስፈላጊው እና ዋነኛው ነገር ነው።”</p>
+                <h2 className="text-accent-5 text-2xl pb-2">ውብገነት ቦጋለ (ጃኔት)</h2>
+                <p className="text-[#3A4750] font-nokia-light text-lg mb-4">“መጽሃፍ ቅዱስን ማንበብ ከምንም በላይ ለህይወታችን አስፈላጊው እና ዋነኛው ነገር ነው።መጽሃፍ ቅዱስን ማንበብ ከምንም በላይ ለህይወታችን አስፈላጊው እና ዋነኛው ነገር ነው።”</p>
             </div>
         </div>
         <div className="flex  flex-col w-[33.%] md:w-[33.3%]">
@@ -29,8 +29,8 @@ const Testimonials = () => {
                 <img  className="rounded-full" src="src/assets/dawit.svg" alt="" />
             </div>
             <div className="text-center py-4 font-nokia-bold">
-                <h2 className="text-[#EA9215] text-2xl pb-2">ዳዊት መሃሪ</h2>
-                <p className="text-[#3A4750] font-nokia-ultraLight text-lg mb-4">“መጽሃፍ ቅዱስን ማንበብ ከምንም በላይ ለህይወታችን አስፈላጊው እና ዋነኛው ነገር ነው።መጽሃፍ ቅዱስን ማንበብ ከምንም በላይ ለህይወታችን አስፈላጊው እና ዋነኛው ነገር ነው።”</p>
+                <h2 className="text-accent-5 text-2xl pb-2">ዳዊት መሃሪ</h2>
+                <p className="text-[#3A4750] font-nokia-light text-lg mb-4">“መጽሃፍ ቅዱስን ማንበብ ከምንም በላይ ለህይወታችን አስፈላጊው እና ዋነኛው ነገር ነው።መጽሃፍ ቅዱስን ማንበብ ከምንም በላይ ለህይወታችን አስፈላጊው እና ዋነኛው ነገር ነው።”</p>
             </div>
         </div>
     </div>

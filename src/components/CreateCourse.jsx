@@ -37,7 +37,7 @@ function CreateCourse({ setCourseData, setStep }) {
       <h2 className="text-orange-500 text-2xl font-bold border-b-4 border-gray-300 pb-1">
         Create Course
       </h2>
-      <p className="font-nokia-bold text-sm text-accent-6"> Check Text</p>
+      <p className="font-nokia-bold text-sm text-accent-5"> Check Text</p>
       <form
         className="grid grid-cols-1 gap-3 w-1/2 mx-auto mt-3"
         onSubmit={handleSubmit}

@@ -7,7 +7,7 @@ import axios from "axios";
 import { AuthContextProvider } from "./context/AuthContext";
 
 // axios.defaults.baseURL = "https://ezra-seminary-api.onrender.com";
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "http://localhost:6000";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
