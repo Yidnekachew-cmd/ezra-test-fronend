@@ -3,15 +3,16 @@ import LogoutButton from "./LogoutButton";
 
 const Header = () => {
   return (
-    <header>
-      <div className="container flex justify-between mt-6 px-12 items-center">
-        <div className=" cursor-pointer ">
+    <header className="container  bg-header-img  bg-bottom bg-cover">
+      <div className=" flex justify-between py-6 items-center text-white font-nokia-bold w-[80%] mx-auto">
+        <div className="flex justify-center items-center space-x-3 cursor-pointer ">
+          <img src="src/assets/ezra-logo.svg" alt="" />
           <h3>
             <strong className="text-2xl">Ezra</strong> Seminary
           </h3>
         </div>
         <nav>
-          <ul className="hidden md:flex space-x-4 cursor-pointer">
+          <ul className="hidden md:flex space-x-4 cursor-pointer text-sm justify-center items-center">
             <li className="hover:text-gray-400">
               <NavLink to="/">Home</NavLink>
             </li>
@@ -26,6 +27,17 @@ const Header = () => {
             </li>
             <li className="hover:text-gray-400">
               <NavLink to="/aboutUs">About Us</NavLink>
+            </li>
+            <li className="hover:text-gray-400">
+              <NavLink to="/contactUs">Contact Us</NavLink>
+            </li>
+            <li className="hover:text-gray-400">
+              <NavLink to="/logIn">Log In</NavLink>
+            </li>
+            <li className="hover:text-gray-400 text-base ">
+              <NavLink to="/createAccount">
+                <button type="button" className="bg-[#EA9215] rounded-full py-1 px-2">Create Account</button>
+                </NavLink>
             </li>
           </ul>
           <LogoutButton />

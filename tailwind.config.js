@@ -1,12 +1,13 @@
+import tailwindcssAnimate from "tailwindcss-animate";
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  darkMode: ["class"],
+export default {
+  darkMode: "class",
   content: [
     './pages/**/*.{js,jsx}',
     './components/**/*.{js,jsx}',
     './app/**/*.{js,jsx}',
     './src/**/*.{js,jsx}',
-	],
+  ],
   theme: {
     container: {
       center: true,
@@ -16,6 +17,17 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        'nokia-bold': ["Nokia Pure Headline Bold", "Inter", "sans-serif"],
+        'nokia-ultraLight': ["Nokia Pure Headline Light", "Inter", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
+        lato: ["Lato", "sans-serif"],
+        sans: ["Public sans", "Inter", "sans-serif"],
+      },
+      backgroundImage: {
+        'header-img': "url('./src/assets/header-img.svg')",
+        // 'footer-texture': "url('/img/footer-texture.png')",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -72,5 +84,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-}
+  plugins: [tailwindcssAnimate],
+};
