@@ -3,10 +3,10 @@ import tailwindcssAnimate from "tailwindcss-animate";
 export default {
   darkMode: "class",
   content: [
-    './pages/**/*.{js,jsx}',
-    './components/**/*.{js,jsx}',
-    './app/**/*.{js,jsx}',
-    './src/**/*.{js,jsx}',
+    "./pages/**/*.{js,jsx}",
+    "./components/**/*.{js,jsx}",
+    "./app/**/*.{js,jsx}",
+    "./src/**/*.{js,jsx}",
   ],
   theme: {
     container: {
@@ -16,16 +16,35 @@ export default {
         "2xl": "1400px",
       },
     },
+    fontSize: {
+      xs: ["14px", { lineHeight: "24px", letterSpacing: "-0.03em" }],
+      sm: ["16px", { lineHeight: "28px", letterSpacing: "-0.03em" }],
+      lg: ["18px", { lineHeight: "28px", letterSpacing: "-0.03em" }],
+      xl: ["24px", { lineHeight: "36px", letterSpacing: "-0.03em" }],
+      "2xl": ["36px", { lineHeight: "48px", letterSpacing: "-0.032em" }],
+      "3xl": ["48px", { lineHeight: "56px", letterSpacing: "-0.032em" }],
+      "4xl": ["56px", { lineHeight: "64px", letterSpacing: "-0.032em" }],
+      "5xl": ["80px", { lineHeight: "80px", letterSpacing: "-0.032em" }],
+    },
     extend: {
       fontFamily: {
-        'nokia-bold': ["Nokia Pure Headline Bold", "Inter", "sans-serif"],
-        'nokia-ultraLight': ["Nokia Pure Headline Light", "Inter", "sans-serif"],
+        "nokia-bold": ["Nokia Pure Headline Bold", "Inter", "sans-serif"],
+        "nokia-ultraLight": [
+          "Nokia Pure Headline Light",
+          "Inter",
+          "sans-serif",
+        ],
         inter: ["Inter", "sans-serif"],
-        lato: ["Lato", "sans-serif"],
+        "Lato-Light": ["Lato-Light", "sans-serif"],
+        "Lato-Regular": ["Lato-Regular", "sans-serif"],
+        "Lato-Black": ["Lato-Black", "sans-serif"],
+        "Lato-Bold": ["Lato-Bold", "sans-serif"],
+        "Lato-Thin": ["Lato-Thin", "sans-serif"],
         sans: ["Public sans", "Inter", "sans-serif"],
       },
+
       backgroundImage: {
-        'header-img': "url('./src/assets/header-img.svg')",
+        "header-img": "url('./src/assets/header-img.svg')",
         // 'footer-texture': "url('/img/footer-texture.png')",
       },
       colors: {
