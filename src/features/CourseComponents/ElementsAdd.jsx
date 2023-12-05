@@ -9,6 +9,7 @@ function ElementsAdd() {
   };
 
   const handleAddButtonClick = () => {
+    console.log(elements);
     if (currentElement) {
       setElements([
         ...elements,
@@ -20,7 +21,6 @@ function ElementsAdd() {
       ]);
       setCurrentElement(""); // Reset dropdown if needed
     }
-    console.log(elements);
   };
 
   const handleInputChange = (id, value) => {
@@ -31,13 +31,14 @@ function ElementsAdd() {
 
   return (
     <div className="bg-white w-[16%] p-6">
-      <p>Insert Element</p>
-      <div>
+      <p className="font-bold py-2">Insert Element</p>
+      <div className="flex justify-between">
         <select
           name="elements"
           id="elements"
           value={currentElement}
           onChange={handleDropdownChange}
+          className="border-2 border-orange-500 rounded-lg"
         >
           <option value="">Choose Type</option>
           <option value="title">title</option>
@@ -51,14 +52,23 @@ function ElementsAdd() {
           Add
         </button>
       </div>
+
       {elements.map((element, index) => (
-        <input
-          key={index}
-          id={element.id}
-          placeholder={`Enter ${element.type}`}
-          value={element.value}
-          onChange={(e) => handleInputChange(element.id, e.target.value)}
-        />
+        <div key={index} className="py-2">
+          <div className="flex justify-between items-center pb-2">
+            <label className="text-orange-500 font-bold">{element.type}</label>
+            <button className="flex items-center text-orange-400 hover:text-orange-500">
+              <span className="material-symbols-outlined">delete</span>
+            </button>
+          </div>
+          <input
+            id={element.id}
+            placeholder={`Enter ${element.type}`}
+            value={element.value}
+            onChange={(e) => handleInputChange(element.id, e.target.value)}
+            className="w-full border-2 border-orange-500 rounded-lg text-orange-500 font-bold pl-4"
+          />
+        </div>
       ))}
     </div>
   );
