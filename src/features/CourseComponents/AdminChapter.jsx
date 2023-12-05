@@ -1,10 +1,13 @@
 // import axios from "axios";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import ChaptersAdd from "./ChaptersAdd";
 import ElementsAdd from "./ElementsAdd";
 
 function AdminChapter() {
-  const { title, description, image } = useSelector((state) => state.course);
+  const { title, description, image, chapters } = useSelector(
+    (state) => state.course
+  );
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -12,6 +15,7 @@ function AdminChapter() {
     formData.append("title", title);
     formData.append("description", description);
     formData.append("image", image);
+    formData.append("chapters", chapters);
 
     // axios
     //   .post("/course/create", formData)
@@ -27,7 +31,9 @@ function AdminChapter() {
     <div>
       <div className="flex justify-between border-gray-200 border-2 p-1">
         <button className="text-white font-bold text-3xl bg-orange-400 hover:bg-orange-500 rounded-[50%]">
-          <span className="material-symbols-outlined t">arrow_left</span>
+          <Link to="/courses/create">
+            <span className="material-symbols-outlined t">arrow_left</span>
+          </Link>
         </button>
         <button
           onSubmit={handleSubmit}
