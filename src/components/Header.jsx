@@ -42,13 +42,8 @@ const Header = () => {
             )}
             <li className="hover:text-gray-400 text-base ">
               <NavLink to="/createAccount">
-                <button
-                  type="button"
-                  className="bg-[#EA9215] rounded-full py-1 px-2"
-                >
-                  Create Account
-                </button>
-              </NavLink>
+                <button type="button" className="bg-accent-5 rounded-full py-1 px-2">Create Account</button>
+                </NavLink>
             </li>
           </ul>
         </nav>

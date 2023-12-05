@@ -4,11 +4,11 @@ const Intro = () => {
         <div className="flex flex-col md:flex-row-reverse">
             <div className="flex flex-col space-y-6 text-[#3A4750] justify-center items-center mx-auto text-center md:w-[50%]">
                 <h2 className="text-2xl md:text-3xl font-nokia-bold w-[40%] md:w-[45%]">
-                የእግዚአብሔር ቃል <span className="text-[#EEA63F]">የሕይወት እንጀራ</span> ነው!
+                የእግዚአብሔር ቃል <span className="text-accent-5">የሕይወት እንጀራ</span> ነው!
                 </h2>
                 <hr className="border-[#EEA63F] border-1 w-[100%] md:w-[80%]"/>
-                <p className="font-nokia-ultraLight w-[78%] text-lg md:w-[64%]">
-                “ልጄ ሆይ፥ <span className="text-[#EEA63F] font-nokia-bold">ቃሌን ጠብቅ</span> ትእዛዜንም በአንተ ዘንድ ሸሽግ። ትእዛዜን ጠብቅ <span className="font-nokia-bold text-[]"> በሕይወትም ትኖራለህ፤ </span> ሕጌንም <span className="font-nokia-bold text-[]"> እንደ ዓይንህ ብሌን ጠብቅ፤</span> በጣቶችህ እሰራቸው፤ በልብህ ጽላት ጻፋቸው።” ምሳሌ 7:1-3
+                <p className="font-nokia-light w-[78%] text-lg md:w-[64%]">
+                “ልጄ ሆይ፥ <span className="text-accent-5 font-nokia-bold">ቃሌን ጠብቅ</span> ትእዛዜንም በአንተ ዘንድ ሸሽግ። ትእዛዜን ጠብቅ <span className="font-nokia-bold text-[]"> በሕይወትም ትኖራለህ፤ </span> ሕጌንም <span className="font-nokia-bold text-[]"> እንደ ዓይንህ ብሌን ጠብቅ፤</span> በጣቶችህ እሰራቸው፤ በልብህ ጽላት ጻፋቸው።” ምሳሌ 7:1-3
                 </p>
             </div>
             <div className="mx-auto w-[100%] cursor-pointer mt-12  md:w-[50%]">
@@ -16,7 +16,7 @@ const Intro = () => {
             </div>
         </div>
         <div className="hidden md:flex text-center mt-12 ">
-        <p className=" font-nokia-ultraLight text-xl ">
+        <p className=" font-nokia-light text-xl ">
         በየዕለቱ <span className="font-nokia-bold text-[]"> መጽሃፍ ቅዱስን ለማጥናት </span> ይህንን መተግበሪያ <span className="font-nokia-bold text-[]"> በስልክዎት ላይ </span> ይጫኑ እና ይጠቀሙ።
         </p>
         </div>
