@@ -12,7 +12,7 @@ const Contents = () => {
                 </div>
                 <div className="bg-[#3A4750E5] bg-opacity-90 text-center py-4 font-nokia-bold">
                     <h2 className="text-accent-5 text-2xl ">Course Study</h2>
-                    <p className="text-[#fff] text-lg mb-4">Study on specific bible topics.</p>
+                    <p className="text-[#fff] font-nokia-bold text-lg mb-4">Study on specific bible topics.</p>
                     <button type="button" className=" text-[#fff] font-nokia-light border-2  border-white border-opacity-80 rounded-full px-4 text-sm">See More</button>
                 </div>
             </div>
@@ -22,7 +22,7 @@ const Contents = () => {
                 </div>
                 <div className="bg-[#3A4750E5] bg-opacity-90 text-center py-4 font-nokia-bold ">
                     <h2 className="text-accent-5 text-2xl ">Sabbath School Study</h2>
-                    <p className="text-[#fff] text-lg mb-4">Quarterly bible study on a topic.</p>
+                    <p className="text-[#fff] font-nokia-bold text-lg mb-4">Quarterly bible study on a topic.</p>
                     <button type="button" className=" text-[#fff] font-nokia-light border-2  border-white border-opacity-80 rounded-full px-4 text-sm">See More</button>
                 </div>
             </div>
@@ -32,7 +32,7 @@ const Contents = () => {
                 </div>
                 <div className="bg-[#3A4750E5] bg-opacity-90 text-center py-4 font-nokia-bold">
                     <h2 className="text-accent-5 text-2xl ">Devotional Study</h2>
-                    <p className="text-[#fff] text-lg mb-4">Daily devotional text study.</p>
+                    <p className="text-[#fff] font-nokia-bold text-lg mb-4">Daily devotional text study.</p>
                     <button type="button" className=" text-[#fff] font-nokia-light border-2  border-white border-opacity-80 rounded-full px-4 text-sm">See More</button>
                 </div>
             </div>

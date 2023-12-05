@@ -14,7 +14,7 @@ const Header = () => {
           </h3>
         </div>
         <nav>
-          <ul className="hidden md:flex space-x-4 cursor-pointer text-sm justify-center items-center">
+          <ul className="font-Lato-Regular tracking-wide hidden md:flex space-x-4 cursor-pointer text-sm justify-center items-center">
             <li className="hover:text-gray-400">
               <NavLink to="/">Home</NavLink>
             </li>
@@ -42,7 +42,7 @@ const Header = () => {
             )}
             <li className="hover:text-gray-400 text-base ">
               <NavLink to="/createAccount">
-                <button type="button" className="bg-accent-5 rounded-full py-1 px-2">Create Account</button>
+                <button type="button" className="font-nokia-bold bg-accent-6 rounded-full py-2 px-5">Create Account</button>
                 </NavLink>
             </li>
           </ul>
