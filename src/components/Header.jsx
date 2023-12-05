@@ -5,7 +5,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 const Header = () => {
   const { user } = useAuthContext();
   return (
-    <header className="container  bg-header-img  bg-bottom bg-cover">
+    <header className="  bg-header-img  bg-bottom bg-cover">
       <div className=" flex justify-between py-6 items-center text-white font-nokia-bold w-[80%] mx-auto">
         <div className="flex justify-center items-center space-x-3 cursor-pointer ">
           <img src="src/assets/ezra-logo.svg" alt="" />
