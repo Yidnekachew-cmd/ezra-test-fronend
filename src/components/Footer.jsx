@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <div className="flex flex-col mx-auto">
-        <div className="flex flex-col bg-[#3A4750] justify-center items-center py-8 space-y-4">
+        <div className="flex flex-col bg-secondary-6 justify-center items-center py-8 space-y-4">
             <div className="flex flex-row justify-center items-center space-x-3">
                 <div>
                     <img src="src/assets/ezra-logo.svg" alt="" />

@@ -15,22 +15,22 @@ const Header = () => {
         </div>
         <nav>
           <ul className="font-Lato-Regular tracking-wide hidden md:flex space-x-4 cursor-pointer text-sm justify-center items-center">
-            <li className="hover:text-gray-400">
+            <li className="hover:text-accent-4">
               <NavLink to="/">Home</NavLink>
             </li>
-            <li className="hover:text-gray-400">
+            <li className="hover:text-accent-4">
               <NavLink to="/courses">Courses</NavLink>
             </li>
-            <li className="hover:text-gray-400">
+            <li className="hover:text-accent-4">
               <NavLink to="/sabbathSchool">Sabbath School</NavLink>
             </li>
-            <li className="hover:text-gray-400">
+            <li className="hover:text-accent-4">
               <NavLink to="/devotion">Devotion</NavLink>
             </li>
-            <li className="hover:text-gray-400">
+            <li className="hover:text-accent-4">
               <NavLink to="/aboutUs">About Us</NavLink>
             </li>
-            <li className="hover:text-gray-400">
+            <li className="hover:text-accent-4">
               <NavLink to="/contactUs">Contact Us</NavLink>
             </li>
             {user ? (
@@ -42,7 +42,7 @@ const Header = () => {
             )}
             <li className="hover:text-gray-400 text-base ">
               <NavLink to="/createAccount">
-                <button type="button" className="font-nokia-bold bg-accent-6 rounded-full py-2 px-5">Create Account</button>
+                <button type="button" className="font-nokia-bold bg-accent-6 rounded-full py-2 px-5 hover:bg-accent-7 text-white transition-colors">Create Account</button>
                 </NavLink>
             </li>
           </ul>
