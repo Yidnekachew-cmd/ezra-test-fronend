@@ -1,5 +1,5 @@
 import Header from "./components/Header";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./routes/Home";
 import Courses from "./routes/Courses";
 import SabbathSchool from "./routes/SabbathSchool";
@@ -9,18 +9,35 @@ import ContactUs from "./routes/ContactUs";
 import LogIn from "./routes/LogIn";
 import CreateAccount from "./routes/CreateAccount";
 import NotMatch from "./routes/NotMatch";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Navbar from "./components/Navbar";
+import { useAuthContext } from "./hooks/useAuthContext";
 import Footer from "./components/Footer";
 import AddCourse from "./components/AddCourse";
 import ChaptersDisplay from "./features/CourseComponents/ChaptersDisplay";
 import SlidesDisplay from "./features/CourseComponents/SlidesDisplay";
 
 function App() {
+  const { user } = useAuthContext();
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/courses" element={<Courses />} />
+      <BrowserRouter>
+        {user ? <Header /> : <Navbar />}
+        <Routes>
+          <Route
+            path="/"
+            element={user ? <Home /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/login"
+            element={!user ? <Login /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/signup"
+            element={!user ? <Signup /> : <Navigate to="/" />}
+          />
+          <Route path="/courses" element={<Courses />} />
         <Route path="/course/create/add" element={<AddCourse />} />
         <Route path="/sabbathSchool" element={<SabbathSchool />} />
         <Route path="/devotion" element={<Devotion />} />
@@ -36,8 +53,8 @@ function App() {
         <Route path="*" element={<NotMatch />} />
       </Routes>
       <Footer />
+      </BrowserRouter>
     </>
   );
 }
-
 export default App;

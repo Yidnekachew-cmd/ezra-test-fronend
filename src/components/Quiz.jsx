@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import useAxiosInstance from "../api/axiosInstance";
 
 function Quiz() {
   // Properties
@@ -8,10 +8,11 @@ function Quiz() {
   const [currentQuiz, setCurrentQuiz] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
+  const instance = useAxiosInstance();
 
   // get all quizzes
   useEffect(() => {
-    axios
+    instance
       .get("/quiz/getall")
       .then((res) => {
         setData(res.data);

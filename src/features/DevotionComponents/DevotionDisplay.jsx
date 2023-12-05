@@ -89,7 +89,7 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
               )} */}
 
               <img
-                src={`https://ezra-seminary-api.onrender.com/images/${devotion.image}`}
+                src={`http://localhost:5000/images/${devotion.image}`}
                 alt="Devotion Image"
               />
             </div>

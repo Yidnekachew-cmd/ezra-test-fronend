@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import useAxiosInstance from "../../api/axiosInstance";
 
 function CoursesAvailable() {
   const [data, setData] = useState([]);
 
-  //get all courses
+  const instance = useAxiosInstance();
+
   useEffect(() => {
-    axios
+    instance
       .get("/course/getall")
       .then((res) => {
         setData(res.data);
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [instance]);
 
   return (
     <div className="h-screen pt-9 px-20">
