@@ -138,7 +138,7 @@ function SlidesDisplay() {
                           <img
                             key={element._id}
                             // src={`https://ezra-seminary-api.onrender.com/images/${element.value}`}
-                            src={`http://localhost:6000/images/${element.value}`}
+                            src={`http://localhost:5100/images/${element.value}`}
                             alt={element.id}
                             className="w-[15%]"
                           />
