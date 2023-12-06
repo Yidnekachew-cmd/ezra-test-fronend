@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import DevotionForm from "../features/DevotionComponents/DevotionForm";
 import DevotionDisplay from "../features/DevotionComponents/DevotionDisplay";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -8,6 +7,7 @@ import useAxiosInstance from "../api/axiosInstance";
 const Devotion = () => {
   const { token, role } = useAuthContext(); // get the authentication token
   const [devotions, setDevotions] = useState([]);
+  const [formSubmitCount, setFormSubmitCount] = useState(0);
   const instance = useAxiosInstance(token);
 
   useEffect(() => {
@@ -97,6 +97,7 @@ const Devotion = () => {
       setParagraphs([]);
       setSelectedFile(null);
       setPreviewUrl("");
+      setFormSubmitCount(formSubmitCount + 1);
     } catch (error) {
       console.log(error);
     }
@@ -165,6 +166,7 @@ const Devotion = () => {
           handleFileChange={handleFileChange}
           deletePara={deletePara}
           handleDelete={handleDelete}
+          key={formSubmitCount}
         />
       )}
     </div>
