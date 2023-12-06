@@ -10,22 +10,22 @@ const PopularCourses = () => {
                 <div className="mx-auto w-[100%] relative inline-block">
                     <img  className="w-full " src="src/assets/course-1.svg" alt="" />
                     <h2 className="text-[#fff] text-2xl absolute top-[80%] left-[30%] md:left-[32%] transform -translate-x-1/2 -translate-y-1/2 ">የክርስቶስ ትንሳኤ</h2>
-                    <button type="button" className=" text-accent-5 font-nokia-light border-2  border-accent-5 border-opacity-80 rounded-full px-4 text-sm absolute top-[87%] md:top-[90%] left-[25%] md:left-[17%] transform -translate-x-1/2 -translate-y-1/2 ">ክፈት</button>
+                    <button type="button" className=" text-accent-5 font-nokia-light border-2  border-accent-5 border-opacity-80 rounded-full px-4 text-sm absolute top-[87%] md:top-[90%] left-[25%] md:left-[17%] transform -translate-x-1/2 -translate-y-1/2 hover:bg-accent-6 hover:text-white transition-all">ክፈት</button>
                 </div>
                 <div className="mx-auto w-[100%] relative inline-block">
                     <img  className="w-full" src="src/assets/course-2.svg" alt="" />
-                    <h2 className="text-[#fff] text-2xl absolute top-[80%] left-[23%] md:left-[32%] transform -translate-x-1/2 -translate-y-1/2 ">ፀጋው</h2>
-                    <button type="button" className=" text-accent-5 font-nokia-light border-2  border-accent-5 border-opacity-80 rounded-full px-4 text-sm absolute top-[87%] md:top-[90%] left-[25%] md:left-[17%] transform -translate-x-1/2 -translate-y-1/2 ">ክፈት</button>
+                    <h2 className="text-[#fff] text-2xl absolute top-[80%] left-[30%] md:left-[17%] transform -translate-x-1/2 -translate-y-1/2 ">ፀጋው</h2>
+                    <button type="button" className=" text-accent-5 font-nokia-light border-2  border-accent-5 border-opacity-80 rounded-full px-4 text-sm absolute top-[87%] md:top-[90%] left-[25%] md:left-[17%] transform -translate-x-1/2 -translate-y-1/2 hover:bg-accent-6 hover:text-white transition-all">ክፈት</button>
                 </div>
-                  <div className="mx-auto w-[100%] relative inline-block">
+                <div className="mx-auto w-[100%] relative inline-block">
                     <img  className="w-full" src="src/assets/course-3.svg" alt="" />
-                    <h2 className="text-[#fff] text-2xl absolute top-[80%] left-[23%] md:left-[32%] transform -translate-x-1/2 -translate-y-1/2 ">ማደግ</h2>
-                    <button type="button" className=" text-accent-5 font-nokia-light border-2  border-accent-5 border-opacity-80 rounded-full px-4 text-sm absolute top-[87%] md:top-[90%] left-[25%] md:left-[17%] transform -translate-x-1/2 -translate-y-1/2 ">ክፈት</button>
+                    <h2 className="text-[#fff] text-2xl absolute top-[80%] left-[30%] md:left-[17%] transform -translate-x-1/2 -translate-y-1/2 ">ማደግ</h2>
+                    <button type="button" className=" text-accent-5 font-nokia-light border-2  border-accent-5 border-opacity-80 rounded-full px-4 text-sm absolute top-[87%] md:top-[90%] left-[25%] md:left-[17%] transform -translate-x-1/2 -translate-y-1/2 hover:bg-accent-6 hover:text-white transition-all">ክፈት</button>
                 </div>
                 <div className="mx-auto w-[100%] relative inline-block">
                     <img  className="w-full" src="src/assets/course-4.svg" alt="" />
-                    <h2 className="text-[#fff] text-2xl absolute top-[80%] left-[30%] md:left-[32%] transform -translate-x-1/2 -translate-y-1/2 ">የፀሎት ያለህ</h2>
-                    <button type="button" className=" text-accent-5 font-nokia-light border-2  border-accent-5 border-opacity-80 rounded-full px-4 text-sm absolute top-[87%] md:top-[90%] left-[25%] md:left-[17%] transform -translate-x-1/2 -translate-y-1/2 ">ክፈት</button>
+                    <h2 className="text-[#fff] text-2xl absolute top-[80%] left-[30%] md:left-[26%] transform -translate-x-1/2 -translate-y-1/2 ">የፀሎት ያለህ</h2>
+                    <button type="button" className=" text-accent-5 font-nokia-light border-2  border-accent-5 border-opacity-80 rounded-full px-4 text-sm absolute top-[87%] md:top-[90%] left-[25%] md:left-[17%] transform -translate-x-1/2 -translate-y-1/2 hover:bg-accent-6 hover:text-white transition-all">ክፈት</button>
                 </div>
             </div>
             
