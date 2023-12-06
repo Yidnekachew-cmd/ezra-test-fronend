@@ -15,7 +15,7 @@ function CoursesAvailable() {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }, [instance]);
+  }, []);
 
   return (
     <div className="h-screen pt-9 px-20">
@@ -30,7 +30,7 @@ function CoursesAvailable() {
               className="inline-block border-2 border-orange-300 p-1 m-3 mr-5 w-[350px] shadow-md rounded-lg"
             >
               <img
-                src={`http://localhost:5000/images/` + course.image}
+                src={`http://localhost:5100/images/` + course.image}
                 className="w-full rounded-md"
                 alt="no_image"
               />

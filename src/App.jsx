@@ -11,7 +11,7 @@ import CreateAccount from "./routes/CreateAccount";
 import NotMatch from "./routes/NotMatch";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Footer from "./components/Footer";
 import AddCourse from "./components/AddCourse";
@@ -23,12 +23,9 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        {user ? <Header /> : <Navbar />}
+        <Header />
         <Routes>
-          <Route
-            path="/"
-            element={user ? <Home /> : <Navigate to="/login" />}
-          />
+          <Route path="/" element={<Home />} />
           <Route
             path="/login"
             element={!user ? <Login /> : <Navigate to="/" />}
@@ -38,21 +35,21 @@ function App() {
             element={!user ? <Signup /> : <Navigate to="/" />}
           />
           <Route path="/courses" element={<Courses />} />
-        <Route path="/course/create/add" element={<AddCourse />} />
-        <Route path="/sabbathSchool" element={<SabbathSchool />} />
-        <Route path="/devotion" element={<Devotion />} />
-        <Route path="/aboutUs" element={<AboutUs />} />
-        <Route path="/contactUs" element={<ContactUs />} />
-        <Route path="/logIn" element={<LogIn />} />
-        <Route path="/createAccount" element={<CreateAccount />} />
-        <Route path="/courses/get/:courseId" element={<ChaptersDisplay />} />
-        <Route
-          path="/courses/get/:courseId/chapter/:chapterId"
-          element={<SlidesDisplay />}
-        />
-        <Route path="*" element={<NotMatch />} />
-      </Routes>
-      <Footer />
+          <Route path="/course/create/add" element={<AddCourse />} />
+          <Route path="/sabbathSchool" element={<SabbathSchool />} />
+          <Route path="/devotion" element={<Devotion />} />
+          <Route path="/aboutUs" element={<AboutUs />} />
+          <Route path="/contactUs" element={<ContactUs />} />
+          <Route path="/logIn" element={<LogIn />} />
+          <Route path="/createAccount" element={<CreateAccount />} />
+          <Route path="/courses/get/:courseId" element={<ChaptersDisplay />} />
+          <Route
+            path="/courses/get/:courseId/chapter/:chapterId"
+            element={<SlidesDisplay />}
+          />
+          <Route path="*" element={<NotMatch />} />
+        </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   );

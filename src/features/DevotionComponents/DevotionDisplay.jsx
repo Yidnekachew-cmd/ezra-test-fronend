@@ -6,14 +6,14 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
     <div className="w-[70%] bg-gray-100 container mx-auto">
       {devotions.map((devotion, index) => (
         <div key={index} className="mt-6">
-          <h1 className="font-customBold text-3xl text-[#EA9215]">
+          <h1 className="font-customBold text-3xl text-accent-5">
             Daily Devotional
           </h1>
 
           <div className="flex space-x-12">
             {devotion.month !== "" || devotion.day !== "" ? (
-              <div className="rounded w-[20%] h-36 my-1 border-2 bg-[#fff] border-[#EA9215] mt-8 text-[#3A4750]">
-                <div className="w-[95%] mx-auto flex flex-col justify-center items-center border-2 bg-[#3A4750] p-3 rounded">
+              <div className="rounded w-[20%] h-36 my-1 border-2 bg-[#fff] border-accent-5 mt-8 text-secondary-6">
+                <div className="w-[95%] mx-auto flex flex-col justify-center items-center border-2 bg-secondary-6 p-3 rounded">
                   <p className="font-customBold text-3xl text-[#fff]">
                     {devotion.month}
                   </p>
@@ -23,8 +23,8 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
                 </div>
               </div>
             ) : (
-              <div className="hidden rounded w-[20%] h-36 my-1 border-2 bg-[#fff] border-[#EA9215] mt-8 text-[#3A4750]">
-                <div className="w-[95%] mx-auto flex flex-col justify-center items-center border-2 bg-[#3A4750] p-3 rounded">
+              <div className="hidden rounded w-[20%] h-36 my-1 border-2 bg-[#fff] border-accent-5 mt-8 text-secondary-6">
+                <div className="w-[95%] mx-auto flex flex-col justify-center items-center border-2 bg-secondary-6 p-3 rounded">
                   <p className="font-customBold text-3xl text-[#fff]">
                     {devotion.month}
                   </p>
@@ -37,7 +37,7 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
 
             <div className="flex flex-col w-[50%] space-y-2 mt-8">
               <div className="flex width: 100% space-x-12">
-                <h1 className="font-customBold text-4xl text-justify text-[#3A4750]">
+                <h1 className="font-customBold text-4xl text-justify text-secondary-6">
                   {devotion.title}
                 </h1>
                 <FaTrash
@@ -45,22 +45,22 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
                   onClick={() => handleDelete(devotion._id)}
                 />
               </div>
-              <h2 className="font-customBold text-lg text-[#EA9215]">
+              <h2 className="font-customBold text-lg text-accent-5">
                 {devotion.chapter}
               </h2>
               {devotion.chapter !== "" ? (
-                <hr className="border-[#EA9215]" />
+                <hr className="border-accent-5" />
               ) : (
-                <hr className="hidden border-[#3A4750]" />
+                <hr className="hidden border-secondary-6" />
               )}
 
-              <p className="font-customBold text-1xl text-[#3A4750]">
+              <p className="font-customBold text-1xl text-secondary-6">
                 {devotion.verse}
               </p>
 
               {devotion.body.map((paragraph, paragraphIndex) => (
                 <p
-                  className="font-customLight text-sm text-justify text-[#3A4750]"
+                  className="font-customLight text-sm text-justify text-secondary-6"
                   key={paragraphIndex}
                 >
                   {paragraph}
@@ -68,11 +68,11 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
               ))}
 
               {devotion.prayer !== "" ? (
-                <p className="font-customBold text-1xl text-center border-2 border-[#EA9215] p-2 rounded text-[#EA9215]">
+                <p className="font-customBold text-1xl text-center border-2 border-accent-5 p-2 rounded text-accent-5">
                   {devotion.prayer}
                 </p>
               ) : (
-                <p className="hidden font-customBold text-1xl text-center border-2 border-[#EA9215] p-2 rounded text-[#EA9215]">
+                <p className="hidden font-customBold text-1xl text-center border-2 border-accent-5 p-2 rounded text-accent-5">
                   {devotion.prayer}
                 </p>
               )}
@@ -89,7 +89,7 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
               )} */}
 
               <img
-                src={`http://localhost:5000/images/${devotion.image}`}
+                src={`http://localhost:5100/images/${devotion.image}`}
                 alt="Devotion Image"
               />
             </div>
