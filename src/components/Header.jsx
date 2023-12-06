@@ -46,7 +46,6 @@ const Header = () => {
                 </NavLink>
             </li>
           </ul>
-          <LogoutButton />
         </nav>
       </div>
     </header>
