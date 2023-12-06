@@ -38,7 +38,7 @@ function App() {
           <Route
             path="/course/create/add"
             element={
-              user && user.role === "admin" ? (
+              user && user.role === "Admin" ? (
                 <AddCourse />
               ) : (
                 <Navigate to="/" />

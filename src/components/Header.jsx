@@ -45,19 +45,18 @@ const Header = () => {
               <li className="relative">
                 <button
                   onClick={handleAccountClick}
-                  className="bg-accent-6 hover:bg-accent-7 text-base focus:outline-none"
+                  className="bg-accent-6 hover:bg-accent-7 text-base focus:outline-none flex"
                 >
                   <FaRegUserCircle user={user} />
-
-                  {/* {user.email}  role will be added here */}
                 </button>
                 {showAccountModal && (
                   <div className="absolute top-[40px] right-0 bg-accent-6 shadow-lg rounded-md z-10">
                     <div className="px-4 py-2 border-b">
                       Logged in as: {user.email}
                     </div>
+                    <div className="px-4 py-2 border-b">Role: {user.role}</div>
                     <div className="px-4 py-2 border-b">
-                      <NavLink to="/profile">Profile</NavLink>
+                      <NavLink to="/profile">Profile Settings</NavLink>
                     </div>
                     <div className="px-4 py-2">
                       <LogoutButton />

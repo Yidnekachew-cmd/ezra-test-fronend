@@ -6,7 +6,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import useAxiosInstance from "../api/axiosInstance";
 
 const Devotion = () => {
-  const { token } = useAuthContext(); // get the authentication token
+  const { token, role } = useAuthContext(); // get the authentication token
   const [devotions, setDevotions] = useState([]);
   const instance = useAxiosInstance(token);
 
@@ -78,10 +78,12 @@ const Devotion = () => {
     }
 
     try {
-      const response = await axios.post("/devotion/create", formData);
-      // console.log(formData);
+      const response = await instance.post("/devotion/create", formData);
       console.log(response);
-      window.location.reload();
+
+      // Fetch devotions again after a successful post request
+      const devotionsResponse = await instance.get("/devotion/show");
+      setDevotions(devotionsResponse.data);
     } catch (error) {
       console.log(error);
     }
@@ -133,22 +135,25 @@ const Devotion = () => {
     } else {
       setPreviewUrl("");
     }
+    console.log(role);
   };
 
   return (
     <div className=" flex bg-gray-200">
       <DevotionDisplay devotions={devotions} handleDelete={handleDelete} />
-      <DevotionForm
-        form={form}
-        handleParaChange={handleParaChange}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        paragraphs={paragraphs}
-        addPara={addPara}
-        handleFileChange={handleFileChange}
-        deletePara={deletePara}
-        handleDelete={handleDelete}
-      />
+      {role === "Admin" && (
+        <DevotionForm
+          form={form}
+          handleParaChange={handleParaChange}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          paragraphs={paragraphs}
+          addPara={addPara}
+          handleFileChange={handleFileChange}
+          deletePara={deletePara}
+          handleDelete={handleDelete}
+        />
+      )}
     </div>
   );
 };
