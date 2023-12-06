@@ -84,6 +84,19 @@ const Devotion = () => {
       // Fetch devotions again after a successful post request
       const devotionsResponse = await instance.get("/devotion/show");
       setDevotions(devotionsResponse.data);
+
+      // Reset the form and paragraphs state
+      setForm({
+        month: "",
+        day: "",
+        title: "",
+        chapter: "",
+        verse: "",
+        prayer: "",
+      });
+      setParagraphs([]);
+      setSelectedFile(null);
+      setPreviewUrl("");
     } catch (error) {
       console.log(error);
     }
