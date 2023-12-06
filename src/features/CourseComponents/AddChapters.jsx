@@ -1,37 +1,36 @@
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setChapters,
-  addChapter,
-  addSlideToChapter,
-} from "../../redux/courseSlice";
+import { useState } from "react";
 
-function ChaptersAdd() {
-  const dispatch = useDispatch();
-  const chapters = useSelector((state) => state.course.chapters);
+function AddChapters() {
+  const [chapters, setChapters] = useState([]);
+
+  const addChapter = () => {
+    setChapters([...chapters, { chapter: "", slides: [] }]);
+  };
 
   const updateChapter = (index, value) => {
     const newChapters = [...chapters];
     newChapters[index].chapter = value;
-    dispatch(setChapters(newChapters));
+    setChapters(newChapters);
   };
 
   const addSlide = (chapterIndex) => {
     const newChapters = [...chapters];
     newChapters[chapterIndex].slides.push({ slide: "" });
-    dispatch(addSlideToChapter({ chapterIndex, slide: { slide: "" } }));
+    setChapters(newChapters);
   };
 
   const updateSlide = (chapterIndex, slideIndex, value) => {
     const newChapters = [...chapters];
     newChapters[chapterIndex].slides[slideIndex].slide = value;
-    dispatch(setChapters(newChapters));
+    setChapters(newChapters);
   };
+  console.log(chapters);
 
   return (
     <div className="bg-white w-[30%] p-6">
       <button
         className="flex justify-center items-center text-white bg-orange-400 hover:bg-orange-500 rounded-3xl mb-4 p-2"
-        onClick={() => dispatch(addChapter())}
+        onClick={addChapter}
       >
         <span className="material-symbols-outlined">add</span>
         Add Chapter
@@ -79,4 +78,4 @@ function ChaptersAdd() {
   );
 }
 
-export default ChaptersAdd;
+export default AddChapters;

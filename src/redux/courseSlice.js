@@ -5,7 +5,7 @@ export const courseSlice = createSlice({
   initialState: {
     title: "",
     description: "",
-    image: "",
+    image: null,
     chapters: [],
   },
   reducers: {
@@ -18,16 +18,24 @@ export const courseSlice = createSlice({
     setImage: (state, action) => {
       state.image = action.payload;
     },
+    setChapters: (state, action) => {
+      state.chapters = action.payload;
+    },
     addChapter: (state, action) => {
       state.chapters.push(action.payload);
     },
-    updateChapterTitle: (state, action) => {
-      const { chapterIndex, title } = action.payload;
-      if (state.chapters[chapterIndex]) {
-        state.chapters[chapterIndex].chapter = title;
+    addSlideToChapter: (state, { payload: { chapterIndex, slide } }) => {
+      state.chapters[chapterIndex].slides.push(slide);
+    },
+    addElementToSlide: (state, action) => {
+      const { chapterIndex, slideIndex, element } = action.payload;
+      const chapter = state.chapters[chapterIndex];
+      if (chapter && chapter.slides[slideIndex]) {
+        const slide = chapter.slides[slideIndex];
+        if (!slide.elements) slide.elements = [];
+        slide.elements.push(element);
       }
     },
-    // you can create similar reducers for adding slides and updating slides
   },
 });
 
@@ -35,7 +43,10 @@ export const {
   setTitle,
   setDescription,
   setImage,
+  setChapters,
   addChapter,
-  updateChapterTitle,
+  addSlideToChapter,
+  addElementToSlide,
 } = courseSlice.actions;
+
 export default courseSlice.reducer;
