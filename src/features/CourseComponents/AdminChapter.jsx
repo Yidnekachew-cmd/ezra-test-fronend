@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ChaptersAdd from "./ChaptersAdd";
@@ -17,14 +17,14 @@ function AdminChapter() {
     formData.append("image", image);
     formData.append("chapters", chapters);
 
-    // axios
-    //   .post("/course/create", formData)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios
+      .post("/course/create", formData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

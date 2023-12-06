@@ -1,17 +1,8 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addElementToSlide } from "../../redux/courseSlice";
 
-function ElementsAdd() {
-  const dispatch = useDispatch();
-  const elements = useSelector((state) => {
-    const chapter = state.course.chapters[currentChapterIndex];
-    return chapter ? chapter.slides[currentSlideIndex].elements : [];
-  });
-
+function AddElements() {
+  const [elements, setElements] = useState([]);
   const [currentElement, setCurrentElement] = useState("");
-  const [currentChapterIndex, setCurrentChapterIndex] = useState(0);
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   const handleDropdownChange = (e) => {
     setCurrentElement(e.target.value);
@@ -83,4 +74,4 @@ function ElementsAdd() {
   );
 }
 
-export default ElementsAdd;
+export default AddElements;
