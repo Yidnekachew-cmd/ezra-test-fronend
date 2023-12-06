@@ -22,31 +22,34 @@ const Login = () => {
             <span className="font-Lato-Bold">EZRA</span> Seminary
           </h3>
         </div>
-        <p className="text-2xl">
+        <p className="text-3xl">
         መጽሃፍ ቅዱስ እግዚአብሔርን<br/>
-        <span className="text-3xl text-accent-6">በግላችን የምናውቅበት</span><br/>
+        <span className="text-4xl text-accent-6">በግላችን የምናውቅበት</span><br/>
         ዋነኛው መንገድ ነው።<br/>
         </p>
       </div>
-    <form className="font-nokia-bold px-4 py-5" onSubmit={handleSubmit}>
-      <h3 className="text-2xl">Login</h3>
-
-      <label>Email:</label>
+    <form className="flex flex-col font-nokia-bold px-7 py-5 text-accent-6" onSubmit={handleSubmit}>
+      <h3 className="text-3xl"><span className="text-secondary-6">Log</span>in</h3>
+      <div className="mt-4 flex flex-col gap-2 text-xs">
+      <label>Email</label>
       <input
         type="email"
-        className="login-input"
+        className="border-2 border-accent-6 text-accent-3 text-xs1 p-2 w-80"
+        placeholder="abc@gmail.com"
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <label>Password:</label>
+      <label>Password</label>
       <input
         type="password"
-        className="login-input"
+        className="border-2 border-accent-6 text-accent-3 text-xs1 p-2 w-80"
+        placeholder="********"
         required
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+      </div>
       <button disabled={isLoading}>Login</button>
       {error && <div className="error">{error}</div>}
     </form>
