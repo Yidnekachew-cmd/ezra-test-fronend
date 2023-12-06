@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import DevotionForm from "../features/DevotionComponents/DevotionForm";
 import DevotionDisplay from "../features/DevotionComponents/DevotionDisplay";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -12,7 +13,7 @@ const Devotion = () => {
   useEffect(() => {
     const fetchDevotions = async () => {
       try {
-        const response = await instance.get("/devotion/show"); // use the new instance of Axios
+        const response = await instance.get("/devotion/show");
         setDevotions(response.data);
       } catch (error) {
         console.log(error);
@@ -20,7 +21,7 @@ const Devotion = () => {
     };
 
     fetchDevotions();
-  }, [instance]);
+  }, []);
 
   // useState for adding multiple paragraphs
   const [paragraphs, setParagraphs] = useState([]);
@@ -77,7 +78,7 @@ const Devotion = () => {
     }
 
     try {
-      const response = await instance.post("/devotion/create", formData);
+      const response = await axios.post("/devotion/create", formData);
       // console.log(formData);
       console.log(response);
       window.location.reload();
@@ -108,7 +109,6 @@ const Devotion = () => {
 
   // useState for Photo preview
   const [selectedFile, setSelectedFile] = useState(null);
-  // eslint-disable-next-line no-unused-vars
   const [previewUrl, setPreviewUrl] = useState("");
 
   const handleFileChange = (event) => {
@@ -124,8 +124,7 @@ const Devotion = () => {
         setForm({
           ...form,
           body: newPara,
-          // Store the actual file, not a data URL
-          image: file,
+          image: reader.result,
         });
       };
 
