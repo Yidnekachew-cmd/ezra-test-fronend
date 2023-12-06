@@ -89,7 +89,7 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
               )} */}
 
               <img
-                src={`http://localhost:6000/images/${devotion.image}`}
+                src={`http://localhost:5100/images/${devotion.image}`}
                 alt="Devotion Image"
               />
             </div>

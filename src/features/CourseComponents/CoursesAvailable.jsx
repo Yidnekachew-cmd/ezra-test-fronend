@@ -30,8 +30,8 @@ function CoursesAvailable() {
               className="inline-block border-2 border-orange-300 p-1 m-3 mr-5 w-[350px] shadow-md rounded-lg"
             >
               <img
-                src={`http://localhost:5000/images/` + course.image}
-                className="w-full h-[221px] rounded-md"
+                src={`http://localhost:5100/images/` + course.image}
+                className="w-full rounded-md"
                 alt="no_image"
               />
               <p className="text-lg m-1 border-b-2 border-orange-500">
