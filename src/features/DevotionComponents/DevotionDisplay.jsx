@@ -3,7 +3,7 @@ import { FaTrash } from "react-icons/fa";
 
 const DevotionDisplay = ({ devotions, handleDelete }) => {
   return (
-    <div className="w-[70%] bg-gray-100 container mx-auto">
+    <div className="w-[70%] bg-gray-100 container flex-col mx-auto">
       {devotions.map((devotion, index) => (
         <div key={index} className="mt-6">
           <h1 className="font-customBold text-3xl text-accent-5">

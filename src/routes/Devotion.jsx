@@ -109,6 +109,7 @@ const Devotion = () => {
 
   // useState for Photo preview
   const [selectedFile, setSelectedFile] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [previewUrl, setPreviewUrl] = useState("");
 
   const handleFileChange = (event) => {
