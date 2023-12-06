@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import DevotionForm from "../features/DevotionComponents/DevotionForm";
 import DevotionDisplay from "../features/DevotionComponents/DevotionDisplay";
-// import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 import useAxiosInstance from "../api/axiosInstance";
 
 const Devotion = () => {
+  const { token } = useAuthContext(); // get the authentication token
   const [devotions, setDevotions] = useState([]);
-  const instance = useAxiosInstance();
+  const instance = useAxiosInstance(token);
 
   useEffect(() => {
     const fetchDevotions = async () => {
@@ -123,7 +124,8 @@ const Devotion = () => {
         setForm({
           ...form,
           body: newPara,
-          image: reader.result,
+          // Store the actual file, not a data URL
+          image: file,
         });
       };
 

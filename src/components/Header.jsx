@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Header = () => {
+  const { user } = useAuthContext();
   return (
     <header className="container  bg-header-img  bg-bottom bg-cover">
       <div className=" flex justify-between py-6 items-center text-white font-nokia-bold w-[80%] mx-auto">
@@ -31,16 +33,24 @@ const Header = () => {
             <li className="hover:text-gray-400">
               <NavLink to="/contactUs">Contact Us</NavLink>
             </li>
-            <li className="hover:text-gray-400">
-              <NavLink to="/logIn">Log In</NavLink>
-            </li>
+            {user ? (
+              <LogoutButton />
+            ) : (
+              <li className="hover:text-gray-400">
+                <NavLink to="/logIn">Log In</NavLink>
+              </li>
+            )}
             <li className="hover:text-gray-400 text-base ">
               <NavLink to="/createAccount">
-                <button type="button" className="bg-[#EA9215] rounded-full py-1 px-2">Create Account</button>
-                </NavLink>
+                <button
+                  type="button"
+                  className="bg-[#EA9215] rounded-full py-1 px-2"
+                >
+                  Create Account
+                </button>
+              </NavLink>
             </li>
           </ul>
-          <LogoutButton />
         </nav>
       </div>
     </header>

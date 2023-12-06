@@ -15,7 +15,7 @@ function CoursesAvailable() {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }, [instance]);
+  }, []);
 
   return (
     <div className="h-screen pt-9 px-20">
