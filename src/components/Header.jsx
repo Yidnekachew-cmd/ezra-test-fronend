@@ -5,7 +5,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 const Header = () => {
   const { user } = useAuthContext();
   return (
-    <header className="  bg-header-img  bg-bottom bg-cover">
+    <header className="bg-header-img bg-bottom bg-cover backdrop-blur-md">
       <div className=" flex justify-between py-6 items-center text-white font-nokia-bold w-[80%] mx-auto">
         <div className="flex justify-center items-center space-x-3 cursor-pointer ">
           <img src="src/assets/ezra-logo.svg" alt="" />
@@ -15,22 +15,22 @@ const Header = () => {
         </div>
         <nav>
           <ul className="font-Lato-Regular tracking-wide hidden md:flex space-x-4 cursor-pointer text-sm justify-center items-center">
-            <li className="hover:text-accent-4">
+            <li className="hover:text-accent-6">
               <NavLink to="/">Home</NavLink>
             </li>
-            <li className="hover:text-accent-4">
+            <li className="hover:text-accent-6">
               <NavLink to="/courses">Courses</NavLink>
             </li>
-            <li className="hover:text-accent-4">
+            <li className="hover:text-accent-6">
               <NavLink to="/sabbathSchool">Sabbath School</NavLink>
             </li>
-            <li className="hover:text-accent-4">
+            <li className="hover:text-accent-6">
               <NavLink to="/devotion">Devotion</NavLink>
             </li>
-            <li className="hover:text-accent-4">
+            <li className="hover:text-accent-6">
               <NavLink to="/aboutUs">About Us</NavLink>
             </li>
-            <li className="hover:text-accent-4">
+            <li className="hover:text-accent-6">
               <NavLink to="/contactUs">Contact Us</NavLink>
             </li>
             {user ? (
