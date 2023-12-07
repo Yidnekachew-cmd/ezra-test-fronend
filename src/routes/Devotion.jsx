@@ -141,8 +141,7 @@ const Devotion = () => {
         setForm({
           ...form,
           body: newPara,
-          // Store the actual file, not a data URL
-          image: file,
+          image: reader.result,
         });
       };
 

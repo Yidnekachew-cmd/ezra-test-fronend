@@ -36,7 +36,17 @@ function App() {
             element={!user ? <Signup /> : <Navigate to="/" />}
           />
           <Route path="/courses" element={<Courses />} />
-          <Route path="/course/create/add" element={<AddCourse />} />
+          <Route
+            path="/course/create/add"
+            element={
+              user && user.role === "Admin" ? (
+                <AddCourse />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          />
+
           <Route path="/sabbathSchool" element={<SabbathSchool />} />
           <Route path="/devotion" element={<Devotion />} />
           <Route path="/aboutUs" element={<AboutUs />} />
