@@ -9,7 +9,6 @@ function useAxiosInstance() {
     baseURL: "http://localhost:5100",
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
     },
   });
 

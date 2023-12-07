@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import ChaptersAdd from "./ChaptersAdd";
-import ElementsAdd from "./ElementsAdd";
+// import ChaptersAdd from "./ChaptersAdd";
+// import ElementsAdd from "./ElementsAdd";
+
+import AddChapters from "./AddChapters";
+import AddElements from "./AddElements";
 
 function AdminChapter() {
   const { title, description, image, chapters } = useSelector(
@@ -43,8 +46,8 @@ function AdminChapter() {
         </button>
       </div>
       <div className="flex justify-between h-screen w-full bg-[#F1F1F1]">
-        <ChaptersAdd />
-        <ElementsAdd />
+        <AddChapters />
+        <AddElements />
       </div>
     </div>
   );
