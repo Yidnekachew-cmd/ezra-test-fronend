@@ -1,40 +1,41 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addElementToSlide } from "../../redux/courseSlice";
+import {
+  addElementToSlide,
+  updateElement,
+  selectElements,
+} from "../../redux/courseSlice";
 
 function ElementsAdd() {
   const dispatch = useDispatch();
-  const elements = useSelector((state) => {
-    const chapter = state.course.chapters[currentChapterIndex];
-    return chapter ? chapter.slides[currentSlideIndex].elements : [];
-  });
-
+  const elements = useSelector(selectElements);
   const [currentElement, setCurrentElement] = useState("");
-  const [currentChapterIndex, setCurrentChapterIndex] = useState(0);
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   const handleDropdownChange = (e) => {
     setCurrentElement(e.target.value);
   };
 
   const handleAddButtonClick = () => {
-    console.log(elements);
     if (currentElement) {
-      setElements([
-        ...elements,
-        {
-          type: currentElement,
-          id: `${currentElement}${elements.length + 1}`,
-          value: "",
-        },
-      ]);
+      dispatch(
+        addElementToSlide({
+          chapterIndex,
+          slideIndex,
+          elementType: currentElement,
+        })
+      );
       setCurrentElement(""); // Reset dropdown if needed
     }
   };
 
   const handleInputChange = (id, value) => {
-    setElements(
-      elements.map((el) => (el.id === id ? { ...el, value: value } : el))
+    dispatch(
+      updateElement({
+        chapterIndex,
+        slideIndex,
+        elementId: id,
+        value: value,
+      })
     );
   };
 
