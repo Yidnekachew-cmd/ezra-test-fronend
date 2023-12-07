@@ -4,8 +4,9 @@
 body {
   /* background: #f1f1f1;
   margin: 0; */
-  font-family: "Poppins";
+  /* font-family: "Poppins"; */
 }
+/* 
 .nav-bar-header {
   background: #ea9215;
   color: #fff;
@@ -57,7 +58,6 @@ div.error {
   border: 1px solid var(--error);
 }
 
-/* navbar */
 .nav-form {
   display: flex;
   gap: 2%;
@@ -78,26 +78,7 @@ nav button {
   margin-left: 10px;
 }
 
-/* auth forms */
-form.signup,
-form.login {
-  max-width: 450px;
-  margin: 40px auto;
-  background: #fff;
-  border-radius: 4px;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6em;
+.login input.error {
+  border: 1px solid var(--error);
 }
-
-.titles {
-  text-align: center;
-  font-size: 2.5rem;
-  margin: 2% auto 10%;
-}
-
-.logout {
-  color: rgb(146, 100, 14);
-  font-size: large;
-}
+*/

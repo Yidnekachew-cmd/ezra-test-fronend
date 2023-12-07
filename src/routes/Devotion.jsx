@@ -151,7 +151,6 @@ const Devotion = () => {
     }
     console.log(role);
   };
-
   return (
     <div className=" flex bg-gray-200">
       <DevotionDisplay devotions={devotions} handleDelete={handleDelete} />

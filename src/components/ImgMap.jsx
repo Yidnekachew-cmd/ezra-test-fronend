@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosInstance from "../api/axiosInstance";
 
-const GetCourse = () => {
+const ImgMap = () => {
   const [data, setData] = useState([]);
   const instance = useAxiosInstance();
 
@@ -56,4 +56,4 @@ const GetCourse = () => {
   );
 };
 
-export default GetCourse;
+export default ImgMap;

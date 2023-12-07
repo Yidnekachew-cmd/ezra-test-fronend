@@ -44,6 +44,7 @@ export default {
 
       backgroundImage: {
         "header-img": "url('./src/assets/header-img.svg')",
+        "coming-soon": "url('./src/assets/coming-soon.png')",
         // 'footer-texture': "url('/img/footer-texture.png')",
       },
       colors: {
@@ -77,6 +78,7 @@ export default {
         "accent-8": "#A6680F",
         "accent-9": "#85530C",
         "accent-10": "#694209",
+        "accent-11": "#EFC180",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -1,35 +1,14 @@
-// import axios from "axios";
-import { useState } from "react";
-import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setTitle, setDescription, setImage } from "../redux/courseSlice";
 
-// import { useNavigate } from "react-router-dom";
+function CreateCourse() {
+  const dispatch = useDispatch();
+  const { title, description, image } = useSelector((state) => state.course);
 
-function CreateCourse({ setCourseData, setStep }) {
-  const [data, setData] = useState({
-    title: "",
-    description: "",
-    image: "",
-    chapters: [],
-  });
-  //   const navigate = useNavigate();
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setCourseData(data);
-    setStep(2);
-    console.log(data);
-    const formdata = new FormData();
-    formdata.append("title", data.title);
-    formdata.append("description", data.description);
-    formdata.append("image", data.image);
-    console.log(formdata);
-    // axios
-    //   .post("/course/create", formdata)
-    //   .then((res) => {
-    //     navigate("/course/add");
-    //     console.log(res);
-    //   })
-    //   .catch((err) => console.log(err));
+  const handleImageChange = (e) => {
+    const file = e.target.files[[1]];
+    dispatch(setImage(file));
   };
 
   return (
@@ -38,16 +17,14 @@ function CreateCourse({ setCourseData, setStep }) {
         Create Course
       </h2>
       <p className="font-nokia-bold text-sm text-accent-5"> Check Text</p>
-      <form
-        className="grid grid-cols-1 gap-3 w-1/2 mx-auto mt-3"
-        onSubmit={handleSubmit}
-      >
+      <form className="grid grid-cols-1 gap-3 w-1/2 mx-auto mt-3">
         <div className="col-span-12 mx-auto">
           <input
             type="file"
             className="w-full p-24 text-orange-500 font-bold leading-tight border border-orange-300 rounded-md focus:outline-none focus:border-blue-500"
             name="image"
-            onChange={(e) => setData({ ...data, image: e.target.files[0] })}
+            value={image}
+            onChange={handleImageChange}
           />
         </div>
         <div className="col-span-12">
@@ -60,7 +37,8 @@ function CreateCourse({ setCourseData, setStep }) {
             name="title"
             placeholder="Untitled Course"
             autoComplete="off"
-            onChange={(e) => setData({ ...data, title: e.target.value })}
+            value={title}
+            onChange={(e) => dispatch(setTitle(e.target.value))}
           />
         </div>
         <div className="col-span-12">
@@ -71,7 +49,8 @@ function CreateCourse({ setCourseData, setStep }) {
             name="description"
             placeholder="Add a description"
             autoComplete="off"
-            onChange={(e) => setData({ ...data, description: e.target.value })}
+            value={description}
+            onChange={(e) => dispatch(setDescription(e.target.value))}
           />
         </div>
         <div className="col-span-12">
@@ -79,17 +58,12 @@ function CreateCourse({ setCourseData, setStep }) {
             type="submit"
             className="px-4 py-2 font-semibold text-white bg-orange-500 rounded-md hover:bg-orange-600"
           >
-            Create
+            <Link to="/courses/create/chapters">Create</Link>
           </button>
         </div>
       </form>
     </div>
   );
 }
-
-CreateCourse.propTypes = {
-  setCourseData: PropTypes.func.isRequired,
-  setStep: PropTypes.func.isRequired,
-};
 
 export default CreateCourse;
