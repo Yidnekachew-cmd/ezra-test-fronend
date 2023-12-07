@@ -31,26 +31,54 @@ const Login = () => {
     <form className="flex flex-col font-nokia-bold px-7 py-5 text-accent-6" onSubmit={handleSubmit}>
       <h3 className="text-3xl"><span className="text-secondary-6">Log</span>in</h3>
       <div className="mt-4 flex flex-col gap-2 text-xs">
-      <label>Email</label>
-      <input
-        type="email"
-        className="border-2 border-accent-6 text-accent-3 text-xs1 p-2 w-80"
-        placeholder="abc@gmail.com"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <label>Password</label>
-      <input
-        type="password"
-        className="border-2 border-accent-6 text-accent-3 text-xs1 p-2 w-80"
-        placeholder="********"
-        required
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <label>Email</label>
+        <input
+          type="email"
+          className="border rounded-lg border-accent-6 placeholder:text-accent-3 text-xs1 p-2 w-160 mb-2"
+          placeholder="abc@gmail.com"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <label>Password</label>
+        <input
+          type="password"
+          className="border rounded-lg border-accent-6  placeholder:text-accent-3 text-xs1 p-2 w-80"
+          placeholder="********"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <p className="self-end">Forgot Password?</p>
+        <div className="flex gap-2">
+          <input type="checkbox" className="appearance-none border-2 border-accent-6 rounded-md w-5 h-5 checked:bg-accent-6 checked:border-transparent text-white" />
+          <label className="text-xs">Remember me</label>
+        </div>
+        <div className="flex gap-2">
+          <input type="checkbox" className="appearance-none border-2 border-accent-6 rounded-md w-5 h-5 checked:bg-accent-6 checked:border-transparent text-white" />
+          <label className="text-xs">Remember me</label>
+        </div>
+        <div className="flex gap-2">
+          <input type="checkbox" className="appearance-none border-2 border-accent-6 rounded-md w-5 h-5 checked:bg-accent-6 checked:border-transparent text-white" />
+          <label className="text-xs">Remember me</label>
+        </div>
+        <div className="flex gap-2">
+          <input type="checkbox" className="appearance-none border-2 border-accent-6 rounded-md w-5 h-5 checked:bg-accent-6 checked:border-transparent text-white" />
+          <label className="text-xs">Remember me</label>
+        </div>
+        <div className="flex gap-2">
+          <input type="checkbox" className="appearance-none border-2 border-accent-6 rounded-md w-5 h-5 checked:bg-accent-6 checked:border-transparent text-white" />
+          <label className="text-xs">Remember me</label>
+        </div>
+        <div className="flex gap-2">
+          <input type="checkbox" className="appearance-none border-2 border-accent-6 rounded-md w-5 h-5 checked:bg-accent-6 checked:border-transparent text-white" />
+          <label className="text-xs">Remember me</label>
+        </div>
       </div>
-      <button disabled={isLoading}>Login</button>
+      <div className="w-[100%] mt-2 flex gap-2">
+        <button disabled={isLoading} className="w-70% bg-accent-6 text-white px-16 py-1 rounded-sm">Log In</button>
+        <button className="border border-accent-6 rounded-sm px-8" >Sign Up</button>
+      </div>
       {error && <div className="error">{error}</div>}
     </form>
     </div>
