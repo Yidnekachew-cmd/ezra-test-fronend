@@ -5,14 +5,15 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import useAxiosInstance from "../api/axiosInstance";
 
 const Devotion = () => {
-  const { token } = useAuthContext(); // get the authentication token
+  const { token, role } = useAuthContext(); // get the authentication token
   const [devotions, setDevotions] = useState([]);
+  const [formSubmitCount, setFormSubmitCount] = useState(0);
   const instance = useAxiosInstance(token);
 
   useEffect(() => {
     const fetchDevotions = async () => {
       try {
-        const response = await instance.get("/devotion/show"); // use the new instance of Axios
+        const response = await instance.get("/devotion/show");
         setDevotions(response.data);
       } catch (error) {
         console.log(error);
@@ -20,7 +21,7 @@ const Devotion = () => {
     };
 
     fetchDevotions();
-  }, [instance]);
+  }, []);
 
   // useState for adding multiple paragraphs
   const [paragraphs, setParagraphs] = useState([]);
@@ -78,9 +79,25 @@ const Devotion = () => {
 
     try {
       const response = await instance.post("/devotion/create", formData);
-      // console.log(formData);
       console.log(response);
-      window.location.reload();
+
+      // Fetch devotions again after a successful post request
+      const devotionsResponse = await instance.get("/devotion/show");
+      setDevotions(devotionsResponse.data);
+
+      // Reset the form and paragraphs state
+      setForm({
+        month: "",
+        day: "",
+        title: "",
+        chapter: "",
+        verse: "",
+        prayer: "",
+      });
+      setParagraphs([]);
+      setSelectedFile(null);
+      setPreviewUrl("");
+      setFormSubmitCount(formSubmitCount + 1);
     } catch (error) {
       console.log(error);
     }
@@ -133,22 +150,25 @@ const Devotion = () => {
     } else {
       setPreviewUrl("");
     }
+    console.log(role);
   };
-
   return (
     <div className=" flex bg-gray-200">
       <DevotionDisplay devotions={devotions} handleDelete={handleDelete} />
-      <DevotionForm
-        form={form}
-        handleParaChange={handleParaChange}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        paragraphs={paragraphs}
-        addPara={addPara}
-        handleFileChange={handleFileChange}
-        deletePara={deletePara}
-        handleDelete={handleDelete}
-      />
+      {role === "Admin" && (
+        <DevotionForm
+          form={form}
+          handleParaChange={handleParaChange}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          paragraphs={paragraphs}
+          addPara={addPara}
+          handleFileChange={handleFileChange}
+          deletePara={deletePara}
+          handleDelete={handleDelete}
+          key={formSubmitCount}
+        />
+      )}
     </div>
   );
 };
