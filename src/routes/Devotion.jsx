@@ -69,7 +69,7 @@ const Devotion = () => {
 
     // Append paragraphs data to the FormData object
     paragraphs.forEach((paragraph, index) => {
-      formData.append(paragraph${index + 1}, paragraph);
+      formData.append(`paragraph${index + 1}`, paragraph);
     });
 
     // Append the selected file to the FormData object
