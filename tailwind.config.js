@@ -44,6 +44,7 @@ export default {
 
       backgroundImage: {
         "header-img": "url('./src/assets/header-img.svg')",
+        "coming-soon": "url('./src/assets/coming-soon.png')",
         // 'footer-texture': "url('/img/footer-texture.png')",
       },
       colors: {
