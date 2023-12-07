@@ -6,7 +6,7 @@ import Testimonials from "@/features/HomePageComponents/Testimonials";
 
 const Home = () => {
   return (
-    <div className="flex flex-col space-y-12 md:space-y-">
+    <div className="flex flex-col space-y-12 ">
       <Hero />
       <Intro />
       <Contents />  
