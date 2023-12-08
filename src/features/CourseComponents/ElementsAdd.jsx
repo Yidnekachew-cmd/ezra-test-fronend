@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useCourseContext } from "./CourseContext";
-
+import { useCourseContext } from "../../context/CourseContext";
 import { useDispatch, useSelector } from "react-redux";
 import { addElementToSlide, updateElement } from "../../redux/courseSlice";
 
 function ElementsAdd() {
-  const { currentChapterIndex, currentSlideIndex } = useCourseContext();
+  const { currentChapterIndex, currentSlideIndex } = useCourseContext(); // Getting values from context
   const dispatch = useDispatch();
+
   const chapters = useSelector((state) => state.course.chapters);
   const elements =
     chapters[currentChapterIndex]?.slides[currentSlideIndex]?.elements || [];
@@ -21,20 +21,20 @@ function ElementsAdd() {
     if (currentElement) {
       dispatch(
         addElementToSlide({
-          chapterIndex,
-          slideIndex,
+          chapterIndex: currentChapterIndex, // Use values from the context
+          slideIndex: currentSlideIndex,
           elementType: currentElement,
         })
       );
-      setCurrentElement(""); // Reset dropdown if needed
+      setCurrentElement(""); // Reset the dropdown selection
     }
   };
 
   const handleInputChange = (id, value) => {
     dispatch(
       updateElement({
-        chapterIndex,
-        slideIndex,
+        chapterIndex: currentChapterIndex,
+        slideIndex: currentSlideIndex,
         elementId: id,
         value: value,
       })
@@ -69,6 +69,7 @@ function ElementsAdd() {
         <div key={index} className="py-2">
           <div className="flex justify-between items-center pb-2">
             <label className="text-orange-500 font-bold">{element.type}</label>
+            {/* Removal button needs to be implemented */}
             <button className="flex items-center text-orange-400 hover:text-orange-500">
               <span className="material-symbols-outlined">delete</span>
             </button>

@@ -9,7 +9,7 @@ import {
 
 function ChaptersAdd() {
   const dispatch = useDispatch();
-  const chapters = useSelector(selectChapters); // useSelector hook to get the 'chapters' from the state
+  const chapters = useSelector(selectChapters) || []; // useSelector hook to get the 'chapters' from the state
 
   const addChapterHandler = () => {
     dispatch(addChapter());
@@ -26,6 +26,8 @@ function ChaptersAdd() {
   const updateSlideHandler = (chapterIndex, slideIndex, value) => {
     dispatch(updateSlide({ chapterIndex, slideIndex, value }));
   };
+
+  console.log(chapters);
 
   return (
     <div className="bg-white w-[30%] p-6">

@@ -28,9 +28,7 @@ export const courseSlice = createSlice({
       const { chapterIndex, value } = action.payload;
       state.chapters[chapterIndex].chapter = value;
     },
-    selectChapters: (state) => {
-      state.course.chapters;
-    },
+    selectChapters: (state) => state.chapters,
     addSlide: (state, action) => {
       const { chapterIndex } = action.payload;
       state.chapters[chapterIndex].slides.push({
