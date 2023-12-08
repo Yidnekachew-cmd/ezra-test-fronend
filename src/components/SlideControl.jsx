@@ -1,23 +1,47 @@
-// import axios from "axios";
 import PropTypes from "prop-types";
-import { Trash } from "@phosphor-icons/react"
+import { useDispatch, useSelector } from "react-redux";
+import { Trash } from "@phosphor-icons/react";
+import {
+  addElementToSlide,
+  removeSlideElement,
+  updateSlideElement,
+  updateSlideImage,
+} from "../redux/courseSlice";
 
-const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputChange, handleImageChange, selectedType, setSelectedType, handleRemoveSlide, handleAddElement}) => {
+const SlideControl = () => {
+  const dispatch = useDispatch();
+  const slides = useSelector((state) => state.course.chapters); // Assuming slides are stored in the chapters array in the store
+  const selectedChapter = useSelector((state) => state.course.selectedChapter);
+  const selectedType = useSelector((state) => state.course.selectedType);
 
-    const handleAddSlide = () => {
-        const newSlide = [];
-        setSlides([...slides, newSlide]);
+  const handleAddElement = (slideIndex) => {
+    if (!selectedType || !selectedChapter) return;
+
+    const newElement = {
+      type: selectedType,
+      id: `${selectedType}-${slideIndex + 1}-${slides[slideIndex].elements.length + 1}`,
+      value: "",
     };
-    
- 
-    
-    const handleRemoveElement = (slideIndex, elementId) => {
-        const updatedSlide = slides[slideIndex].filter((el) => el.id !== elementId);
-        const updatedSlides = [...slides];
-        updatedSlides[slideIndex] = updatedSlide;
-        setSlides(updatedSlides);
-    };
-    
+
+    dispatch(addElementToSlide({ chapterIndex: selectedChapter, slideIndex, element: newElement }));
+  };
+
+  const handleInputChange = (slideIndex, elementId, value) => {
+    dispatch(updateSlideElement({ slideIndex, elementId, value }));
+  };
+
+  const handleRemoveElement = (slideIndex, elementId) => {
+    dispatch(removeSlideElement({ slideIndex, elementId }));
+  };
+
+  const handleImageChange = (slideIndex, elementId, e) => {
+    const file = e.target.files[0];
+    if (!file || !selectedChapter) return;
+
+    const imageUrl = URL.createObjectURL(file);
+
+    dispatch(updateSlideImage({ slideIndex, elementId, imageUrl }));
+  };
   
     const handleSubmit = (event) => {
       event.preventDefault();

@@ -7,7 +7,7 @@ import SlideView from './SlideView';
 import ChapterForm from './ChapterForm';
 import ChapterList from './ChapterList';
 import SlideList from "./SlideList";
-import { addChapter, addElementToSlide, removeSlide } from "./courseSlice";
+import { addChapter, addElementToSlide, removeSlide,updateSlideElement,removeSlideElement,updateSlideImage } from "../redux/courseSlice";
 
 
 function SlideShow() {
@@ -17,14 +17,20 @@ function SlideShow() {
   const [showChapterForm, setChapterForm] = useState(false);
   const [selectedType, setSelectedType] = useState('');
   const selectedChapter = useSelector((state) => state.course.chapters);
+  const selectedChapterRedux = useSelector((state) => state.course.selectedChapter);
   const slides = selectedChapter ? selectedChapter.slides : [];
 
+
+  const handleSetSelectedChapter = (chapterId) => {
+    dispatch(selectedChapterRedux(chapterId)); // Dispatch action to update selected chapter in Redux
+    // Other logic related to the selected chapter if needed
+  };
 
   const handleAddChapter = (chapterTitle) => {
     dispatch(addChapter(chapterTitle));
     setChapterForm(false);
   };
-  const handleAddElement = (slideIndex) => {
+const handleAddElement = (slideIndex) => {
     if (!selectedType || !selectedChapter) return;
 
     const newElement = {
@@ -33,7 +39,7 @@ function SlideShow() {
       value: '',
     };
 
-    dispatch(addElementToSlide({ chapterIndex: /* your chapter index */, slideIndex, element: newElement }));
+    dispatch(addElementToSlide({ chapterIndex: selectedChapter, slideIndex, element: newElement }));
   };
 
   const handleInputChange = (slideIndex, elementId, value) => {
@@ -102,7 +108,7 @@ function SlideShow() {
         <div className="container mx-auto py-8 grid grid-cols-6 gap-2">
           <div className="col-span-1 bg-accent-3 w-[100%]">
           
-          <ChapterList courses={courses} setSelectedChapter={setSelectedChapter} selectedChapter={selectedChapter} />
+          <ChapterList courses={courses} setSelectedChapter={handleSetSelectedChapter} selectedChapter={selectedChapter} />
           { selectedChapter ?
           <SlideList setSelectedSlide={setSelectedSlide} slides={courses[selectedChapter]} /> : null
 }

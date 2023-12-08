@@ -36,6 +36,9 @@ export const courseSlice = createSlice({
         slide.elements.push(element);
       }
     },
+    setSelectedChapter: (state, action) => {
+      state.selectedChapter = action.payload;
+    },
     updateSlideElement: (state, action) => {
       const { chapterIndex, slideIndex, elementId, value } = action.payload;
       const chapter = state.chapters[chapterIndex];
@@ -49,6 +52,12 @@ export const courseSlice = createSlice({
             elementToUpdate.value = value;
           }
         }
+      }
+    },
+    removeSlide: (state, action) => {
+      const index = action.payload;
+      if (index >= 0 && index < state.chapters.length) {
+        state.chapters[index].slides = [];
       }
     },
     removeSlideElement: (state, action) => {
@@ -87,7 +96,9 @@ export const {
   addChapter,
   addSlideToChapter,
   addElementToSlide,
+  setSelectedChapter,
   updateSlideElement,
+  removeSlide,
   removeSlideElement,
   updateSlideImage,
 } = courseSlice.actions;
