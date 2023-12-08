@@ -52,7 +52,7 @@ const Header = () => {
               <li ref={ref} className="relative">
                 <button
                   onClick={handleAccountClick}
-                  className="bg-accent-6 hover:bg-accent-7 text-base focus:outline-none flex"
+                  className="bg-accent-6 rounded-full p-1 hover:bg-accent-7 text-base focus:outline-none flex"
                 >
                   <FaRegUserCircle user={user} />
                 </button>

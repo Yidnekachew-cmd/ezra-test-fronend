@@ -18,7 +18,7 @@ function CoursesAvailable() {
   }, []);
 
   return (
-    <div className="h-auto flex flex-col w-[90%] md:w-[80%] mt-12 mx-auto space-y-12">
+    <div className="h-auto flex flex-col w-[90%] md:w-[80%] mt-12 mx-auto space-y-12 mb-12">
       <div className="space-y-3">
         <div className="flex justify-between items-end">
           <div>
@@ -32,15 +32,20 @@ function CoursesAvailable() {
               Our Most Popular Classes
             </h2>
           </div>
-          <div>Search</div>
+          <div className="flex justify-end">
+            
+            <input type="text" placeholder="Search" className=" hidden md:inline-block border-2 border-accent-6  w-[80%] outline-1 outline-accent-5 rounded-l px-4"  />
+            <img src="src/assets/Search-1.svg" alt="" className="hidden md:inline-block cursor-pointer" />
+            <img src="src/assets/Search.svg" alt="" className="md:hidden cursor-pointer" />
+          </div>
         </div>
-        <hr className="border-accent-5 border-1 w-[100%] pb-3"/>
+        <hr className="border-accent-5 border-1 w-[100%] pb-3 md:w-[30%]"/>
         <div className="flex flex-col justify-center items-center md:justify-start md:items-start w-[90%] mx-auto md:w-[95%] md:flex-row md:flex-wrap space-y-6 md:space-y-0 md:gap-3">
           {data.map((course, index) => {
             return (
               <div
                 key={index}
-                className="flex flex-col justify-center items-start  border-accent-5 border-2 w-[100%] md:w-[25%] shadow-2xl rounded-3xl md:rounded-xl h-auto pb-6"
+                className="flex flex-col justify-center items-start  border-accent-5 border-2 w-[100%] md:w-[32.3%] shadow-2xl rounded-3xl md:rounded-xl h-auto pb-6"
               >
                 <img
                   src={`http://localhost:5100/images/` + course.image}
@@ -67,7 +72,7 @@ function CoursesAvailable() {
           })}
         </div>
       </div>
-      <div className="space-y-3">
+      <div className="space-y-3 ">
         <div>
           <h3 className="text-xs md:text-sm font-Lato-bold  text-accent-5">
           Explore different topics
