@@ -6,6 +6,7 @@ import "./index.css";
 import axios from "axios";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { CourseProvider } from "./context/CourseContext";
 
 // axios.defaults.baseURL = "https://ezra-seminary-api.onrender.com";
 axios.defaults.baseURL = "http://localhost:5000";
@@ -13,9 +14,11 @@ axios.defaults.baseURL = "http://localhost:5000";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
+      <CourseProvider>
+        <Router>
+          <App />
+        </Router>
+      </CourseProvider>
     </Provider>
   </React.StrictMode>
 );

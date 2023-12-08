@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { useCourseContext } from "./CourseContext";
+
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addElementToSlide,
-  updateElement,
-  selectElements,
-} from "../../redux/courseSlice";
+import { addElementToSlide, updateElement } from "../../redux/courseSlice";
 
 function ElementsAdd() {
+  const { currentChapterIndex, currentSlideIndex } = useCourseContext();
   const dispatch = useDispatch();
-  const elements = useSelector(selectElements);
+  const chapters = useSelector((state) => state.course.chapters);
+  const elements =
+    chapters[currentChapterIndex]?.slides[currentSlideIndex]?.elements || [];
+
   const [currentElement, setCurrentElement] = useState("");
 
   const handleDropdownChange = (e) => {

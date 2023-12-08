@@ -62,6 +62,24 @@ export const courseSlice = createSlice({
       const { chapterIndex, slideIndex } = action.payload;
       state.chapters[chapterIndex].slides[slideIndex].elements;
     },
+    setCurrentChapter: (state, action) => {
+      state.currentChapterIndex = action.payload;
+    },
+    setCurrentSlide: (state, action) => {
+      const { chapterIndex, slideIndex } = action.payload;
+      state.currentChapterIndex = chapterIndex;
+      state.currentSlideIndex = slideIndex;
+    },
+    selectCurrentChapter: (state) => {
+      return state.chapters[state.currentChapterIndex] || {};
+    },
+    selectCurrentSlide: (state) => {
+      const chapter = state.chapters[state.currentChapterIndex];
+      if (chapter) {
+        return chapter.slides[state.currentSlideIndex] || {};
+      }
+      return {};
+    },
   },
 });
 
@@ -77,6 +95,10 @@ export const {
   addElementToSlide,
   updateElement,
   selectElements,
+  setCurrentChapter,
+  setCurrentSlide,
+  selectCurrentChapter,
+  selectCurrentSlide,
 } = courseSlice.actions;
 
 export default courseSlice.reducer;
