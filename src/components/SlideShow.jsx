@@ -131,14 +131,16 @@ function SlideShow() {
           <div className="col-span-1 bg-accent-3 w-[100%]">
           
           <ChapterList courses={courses} setSelectedChapter={setSelectedChapter} selectedChapter={selectedChapter} />
-          <SlideList setSelectedSlide={setSelectedSlide} slides={courses[selectedChapter]} />
+          { selectedChapter ?
+          <SlideList setSelectedSlide={setSelectedSlide} slides={courses[selectedChapter]} /> : null
+}
           </div>
           { selectedChapter ?
             <>
-            <div className="col-span-4 bg-accent-3 w-[100%]">
+            <div className="col-span-3 bg-accent-3 w-[100%]">
               <SlideView selectedSlide={selectedSlide} slides={courses[selectedChapter]} />
               </div>
-              <div className="bg-accent-3 w-[100%]">
+              <div className="col-span-2 bg-accent-3 w-[100%]">
               <SlideControl
                 courses={courses}
                 selectedChapter={selectedChapter}
