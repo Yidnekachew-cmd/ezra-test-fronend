@@ -42,7 +42,31 @@ export const courseSlice = createSlice({
     },
     addElementToSlide: (state, action) => {
       const { chapterIndex, slideIndex, elementType } = action.payload;
-      state.chapters[chapterIndex].slides[slideIndex].elements.push({
+      if (state.chapters[chapterIndex] == null) {
+        console.warn(
+          "Cannot add element, invalid chapter index:",
+          chapterIndex
+        );
+        return;
+      }
+
+      const slides = state.chapters[chapterIndex].slides;
+      if (!slides) {
+        console.warn(
+          "Cannot add element, no slides array in chapter:",
+          chapterIndex
+        );
+        return;
+      }
+
+      if (slides[slideIndex] == null) {
+        console.warn(
+          `Cannot add element, invalid slide index: ${slideIndex} for chapter: ${chapterIndex}`
+        );
+        return;
+      }
+      const elements = slides[slideIndex].elements;
+      elements.push({
         type: elementType,
         id: `${elementType}${Math.random().toString(36).substr(2, 9)}`, // Unique ID generation
         value: "",
@@ -56,14 +80,7 @@ export const courseSlice = createSlice({
         elements[elementIndex].value = value;
       }
     },
-    selectSlides: (state, action) => {
-      const { chapterIndex } = action.payload;
-      state.chapters[chapterIndex].slides;
-    },
-    selectElements: (state, action) => {
-      const { chapterIndex, slideIndex } = action.payload;
-      state.chapters[chapterIndex].slides[slideIndex].elements;
-    },
+
     setCurrentChapter: (state, action) => {
       state.currentChapterIndex = action.payload;
     },
@@ -96,7 +113,7 @@ export const {
   updateSlide,
   addElementToSlide,
   updateElement,
-  selectElements,
+
   setCurrentChapter,
   setCurrentSlide,
   selectCurrentChapter,
@@ -104,4 +121,15 @@ export const {
 } = courseSlice.actions;
 
 export default courseSlice.reducer;
+
 export const selectChapters = (state) => state.course.chapters;
+export const selectSlides = (state, chapterIndex) => {
+  return state.course.chapters[chapterIndex]?.slides;
+};
+
+export const selectElements = (state, action) => {
+  const { chapterIndex, slideIndex } = action.payload;
+  state.chapters[chapterIndex].slides[slideIndex].elements;
+};
+export const selectAllSlides = (state) =>
+  state.course.chapters.map((chapter) => chapter.slides);
