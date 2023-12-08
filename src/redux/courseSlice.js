@@ -36,6 +36,46 @@ export const courseSlice = createSlice({
         slide.elements.push(element);
       }
     },
+    updateSlideElement: (state, action) => {
+      const { chapterIndex, slideIndex, elementId, value } = action.payload;
+      const chapter = state.chapters[chapterIndex];
+      if (chapter && chapter.slides[slideIndex]) {
+        const slide = chapter.slides[slideIndex];
+        if (slide && slide.elements) {
+          const elementToUpdate = slide.elements.find(
+            (el) => el.id === elementId
+          );
+          if (elementToUpdate) {
+            elementToUpdate.value = value;
+          }
+        }
+      }
+    },
+    removeSlideElement: (state, action) => {
+      const { chapterIndex, slideIndex, elementId } = action.payload;
+      const chapter = state.chapters[chapterIndex];
+      if (chapter && chapter.slides[slideIndex]) {
+        const slide = chapter.slides[slideIndex];
+        if (slide && slide.elements) {
+          slide.elements = slide.elements.filter((el) => el.id !== elementId);
+        }
+      }
+    },
+    updateSlideImage: (state, action) => {
+      const { chapterIndex, slideIndex, elementId, fileName } = action.payload;
+      const chapter = state.chapters[chapterIndex];
+      if (chapter && chapter.slides[slideIndex]) {
+        const slide = chapter.slides[slideIndex];
+        if (slide && slide.elements) {
+          const elementToUpdate = slide.elements.find(
+            (el) => el.id === elementId
+          );
+          if (elementToUpdate) {
+            elementToUpdate.value = fileName;
+          }
+        }
+      }
+    },
   },
 });
 
@@ -47,6 +87,9 @@ export const {
   addChapter,
   addSlideToChapter,
   addElementToSlide,
+  updateSlideElement,
+  removeSlideElement,
+  updateSlideImage,
 } = courseSlice.actions;
 
 export default courseSlice.reducer;

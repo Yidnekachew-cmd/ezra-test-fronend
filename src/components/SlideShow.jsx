@@ -21,72 +21,39 @@ function SlideShow() {
 
 
   const handleAddChapter = (chapterTitle) => {
-    setCourses({...courses, [chapterTitle]: []});
+    dispatch(addChapter(chapterTitle));
     setChapterForm(false);
-  }
-
+  };
   const handleAddElement = (slideIndex) => {
     if (!selectedType || !selectedChapter) return;
-  
-    const selectedCourse = courses[selectedChapter];
-  
-    const updatedSlide = selectedCourse[slideIndex].concat({
+
+    const newElement = {
       type: selectedType,
-      id: `${selectedType}-${slideIndex + 1}-${selectedCourse[slideIndex].length + 1}`,
+      id: `${selectedType}-${slideIndex + 1}-${slides[slideIndex].elements.length + 1}`,
       value: '',
-    });
-    const updatedSlides = [...selectedCourse];
-    updatedSlides[slideIndex] = updatedSlide;
-  
-    setCourses((courses) => ({
-      ...courses,
-      [selectedChapter]: updatedSlides,
-    }));
+    };
+
+    dispatch(addElementToSlide({ chapterIndex: /* your chapter index */, slideIndex, element: newElement }));
   };
-  
-  const handleInputChange = (slideIndex, elementId, value, courseSlides) => {
-    const updatedSlide = courseSlides[slideIndex].map((el) =>
-        el.id === elementId ? { ...el, value: value } : el
-    );
-    const updatedSlides = [...courseSlides];
-    updatedSlides[slideIndex] = updatedSlide;
-    setCourses((courses) => ({
-      ...courses,
-      [selectedChapter]: updatedSlides,
-    }));
+
+  const handleInputChange = (slideIndex, elementId, value) => {
+    dispatch(updateSlideElement({ slideIndex, elementId, value }));
   };
 
   const handleRemoveElement = (slideIndex, elementId) => {
-    const selectedCourse = courses[selectedChapter];
-    const updatedSlide = selectedCourse[slideIndex].filter((el) => el.id !== elementId);
-    const updatedSlides = [...selectedCourse];
-    updatedSlides[slideIndex] = updatedSlide;
-    setCourses((courses) => ({
-      ...courses,
-      [selectedChapter]: updatedSlides,
-    }));
+    dispatch(removeSlideElement({ slideIndex, elementId }));
   };
 
   const handleImageChange = (slideIndex, elementId, e) => {
     const file = e.target.files[0];
     if (!file || !selectedChapter) return;
-    
-    const selectedCourse = courses[selectedChapter];
-    const updatedSlide = selectedCourse[slideIndex].map((el) =>
-        el.id === elementId ? { ...el, value: file.name } : el
-    );
-    
-    const updatedSlides = [...selectedCourse];
-    updatedSlides[slideIndex] = updatedSlide;
-    setCourses((courses) => ({
-      ...courses,
-      [selectedChapter]: updatedSlides,
-    }));
-  };
 
+    const imageUrl = URL.createObjectURL(file);
+
+    dispatch(updateSlideImage({ slideIndex, elementId, imageUrl }));
+  };
   const handleRemoveSlide = (index) => {
-    const updatedSlides = courses[selectedChapter].filter((_, slideIndex) => slideIndex !== index);
-    setCourses({ ...courses, [selectedChapter]: updatedSlides });
+    dispatch(removeSlide(index));
   };
 
   const { title, description, image, chapters } = useSelector(
