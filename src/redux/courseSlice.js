@@ -28,7 +28,7 @@ export const courseSlice = createSlice({
       const { chapterIndex, value } = action.payload;
       state.chapters[chapterIndex].chapter = value;
     },
-    selectChapters: (state) => state.chapters,
+
     addSlide: (state, action) => {
       const { chapterIndex } = action.payload;
       state.chapters[chapterIndex].slides.push({
@@ -55,6 +55,10 @@ export const courseSlice = createSlice({
       if (elementIndex !== -1) {
         elements[elementIndex].value = value;
       }
+    },
+    selectSlides: (state, action) => {
+      const { chapterIndex } = action.payload;
+      state.chapters[chapterIndex].slides;
     },
     selectElements: (state, action) => {
       const { chapterIndex, slideIndex } = action.payload;
@@ -87,7 +91,7 @@ export const {
   setImage,
   addChapter,
   updateChapter,
-  selectChapters,
+
   addSlide,
   updateSlide,
   addElementToSlide,
@@ -100,3 +104,4 @@ export const {
 } = courseSlice.actions;
 
 export default courseSlice.reducer;
+export const selectChapters = (state) => state.course.chapters;
