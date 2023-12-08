@@ -1,19 +1,24 @@
 import { useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import SlideControl from './SlideControl';
 import SlideView from './SlideView';
 import ChapterForm from './ChapterForm';
 import ChapterList from './ChapterList';
 import SlideList from "./SlideList";
+import { addChapter, addElementToSlide, removeSlide } from "./courseSlice";
+
 
 function SlideShow() {
   const [courses, setCourses] = useState({}); 
-  const [selectedChapter, setSelectedChapter] = useState(null);
   const [selectedSlide, setSelectedSlide] = useState(null);
-  const [selectedType, setSelectedType] = useState('');
+  const dispatch = useDispatch();
   const [showChapterForm, setChapterForm] = useState(false);
+  const [selectedType, setSelectedType] = useState('');
+  const selectedChapter = useSelector((state) => state.course.chapters);
+  const slides = selectedChapter ? selectedChapter.slides : [];
+
 
   const handleAddChapter = (chapterTitle) => {
     setCourses({...courses, [chapterTitle]: []});
