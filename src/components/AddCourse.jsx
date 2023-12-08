@@ -1,5 +1,5 @@
 // import SubTitle from "./SubTitle";
-import ImgMap from "./ImgMap";
+// import ImgMap from "./ImgMap";
 import SlideShow from "./SlideShow";
 
 const AddCourse = () => {

@@ -1,4 +1,7 @@
 import { useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import SlideControl from './SlideControl';
 import SlideView from './SlideView';
 import ChapterForm from './ChapterForm';
@@ -80,22 +83,62 @@ function SlideShow() {
     const updatedSlides = courses[selectedChapter].filter((_, slideIndex) => slideIndex !== index);
     setCourses({ ...courses, [selectedChapter]: updatedSlides });
   };
+
+  const { title, description, image, chapters } = useSelector(
+    (state) => state.course
+  );
+
   
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("image", image);
+    formData.append("chapters", chapters);
+
+    axios
+      .post("/course/create", formData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <>
+    <div className="h-screen w-[100%]">
+     <div className="flex justify-between border-gray-200 border-2 p-1">
+        <button className="text-white font-bold text-3xl bg-orange-400 hover:bg-orange-500 rounded-[50%]">
+          <Link to="/courses/create">
+            <span className="material-symbols-outlined t">arrow_left</span>
+          </Link>
+        </button>
+        <button
+          onSubmit={handleSubmit}
+          className="px-2 font-semibold text-white bg-orange-500 rounded-md hover:bg-orange-600"
+        >
+          Publish
+        </button>
+      </div>
       <button onClick={() => setChapterForm(!showChapterForm)} className="bg-green-500 text-white px-4 py-2 rounded">
         { showChapterForm ? 'Hide Chapter Form' : 'Add Chapter' }
       </button>
       { showChapterForm ? 
         <ChapterForm handleAddChapter={handleAddChapter} /> :
-        <div className="container mx-auto py-8 grid grid-cols-3 gap-4">
+        <div className="container mx-auto py-8 grid grid-cols-6 gap-2">
+          <div className="col-span-1 bg-accent-3 w-[100%]">
+          
           <ChapterList courses={courses} setSelectedChapter={setSelectedChapter} selectedChapter={selectedChapter} />
+          <SlideList setSelectedSlide={setSelectedSlide} slides={courses[selectedChapter]} />
+          </div>
           { selectedChapter ?
             <>
+            <div className="col-span-4 bg-accent-3 w-[100%]">
               <SlideView selectedSlide={selectedSlide} slides={courses[selectedChapter]} />
-              {/* <div className="col-span-1"> */}
-                <SlideList setSelectedSlide={setSelectedSlide} slides={courses[selectedChapter]} />
-              {/* </div> */}
+              </div>
+              <div className="bg-accent-3 w-[100%]">
               <SlideControl
                 courses={courses}
                 selectedChapter={selectedChapter}
@@ -109,12 +152,13 @@ function SlideShow() {
                 setSelectedType={setSelectedType}
                 handleRemoveSlide={handleRemoveSlide}
               />
+              </div>
             </>
             : null
           }
         </div>
       }
-    </>
+    </div>
 );
 }  
 

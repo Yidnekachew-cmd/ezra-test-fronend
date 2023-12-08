@@ -55,7 +55,7 @@ const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputC
     };
 
     return (
-      <div className="col-span-2 bg-white shadow-lg rounded-lg p-6 pt-8">
+      <div className="col-span-1 shadow-lg rounded-lg p-6 pt-8">
         {slides.map((slide, slideIndex) => (
           <div key={slideIndex} className="border-t border-gray-200 pt-4">
             <div className="flex items-center mb-4">
