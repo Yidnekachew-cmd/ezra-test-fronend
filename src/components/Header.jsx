@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { FaRegUserCircle } from "react-icons/fa";
+import { useOnClickOutside } from "./useOnClickOutside";
 
 const Header = () => {
   const { user } = useAuthContext();
   const [showAccountModal, setShowAccountModal] = useState(false);
 
   const handleAccountClick = () => {
-    setShowAccountModal(!showAccountModal);
+    setShowAccountModal((prev) => !prev);
   };
+  
+  // To access the dom element || useRef is used to create a ref(reference) object
+  const ref = useRef();
+
+  // A logic that watches for clicks outside the dropdown panel to close it
+  useOnClickOutside(ref, showAccountModal, () => setShowAccountModal(false));
 
   return (
     <header className="bg-header-img bg-bottom bg-cover backdrop-blur-md">
@@ -42,7 +49,7 @@ const Header = () => {
               <NavLink to="/contactUs">Contact Us</NavLink>
             </li>
             {user ? (
-              <li className="relative">
+              <li ref={ref} className="relative">
                 <button
                   onClick={handleAccountClick}
                   className="bg-accent-6 hover:bg-accent-7 text-base focus:outline-none flex"
