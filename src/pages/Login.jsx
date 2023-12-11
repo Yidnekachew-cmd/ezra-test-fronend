@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
+import { GoogleLogo, FacebookLogo } from "@phosphor-icons/react";
 import "./LoginAndSignup.css";
 
 const Login = () => {
@@ -14,8 +15,8 @@ const Login = () => {
   };
 
   return (
-    <div className="flex w-[70%] rounded-xl border-2 border-accent-6 mx-auto my-20">
-      <div className="flex flex-col bg-coming-soon bg-cover w-[60%] font-nokia-bold p-7 justify-between text-white rounded-xl gap-64" style={{backgroundPositionX:"-80px"}}>
+    <div className="flex w-[90%] md:w-[70%] rounded-xl border-2 border-accent-6 mx-auto my-20">
+      <div className="md:flex flex-col bg-coming-soon bg-cover hidden lg:w-[58%] font-nokia-bold p-7 justify-between text-white rounded-xl gap-64" style={{backgroundPositionX:"-80px"}}>
       <div className="flex space-x-3 cursor-pointer text-white ">
           <img src="src/assets/ezra-logo.svg" alt="" />
           <h3 className="self-center text-2xl font-Lato-Regular">
@@ -28,7 +29,7 @@ const Login = () => {
         ዋነኛው መንገድ ነው።<br/>
         </p>
       </div>
-    <form className="flex flex-col font-nokia-bold px-7 py-16 text-accent-6 w-[10em] md:w-[20em] lg:w-[30em] border border-red-300" onSubmit={handleSubmit}>
+    <form className="flex flex-col font-nokia-bold px-7 py-16 text-accent-6 w-[100%] sm:w-[10em] md:w-[20em] lg:w-[35em] border border-red-300" onSubmit={handleSubmit}>
       <h3 className="text-3xl"><span className="text-secondary-6">Log</span>in</h3>
       <div className="mt-4 flex flex-col gap-2 text-xs">
         <label>Email</label>
@@ -57,10 +58,17 @@ const Login = () => {
       
       </div>
       <div className="w-[100%] mt-4 flex gap-2 border border-red-300">
-        <button disabled={isLoading} className="md:w-[40%] lg:w-[69%] bg-accent-6 text-white px-16 py-1 rounded-sm">Log In</button>
+        <button disabled={isLoading} className="md:w-[40%] lg:w-[69%] bg-accent-6 text-white px-16 py-1 rounded-sm hover:bg-accent-7 hover:cursor-pointer transition-all">Log In</button>
         <button className="border border-accent-6 rounded-sm px-8" >Sign Up</button>
       </div>
       {error && <div className="error">{error}</div>}
+      <div className="text-xs mt-4">
+        <p>Or signup with</p>
+        <div className="flex mt-2 text-2xl text-white gap-2 ">
+          <GoogleLogo className="bg-accent-6 rounded-full hover:bg-accent-7 hover:cursor-pointer  transition-all"></GoogleLogo>
+          <FacebookLogo className="bg-accent-6 rounded-full  hover:bg-accent-7  hover:cursor-pointer  transition-all"></FacebookLogo>
+        </div>
+      </div>
     </form>
     </div>
   );
