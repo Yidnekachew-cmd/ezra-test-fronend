@@ -1,25 +1,37 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ChaptersAdd from "./ChaptersAdd";
+import { selectCourse } from "../../redux/courseSlice";
 
 function AdminChapter() {
-  const { title, description, image, chapters } = useSelector(
-    (state) => state.course
-  );
+  const navigate = useNavigate();
+  const course = useSelector(selectCourse);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const { title, description, image, chapters } = course;
+
+    console.log("Chapters data:", chapters);
+
     const formData = new FormData();
+    const payload = Object.fromEntries(formData);
+
     formData.append("title", title);
     formData.append("description", description);
     formData.append("image", image);
-    formData.append("chapters", chapters);
+
+    // Convert chapters to JSON string and append it to formData
+    formData.append("chapters", JSON.stringify(chapters));
+
+    console.log(formData);
+    console.log(payload);
 
     axios
       .post("/course/create", formData)
       .then((res) => {
         console.log(res);
+        navigate("/courses");
       })
       .catch((err) => {
         console.log(err);
@@ -35,7 +47,7 @@ function AdminChapter() {
           </Link>
         </button>
         <button
-          onSubmit={handleSubmit}
+          onClick={handleSubmit}
           className="px-2 font-semibold text-white bg-orange-500 rounded-md hover:bg-orange-600"
         >
           Publish

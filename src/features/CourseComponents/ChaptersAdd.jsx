@@ -1,6 +1,7 @@
 import ElementsAdd from "./ElementsAdd";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  selectCourse,
   selectChapters,
   selectAllSlides,
   addChapter,
@@ -11,6 +12,7 @@ import {
 
 function ChaptersAdd() {
   const dispatch = useDispatch();
+  const course = useSelector(selectCourse);
   const chapters = useSelector(selectChapters) || []; // useSelector hook to get the 'chapters' from the state
   // const slides = useSelector((state) => selectSlides(state, chapterIndex));
   const allSlides = useSelector(selectAllSlides);
@@ -31,7 +33,7 @@ function ChaptersAdd() {
     dispatch(updateSlide({ chapterIndex, slideIndex, value }));
   };
 
-  // console.log(chapters);
+  console.log(course);
 
   return (
     <div className="flex justify-between h-screen w-full bg-[#F1F1F1]">
