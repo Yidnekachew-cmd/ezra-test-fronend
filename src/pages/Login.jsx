@@ -15,7 +15,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex w-[90%] md:w-[70%] rounded-xl border-2 border-accent-6 mx-auto my-20">
+    <div className="flex w-[90%] md:w-[70%] rounded-xl md:border-2 md:border-accent-6 mx-auto my-20">
       <div className="md:flex flex-col bg-coming-soon bg-cover hidden lg:w-[58%] font-nokia-bold p-7 justify-between text-white rounded-xl gap-64" style={{backgroundPositionX:"-80px"}}>
       <div className="flex space-x-3 cursor-pointer text-white ">
           <img src="src/assets/ezra-logo.svg" alt="" />
@@ -29,7 +29,7 @@ const Login = () => {
         ዋነኛው መንገድ ነው።<br/>
         </p>
       </div>
-    <form className="flex flex-col font-nokia-bold px-7 py-16 text-accent-6 w-[100%] sm:w-[10em] md:w-[20em] lg:w-[35em] border border-red-300" onSubmit={handleSubmit}>
+    <form className="flex flex-col font-nokia-bold px-7 py-16 text-accent-6 w-[100%] sm:w-[10em] md:w-[20em] lg:w-[35em]" onSubmit={handleSubmit}>
       <h3 className="text-3xl"><span className="text-secondary-6">Log</span>in</h3>
       <div className="mt-4 flex flex-col gap-2 text-xs">
         <label>Email</label>
@@ -57,7 +57,7 @@ const Login = () => {
         </div>
       
       </div>
-      <div className="w-[100%] mt-4 flex gap-2 border border-red-300">
+      <div className="w-[100%] mt-4 flex gap-2">
         <button disabled={isLoading} className="md:w-[40%] lg:w-[69%] bg-accent-6 text-white px-16 py-1 rounded-sm hover:bg-accent-7 hover:cursor-pointer transition-all">Log In</button>
         <button className="border border-accent-6 rounded-sm px-8" >Sign Up</button>
       </div>
