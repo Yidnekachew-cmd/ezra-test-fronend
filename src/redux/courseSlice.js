@@ -5,7 +5,7 @@ export const courseSlice = createSlice({
   initialState: {
     title: "",
     description: "",
-    image: null,
+    image: "",
     chapters: [],
   },
   reducers: {
@@ -122,14 +122,15 @@ export const {
 
 export default courseSlice.reducer;
 
+export const selectCourse = (state) => state.course;
 export const selectChapters = (state) => state.course.chapters;
 export const selectSlides = (state, chapterIndex) => {
   return state.course.chapters[chapterIndex]?.slides;
 };
 
-export const selectElements = (state, action) => {
-  const { chapterIndex, slideIndex } = action.payload;
-  state.chapters[chapterIndex].slides[slideIndex].elements;
+export const selectElements = (state, chapterIndex, slideIndex) => {
+  const { chapters } = state.course;
+  return chapters[chapterIndex]?.slides[slideIndex]?.elements || [];
 };
 export const selectAllSlides = (state) =>
   state.course.chapters.map((chapter) => chapter.slides);

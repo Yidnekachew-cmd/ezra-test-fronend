@@ -1,15 +1,22 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setTitle, setDescription, setImage } from "../redux/courseSlice";
+import {
+  setTitle,
+  setDescription,
+  setImage,
+  selectCourse,
+} from "../redux/courseSlice";
 
 function CreateCourse() {
   const dispatch = useDispatch();
-  const { title, description, image } = useSelector((state) => state.course);
+  const { title, description } = useSelector((state) => state.course);
+  const course = useSelector(selectCourse);
 
   const handleImageChange = (e) => {
     const file = e.target.files[[1]];
     dispatch(setImage(file));
   };
+  console.log(course);
 
   return (
     <div className="h-screen pt-9 px-20">
@@ -22,7 +29,6 @@ function CreateCourse() {
             type="file"
             className="w-full p-24 text-orange-500 font-bold leading-tight border border-orange-300 rounded-md focus:outline-none focus:border-blue-500"
             name="image"
-            value={image}
             onChange={handleImageChange}
           />
         </div>

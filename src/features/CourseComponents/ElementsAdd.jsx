@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { useCourseContext } from "../../context/CourseContext";
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { addElementToSlide, updateElement } from "../../redux/courseSlice";
+import {
+  addElementToSlide,
+  updateElement,
+  // selectElements,
+} from "../../redux/courseSlice";
 
-function ElementsAdd() {
-  const { currentChapterIndex, currentSlideIndex } = useCourseContext(); // Getting values from context
+function ElementsAdd({ chapterIndex, slideIndex }) {
   const dispatch = useDispatch();
 
   const chapters = useSelector((state) => state.course.chapters);
-  const elements =
-    chapters[currentChapterIndex]?.slides[currentSlideIndex]?.elements || [];
+  const elements = chapters[chapterIndex]?.slides[slideIndex]?.elements || [];
 
   const [currentElement, setCurrentElement] = useState("");
 
@@ -21,8 +23,8 @@ function ElementsAdd() {
     if (currentElement) {
       dispatch(
         addElementToSlide({
-          chapterIndex: currentChapterIndex, // Use values from the context
-          slideIndex: currentSlideIndex,
+          chapterIndex,
+          slideIndex,
           elementType: currentElement,
         })
       );
@@ -33,8 +35,8 @@ function ElementsAdd() {
   const handleInputChange = (id, value) => {
     dispatch(
       updateElement({
-        chapterIndex: currentChapterIndex,
-        slideIndex: currentSlideIndex,
+        chapterIndex,
+        slideIndex,
         elementId: id,
         value: value,
       })
@@ -86,5 +88,10 @@ function ElementsAdd() {
     </div>
   );
 }
+
+ElementsAdd.propTypes = {
+  chapterIndex: PropTypes.number.isRequired,
+  slideIndex: PropTypes.number.isRequired,
+};
 
 export default ElementsAdd;
