@@ -12,19 +12,16 @@ function AdminChapter() {
     event.preventDefault();
     const { title, description, image, chapters } = course;
 
-    console.log("Chapters data:", chapters);
+    // console.log("Chapters data:", chapters);
 
     const formData = new FormData();
-    const payload = Object.fromEntries(formData);
-
     formData.append("title", title);
     formData.append("description", description);
     formData.append("image", image);
-
-    // Convert chapters to JSON string and append it to formData
-    formData.append("chapters", JSON.stringify(chapters));
-
+    formData.append("chapters", JSON.stringify(chapters)); // Convert chapters to JSON string and append it to formData
     console.log(formData);
+
+    const payload = Object.fromEntries(formData);
     console.log(payload);
 
     axios
