@@ -29,10 +29,10 @@ const CreateSSL = () => {
             </select>
           </div>
           <div className="flex gap-2 text-sm">
-            <button className="flex items-center gap-1 text-primary-1 bg-accent-6 px-2 py-1 rounded-sm">
+            <button className="flex items-center gap-1 text-primary-1 bg-accent-6 px-3 rounded-sm hover:bg-accent-7 transition-all">
               Create Week <PlusCircle />
             </button>
-            <button className="flex items-center gap-1 text-primary-1 bg-accent-6 px-2 py-1 rounded-sm">
+            <button className="flex items-center gap-1 text-primary-1 bg-accent-6 px-3 rounded-sm hover:bg-accent-7 transition-all">
               Create Day <PlusCircle />
             </button>
           </div>
