@@ -21,7 +21,7 @@ const Courses = () => {
     <div>
       <CoursesAvailable />
       {/* {step === 1 && role === "Admin" && (
-        // <CreateCourse setCourseData={setCourseData} setStep={setStep} />
+        <CreateCourse setCourseData={setCourseData} setStep={setStep} />
       )} */}
       {/* {step === 2 && role === "Admin" && <AddCourse courseData={courseData} />} */}
     </div>
@@ -29,3 +29,15 @@ const Courses = () => {
 };
 
 export default Courses;
+
+// import CreateCourse from "@/components/CreateCourse";
+
+// const Courses = () => {
+//   return (
+//     <div>
+//       <CreateCourse />
+//     </div>
+//   );
+// };
+
+// export default Courses;

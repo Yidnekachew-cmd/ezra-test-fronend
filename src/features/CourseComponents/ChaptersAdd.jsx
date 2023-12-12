@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ElementsAdd from "./ElementsAdd";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,6 +18,9 @@ function ChaptersAdd() {
   // const slides = useSelector((state) => selectSlides(state, chapterIndex));
   const allSlides = useSelector(selectAllSlides);
 
+  // State to track the currently editing slide
+  const [editingSlideIndex, setEditingSlideIndex] = useState(null);
+
   const addChapterHandler = () => {
     dispatch(addChapter());
   };
@@ -27,6 +31,10 @@ function ChaptersAdd() {
 
   const addSlideHandler = (chapterIndex) => {
     dispatch(addSlide({ chapterIndex }));
+    setEditingSlideIndex({
+      chapter: chapterIndex,
+      slide: chapters[chapterIndex].slides.length,
+    });
   };
 
   const updateSlideHandler = (chapterIndex, slideIndex, value) => {
@@ -39,7 +47,7 @@ function ChaptersAdd() {
     <div className="flex justify-between h-screen w-full bg-[#F1F1F1]">
       <div className="bg-white w-[30%] p-6">
         <button
-          className="flex justify-center items-center text-white bg-orange-400 hover:bg-accent-6 rounded-3xl mb-4 p-2"
+          className="flex justify-center items-center text-white bg-orange-400 hover:bg-orange-500 rounded-3xl mb-4 p-2"
           onClick={addChapterHandler}
         >
           <span className="material-symbols-outlined">add</span>
@@ -77,19 +85,31 @@ function ChaptersAdd() {
                           e.target.value
                         )
                       }
+                      onClick={() =>
+                        setEditingSlideIndex({
+                          chapter: chapterIndex,
+                          slide: slideIndex,
+                        })
+                      }
                     />
-                    <ElementsAdd
-                      chapterIndex={chapterIndex}
-                      slideIndex={slideIndex}
-                    />
+
+                    {/* check whether the editingSlideIndex matches the current slide being rendered. */}
+                    {editingSlideIndex &&
+                      editingSlideIndex.chapter === chapterIndex &&
+                      editingSlideIndex.slide === slideIndex && (
+                        <ElementsAdd
+                          chapterIndex={chapterIndex}
+                          slideIndex={slideIndex}
+                        />
+                      )}
                   </div>
                 ))}
                 <button
                   className="flex justify-between items-center text-white bg-gray-200 hover:bg-gray-300 p-1 rounded-lg"
                   onClick={() => addSlideHandler(chapterIndex)}
                 >
-                  <p className="text-accent-6 px-2">New Slide</p>
-                  <span className="material-symbols-outlined t flex justify-center text-xl font-bold bg-orange-400 hover:bg-accent-6 rounded-3xl">
+                  <p className="text-orange-500 px-2">New Slide</p>
+                  <span className="material-symbols-outlined t flex justify-center text-xl font-bold bg-orange-400 hover:bg-orange-500 rounded-3xl">
                     add
                   </span>
                 </button>
