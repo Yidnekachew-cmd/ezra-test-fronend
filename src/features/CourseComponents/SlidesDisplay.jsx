@@ -148,6 +148,15 @@ function SlidesDisplay() {
                               {element.value}
                             </p>
                           );
+                        } else if (element.type === "text") {
+                          return (
+                            <p
+                              key={element._id}
+                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-justify text-4xl"
+                            >
+                              {element.value}
+                            </p>
+                          );
                         } else if (element.type === "img") {
                           return (
                             <img
