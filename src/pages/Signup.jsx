@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
 import { GoogleLogo, FacebookLogo } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -35,14 +36,14 @@ const Signup = () => {
         </p>
       </div>
       <form
-        className="flex flex-col font-nokia-bold px-7 py-8 text-accent-6 w-[100%] sm:w-[10em] md:w-[20em] lg:w-[80%]"
+        className="flex flex-col font-nokia-bold px-7 py-8 text-accent-6 w-[100%] sm:w-[10em] md:w-[20em] lg:w-[60%]"
         onSubmit={handleSubmit}
       >
         <h3 className="text-3xl">
           <span className="text-secondary-6">Create </span>Account
         </h3>
         <div className="mt-10 flex flex-col gap-2 text-xs">
-          <div className="flex flex-row gap-4 ">
+          <div className="flex flex-row gap-4">
             <div className="flex flex-col flex-auto gap-2">
               <label>First Name</label>
               <input
@@ -118,16 +119,19 @@ const Signup = () => {
           </button>
           <p className="flex item-center">
             Already have an account?
-            <span className="text-secondary-6 hover:text-secondary-3 transition-all cursor-pointer">
+            <Link
+              className="text-secondary-6 hover:text-secondary-3 transition-all cursor-pointer"
+              to="/login"
+            >
               {"  "}
               Sign In
-            </span>
+            </Link>
           </p>
         </div>
         {error && <div className="error">{error}</div>}
         <div className="text-xs mt-4">
           <p>Or signup with</p>
-          <div className="flex mt-2 text-2xl text-white gap-2 ">
+          <div className="flex mt-2 text-2xl text-white gap-2">
             <GoogleLogo className="bg-accent-6 rounded-full hover:bg-accent-7 hover:cursor-pointer  transition-all"></GoogleLogo>
             <FacebookLogo className="bg-accent-6 rounded-full  hover:bg-accent-7  hover:cursor-pointer  transition-all"></FacebookLogo>
           </div>
