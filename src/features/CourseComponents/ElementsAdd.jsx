@@ -57,6 +57,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
           <option value="">Choose Type</option>
           <option value="title">title</option>
           <option value="sub">sub</option>
+          <option value="text">text</option>
           <option value="img">img</option>
         </select>
         <button
@@ -81,7 +82,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
             placeholder={`Enter ${element.type}`}
             value={element.value}
             onChange={(e) => handleInputChange(element.id, e.target.value)}
-            className="w-full border-2 border-orange-500 rounded-lg text-orange-500 font-bold pl-4"
+            className="w-36 border-2 border-orange-500 rounded-lg text-orange-500 font-bold pl-4"
           />
         </div>
       ))}
