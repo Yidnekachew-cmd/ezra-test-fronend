@@ -38,7 +38,7 @@ function AddElements() {
           id="elements"
           value={currentElement}
           onChange={handleDropdownChange}
-          className="border-2 border-orange-500 rounded-lg"
+          className="border-2 border-accent-6 rounded-lg"
         >
           <option value="">Choose Type</option>
           <option value="title">title</option>
@@ -47,7 +47,7 @@ function AddElements() {
         </select>
         <button
           onClick={handleAddButtonClick}
-          className="px-2 font-semibold text-white bg-orange-500 rounded-md hover:bg-orange-600"
+          className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-orange-600"
         >
           Add
         </button>
@@ -56,8 +56,8 @@ function AddElements() {
       {elements.map((element, index) => (
         <div key={index} className="py-2">
           <div className="flex justify-between items-center pb-2">
-            <label className="text-orange-500 font-bold">{element.type}</label>
-            <button className="flex items-center text-orange-400 hover:text-orange-500">
+            <label className="text-accent-6 font-bold">{element.type}</label>
+            <button className="flex items-center text-orange-400 hover:text-accent-6">
               <span className="material-symbols-outlined">delete</span>
             </button>
           </div>
@@ -66,7 +66,7 @@ function AddElements() {
             placeholder={`Enter ${element.type}`}
             value={element.value}
             onChange={(e) => handleInputChange(element.id, e.target.value)}
-            className="w-full border-2 border-orange-500 rounded-lg text-orange-500 font-bold pl-4"
+            className="w-full border-2 border-accent-6 rounded-lg text-accent-6 font-bold pl-4"
           />
         </div>
       ))}

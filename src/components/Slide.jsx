@@ -70,7 +70,7 @@ const Slide = () => {
             <h1 className=" font-Lato-Black pb-1">
               SLIDE {currentDataNumber}/{totalDataNumber}
             </h1>
-            <hr className="border-accent-5 border-1 w-[100%] mx-auto"/>
+            <hr className="border-accent-5 border-1 w-[100%] mx-auto" />
           </div>
           <div className="flex flex-col  mt-[20px]">
             {items.map((item, index) => {
@@ -88,17 +88,17 @@ const Slide = () => {
                 >
                   <span
                     className={`${
-                      index === activeIndex && "text-orange-500 font-bold"
+                      index === activeIndex && "text-accent-6 font-bold"
                     }`}
                   >
                     {item.title}
                   </span>
                   {unlocked ? (
-                    <span className="material-symbols-outlined text-orange-500 pl-4 text-xl">
+                    <span className="material-symbols-outlined text-accent-6 pl-4 text-xl">
                       check_circle
                     </span>
                   ) : (
-                    <span className="material-symbols-outlined text-orange-500 pl-4 text-lg">
+                    <span className="material-symbols-outlined text-accent-6 pl-4 text-lg">
                       radio_button_unchecked
                     </span>
                   )}
@@ -121,11 +121,17 @@ const Slide = () => {
         {/* slides */}
         <div className="md:w-[70%] justify-start items-center mx-auto h-[80%]  bg-chapter-img-1 bg-no-repeat bg-cover bg-center rounded-lg ">
           <div className="flex flex-col w-[100%]">
-          <div className="w-[90%] pt-4 pb-2 flex justify-between mx-auto items-center">
-              <h1 className="text-[#fff] text-sm font-Lato-Black">EZRA seminary</h1>
-              <img src="../../src/assets/close-icon.svg" className="w-[3%] z-40 cursor-pointer" alt="" />
+            <div className="w-[90%] pt-4 pb-2 flex justify-between mx-auto items-center">
+              <h1 className="text-[#fff] text-sm font-Lato-Black">
+                EZRA seminary
+              </h1>
+              <img
+                src="../../src/assets/close-icon.svg"
+                className="w-[3%] z-40 cursor-pointer"
+                alt=""
+              />
             </div>
-            <hr className="border-accent-5 border-1 w-[90%] mx-auto"/>
+            <hr className="border-accent-5 border-1 w-[90%] mx-auto" />
             <SlideItems item={items[activeIndex]} />
             <button
               className={`text-white text-center font-nokia-bold mt-2 py-2 px-4 bg-accent-6 hover:bg-accent-7 w-[20%] rounded-3xl mx-auto text-2xl  ${

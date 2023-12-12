@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import { CaretCircleLeft } from "@phosphor-icons/react";
 
 function SlidesDisplay() {
   const [data, setData] = useState([]);
@@ -78,11 +79,11 @@ function SlidesDisplay() {
                   >
                     <span>{slides.slide}</span>
                     {unlocked ? (
-                      <span className="material-symbols-outlined text-orange-500 pl-4 text-xl">
+                      <span className="material-symbols-outlined text-accent-6 pl-4 text-xl">
                         check_circle
                       </span>
                     ) : (
-                      <span className="material-symbols-outlined text-orange-500 pl-4 text-lg">
+                      <span className="material-symbols-outlined text-accent-6 pl-4 text-lg">
                         radio_button_unchecked
                       </span>
                     )}
@@ -95,9 +96,10 @@ function SlidesDisplay() {
                 <button className="text-white font-nokia-bold bg-accent-6 hover:bg-accent-7 rounded-xl py-1 px-4">
                   ዘግተህ ውጣ
                 </button>
-                <button className="text-white font-bold text-3xl bg-accent-6 hover:bg-accent-7 rounded-[50%] w-[15%] mx-auto">
+                {/* <button className="text-white font-bold text-3xl bg-accent-6 hover:bg-accent-7 rounded-[50%] w-[15%] mx-auto">
                   <span className="material-symbols-outlined ">arrow_left</span>
-                </button>
+                </button> */}
+                <CaretCircleLeft className="text-2xl bg-accent-6 rounded-full text-primary-1 mr-2" />
               </div>
             </Link>
           </div>
