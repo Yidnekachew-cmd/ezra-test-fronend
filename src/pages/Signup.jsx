@@ -15,7 +15,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex w-[90%] md:w-[70%] rounded-xl border-2 border-accent-6 mx-auto my-20">
+    <div className="flex w-[95%] md:w-[70%] rounded-xl border-2 border-accent-6 mx-auto my-20">
       <div
         className="md:flex flex-col bg-coming-soon bg-cover hidden lg:w-[40%] font-nokia-bold p-7 justify-between text-white rounded-xl gap-64"
         style={{ backgroundPositionX: "-80px" }}
@@ -110,7 +110,7 @@ const Signup = () => {
             </label>
           </div>
         </div>
-        <div className="w-[100%] mt-4 flex gap-2">
+        <div className="w-[100%] mt-4 flex flex-col sm:flex sm:flex-row gap-2">
           <button
             disabled={isLoading}
             className="md:w-[30%] lg:w-[50%] bg-accent-6 text-white px-16 py-1 rounded-sm hover:bg-accent-7 hover:cursor-pointer transition-all"
