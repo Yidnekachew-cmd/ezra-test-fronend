@@ -1,17 +1,24 @@
 import PropTypes from "prop-types";
 
 const ChapterList = ({ courses, setSelectedChapter, selectedChapter }) => {
+  const handleChapterChange = (e) => {
+    setSelectedChapter(e.target.value);
+  };
+
   return (
     <div className="col-span-1">
-      {Object.keys(courses).map((chapter, index) => (
-        <button
-          className={`block text-left px-4 py-1 rounded-md ${selectedChapter === chapter ? 'bg-blue-100 ' : ''}`}
-          onClick={() => setSelectedChapter(chapter)}
-          key={index}
-        > 
-          {chapter}
-        </button>
-      ))}
+      <select
+        className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+        value={selectedChapter}
+        onChange={handleChapterChange}
+      >
+        <option value="">Select Chapter</option>
+        {Object.keys(courses).map((chapter, index) => (
+          <option value={chapter} key={index}>
+            {chapter}
+          </option>
+        ))}
+      </select>
     </div>
   );
 };
@@ -23,4 +30,3 @@ ChapterList.propTypes = {
 };
 
 export default ChapterList;
-

@@ -59,6 +59,7 @@ function App() {
             element={<SlidesDisplay />}
           />
           <Route path="/courses/create/chapters" element={<AdminChapter />} />
+          <Route path="/courses/create/add" element={<AddCourse />} />
           <Route path="*" element={<NotMatch />} />
         </Routes>
         <Footer />

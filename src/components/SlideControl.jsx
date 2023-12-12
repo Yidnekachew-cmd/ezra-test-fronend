@@ -1,22 +1,47 @@
-// import axios from "axios";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { Trash } from "@phosphor-icons/react";
+// import {
+//   addElementToSlide,
+//   removeSlideElement,
+//   updateSlideElement,
+//   updateSlideImage,
+// } from "../redux/courseSlice";
 
-const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputChange, handleImageChange, selectedType, setSelectedType, handleRemoveSlide, handleAddElement}) => {
+const SlideControl = () => {
+  const dispatch = useDispatch();
+  const slides = useSelector((state) => state.course.chapters); // Assuming slides are stored in the chapters array in the store
+  const selectedChapter = useSelector((state) => state.course.selectedChapter);
+  const selectedType = useSelector((state) => state.course.selectedType);
 
-    const handleAddSlide = () => {
-        const newSlide = [];
-        setSlides([...slides, newSlide]);
+  const handleAddElement = (slideIndex) => {
+    if (!selectedType || !selectedChapter) return;
+
+    const newElement = {
+      type: selectedType,
+      id: `${selectedType}-${slideIndex + 1}-${slides[slideIndex].elements.length + 1}`,
+      value: "",
     };
-    
- 
-    
-    const handleRemoveElement = (slideIndex, elementId) => {
-        const updatedSlide = slides[slideIndex].filter((el) => el.id !== elementId);
-        const updatedSlides = [...slides];
-        updatedSlides[slideIndex] = updatedSlide;
-        setSlides(updatedSlides);
-    };
-    
+
+    // dispatch(addElementToSlide({ chapterIndex: selectedChapter, slideIndex, element: newElement }));
+  };
+
+  const handleInputChange = (slideIndex, elementId, value) => {
+    // dispatch(updateSlideElement({ slideIndex, elementId, value }));
+  };
+
+  const handleRemoveElement = (slideIndex, elementId) => {
+    // dispatch(removeSlideElement({ slideIndex, elementId }));
+  };
+
+  const handleImageChange = (slideIndex, elementId, e) => {
+    const file = e.target.files[0];
+    if (!file || !selectedChapter) return;
+
+    const imageUrl = URL.createObjectURL(file);
+
+    // dispatch(updateSlideImage({ slideIndex, elementId, imageUrl }));
+  };
   
     const handleSubmit = (event) => {
       event.preventDefault();
@@ -55,17 +80,16 @@ const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputC
     };
 
     return (
-      <div className="col-span-2 bg-white shadow-lg rounded-lg p-6 pt-8">
+      <div className=" shadow-lg rounded-lg p-6 pt-8">
         {slides.map((slide, slideIndex) => (
           <div key={slideIndex} className="border-t border-gray-200 pt-4">
             <div className="flex items-center mb-4">
               <h3 className="text-lg font-semibold flex-grow">Slide {slideIndex + 1}</h3>
-              <button
+              <Trash
                 onClick={() => handleRemoveSlide(slideIndex)}
-                className="shadow-md bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md"
+                className="w-8 h-8 p-1 bg-accent-6 hover:bg-red-60 rounded-md text-white hover:bg-accent-8"
               >
-                Remove Slide
-              </button>
+              </Trash>
             </div>
             {slide.map((element) => (
               <div key={element.id} className="flex items-center justify-between mb-3">
@@ -84,12 +108,12 @@ const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputC
                     className="shadow-sm border-gray-300 rounded px-2 py-1"
                   />
                 )}
-                <button
+                <Trash
                   onClick={() => handleRemoveElement(slideIndex, element.id)}
-                  className="shadow-md bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md"
-                >
+                  className="w-8 h-8 p-1 bg-accent-6 hover:bg-red-60 rounded-md text-white hover:bg-accent-8"
+                  >
                   Remove
-                </button>
+                </Trash>
               </div>
             ))}
             <div className="flex items-center space-x-4">
@@ -98,7 +122,7 @@ const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputC
                 className="shadow-sm border-gray-300 rounded px-2 py-1"
                 value={selectedType}
               >
-                <option value="">Select Type</option>
+                <option value="">Type</option>
                 <option value="title">Title</option>
                 <option value="sub">Sub</option>
                 <option value="img">Image</option>
@@ -114,7 +138,7 @@ const SlideControl = ({slides, setSlides, courses, selectedChapter, handleInputC
         ))}
         <div className="flex justify-between mt-5">
           <button onClick={handleAddSlide} className="shadow-md bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
-            Add Slide
+            Add
           </button>
           <button onClick={handleSubmit} className="shadow-md bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
             Submit
