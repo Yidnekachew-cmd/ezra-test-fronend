@@ -58,7 +58,7 @@ function CreateCourse() {
             type="submit"
             className="px-4 py-2 font-semibold text-white bg-orange-500 rounded-md hover:bg-orange-600"
           >
-            <Link to="/courses/create/add">Create</Link>
+            <Link to="/courses/create/chapters">Create</Link>
           </button>
         </div>
       </form>

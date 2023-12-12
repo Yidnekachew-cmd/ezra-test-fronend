@@ -1,40 +1,45 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { addElementToSlide } from "../../redux/courseSlice";
+import {
+  addElementToSlide,
+  updateElement,
+  // selectElements,
+} from "../../redux/courseSlice";
 
-function ElementsAdd() {
+function ElementsAdd({ chapterIndex, slideIndex }) {
   const dispatch = useDispatch();
-  const elements = useSelector((state) => {
-    const chapter = state.course.chapters[currentChapterIndex];
-    return chapter ? chapter.slides[currentSlideIndex].elements : [];
-  });
+
+  const chapters = useSelector((state) => state.course.chapters);
+  const elements = chapters[chapterIndex]?.slides[slideIndex]?.elements || [];
 
   const [currentElement, setCurrentElement] = useState("");
-  const [currentChapterIndex, setCurrentChapterIndex] = useState(0);
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   const handleDropdownChange = (e) => {
     setCurrentElement(e.target.value);
   };
 
   const handleAddButtonClick = () => {
-    console.log(elements);
     if (currentElement) {
-      setElements([
-        ...elements,
-        {
-          type: currentElement,
-          id: `${currentElement}${elements.length + 1}`,
-          value: "",
-        },
-      ]);
-      setCurrentElement(""); // Reset dropdown if needed
+      dispatch(
+        addElementToSlide({
+          chapterIndex,
+          slideIndex,
+          elementType: currentElement,
+        })
+      );
+      setCurrentElement(""); // Reset the dropdown selection
     }
   };
 
   const handleInputChange = (id, value) => {
-    setElements(
-      elements.map((el) => (el.id === id ? { ...el, value: value } : el))
+    dispatch(
+      updateElement({
+        chapterIndex,
+        slideIndex,
+        elementId: id,
+        value: value,
+      })
     );
   };
 
@@ -66,6 +71,7 @@ function ElementsAdd() {
         <div key={index} className="py-2">
           <div className="flex justify-between items-center pb-2">
             <label className="text-orange-500 font-bold">{element.type}</label>
+            {/* Removal button needs to be implemented */}
             <button className="flex items-center text-orange-400 hover:text-orange-500">
               <span className="material-symbols-outlined">delete</span>
             </button>
@@ -75,12 +81,17 @@ function ElementsAdd() {
             placeholder={`Enter ${element.type}`}
             value={element.value}
             onChange={(e) => handleInputChange(element.id, e.target.value)}
-            className="w-full border-2 border-orange-500 rounded-lg text-orange-500 font-bold pl-4"
+            className="w-24 border-2 border-orange-500 rounded-lg text-orange-500 font-bold p-1"
           />
         </div>
       ))}
     </div>
   );
 }
+
+ElementsAdd.propTypes = {
+  chapterIndex: PropTypes.number.isRequired,
+  slideIndex: PropTypes.number.isRequired,
+};
 
 export default ElementsAdd;

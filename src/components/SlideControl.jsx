@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { Trash } from "@phosphor-icons/react";
-import {
-  addElementToSlide,
-  removeSlideElement,
-  updateSlideElement,
-  updateSlideImage,
-} from "../redux/courseSlice";
+// import {
+//   addElementToSlide,
+//   removeSlideElement,
+//   updateSlideElement,
+//   updateSlideImage,
+// } from "../redux/courseSlice";
 
 const SlideControl = () => {
   const dispatch = useDispatch();
@@ -23,15 +23,15 @@ const SlideControl = () => {
       value: "",
     };
 
-    dispatch(addElementToSlide({ chapterIndex: selectedChapter, slideIndex, element: newElement }));
+    // dispatch(addElementToSlide({ chapterIndex: selectedChapter, slideIndex, element: newElement }));
   };
 
   const handleInputChange = (slideIndex, elementId, value) => {
-    dispatch(updateSlideElement({ slideIndex, elementId, value }));
+    // dispatch(updateSlideElement({ slideIndex, elementId, value }));
   };
 
   const handleRemoveElement = (slideIndex, elementId) => {
-    dispatch(removeSlideElement({ slideIndex, elementId }));
+    // dispatch(removeSlideElement({ slideIndex, elementId }));
   };
 
   const handleImageChange = (slideIndex, elementId, e) => {
@@ -40,7 +40,7 @@ const SlideControl = () => {
 
     const imageUrl = URL.createObjectURL(file);
 
-    dispatch(updateSlideImage({ slideIndex, elementId, imageUrl }));
+    // dispatch(updateSlideImage({ slideIndex, elementId, imageUrl }));
   };
   
     const handleSubmit = (event) => {

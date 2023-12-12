@@ -7,7 +7,7 @@ import SlideView from './SlideView';
 import ChapterForm from './ChapterForm';
 import ChapterList from './ChapterList';
 import SlideList from "./SlideList";
-import { addChapter, addElementToSlide, removeSlide,updateSlideElement,removeSlideElement,updateSlideImage } from "../redux/courseSlice";
+// import { addChapter, addElementToSlide, removeSlide,updateSlideElement,removeSlideElement,updateSlideImage } from "../redux/courseSlice";
 
 
 function SlideShow() {
@@ -39,15 +39,15 @@ const handleAddElement = (slideIndex) => {
       value: '',
     };
 
-    dispatch(addElementToSlide({ chapterIndex: selectedChapter, slideIndex, element: newElement }));
+    // dispatch(addElementToSlide({ chapterIndex: selectedChapter, slideIndex, element: newElement }));
   };
 
   const handleInputChange = (slideIndex, elementId, value) => {
-    dispatch(updateSlideElement({ slideIndex, elementId, value }));
+    // dispatch(updateSlideElement({ slideIndex, elementId, value }));
   };
 
   const handleRemoveElement = (slideIndex, elementId) => {
-    dispatch(removeSlideElement({ slideIndex, elementId }));
+    // dispatch(removeSlideElement({ slideIndex, elementId }));
   };
 
   const handleImageChange = (slideIndex, elementId, e) => {
@@ -56,10 +56,10 @@ const handleAddElement = (slideIndex) => {
 
     const imageUrl = URL.createObjectURL(file);
 
-    dispatch(updateSlideImage({ slideIndex, elementId, imageUrl }));
+    // dispatch(updateSlideImage({ slideIndex, elementId, imageUrl }));
   };
   const handleRemoveSlide = (index) => {
-    dispatch(removeSlide(index));
+    // dispatch(removeSlide(index));
   };
 
   const { title, description, image, chapters } = useSelector(

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-// import axios from "axios";
+import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import useAxiosInstance from "../../api/axiosInstance";
 
 function SlidesDisplay() {
   const [data, setData] = useState([]);
@@ -9,11 +8,10 @@ function SlidesDisplay() {
   const [unlockedIndex, setUnlockedIndex] = useState(0); // New state variable to track the unlocked index
 
   const { courseId, chapterId } = useParams(); // Note the two separate parameters
-  const instance = useAxiosInstance();
 
   //get all courses
   useEffect(() => {
-    instance
+    axios
       .get(`/course/get/${courseId}`) // Assuming you will change the endpoint as needed
       .then((res) => {
         // Now we need to find the specific chapter within the course
@@ -138,7 +136,7 @@ function SlidesDisplay() {
                           <img
                             key={element._id}
                             // src={`https://ezra-seminary-api.onrender.com/images/${element.value}`}
-                            src={`http://localhost:5100/images/${element.value}`}
+                            src={`http://localhost:5000/images/${element.value}`}
                             alt={element.id}
                             className="w-[15%]"
                           />
