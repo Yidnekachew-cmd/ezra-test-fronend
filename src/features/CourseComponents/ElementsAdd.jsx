@@ -81,7 +81,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
             placeholder={`Enter ${element.type}`}
             value={element.value}
             onChange={(e) => handleInputChange(element.id, e.target.value)}
-            className="w-24 border-2 border-orange-500 rounded-lg text-orange-500 font-bold p-1"
+            className="w-full border-2 border-orange-500 rounded-lg text-orange-500 font-bold pl-4"
           />
         </div>
       ))}

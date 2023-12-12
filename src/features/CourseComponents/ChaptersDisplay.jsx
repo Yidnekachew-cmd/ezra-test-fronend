@@ -52,13 +52,12 @@ function ChaptersDisplay() {
               <h1 className=" font-Lato-Black pb-1">
                 CHAPTER {currentDataNumber}/{totalDataNumber}
               </h1>
-              <hr className="border-accent-5 border-1 w-[100%] mx-auto"/>
+              <hr className="border-accent-5 border-1 w-[100%] mx-auto" />
             </div>
             <div className="flex flex-col  mt-[20px]">
               {data.map((chapter, index) => {
                 const unlocked = isSlideUnlocked(index);
                 return (
-                  
                   <button
                     key={index}
                     className={`flex justify-between items-center text-sm font-nokia-bold border-b-2 border-accent-5 px-4 text-secondary-6 cursor-pointer py-2 ${
@@ -71,11 +70,11 @@ function ChaptersDisplay() {
                   >
                     <span>{chapter.chapter}</span>
                     {unlocked ? (
-                      <span className="material-symbols-outlined text-orange-500 pl-4 text-xl">
+                      <span className="material-symbols-outlined text-accent-6 pl-4 text-xl">
                         check_circle
                       </span>
                     ) : (
-                      <span className="material-symbols-outlined text-orange-500 pl-4 text-lg">
+                      <span className="material-symbols-outlined text-accent-6 pl-4 text-lg">
                         radio_button_unchecked
                       </span>
                     )}
@@ -87,18 +86,26 @@ function ChaptersDisplay() {
         </div>
         {/* slides */}
         <div className=" md:w-[70%] justify-start items-center mx-auto h-[80%]  bg-chapter-img-1 bg-no-repeat bg-cover bg-center rounded-lg ">
-          <div className="flex flex-col w-[100%] ">
-            <div className="w-[90%] pt-4 pb-2 flex justify-between mx-auto items-center">
-              <h1 className="text-[#fff] text-sm font-Lato-Black">EZRA seminary</h1>
-              <img src="../../src/assets/close-icon.svg" className="w-[3%] z-40 cursor-pointer" alt="" />
+          <div className="flex flex-col justify-between h-full">
+            <div>
+              <div className="w-[90%] pt-4 pb-2 flex justify-between mx-auto items-center">
+                <h1 className="text-[#fff] text-sm font-Lato-Black">
+                  EZRA seminary
+                </h1>
+                <img
+                  src="../../src/assets/close-icon.svg"
+                  className="w-[3%] z-40 cursor-pointer"
+                  alt=""
+                />
+              </div>
+              <hr className="border-accent-5 border-1 w-[90%] mx-auto" />
             </div>
-            <hr className="border-accent-5 border-1 w-[90%] mx-auto"/>
             {data.map((chapter, index) => {
               if (index === activeIndex) {
                 return (
                   <div
                     key={index}
-                    className="flex flex-col justify-center py-52 "
+                    className="flex flex-col justify-center py-52 flex-grow"
                   >
                     <h1 className="text-3xl text-[#fff] text-center font-nokia-bold">
                       {chapter.chapter}
@@ -110,14 +117,15 @@ function ChaptersDisplay() {
                         ትምህርቱን ጀምር
                       </Link>
                     </button>
-                  
                   </div>
                 );
               } else {
                 return null; // Hide the chapter if it doesn't match the activeIndex
               }
             })}
-            <hr className="border-accent-5 border-1 w-[90%] mx-auto z-50 "/>
+            <div>
+              <hr className="border-accent-5 border-1 w-[90%] mx-auto mb-8" />
+            </div>
           </div>
         </div>
       </div>

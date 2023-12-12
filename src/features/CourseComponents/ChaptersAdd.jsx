@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ElementsAdd from "./ElementsAdd";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,6 +18,9 @@ function ChaptersAdd() {
   // const slides = useSelector((state) => selectSlides(state, chapterIndex));
   const allSlides = useSelector(selectAllSlides);
 
+  // State to track the currently editing slide
+  const [editingSlideIndex, setEditingSlideIndex] = useState(null);
+
   const addChapterHandler = () => {
     dispatch(addChapter());
   };
@@ -27,6 +31,10 @@ function ChaptersAdd() {
 
   const addSlideHandler = (chapterIndex) => {
     dispatch(addSlide({ chapterIndex }));
+    setEditingSlideIndex({
+      chapter: chapterIndex,
+      slide: chapters[chapterIndex].slides.length,
+    });
   };
 
   const updateSlideHandler = (chapterIndex, slideIndex, value) => {
@@ -77,11 +85,23 @@ function ChaptersAdd() {
                           e.target.value
                         )
                       }
+                      onClick={() =>
+                        setEditingSlideIndex({
+                          chapter: chapterIndex,
+                          slide: slideIndex,
+                        })
+                      }
                     />
-                    <ElementsAdd
-                      chapterIndex={chapterIndex}
-                      slideIndex={slideIndex}
-                    />
+
+                    {/* check whether the editingSlideIndex matches the current slide being rendered. */}
+                    {editingSlideIndex &&
+                      editingSlideIndex.chapter === chapterIndex &&
+                      editingSlideIndex.slide === slideIndex && (
+                        <ElementsAdd
+                          chapterIndex={chapterIndex}
+                          slideIndex={slideIndex}
+                        />
+                      )}
                   </div>
                 ))}
                 <button
