@@ -93,13 +93,10 @@ function SlidesDisplay() {
             </div>
             <Link to={`/courses/get/${courseId}`}>
               <div className="flex justify-between items-center w-[100%] mx-auto mt-12">
-                <button className="text-white font-nokia-bold bg-accent-6 hover:bg-accent-7 rounded-xl py-1 px-4">
+                <button className="text-white font-nokia-bold bg-accent-6 hover:bg-accent-7 rounded-xl py-1 px-4 transition-all">
                   ዘግተህ ውጣ
                 </button>
-                {/* <button className="text-white font-bold text-3xl bg-accent-6 hover:bg-accent-7 rounded-[50%] w-[15%] mx-auto">
-                  <span className="material-symbols-outlined ">arrow_left</span>
-                </button> */}
-                <CaretCircleLeft className="text-2xl bg-accent-6 rounded-full text-primary-1 mr-2" />
+                <CaretCircleLeft className="text-2xl bg-accent-6 rounded-full text-primary-1 mr-2 hover:bg-accent-7 transition-all" />
               </div>
             </Link>
           </div>
@@ -175,7 +172,7 @@ function SlidesDisplay() {
             <div className="mb-4">
               <hr className="border-accent-5  border-1 w-[90%] mx-auto z-50 " />
               <button
-                className={`text-white text-center font-nokia-bold mt-2 py-1 px-2 bg-accent-6 hover:bg-accent-7 w-[15%] rounded-3xl mx-auto text-2xl  ${
+                className={`text-white text-center font-nokia-bold mt-2 py-1 px-2 bg-accent-6 hover:bg-accent-7 w-[15%] rounded-3xl mx-auto text-2xl transition-all ${
                   activeIndex === data.length - 1 ? "hidden" : "block"
                 }`} // hidding the next button for the last slide
                 onClick={() => {
