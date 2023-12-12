@@ -10,7 +10,6 @@ const DevotionDisplay = ({
   setSelectedDevotion,
   selectedDevotion,
 }) => {
-
   // If no devotion is selected, display the latest one
   const devotionToDisplay = selectedDevotion || devotions[0];
 
@@ -19,23 +18,21 @@ const DevotionDisplay = ({
     (devotion) => devotion._id !== devotionToDisplay._id
   );
 
-return (
+  return (
     <div className="w-[100%] h-auto font-nokia-bold  flex flex-col mx-auto container space-y-12 mb-12">
-      <CurrentDevotional 
-      devotionToDisplay={devotionToDisplay} 
-      handleDelete={handleDelete} 
-      startEditing={startEditing} 
+      <CurrentDevotional
+        devotionToDisplay={devotionToDisplay}
+        handleDelete={handleDelete}
+        startEditing={startEditing}
       />
-      <PreviousDevotionals 
-      previousDevotions={previousDevotions} 
-      handleDelete={handleDelete} 
-      setSelectedDevotion={setSelectedDevotion}
+      <PreviousDevotionals
+        previousDevotions={previousDevotions}
+        handleDelete={handleDelete}
+        setSelectedDevotion={setSelectedDevotion}
       />
-      <Categories 
-      title="Lessons Available"
-      />
+      <Categories title="Lessons Available" />
     </div>
-);
+  );
 };
 
 DevotionDisplay.propTypes = {
