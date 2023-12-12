@@ -86,24 +86,26 @@ function ChaptersDisplay() {
         </div>
         {/* slides */}
         <div className=" md:w-[70%] justify-start items-center mx-auto h-[80%]  bg-chapter-img-1 bg-no-repeat bg-cover bg-center rounded-lg ">
-          <div className="flex flex-col w-[100%] ">
-            <div className="w-[90%] pt-4 pb-2 flex justify-between mx-auto items-center">
-              <h1 className="text-[#fff] text-sm font-Lato-Black">
-                EZRA seminary
-              </h1>
-              <img
-                src="../../src/assets/close-icon.svg"
-                className="w-[3%] z-40 cursor-pointer"
-                alt=""
-              />
+          <div className="flex flex-col justify-between h-full">
+            <div>
+              <div className="w-[90%] pt-4 pb-2 flex justify-between mx-auto items-center">
+                <h1 className="text-[#fff] text-sm font-Lato-Black">
+                  EZRA seminary
+                </h1>
+                <img
+                  src="../../src/assets/close-icon.svg"
+                  className="w-[3%] z-40 cursor-pointer"
+                  alt=""
+                />
+              </div>
+              <hr className="border-accent-5 border-1 w-[90%] mx-auto" />
             </div>
-            <hr className="border-accent-5 border-1 w-[90%] mx-auto" />
             {data.map((chapter, index) => {
               if (index === activeIndex) {
                 return (
                   <div
                     key={index}
-                    className="flex flex-col justify-center py-52 "
+                    className="flex flex-col justify-center py-52 flex-grow"
                   >
                     <h1 className="text-3xl text-[#fff] text-center font-nokia-bold">
                       {chapter.chapter}
@@ -121,7 +123,9 @@ function ChaptersDisplay() {
                 return null; // Hide the chapter if it doesn't match the activeIndex
               }
             })}
-            <hr className="border-accent-5 border-1 w-[90%] mx-auto z-50 " />
+            <div>
+              <hr className="border-accent-5 border-1 w-[90%] mx-auto mb-8" />
+            </div>
           </div>
         </div>
       </div>
