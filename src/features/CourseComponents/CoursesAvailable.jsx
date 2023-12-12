@@ -51,6 +51,7 @@ function CoursesAvailable() {
           </div>
         </div>
         <hr className="border-accent-5 border-1 w-[100%] pb-3 md:w-[30%]" />
+
         <div className="flex flex-col justify-center items-center md:justify-start md:items-start w-[90%] mx-auto md:w-[95%] md:flex-row md:flex-wrap space-y-6 md:space-y-0 md:gap-3">
           {data.map((course, index) => {
             return (

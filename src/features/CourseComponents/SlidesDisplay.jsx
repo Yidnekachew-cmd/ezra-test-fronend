@@ -50,65 +50,74 @@ function SlidesDisplay() {
   };
 
   return (
-    <div className="flex justify-center flex-col data-center h-screen">
-      <div className="flex w-full">
-        <div className="flex flex-col justify-evenly ml-6 bg-white p-4 rounded-lg">
+    <div className="flex justify-center items-center w-[80%] mx-auto">
+      <div className="flex w-[100%] justify-center items-center h-screen ">
+        <div className="flex flex-col justify-start items-center md:w-[30%] h-[80%] shadow-2xl  rounded-lg border-2 border-accent-5 ">
           {/* slide number */}
-          <div className="mt-4 border-b-4 border-orange-500 font-bold">
-            SLIDE {currentDataNumber}/{totalDataNumber}
-          </div>
-          <div className="flex flex-col justify-around data-center mt-[20px]">
-            {data.map((slides, index) => {
-              const unlocked = isSlideUnlocked(index);
-              return (
-                <button
-                  key={index}
-                  className={`flex data-center border-b-2 border-orange-300 cursor-pointer py-2 ${
-                    unlocked ? "text-black" : "text-gray-500"
-                  }  ${index === activeIndex && "font-bold bg-[#FAE5C7]"}
-                  `} // Locked slide to gray
-                  onClick={() => {
-                    updateIndex(index);
-                  }}
-                  disabled={!unlocked} // Disable the button if the slide is locked
-                >
-                  <span>{slides.slide}</span>
-                  {unlocked ? (
-                    <span className="material-symbols-outlined text-orange-500 pl-4 text-xl">
-                      check_circle
-                    </span>
-                  ) : (
-                    <span className="material-symbols-outlined text-orange-500 pl-4 text-lg">
-                      radio_button_unchecked
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-          <Link to={`/courses/get/${courseId}`}>
-            <div className="flex justify-between">
-              <button className="text-white font-bold bg-orange-400 hover:bg-orange-500 rounded-xl px-2">
-                ዘግተህ ውጣ
-              </button>
-              <button className="text-white font-bold text-3xl bg-orange-400 hover:bg-orange-500 rounded-[50%] w-[25%] mx-auto">
-                <span className="material-symbols-outlined t">arrow_left</span>
-              </button>
+          <div className="w-[90%] mx-auto ">
+            <div className="flex flex-col mt-6 border-accent-5 border-1">
+              <h1 className=" font-Lato-Black pb-1">
+                SLIDE {currentDataNumber}/{totalDataNumber}
+              </h1>
+            <hr className="border-accent-5 border-1 w-[100%] mx-auto"/>
             </div>
-          </Link>
+            <div className="flex flex-col  mt-[20px]">
+              {data.map((slides, index) => {
+                const unlocked = isSlideUnlocked(index);
+                return (
+                  <button
+                    key={index}
+                    className={`flex justify-between items-center text-sm font-nokia-bold border-b-2 border-accent-5 px-4 text-secondary-6 cursor-pointer py-2 ${
+                      unlocked ? "text-black" : "text-gray-500"
+                    }  ${index === activeIndex && "font-bold bg-[#FAE5C7]"}
+                    `} // Locked slide to gray
+                    onClick={() => {
+                      updateIndex(index);
+                    }}
+                    disabled={!unlocked} // Disable the button if the slide is locked
+                  >
+                    <span>{slides.slide}</span>
+                    {unlocked ? (
+                      <span className="material-symbols-outlined text-orange-500 pl-4 text-xl">
+                        check_circle
+                      </span>
+                    ) : (
+                      <span className="material-symbols-outlined text-orange-500 pl-4 text-lg">
+                        radio_button_unchecked
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+            <Link to={`/courses/get/${courseId}`}>
+              <div className="flex justify-between items-center w-[100%] mx-auto mt-12">
+                <button className="text-white font-nokia-bold bg-accent-6 hover:bg-accent-7 rounded-xl py-1 px-4">
+                  ዘግተህ ውጣ
+                </button>
+                <button className="text-white font-bold text-3xl bg-accent-6 hover:bg-accent-7 rounded-[50%] w-[15%] mx-auto">
+                  <span className="material-symbols-outlined ">arrow_left</span>
+                </button>
+              </div>
+            </Link>
+          </div>
         </div>
         {/* slides */}
-        <div className="overflow-hidden w-[70%] justify-center data-center mx-auto bg-[#955B09BA] rounded-lg">
-          <div className="flex flex-col transition-transform duration-300 shadow-md">
-            <h1 className="text-white font-bold p-2">EZRA seminary</h1>
+        <div className=" md:w-[70%] justify-start items-center mx-auto h-[80%]  bg-chapter-img-1 bg-no-repeat bg-cover bg-center rounded-lg">
+          <div className="flex flex-col w-[100%] ">
+            <div className="w-[90%] pt-4 pb-2 flex justify-between mx-auto items-center">
+              <h1 className="text-[#fff] text-sm font-Lato-Black">EZRA seminary</h1>
+              <img src="/src/assets/close-icon.svg" className="w-[3%] z-40 cursor-pointer" alt="" />
+            </div>
+            <hr className="border-accent-5 border-1 w-[90%] mx-auto"/>
             {data.map((slides, index) => {
               if (index === activeIndex) {
                 return (
                   <div
                     key={index}
-                    className="inline-flex flex-col justify-center h-[490px] border-y-2 border-orange-300"
+                    className="flex flex-col justify-center py-36"
                   >
-                    <h1 className="text-3xl font-bold mt-[10px] mb-[10px] px-[20px] whitespace-normal text-white text-center">
+                    <h1 className="text-3xl text-[#fff] text-center font-nokia-bold">
                       {slides.slide}
                     </h1>
                     {slides.elements.map((element) => {
@@ -117,19 +126,19 @@ function SlidesDisplay() {
                         return (
                           <li
                             key={element._id}
-                            className="text-white text-2xl font-bold pl-20"
+                            className="text-white text-2xl font-nokia-bold pl-20"
                           >
                             {element.value}
                           </li>
                         );
                       } else if (element.type === "sub") {
                         return (
-                          <h2
+                          <p
                             key={element._id}
-                            className="text-white font-bold pl-20"
+                            className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-justify text-sm"
                           >
                             {element.value}
-                          </h2>
+                          </p>
                         );
                       } else if (element.type === "img") {
                         return (
@@ -151,8 +160,9 @@ function SlidesDisplay() {
                 return null; // Hide the slide if it doesn't match the activeIndex
               }
             })}
+            <hr className="border-accent-5  border-1 w-[90%] mx-auto z-50 "/>
             <button
-              className={`text-white font-bold my-2 bg-orange-400 hover:bg-orange-500 w-[10%] rounded-xl mx-auto ${
+              className={`text-white text-center font-nokia-bold mt-2 py-1 px-2 bg-accent-6 hover:bg-accent-7 w-[15%] rounded-3xl mx-auto text-2xl  ${
                 activeIndex === data.length - 1 ? "hidden" : "block"
               }`} // hidding the next button for the last slide
               onClick={() => {
