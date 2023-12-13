@@ -1,0 +1,73 @@
+import PropTypes from "prop-types";
+
+  
+  const PreviousDevotionals = ({ previousDevotions, setSelectedDevotion }) => {
+return (
+    <div className="flex flex-col h-screen space-y-6 w-[100%] mx-auto ">
+        <div className="w-[100%] flex justify-between items-center">
+            <div className="w-[100%]">
+                <h3 className="text-sm font-Lato-black text-accent-6">
+                    Explore Devotionals
+                </h3>
+                <h2 className="text-2xl font-Lato-black text-secondary-6 mb-2">
+                    Devotionals of Previous Days
+                </h2>
+                <hr className=" border-1 border-accent-6 w-[40%]" />
+            </div>
+            <div className="self-end w-[15%]">
+                <button type="button" className="border-2 w-[70%] border-accent-6 rounded-full  px-2 text-accent-6 text-xs">
+                    ሙሉ ተመልከት
+                </button>
+            </div>
+        </div>
+        <div className="flex flex-wrap gap-3 w-[100%] mx-auto  ">
+        {previousDevotions.map((devotion) => (
+            <div key={devotion._id} className="w-[24%] ">
+            <div className="rounded-lg shadow-xl  h-auto border-2 bg-[#fff] border-accent-6 text-secondary-6">
+                <img
+                src={`http://localhost:5100/images/${devotion.image}`}
+                alt="Devotion Image"
+                className="h-auto w-[100%] mx-auto mt-4 cursor-pointer"
+                onClick={() => {
+                    // open the devotion on click
+                    // console.log("clicked");
+                    setSelectedDevotion(devotion);
+                }}
+                />
+                <div className="w-[90%] mx-auto flex justify-between items-center pb-3">
+                    <div className="w-[80%]">
+                        <h1 className="font-customBold text-2xl text-justify mt-2">
+                        {devotion.title}
+                        </h1>
+                        
+                        <h2 className="font-customBold text-lg text-[#EA9215]">
+                            {/* {devotion.chapter} */}
+                            {devotion.month} {devotion.day}
+                        </h2>
+                    </div>
+                    <div className="w-[20%]">
+                        <button type="button" className="text-secondary-6 text-xs font-nokia-bold w-[100%] border-2 border-accent-6 rounded-full  px-2 hover:border-secondary-6 hover:text-accent-6" onClick={() => {
+                        // open the devotion on click
+                        // console.log("clicked");
+                                setSelectedDevotion(devotion);
+                            }} >
+                            ክፈት
+                        </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        ))}
+        </div>
+</div>
+)
+}
+
+PreviousDevotionals.propTypes = {
+    previousDevotions: PropTypes.array.isRequired,
+    setSelectedDevotion: PropTypes.func.isRequired,
+    devotions: PropTypes.array.isRequired,
+
+};
+
+export default PreviousDevotionals
