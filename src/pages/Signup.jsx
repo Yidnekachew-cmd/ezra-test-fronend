@@ -76,7 +76,7 @@ const Signup = () => {
             className="border rounded-lg border-accent-6  placeholder:text-accent-3 text-xs1 p-2 w-[50%]"
             placeholder="AbebeKebede@gmail.com"
             required
-            value={password}
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <div className="flex flex-row gap-4">
