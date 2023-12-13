@@ -7,6 +7,7 @@ import useAxiosInstance from "../api/axiosInstance";
 const Devotion = () => {
   const { token, role } = useAuthContext(); // get the authentication token
   const [devotions, setDevotions] = useState([]);
+  const [selectedDevotion, setSelectedDevotion] = useState(null);
   const [editingDevotion, setEditingDevotion] = useState(null);
   const [formSubmitCount, setFormSubmitCount] = useState(0);
   const instance = useAxiosInstance(token);
@@ -168,6 +169,8 @@ const Devotion = () => {
     <div className=" flex bg-gray-200">
       <DevotionDisplay
         devotions={devotions}
+        selectedDevotion={selectedDevotion}
+        setSelectedDevotion={setSelectedDevotion}
         handleDelete={handleDelete}
         startEditing={startEditing}
       />
