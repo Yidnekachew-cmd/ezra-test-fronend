@@ -4,14 +4,17 @@ import { GoogleLogo, FacebookLogo } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { signup, error, isLoading } = useSignup();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await signup(email, password);
+    await signup(firstName, lastName, email, password);
   };
 
   return (
@@ -51,8 +54,8 @@ const Signup = () => {
                 className="border rounded-lg border-accent-6 placeholder:text-accent-3 text-xs1 p-2 mb-2 md:w-168"
                 placeholder="Abebe"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
             <div className="flex flex-col flex-auto gap-2">
@@ -62,8 +65,8 @@ const Signup = () => {
                 className="border rounded-lg border-accent-6 placeholder:text-accent-3 text-xs1 p-2 mb-2 md:w-168"
                 placeholder="Kebede"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
           </div>
@@ -73,8 +76,8 @@ const Signup = () => {
             className="border rounded-lg border-accent-6  placeholder:text-accent-3 text-xs1 p-2 w-[50%]"
             placeholder="AbebeKebede@gmail.com"
             required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <div className="flex flex-row gap-4">
             <div className="flex flex-col flex-auto gap-2">
@@ -95,8 +98,8 @@ const Signup = () => {
                 className="border rounded-lg border-accent-6  placeholder:text-accent-3 text-xs1 p-2 "
                 placeholder="********"
                 required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
           </div>
