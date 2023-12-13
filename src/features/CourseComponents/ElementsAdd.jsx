@@ -54,11 +54,13 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
           onChange={handleDropdownChange}
           className="border-2 border-orange-500 rounded-lg"
         >
-          <option value="">Choose Type</option>
-          <option value="title">title</option>
-          <option value="sub">sub</option>
-          <option value="text">text</option>
-          <option value="img">img</option>
+          <option value="title">Title</option>
+          <option value="sub">Sub-title</option>
+          <option value="text">Paragraph</option>
+          <option value="slide">Slide</option>
+          <option value="img">Image</option>
+          <option value="quiz">Quiz</option>
+          <option value="list">List</option>
         </select>
         <button
           onClick={handleAddButtonClick}
