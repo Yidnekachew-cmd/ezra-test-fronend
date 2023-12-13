@@ -143,7 +143,7 @@ function SlidesDisplay() {
                           return (
                             <p
                               key={element._id}
-                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-justify text-sm"
+                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-center text-1xl"
                             >
                               {element.value}
                             </p>
@@ -152,7 +152,7 @@ function SlidesDisplay() {
                           return (
                             <p
                               key={element._id}
-                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-justify text-4xl"
+                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-justify text-lg"
                             >
                               {element.value}
                             </p>

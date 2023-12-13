@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addElementToSlide,
   updateElement,
-  // selectElements,
+  deleteElement,
 } from "../../redux/courseSlice";
 
 function ElementsAdd({ chapterIndex, slideIndex }) {
@@ -28,7 +28,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
           elementType: currentElement,
         })
       );
-      setCurrentElement(""); // Reset the dropdown selection
+      setCurrentElement("");
     }
   };
 
@@ -43,8 +43,18 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
     );
   };
 
+  const handleDeleteButtonClick = (elementId) => {
+    dispatch(
+      deleteElement({
+        chapterIndex,
+        slideIndex,
+        elementId,
+      })
+    );
+  };
+
   return (
-    <div className="bg-white w-[16%] p-6">
+    <div className="bg-white w-[100%] px-4">
       <p className="font-bold py-2">Insert Element</p>
       <div className="flex justify-between">
         <select
@@ -52,17 +62,20 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
           id="elements"
           value={currentElement}
           onChange={handleDropdownChange}
-          className="border-2 border-orange-500 rounded-lg"
+          className="w-[100%] border-2 border-accent-6 rounded-md mr-2 py-1"
         >
           <option value="">Choose Type</option>
-          <option value="title">title</option>
-          <option value="sub">sub</option>
-          <option value="text">text</option>
-          <option value="img">img</option>
+          <option value="title">Title</option>
+          <option value="sub">Sub-title</option>
+          <option value="text">Paragraph</option>
+          <option value="slide">Slide</option>
+          <option value="img">Image</option>
+          <option value="quiz">Quiz</option>
+          <option value="list">List</option>
         </select>
         <button
           onClick={handleAddButtonClick}
-          className="px-2 font-semibold text-white bg-orange-500 rounded-md hover:bg-orange-600"
+          className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7"
         >
           Add
         </button>
@@ -70,20 +83,36 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
 
       {elements.map((element, index) => (
         <div key={index} className="py-2">
-          <div className="flex justify-between items-center pb-2">
-            <label className="text-orange-500 font-bold">{element.type}</label>
-            {/* Removal button needs to be implemented */}
-            <button className="flex items-center text-orange-400 hover:text-orange-500">
-              <span className="material-symbols-outlined">delete</span>
-            </button>
+          <div className="flex flex-col justify-between pb-2">
+            <div className="flex justify-between">
+              <label className="text-accent-6 font-bold mb-1">
+                {element.type}
+              </label>
+              <button
+                className="flex items-center text-accent-6 hover:text-accent-6"
+                onClick={() => handleDeleteButtonClick(element.id)}
+              >
+                <span className="material-symbols-outlined">delete</span>
+              </button>
+            </div>
+            {element.type === "img" ? (
+              <input
+                type="file"
+                value={element.value}
+                id={element.id}
+                onChange={(e) => handleInputChange(element.id, e.target.value)}
+                className="w-[100%] border-2 border-accent-6 rounded-md text-primary-6 font-bold p-2"
+              />
+            ) : (
+              <input
+                id={element.id}
+                placeholder={`Enter ${element.type}`}
+                value={element.value}
+                onChange={(e) => handleInputChange(element.id, e.target.value)}
+                className="w-[100%] border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1"
+              />
+            )}
           </div>
-          <input
-            id={element.id}
-            placeholder={`Enter ${element.type}`}
-            value={element.value}
-            onChange={(e) => handleInputChange(element.id, e.target.value)}
-            className="w-36 border-2 border-orange-500 rounded-lg text-orange-500 font-bold pl-4"
-          />
         </div>
       ))}
     </div>

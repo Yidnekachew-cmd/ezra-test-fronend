@@ -47,7 +47,7 @@ function AddElements() {
         </select>
         <button
           onClick={handleAddButtonClick}
-          className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-orange-600"
+          className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7"
         >
           Add
         </button>
@@ -57,7 +57,7 @@ function AddElements() {
         <div key={index} className="py-2">
           <div className="flex justify-between items-center pb-2">
             <label className="text-accent-6 font-bold">{element.type}</label>
-            <button className="flex items-center text-orange-400 hover:text-accent-6">
+            <button className="flex items-center text-accent-6 hover:text-accent-6">
               <span className="material-symbols-outlined">delete</span>
             </button>
           </div>

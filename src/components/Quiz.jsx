@@ -89,7 +89,7 @@ function Quiz() {
                     return (
                       <li
                         key={option.id}
-                        className="mt-2 bg-orange-400 p-3 w-3/4 mx-auto border-2 border-white rounded-3xl text-xl cursor-pointer hover:bg-orange-300"
+                        className="mt-2 bg-accent-6 p-3 w-3/4 mx-auto border-2 border-white rounded-3xl text-xl cursor-pointer hover:bg-orange-300"
                         onClick={() => optionClicked(option.isCorrect)}
                       >
                         {option.text}

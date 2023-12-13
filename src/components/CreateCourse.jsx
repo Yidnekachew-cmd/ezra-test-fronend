@@ -1,29 +1,52 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setTitle, setDescription, setImage } from "../redux/courseSlice";
+import {
+  setTitle,
+  setDescription,
+  setImage,
+  selectCourse,
+} from "../redux/courseSlice";
 
 function CreateCourse() {
   const dispatch = useDispatch();
-  const { title, description, image } = useSelector((state) => state.course);
+  const { title, description } = useSelector((state) => state.course);
+  const course = useSelector(selectCourse);
+
+  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
 
   const handleImageChange = (e) => {
-    const file = e.target.files[[1]];
-    dispatch(setImage(file));
+    const file = e.target.files[[0]];
+    if (file) {
+      dispatch(setImage(file)); // Dispatch the File object to the store
+      const fileReader = new FileReader();
+      fileReader.onloadend = () => {
+        setImagePreviewUrl(fileReader.result);
+      };
+      fileReader.readAsDataURL(file); // Generate a URL for preview
+    }
   };
+
+  console.log(course);
 
   return (
     <div className="h-screen pt-9 px-20">
       <h2 className="text-accent-6 text-2xl font-bold border-b-4 border-gray-300 pb-1">
         Create Course
       </h2>
-      <p className="font-nokia-bold text-sm text-accent-5"> Check Text</p>
       <form className="grid grid-cols-1 gap-3 w-1/2 mx-auto mt-3">
-        <div className="col-span-12 mx-auto">
+        <div className="relative col-span-12 mx-auto">
+          {imagePreviewUrl && (
+            <img
+              src={imagePreviewUrl}
+              alt="Preview"
+              className="absolute inset-0 w-full h-full object-cover rounded-md"
+            />
+          )}
           <input
             type="file"
-            className="w-full p-24 text-accent-6 font-bold leading-tight border border-orange-300 rounded-md focus:outline-none focus:border-blue-500"
+            className="relative z-10 w-full p-24 text-white font-bold leading-tight border border-orange-300 rounded-md bg-transparent focus:outline-none focus:border-blue-500"
             name="image"
-            value={image}
             onChange={handleImageChange}
           />
         </div>
