@@ -135,6 +135,8 @@ export const {
   addElementToSlide,
   updateElement,
   deleteElement,
+  deleteChapter,
+  deleteSlide,
 
   setCurrentChapter,
   setCurrentSlide,

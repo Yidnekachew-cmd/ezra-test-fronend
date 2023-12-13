@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import ChaptersAdd from "./ChaptersAdd";
 import { selectCourse } from "../../redux/courseSlice";
+import { ArrowCircleLeft, ArrowSquareOut } from "@phosphor-icons/react";
 
 function AdminChapter() {
   const navigate = useNavigate();
@@ -38,16 +39,22 @@ function AdminChapter() {
   return (
     <div>
       <div className="flex justify-between border-gray-200 border-2 p-1">
-        <button className="text-white font-bold text-3xl bg-accent-6 hover:bg-accent-6 rounded-[50%]">
-          <Link to="/courses/create">
-            <span className="material-symbols-outlined t">arrow_left</span>
+        <button className="font-nokia-bold text-accent-6 flex flex-row gap-2 hover:text-accent-7 transition-all">
+          <Link
+            to="/courses/create"
+            className="flex flex-row gap-2 items-center justify-center mt-3"
+          >
+            <ArrowCircleLeft weight="fill" size={24} />{" "}
+            <span>Back to course</span>
           </Link>
         </button>
         <button
           onClick={handleSubmit}
-          className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7"
+          className="h-[45px] w-[120px] flex justify-center gap-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7 transition-all"
+          style={{ padding: "10px" }}
         >
-          Publish
+          <span>Publish</span>
+          <ArrowSquareOut size={22} weight="fill" className="self-centered" />
         </button>
       </div>
       <ChaptersAdd />
