@@ -111,6 +111,15 @@ export const courseSlice = createSlice({
       }
       return {};
     },
+    deleteChapter: (state, action) => {
+      const { chapterIndex } = action.payload;
+      state.chapters.splice(chapterIndex, 1);
+    },
+
+    deleteSlide: (state, action) => {
+      const { chapterIndex, slideIndex } = action.payload;
+      state.chapters[chapterIndex].slides.splice(slideIndex, 1);
+    },
   },
 });
 
@@ -125,6 +134,7 @@ export const {
   updateSlide,
   addElementToSlide,
   updateElement,
+  deleteElement,
 
   setCurrentChapter,
   setCurrentSlide,

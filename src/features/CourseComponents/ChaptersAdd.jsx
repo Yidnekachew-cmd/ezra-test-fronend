@@ -10,6 +10,7 @@ import {
   addSlide,
   updateSlide,
 } from "../../redux/courseSlice";
+import { BookOpenText, PlusCircle } from "@phosphor-icons/react";
 
 function ChaptersAdd() {
   const dispatch = useDispatch();
@@ -44,8 +45,8 @@ function ChaptersAdd() {
   console.log(course);
 
   return (
-    <div className="flex justify-between h-screen w-full bg-[#F1F1F1]">
-      <div className="bg-white w-[30%] p-6">
+    <div className="flex justify-between h-screen w-full bg-[#F1F1F1] text-secondary-6 font-nokia-bold">
+      <div className="bg-primary-1 w-[30%] p-6">
         <button
           className="flex justify-center items-center text-white bg-accent-6 hover:bg-accent-6 rounded-3xl mb-4 p-2"
           onClick={addChapterHandler}
@@ -57,26 +58,32 @@ function ChaptersAdd() {
           const slides = allSlides[chapterIndex] || [];
           return (
             <div key={chapterIndex}>
-              <input
-                type="text"
-                name={`chapter-${chapterIndex}`}
-                placeholder="Chapter Title"
-                autoComplete="off"
-                className="w-full text-lg font-bold py-2 px-8 my-2"
-                value={chapter.chapter}
-                onChange={(e) =>
-                  updateChapterHandler(chapterIndex, e.target.value)
-                }
-              />
-              <div className="ml-14 pl-1 border-l-2 border-gray-300">
+              <div className="flex bg-secondary-1 items-center gap-2 px-4 py-2 rounded-md mb-2">
+                <BookOpenText
+                  weight="fill"
+                  className="text-accent-6 rounded-full w-8 h-8"
+                />
+                <input
+                  type="text"
+                  name={`chapter-${chapterIndex}`}
+                  placeholder="Chapter Title"
+                  autoComplete="off"
+                  className="w-full text-lg font-bold focus:outline-none mb-1 bg-transparent"
+                  value={chapter.chapter}
+                  onChange={(e) =>
+                    updateChapterHandler(chapterIndex, e.target.value)
+                  }
+                />
+              </div>
+              <div className="ml-14 pl-1 border-l-2 border-secondary-2">
                 {slides.map((slide, slideIndex) => (
-                  <div key={slideIndex} className="flex flex-col my-2">
+                  <div key={slideIndex} className="flex flex-col ">
                     <input
                       type="text"
                       name={`slide-${chapterIndex}-${slideIndex}`}
                       placeholder="Slide Title"
                       autoComplete="off"
-                      className="w-full text-sm font-bold px-3 py-1 my-2"
+                      className="w-full text-sm font-bold px-3 py-1 focus:outline-none mb-1"
                       value={slide.slide}
                       onChange={(e) =>
                         updateSlideHandler(
@@ -93,7 +100,6 @@ function ChaptersAdd() {
                       }
                     />
 
-                    {/* check whether the editingSlideIndex matches the current slide being rendered. */}
                     {editingSlideIndex &&
                       editingSlideIndex.chapter === chapterIndex &&
                       editingSlideIndex.slide === slideIndex && (
@@ -105,13 +111,17 @@ function ChaptersAdd() {
                   </div>
                 ))}
                 <button
-                  className="flex justify-between items-center text-white bg-gray-200 hover:bg-gray-300 p-1 rounded-lg"
+                  className=""
                   onClick={() => addSlideHandler(chapterIndex)}
                 >
-                  <p className="text-accent-6 px-2">New Slide</p>
-                  <span className="material-symbols-outlined t flex justify-center text-xl font-bold bg-accent-6 hover:bg-accent-6 rounded-3xl">
-                    add
-                  </span>
+                  <p className=" flex items-center text-accent-6 px-4 gap-2 mt-4">
+                    <PlusCircle
+                      className="text-accent-6"
+                      size={22}
+                      weight="fill"
+                    />{" "}
+                    New Slide
+                  </p>
                 </button>
               </div>
             </div>
