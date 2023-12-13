@@ -64,8 +64,8 @@ const Signup = () => {
                 className="border rounded-lg border-accent-6 placeholder:text-accent-3 text-xs1 p-2 mb-2 md:w-168"
                 placeholder="Kebede"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
           </div>
@@ -75,8 +75,8 @@ const Signup = () => {
             className="border rounded-lg border-accent-6  placeholder:text-accent-3 text-xs1 p-2 w-[50%]"
             placeholder="AbebeKebede@gmail.com"
             required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <div className="flex flex-row gap-4">
             <div className="flex flex-col flex-auto gap-2">
