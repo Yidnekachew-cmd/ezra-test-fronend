@@ -7,6 +7,8 @@ export const courseSlice = createSlice({
     description: "",
     image: "",
     chapters: [],
+    currentChapterIndex: 0,
+    currentSlideIndex: 0,
   },
   reducers: {
     setTitle: (state, action) => {
@@ -35,6 +37,11 @@ export const courseSlice = createSlice({
         slide: "",
         elements: [],
       });
+    },
+    updateCurrentSlide(state, action) {
+      const { chapterIndex, slideIndex } = action.payload;
+      state.currentChapterIndex = chapterIndex;
+      state.currentSlideIndex = slideIndex;
     },
     deleteElement(state, action) {
       const { chapterIndex, slideIndex, elementId } = action.payload;
@@ -140,6 +147,7 @@ export const {
 
   setCurrentChapter,
   setCurrentSlide,
+  updateCurrentSlide,
   selectCurrentChapter,
   selectCurrentSlide,
 } = courseSlice.actions;

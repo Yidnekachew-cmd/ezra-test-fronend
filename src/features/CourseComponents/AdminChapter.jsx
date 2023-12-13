@@ -37,7 +37,7 @@ function AdminChapter() {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <div className="flex justify-between border-gray-200 border-2 px-6 py-2">
         <button className="font-nokia-bold text-accent-6 flex flex-row gap-2 hover:text-accent-7 transition-all">
           <Link

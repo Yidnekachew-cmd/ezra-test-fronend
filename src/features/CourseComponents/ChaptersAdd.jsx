@@ -172,7 +172,7 @@ function ChaptersAdd() {
           );
         })}
       </div>
-      <div>
+      <div className="w-[65%]">
         {/* Pass selectedSlideIndex to SlideDataDisplay */}
         {editingSlideIndex !== null && (
           <SlideDataDisplay selectedSlideIndex={editingSlideIndex} />
