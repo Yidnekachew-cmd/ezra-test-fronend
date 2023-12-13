@@ -1,25 +1,12 @@
 import PropTypes from "prop-types";
-import { useSelector, useDispatch } from "react-redux";
-import { selectSlides, updateCurrentSlide } from "../../redux/courseSlice";
+import { useSelector } from "react-redux";
+import { selectSlides } from "../../redux/courseSlice";
 
 function SlideDataDisplay({ selectedSlideIndex }) {
-  const dispatch = useDispatch();
   const slides = useSelector((state) =>
     selectSlides(state, selectedSlideIndex.chapter)
   );
   const selectedSlide = slides[selectedSlideIndex.slide];
-
-  const handleNextSlide = () => {
-    if (selectedSlideIndex.slide < slides.length - 1) {
-      const nextSlideIndex = selectedSlideIndex.slide + 1;
-      dispatch(
-        updateCurrentSlide({
-          chapterIndex: selectedSlideIndex.chapter,
-          slideIndex: nextSlideIndex,
-        })
-      );
-    }
-  };
 
   return (
     <div className="mr-16 h-[80%]  bg-chapter-img-1 bg-no-repeat bg-cover bg-center rounded-lg">
@@ -88,10 +75,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
         )}
         <div className="mb-4 w-[100%] flex flex-col items-center justify-center">
           <hr className="border-accent-5  border-1 w-[90%] mx-auto z-50 " />
-          <button
-            onClick={handleNextSlide}
-            className="text-white text-center font-nokia-bold mt-2 py-1 px-2 bg-accent-6 hover:bg-accent-7 w-[15%] rounded-3xl text-2xl transition-all"
-          >
+          <button className="text-white text-center font-nokia-bold mt-2 py-1 px-2 bg-accent-6 hover:bg-accent-7 w-[15%] rounded-3xl text-2xl transition-all">
             ቀጥል
           </button>
         </div>
