@@ -134,6 +134,7 @@ const DevotionDisplay = ({
           </div>
         </div>
 
+        {/* Previous Devotions */}
         <div className="flex space-x-12 mt-4">
           {previousDevotions.map((devotion) => (
             <div key={devotion._id}>

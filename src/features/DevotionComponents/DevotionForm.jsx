@@ -12,6 +12,7 @@ const DevotionForm = ({
   paragraphs,
   handleFileChange,
   deletePara,
+  editingDevotion,
 }) => {
   return (
     <form
@@ -113,7 +114,8 @@ const DevotionForm = ({
         handleFileChange={handleFileChange}
         form={form}
         required
-        // previewUrl={form.image}
+        previewUrl={form.image}
+        editingDevotion={editingDevotion}
       />
       <br />
       <button className=" bg-gray-600 text-white px-4 py-2 rounded-md ">
@@ -132,6 +134,7 @@ DevotionForm.propTypes = {
   paragraphs: PropTypes.array.isRequired,
   handleFileChange: PropTypes.func.isRequired,
   deletePara: PropTypes.func.isRequired,
+  editingDevotion: PropTypes.bool.isRequired,
 };
 
 export default DevotionForm;

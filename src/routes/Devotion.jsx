@@ -72,7 +72,9 @@ const Devotion = () => {
 
     const formData = new FormData();
     Object.entries(form).forEach(([key, value]) => {
-      formData.append(key, value);
+      if (key !== "image" || (key === "image" && value)) {
+        formData.append(key, value);
+      }
     });
 
     paragraphs.forEach((paragraph, index) => {
@@ -186,6 +188,7 @@ const Devotion = () => {
           deletePara={deletePara}
           handleDelete={handleDelete}
           key={formSubmitCount}
+          editingDevotion={editingDevotion}
         />
       )}
     </div>

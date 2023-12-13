@@ -74,7 +74,7 @@ const Signup = () => {
             placeholder="AbebeKebede@gmail.com"
             required
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <div className="flex flex-row gap-4">
             <div className="flex flex-col flex-auto gap-2">
