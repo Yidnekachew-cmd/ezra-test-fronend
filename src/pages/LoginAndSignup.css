@@ -1,12 +1,13 @@
 /* google font */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap");
 
+/*
 body {
-  /* background: #f1f1f1;
-  margin: 0; */
-  /* font-family: "Poppins"; */
+  background: #f1f1f1;
+  margin: 0;
+  font-family: "Poppins";
 }
-/* 
+
 .nav-bar-header {
   background: #ea9215;
   color: #fff;

@@ -7,6 +7,7 @@ import useAxiosInstance from "../api/axiosInstance";
 const Devotion = () => {
   const { token, role } = useAuthContext(); // get the authentication token
   const [devotions, setDevotions] = useState([]);
+  const [editingDevotion, setEditingDevotion] = useState(null);
   const [formSubmitCount, setFormSubmitCount] = useState(0);
   const instance = useAxiosInstance(token);
 
@@ -59,33 +60,44 @@ const Devotion = () => {
     });
   };
 
+  const startEditing = (devotion) => {
+    setEditingDevotion(devotion);
+    setForm(devotion);
+    setParagraphs(devotion.body);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
+
     const formData = new FormData();
     Object.entries(form).forEach(([key, value]) => {
       formData.append(key, value);
     });
 
-    // Append paragraphs data to the FormData object
     paragraphs.forEach((paragraph, index) => {
       formData.append(`paragraph${index + 1}`, paragraph);
     });
 
-    // Append the selected file to the FormData object
     if (selectedFile) {
       formData.append("image", selectedFile);
     }
 
     try {
-      const response = await instance.post("/devotion/create", formData);
+      let response;
+      if (editingDevotion) {
+        response = await instance.put(
+          `/devotion/${editingDevotion._id}`,
+          formData
+        );
+      } else {
+        response = await instance.post("/devotion/create", formData);
+      }
+
       console.log(response);
 
-      // Fetch devotions again after a successful post request
       const devotionsResponse = await instance.get("/devotion/show");
       setDevotions(devotionsResponse.data);
 
-      // Reset the form and paragraphs state
       setForm({
         month: "",
         day: "",
@@ -98,6 +110,7 @@ const Devotion = () => {
       setSelectedFile(null);
       setPreviewUrl("");
       setFormSubmitCount(formSubmitCount + 1);
+      setEditingDevotion(null); // Reset the editing devotion
     } catch (error) {
       console.log(error);
     }
@@ -153,7 +166,11 @@ const Devotion = () => {
   };
   return (
     <div className=" flex bg-gray-200">
-      <DevotionDisplay devotions={devotions} handleDelete={handleDelete} />
+      <DevotionDisplay
+        devotions={devotions}
+        handleDelete={handleDelete}
+        startEditing={startEditing}
+      />
       {role === "Admin" && (
         <DevotionForm
           form={form}

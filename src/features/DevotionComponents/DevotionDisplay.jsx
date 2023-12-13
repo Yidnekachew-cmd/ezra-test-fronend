@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaEdit } from "react-icons/fa";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
-const DevotionDisplay = ({ devotions, handleDelete }) => {
+const DevotionDisplay = ({ devotions, handleDelete, startEditing }) => {
   const { role } = useAuthContext(); // get the authentication token
   // Sort the devotions array in descending order of creation date
   const [latestDevotion, ...previousDevotions] = devotions;
@@ -47,12 +47,20 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
                   {latestDevotion && latestDevotion.title}
                 </h1>
                 {role === "Admin" && (
-                  <FaTrash
-                    className="text-gray-700 text-xl cursor-pointer self-center"
-                    onClick={() =>
-                      handleDelete(latestDevotion && latestDevotion._id)
-                    }
-                  />
+                  <>
+                    <FaTrash
+                      className="text-gray-700 text-xl cursor-pointer self-center"
+                      onClick={() =>
+                        handleDelete(latestDevotion && latestDevotion._id)
+                      }
+                    />
+                    <FaEdit
+                      className="text-gray-700 text-xl cursor-pointer self-center"
+                      onClick={() =>
+                        startEditing(latestDevotion && latestDevotion._id)
+                      }
+                    />
+                  </>
                 )}
               </div>
               <h2 className=" text-lg text-accent-5">
@@ -144,6 +152,7 @@ const DevotionDisplay = ({ devotions, handleDelete }) => {
 DevotionDisplay.propTypes = {
   devotions: PropTypes.array.isRequired,
   handleDelete: PropTypes.func,
+  startEditing: PropTypes.func,
 };
 
 export default DevotionDisplay;
