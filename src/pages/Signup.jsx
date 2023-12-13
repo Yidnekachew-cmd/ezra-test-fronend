@@ -4,6 +4,8 @@ import { GoogleLogo, FacebookLogo } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { signup, error, isLoading } = useSignup();
