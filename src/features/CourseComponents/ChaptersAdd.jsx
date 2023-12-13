@@ -2,7 +2,7 @@ import { useState } from "react";
 import ElementsAdd from "./ElementsAdd";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  selectCourse,
+  // selectCourse,
   selectChapters,
   selectAllSlides,
   addChapter,
@@ -13,11 +13,11 @@ import {
   deleteSlide,
 } from "../../redux/courseSlice";
 import { BookOpenText, PlusCircle, Trash } from "@phosphor-icons/react";
-// ... (previous imports and code remain unchanged)
+import SlideDataDisplay from "./SlideDataDisplay";
 
 function ChaptersAdd() {
   const dispatch = useDispatch();
-  const course = useSelector(selectCourse);
+  // const course = useSelector(selectCourse);
   const chapters = useSelector(selectChapters) || [];
   const allSlides = useSelector(selectAllSlides);
 
@@ -171,6 +171,12 @@ function ChaptersAdd() {
             </div>
           );
         })}
+      </div>
+      <div>
+        {/* Pass selectedSlideIndex to SlideDataDisplay */}
+        {editingSlideIndex !== null && (
+          <SlideDataDisplay selectedSlideIndex={editingSlideIndex} />
+        )}
       </div>
     </div>
   );
