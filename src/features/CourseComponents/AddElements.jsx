@@ -47,7 +47,7 @@ function AddElements() {
         </select>
         <button
           onClick={handleAddButtonClick}
-          className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-orange-600"
+          className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7"
         >
           Add
         </button>
