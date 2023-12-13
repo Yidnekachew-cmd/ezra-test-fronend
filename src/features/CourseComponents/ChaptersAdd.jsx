@@ -47,7 +47,7 @@ function ChaptersAdd() {
     <div className="flex justify-between h-screen w-full bg-[#F1F1F1]">
       <div className="bg-white w-[30%] p-6">
         <button
-          className="flex justify-center items-center text-white bg-orange-400 hover:bg-accent-6 rounded-3xl mb-4 p-2"
+          className="flex justify-center items-center text-white bg-accent-6 hover:bg-accent-6 rounded-3xl mb-4 p-2"
           onClick={addChapterHandler}
         >
           <span className="material-symbols-outlined">add</span>
@@ -109,7 +109,7 @@ function ChaptersAdd() {
                   onClick={() => addSlideHandler(chapterIndex)}
                 >
                   <p className="text-accent-6 px-2">New Slide</p>
-                  <span className="material-symbols-outlined t flex justify-center text-xl font-bold bg-orange-400 hover:bg-accent-6 rounded-3xl">
+                  <span className="material-symbols-outlined t flex justify-center text-xl font-bold bg-accent-6 hover:bg-accent-6 rounded-3xl">
                     add
                   </span>
                 </button>

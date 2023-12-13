@@ -36,6 +36,18 @@ export const courseSlice = createSlice({
         elements: [],
       });
     },
+    deleteElement(state, action) {
+      const { chapterIndex, slideIndex, elementId } = action.payload;
+      const chapter = state.chapters[chapterIndex];
+      if (chapter) {
+        const slide = chapter.slides[slideIndex];
+        if (slide) {
+          slide.elements = slide.elements.filter(
+            (element) => element.id !== elementId
+          );
+        }
+      }
+    },
     updateSlide: (state, action) => {
       const { chapterIndex, slideIndex, value } = action.payload;
       state.chapters[chapterIndex].slides[slideIndex].slide = value;

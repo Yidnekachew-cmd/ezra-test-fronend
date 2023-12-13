@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addElementToSlide,
   updateElement,
-  // selectElements,
+  deleteElement, // Import deleteElement action
 } from "../../redux/courseSlice";
 
 function ElementsAdd({ chapterIndex, slideIndex }) {
@@ -43,8 +43,18 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
     );
   };
 
+  const handleDeleteButtonClick = (elementId) => {
+    dispatch(
+      deleteElement({
+        chapterIndex,
+        slideIndex,
+        elementId,
+      })
+    );
+  };
+
   return (
-    <div className="bg-white w-[16%] p-6">
+    <div className="bg-white w-[100%] p-6">
       <p className="font-bold py-2">Insert Element</p>
       <div className="flex justify-between">
         <select
@@ -54,6 +64,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
           onChange={handleDropdownChange}
           className="border-2 border-accent-6 rounded-lg"
         >
+          <option value="">Choose Type</option>
           <option value="title">Title</option>
           <option value="sub">Sub-title</option>
           <option value="text">Paragraph</option>
@@ -73,19 +84,33 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
       {elements.map((element, index) => (
         <div key={index} className="py-2">
           <div className="flex justify-between items-center pb-2">
-            <label className="text-accent-6 font-bold">{element.type}</label>
-            {/* Removal button needs to be implemented */}
-            <button className="flex items-center text-orange-400 hover:text-accent-6">
-              <span className="material-symbols-outlined">delete</span>
-            </button>
+            <div>
+              <label className="text-accent-6 font-bold">{element.type}</label>
+              <button
+                className="flex items-center text-accent-6 hover:text-accent-6"
+                onClick={() => handleDeleteButtonClick(element.id)}
+              >
+                <span className="material-symbols-outlined">delete</span>
+              </button>
+            </div>
+            {element.type === "img" ? (
+              <input
+                type="file"
+                value={element.value}
+                id={element.id}
+                onChange={(e) => handleInputChange(element.id, e.target.value)}
+                className="w-[100%] border-2 border-accent-6 rounded-sm text-primary-6 font-bold p-2"
+              />
+            ) : (
+              <input
+                id={element.id}
+                placeholder={`Enter ${element.type}`}
+                value={element.value}
+                onChange={(e) => handleInputChange(element.id, e.target.value)}
+                className="w-36 border-2 border-accent-6 rounded-lg text-accent-6 font-bold pl-4"
+              />
+            )}
           </div>
-          <input
-            id={element.id}
-            placeholder={`Enter ${element.type}`}
-            value={element.value}
-            onChange={(e) => handleInputChange(element.id, e.target.value)}
-            className="w-36 border-2 border-accent-6 rounded-lg text-accent-6 font-bold pl-4"
-          />
         </div>
       ))}
     </div>
