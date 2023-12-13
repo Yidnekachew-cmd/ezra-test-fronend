@@ -13,16 +13,16 @@ import {
   deleteSlide,
 } from "../../redux/courseSlice";
 import { BookOpenText, PlusCircle, Trash } from "@phosphor-icons/react";
+// ... (previous imports and code remain unchanged)
 
 function ChaptersAdd() {
   const dispatch = useDispatch();
   const course = useSelector(selectCourse);
-  const chapters = useSelector(selectChapters) || []; // useSelector hook to get the 'chapters' from the state
-  // const slides = useSelector((state) => selectSlides(state, chapterIndex));
+  const chapters = useSelector(selectChapters) || [];
   const allSlides = useSelector(selectAllSlides);
 
-  // State to track the currently editing slide
   const [editingSlideIndex, setEditingSlideIndex] = useState(null);
+  const [selectedChapterIndex, setSelectedChapterIndex] = useState(null);
 
   const addChapterHandler = () => {
     dispatch(addChapter());
@@ -52,7 +52,13 @@ function ChaptersAdd() {
     dispatch(updateSlide({ chapterIndex, slideIndex, value }));
   };
 
-  console.log(course);
+  const handleChapterClick = (chapterIndex) => {
+    if (selectedChapterIndex === chapterIndex) {
+      setSelectedChapterIndex(null); // Hide slides if clicked again
+    } else {
+      setSelectedChapterIndex(chapterIndex); // Show slides for the selected chapter
+    }
+  };
 
   return (
     <div className="flex justify-between h-screen w-full bg-[#F1F1F1] text-secondary-6 font-nokia-bold">
@@ -66,10 +72,19 @@ function ChaptersAdd() {
         </button>
         {chapters.map((chapter, chapterIndex) => {
           const slides = allSlides[chapterIndex] || [];
+          const isSelected = selectedChapterIndex === chapterIndex;
+
           return (
             <div key={chapterIndex}>
-              <div className="flex bg-secondary-1 items-center justify-between gap-2 px-4 py-2 rounded-md mb-2">
-                <div className="flex items-center gap-2">
+              <div
+                className={`flex bg-secondary-1 items-center justify-between gap-2 px-4 py-2 rounded-md mb-2 ${
+                  isSelected ? "bg-opacity-100" : "bg-opacity-0"
+                }`}
+              >
+                <div
+                  className="flex items-center gap-2 cursor-pointer"
+                  onClick={() => handleChapterClick(chapterIndex)}
+                >
                   <BookOpenText
                     weight="fill"
                     className="text-accent-6 rounded-full w-8 h-8"
@@ -89,68 +104,70 @@ function ChaptersAdd() {
                 <Trash
                   onClick={() => deleteChapterHandler(chapterIndex)}
                   weight="fill"
-                  className="text-accent-6"
+                  className="text-accent-6 cursor-pointer"
                   size={22}
                 />
               </div>
-              <div className="ml-14 pl-1 border-l-2 border-secondary-2">
-                {slides.map((slide, slideIndex) => (
-                  <div key={slideIndex} className="flex flex-col ">
-                    <div className="flex px-4">
-                      <input
-                        type="text"
-                        name={`slide-${chapterIndex}-${slideIndex}`}
-                        placeholder="Slide Title"
-                        autoComplete="off"
-                        className="w-full text-sm font-bold py-1 focus:outline-none mb-1"
-                        value={slide.slide}
-                        onChange={(e) =>
-                          updateSlideHandler(
-                            chapterIndex,
-                            slideIndex,
-                            e.target.value
-                          )
-                        }
-                        onClick={() =>
-                          setEditingSlideIndex({
-                            chapter: chapterIndex,
-                            slide: slideIndex,
-                          })
-                        }
-                      />
-                      <Trash
-                        onClick={() =>
-                          deleteSlideHandler(chapterIndex, slideIndex)
-                        }
-                        weight="fill"
+              {isSelected && (
+                <div className="ml-14 pl-1 border-l-2 border-secondary-2">
+                  {slides.map((slide, slideIndex) => (
+                    <div key={slideIndex} className="flex flex-col ">
+                      <div className="flex px-4">
+                        <input
+                          type="text"
+                          name={`slide-${chapterIndex}-${slideIndex}`}
+                          placeholder="Slide Title"
+                          autoComplete="off"
+                          className="w-full text-sm font-bold py-1 focus:outline-none mb-1"
+                          value={slide.slide}
+                          onChange={(e) =>
+                            updateSlideHandler(
+                              chapterIndex,
+                              slideIndex,
+                              e.target.value
+                            )
+                          }
+                          onClick={() =>
+                            setEditingSlideIndex({
+                              chapter: chapterIndex,
+                              slide: slideIndex,
+                            })
+                          }
+                        />
+                        <Trash
+                          onClick={() =>
+                            deleteSlideHandler(chapterIndex, slideIndex)
+                          }
+                          weight="fill"
+                          className="text-accent-6 cursor-pointer"
+                          size={22}
+                        />
+                      </div>
+                      {editingSlideIndex &&
+                        editingSlideIndex.chapter === chapterIndex &&
+                        editingSlideIndex.slide === slideIndex && (
+                          <ElementsAdd
+                            chapterIndex={chapterIndex}
+                            slideIndex={slideIndex}
+                          />
+                        )}
+                    </div>
+                  ))}
+                  <button
+                    className=""
+                    onClick={() => addSlideHandler(chapterIndex)}
+                  >
+                    <p className=" flex items-center text-accent-6 px-4 gap-2 mt-4">
+                      <PlusCircle
                         className="text-accent-6"
                         size={22}
-                      />
-                    </div>
-                    {editingSlideIndex &&
-                      editingSlideIndex.chapter === chapterIndex &&
-                      editingSlideIndex.slide === slideIndex && (
-                        <ElementsAdd
-                          chapterIndex={chapterIndex}
-                          slideIndex={slideIndex}
-                        />
-                      )}
-                  </div>
-                ))}
-                <button
-                  className=""
-                  onClick={() => addSlideHandler(chapterIndex)}
-                >
-                  <p className=" flex items-center text-accent-6 px-4 gap-2 mt-4">
-                    <PlusCircle
-                      className="text-accent-6"
-                      size={22}
-                      weight="fill"
-                    />{" "}
-                    New Slide
-                  </p>
-                </button>
-              </div>
+                        weight="fill"
+                      />{" "}
+                      New Slide
+                    </p>
+                  </button>
+                </div>
+              )}
             </div>
           );
         })}

@@ -38,24 +38,26 @@ function AdminChapter() {
 
   return (
     <div>
-      <div className="flex justify-between border-gray-200 border-2 p-1">
+      <div className="flex justify-between border-gray-200 border-2 px-6 py-2">
         <button className="font-nokia-bold text-accent-6 flex flex-row gap-2 hover:text-accent-7 transition-all">
           <Link
-            to="/courses/create"
+            to="/courses"
             className="flex flex-row gap-2 items-center justify-center mt-3"
           >
             <ArrowCircleLeft weight="fill" size={24} />{" "}
             <span>Back to course</span>
           </Link>
         </button>
-        <button
-          onClick={handleSubmit}
-          className="h-[45px] w-[120px] flex justify-center gap-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7 transition-all"
-          style={{ padding: "10px" }}
-        >
-          <span>Publish</span>
-          <ArrowSquareOut size={22} weight="fill" className="self-centered" />
-        </button>
+        <div>
+          <button
+            onClick={handleSubmit}
+            className="h-[45px] w-[120px] flex justify-center gap-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7 transition-all"
+            style={{ padding: "10px" }}
+          >
+            <span>Publish</span>
+            <ArrowSquareOut size={22} weight="fill" className="self-centered" />
+          </button>
+        </div>
       </div>
       <ChaptersAdd />
     </div>
