@@ -5,9 +5,9 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 const CurrentDevotional = ({ devotionToDisplay, handleDelete, startEditing }) => {
   const { role } = useAuthContext(); // get the authentication token
   return (
-    <div className=" ">
+    <div className="h-auto border-2 shadow-lg rounded-2xl p-6">
         <div>
-          <h1 className="font-nokia-bold  text-3xl text-accent-5 mt-6">
+          <h1 className="font-nokia-bold  text-3xl text-accent-5 ">
             Daily Devotional
           </h1>
         </div>
@@ -75,7 +75,7 @@ const CurrentDevotional = ({ devotionToDisplay, handleDelete, startEditing }) =>
               {devotionToDisplay &&
                 devotionToDisplay.body.map((paragraph, paragraphIndex) => (
                   <p
-                    className=" font-nokia-bold text-sm text-justify text-secondary-6"
+                    className=" font-nokia-bold text-sm text-justify text-secondary-6 space-y-3"
                     key={paragraphIndex}
                   >
                     {paragraph}

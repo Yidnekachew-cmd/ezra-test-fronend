@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
   
   const PreviousDevotionals = ({ previousDevotions, setSelectedDevotion }) => {
 return (
-    <div className="flex flex-col h-screen space-y-6 w-[100%] mx-auto ">
+    <div className="flex flex-col h-auto space-y-6 w-[100%] mx-auto ">
         <div className="w-[100%] flex justify-between items-center">
             <div className="w-[100%]">
                 <h3 className="text-sm font-Lato-black text-accent-6">
