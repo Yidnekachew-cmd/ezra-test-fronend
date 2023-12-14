@@ -20,7 +20,7 @@ const DevotionDisplay = ({
   );
 
 return (
-    <div className="w-[70%] h-auto bg-gray-100 font-nokia-bold container flex flex-col mx-auto gap-12  pb-12">
+    <div className="w-[100%] h-auto font-nokia-bold  flex flex-col mx-auto container space-y-12 mb-12">
       <CurrentDevotional 
       devotionToDisplay={devotionToDisplay} 
       handleDelete={handleDelete} 

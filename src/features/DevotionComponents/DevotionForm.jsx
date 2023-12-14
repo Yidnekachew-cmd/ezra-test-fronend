@@ -14,112 +14,118 @@ const DevotionForm = ({
   deletePara,
 }) => {
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="w-[30%]  p-3 rounded pb-4 space-y-3"
-    >
-      <label>Month:</label>
-      <select
-        className="  py-2 rounded"
-        name="month"
-        value={form.month}
-        onChange={handleChange}
-        required
+    <div className="flex w-[30%] border-2 shadow-lg rounded-l-2xl h-[100%] font-nokia-bold ">
+      <form
+        onSubmit={handleSubmit}
+        className="w-[90%] mx-auto py-6 space-y-3 "
       >
-        <option value="" disabled>
-          -- ምረጥ --
-        </option>
-        <option value="መስከረም">መስከረም</option>
-        <option value="ጥቅምት">ጥቅምት</option>
-        <option value="ህዳር">ህዳር</option>
-        <option value="ታህሳስ">ታህሳስ</option>
-        <option value="ጥር">ጥር</option>
-        <option value="የካቲት">የካቲት</option>
-        <option value="መጋቢት">መጋቢት</option>
-        <option value="ሚያዚያ">ሚያዚያ</option>
-        <option value="ግንቦት">ግንቦት</option>
-        <option value="ሰኔ">ሰኔ</option>
-        <option value="ሐምሌ">ሐምሌ</option>
-        <option value="ነሀሴ">ነሀሴ</option>
-      </select>
-      <label className="ml-1">Day:</label>
-      <input
-        type="number"
-        name="day"
-        min="1"
-        max="31"
-        placeholder="day"
-        className="cursor-pointer border-2 border-gray-300 rounded-md px-2 py-1"
-        value={form.day}
-        onChange={handleChange}
-        required
-      />
-      <br />
-      <label>Title:</label>
-      <input
-        type="text"
-        name="title"
-        placeholder="Title"
-        className="w-full border-2 border-gray-300 rounded-md px-2 py-1"
-        value={form.title}
-        onChange={handleChange}
-        required
-      />
-      <br />
-      <label>Chapter:</label>
-      <input
-        type="text"
-        name="chapter"
-        placeholder="chapter"
-        className="w-full border-2 border-gray-300 rounded-md px-2 py-1"
-        value={form.chapter}
-        onChange={handleChange}
-        required
-      />
-      <br />
-      <label>verse:</label>
-      <input
-        type="text"
-        name="verse"
-        placeholder="verse"
-        className="w-full border-2 border-gray-300 rounded-md px-2 py-1"
-        value={form.verse}
-        onChange={handleChange}
-        required
-      />
-      <br />
-      <AddParagraph
-        form={form}
-        handleChange={handleChange}
-        addPara={addPara}
-        handleParaChange={handleParaChange}
-        paragraphs={paragraphs}
-        deletePara={deletePara}
-        required
-      />
-      <br />
-      <label>Prayer:</label>
-      <textarea
-        type="text"
-        name="prayer"
-        placeholder="prayer"
-        className="w-full border-2 border-gray-300 rounded-md px-2 py-1"
-        value={form.prayer}
-        onChange={handleChange}
-        required
-      />
-      <br />
-      <PhotoUploader
-        handleFileChange={handleFileChange}
-        form={form}
-        required
-        // previewUrl={form.image}
-      />
-      <br />
-      <button className=" bg-gray-600 text-white px-4 py-2 rounded-md ">
-        Submit
-      </button>
-    </form>
+        <div>
+          <select
+            className="border-2 border-accent-6 bg-[#fff] outline-accent-7  rounded-md px-2 py-1 text-secondary-6 cursor-pointer text-xs  mr-6"
+            name="month"
+            value={form.month}
+            onChange={handleChange}
+            required
+          >
+            <option value="" disabled>
+              Month
+            </option>
+            <option value="መስከረም">መስከረም</option>
+            <option value="ጥቅምት">ጥቅምት</option>
+            <option value="ህዳር">ህዳር</option>
+            <option value="ታህሳስ">ታህሳስ</option>
+            <option value="ጥር">ጥር</option>
+            <option value="የካቲት">የካቲት</option>
+            <option value="መጋቢት">መጋቢት</option>
+            <option value="ሚያዚያ">ሚያዚያ</option>
+            <option value="ግንቦት">ግንቦት</option>
+            <option value="ሰኔ">ሰኔ</option>
+            <option value="ሐምሌ">ሐምሌ</option>
+            <option value="ነሀሴ">ነሀሴ</option>
+          </select>
+          <input
+            type="number"
+            name="day"
+            min="1"
+            max="30"
+            placeholder="Day"
+            className="border-2 border-accent-6 bg-[#fff] outline-accent-7  rounded-md px-2 py-1 text-secondary-6 cursor-pointer text-xs font-nokia-bold w-[27%] placeholder-secondary-6 focus:placeholder-secondary-4"
+            value={form.day}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="space-y-1 text-sm text-accent-6">
+          <label>Title</label>
+          <input
+            type="text"
+            name="title"
+            placeholder="Title"
+            className="w-full border-2 border-accent-6 outline-accent-7 rounded-lg text-accent-6 px-2 py-1 placeholder-accent-4"
+            value={form.title}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="space-y-1 text-sm text-accent-6">
+          <label>Chapter to be read</label>
+          <input
+            type="text"
+            name="chapter"
+            placeholder="chapter"
+            className="w-full border-2 text-accent-6 border-accent-6 outline-accent-7 rounded-lg px-2 py-1 placeholder-accent-4"
+            value={form.chapter}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="space-y-1 text-sm text-accent-6">
+          <label>Main Verse</label>
+          <input
+            type="text"
+            name="verse"
+            placeholder="verse"
+            className="w-full border-2 text-accent-6 border-accent-6 outline-accent-7 rounded-lg px-2 py-1 placeholder-accent-4"
+            value={form.verse}
+            onChange={handleChange}
+            required
+          />
+        </div>
+          <AddParagraph
+            form={form}
+            handleChange={handleChange}
+            required
+            paragraphs={paragraphs}
+            addPara={addPara}
+            handleParaChange={handleParaChange}
+            deletePara={deletePara}
+          />
+        <div className="space-y-1 text-sm text-accent-6">
+          <label>Prayer</label>
+          <textarea
+            type="text"
+            name="prayer"
+            placeholder="prayer"
+            className="w-full border-2 text-accent-6 border-accent-6 outline-accent-7 rounded-lg px-2 py-1 placeholder-accent-4 "
+            value={form.prayer}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="flex justify-between items-center">
+          <PhotoUploader
+            handleFileChange={handleFileChange}
+            form={form}
+            required
+          />
+          <div className="space-y-1 text-sm text-accent-6">
+            <button className=" bg-accent-6 hover:bg-accent-7 text-[#fff] px-6 py-1 rounded-full cursor-pointer ">
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 

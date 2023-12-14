@@ -5,7 +5,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import useAxiosInstance from "../api/axiosInstance";
 
 const Devotion = () => {
-  const { token, role } = useAuthContext(); // get the authentication token
+  const { token, role, isAuthReady } = useAuthContext(); // get the authentication token
   const [devotions, setDevotions] = useState([]);
   const [selectedDevotion, setSelectedDevotion] = useState(null);
   const [editingDevotion, setEditingDevotion] = useState(null);
@@ -13,6 +13,7 @@ const Devotion = () => {
   const instance = useAxiosInstance(token);
 
   useEffect(() => {
+    if(isAuthReady) {
     const fetchDevotions = async () => {
       try {
         const response = await instance.get("/devotion/show");
@@ -23,7 +24,8 @@ const Devotion = () => {
     };
 
     fetchDevotions();
-  }, []);
+  }
+  }, [isAuthReady, token, instance]);
 
   // useState for adding multiple paragraphs
   const [paragraphs, setParagraphs] = useState([]);
@@ -79,6 +81,8 @@ const Devotion = () => {
       formData.append(`paragraph${index + 1}`, paragraph);
     });
 
+    
+
     if (selectedFile) {
       formData.append("image", selectedFile);
     }
@@ -117,6 +121,7 @@ const Devotion = () => {
     }
   };
 
+  // Handle deleting paragraphs
   const deletePara = (index) => {
     const newPara = [...paragraphs];
     newPara.splice(index, 1);
@@ -126,6 +131,7 @@ const Devotion = () => {
       body: newPara,
     });
   };
+
 
   const handleDelete = async (id) => {
     try {
@@ -166,7 +172,7 @@ const Devotion = () => {
     console.log(role);
   };
   return (
-    <div className=" flex bg-gray-200">
+    <div className=" flex h-auto mt-12 w-[100%] mx-auto">
       <DevotionDisplay
         devotions={devotions}
         selectedDevotion={selectedDevotion}
