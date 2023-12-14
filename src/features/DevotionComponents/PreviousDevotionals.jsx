@@ -46,7 +46,7 @@ return (
                         </h2>
                     </div>
                     <div className="w-[20%]">
-                        <button type="button" className="text-secondary-6 text-xs font-nokia-bold w-[100%] border-2 border-accent-6 rounded-full  px-2 hover:border-secondary-6 hover:text-accent-6" onClick={() => {
+                        <button type="button" className="text-[#fff] bg-accent-6 text-xs font-nokia-bold w-[100%] border-2  rounded-full  px-2 hover: hover:bg-accent-7" onClick={() => {
                         // open the devotion on click
                         // console.log("clicked");
                                 setSelectedDevotion(devotion);
