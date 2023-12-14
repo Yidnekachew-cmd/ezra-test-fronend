@@ -46,21 +46,24 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
     console.log(elements);
   };
 
+  const handleFileInputChange = (e, element) => {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      dispatch(
+        updateElement({
+          chapterIndex,
+          slideIndex,
+          elementId: element.id,
+          value: reader.result,
+        })
+      );
+    };
+  };
+
   const handleDeleteListItem = (indexToDelete) => {
     const updatedList = listItems.filter((_, index) => index !== indexToDelete);
     setListItems(updatedList);
-  };
-
-  const handleFileInputChange = (e, id) => {
-    const file = e.target.files[0]; // Get the first file from the input
-    dispatch(
-      updateElement({
-        chapterIndex,
-        slideIndex,
-        elementId: id,
-        value: file,
-      })
-    );
   };
 
   const renderListForm = () => (
