@@ -6,6 +6,7 @@ import {
   updateElement,
   deleteElement,
 } from "../../redux/courseSlice";
+import { File, PlusCircle, Trash } from "@phosphor-icons/react";
 
 function ElementsAdd({ chapterIndex, slideIndex }) {
   const dispatch = useDispatch();
@@ -36,17 +37,16 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
           chapterIndex,
           slideIndex,
           elementType: "list",
-          value: listItems, // Pass the array of list items as value
+          value: listItems,
         })
       );
-      setListItems([]); // Clearing list items after adding
+      setListItems([]);
     }
     setCurrentElement("");
     console.log(elements);
   };
 
   const handleFileInputChange = (e, element) => {
-    // const file = e.target.files[0]; // Get the first file from the input
     const reader = new FileReader();
 
     reader.onloadend = () => {
@@ -55,35 +55,53 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
           chapterIndex,
           slideIndex,
           elementId: element.id,
-          value: reader.result, // Pass the read content (base64 encoded) to the backend
+          value: reader.result,
         })
       );
     };
   };
+
+  const handleDeleteListItem = (indexToDelete) => {
+    const updatedList = listItems.filter((_, index) => index !== indexToDelete);
+    setListItems(updatedList);
+  };
+
   const renderListForm = () => (
-    <div>
-      <input
-        type="text"
-        value={currentListItem}
-        onChange={handleListInputChange}
-        placeholder="Enter list item"
-        className="border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 mr-2"
-      />
-      <button
-        onClick={handleAddListItem}
-        className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7"
-      >
-        Add Item
-      </button>
-      <button
-        onClick={handleAddListElement}
-        className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7"
-      >
-        Save List
-      </button>
+    <div className="mt-2">
+      <div className="flex flex-row items-center w-[100%] gap-1">
+        <input
+          type="text"
+          value={currentListItem}
+          onChange={handleListInputChange}
+          placeholder="Enter list item"
+          className="border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 w-[75%]"
+        />
+        <PlusCircle
+          onClick={handleAddListItem}
+          className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
+          size={24}
+          weight="fill"
+        />
+        <File
+          onClick={handleAddListElement}
+          className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
+          size={24}
+          weight="fill"
+        />
+      </div>
       <ul>
         {listItems.map((item, index) => (
-          <li key={index}>{item}</li>
+          <li key={index} className="flex justify-between">
+            - {item}{" "}
+            <span>
+              <Trash
+                onClick={() => handleDeleteListItem(index)}
+                className="text-red-600 hover:text-red-700 hover:cursor-pointer transition-all"
+                weight="fill"
+                size={22}
+              />
+            </span>
+          </li>
         ))}
       </ul>
     </div>
@@ -94,7 +112,6 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
   };
 
   const handleAddButtonClick = () => {
-    // Only dispatch addElementToSlide when the add button is clicked and currentElement is not "list"
     if (currentElement && currentElement !== "list") {
       dispatch(
         addElementToSlide({
@@ -150,7 +167,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
         </select>
         <button
           onClick={handleAddButtonClick}
-          className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7"
+          className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7 hover:cursor-pointer transition-all"
         >
           Add
         </button>
