@@ -170,8 +170,6 @@ export const selectElements = (state, chapterIndex, slideIndex) => {
   const { chapters } = state.course;
   return chapters[chapterIndex]?.slides[slideIndex]?.elements || [];
 };
-// export const selectAllSlides = (state) =>
-//   state.course.chapters.map((chapter) => chapter.slides);
 
 export const selectAllSlides = createSelector([selectChapters], (chapters) =>
   chapters.map((chapter) => chapter.slides)
