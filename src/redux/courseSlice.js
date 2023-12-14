@@ -53,7 +53,8 @@ export const courseSlice = createSlice({
       state.chapters[chapterIndex].slides[slideIndex].slide = value;
     },
     addElementToSlide: (state, action) => {
-      const { chapterIndex, slideIndex, elementType } = action.payload;
+      const { chapterIndex, slideIndex, elementType, value } = action.payload;
+
       if (state.chapters[chapterIndex] == null) {
         console.warn(
           "Cannot add element, invalid chapter index:",
@@ -77,12 +78,25 @@ export const courseSlice = createSlice({
         );
         return;
       }
-      const elements = slides[slideIndex].elements;
-      elements.push({
+
+      const newElement = {
         type: elementType,
         id: `${elementType}${Math.random().toString(36).substr(2, 9)}`, // Unique ID generation
-        value: "",
-      });
+        value: elementType === "list" ? value : "", // Set value for list type, otherwise an empty string
+      };
+
+      // Handle other element types and set their values accordingly
+      if (
+        elementType === "title" ||
+        elementType === "sub" ||
+        elementType === "text" ||
+        elementType === "img" ||
+        elementType === "quiz"
+      ) {
+        newElement.value = ""; // For other types, initialize the value as an empty string
+      }
+
+      slides[slideIndex].elements.push(newElement);
     },
     updateElement: (state, action) => {
       const { chapterIndex, slideIndex, elementId, value } = action.payload;
