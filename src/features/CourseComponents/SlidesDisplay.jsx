@@ -143,7 +143,7 @@ function SlidesDisplay() {
                           return (
                             <p
                               key={element._id}
-                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-center text-1xl"
+                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-center text-1xl mb-2"
                             >
                               {element.value}
                             </p>
@@ -152,9 +152,9 @@ function SlidesDisplay() {
                           return (
                             <p
                               key={element._id}
-                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-justify text-lg"
+                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-justify text-lg mb-2"
                             >
-                              {element.value}
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{element.value}
                             </p>
                           );
                         } else if (element.type === "img") {
