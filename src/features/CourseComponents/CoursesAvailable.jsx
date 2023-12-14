@@ -85,7 +85,9 @@ function CoursesAvailable() {
           })}
         </div>
       </div>
-      <Categories />
+      <Categories
+      title="Categories"
+      />
     </div>
   );
 }

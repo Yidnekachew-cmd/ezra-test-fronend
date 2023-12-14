@@ -31,7 +31,9 @@ return (
       handleDelete={handleDelete} 
       setSelectedDevotion={setSelectedDevotion}
       />
-      <Categories  />
+      <Categories 
+      title="Lessons Available"
+      />
     </div>
 );
 };

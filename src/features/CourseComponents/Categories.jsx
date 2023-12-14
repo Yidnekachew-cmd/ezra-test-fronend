@@ -1,6 +1,6 @@
+import PropTypes from "prop-types";
 
-
-const Categories = () => {
+const Categories = ({title}) => {
   return (
     <div className="space-y-3">
         <div>
@@ -8,7 +8,7 @@ const Categories = () => {
             Explore different topics
           </h3>
           <h2 className="text-xl md:text-2xl font-Lato-bold  text-secondary-6">
-            Categories
+            {title}
           </h2>
         </div>
         <hr className="border-accent-5 border-1 w-[100%] pb-3" />
@@ -103,6 +103,10 @@ const Categories = () => {
         </div>
       </div>
   )
+}
+
+Categories.propTypes = {
+  title: PropTypes.string.isRequired,
 }
 
 export default Categories
