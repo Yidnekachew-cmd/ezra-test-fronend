@@ -15,12 +15,87 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
 
   const [currentElement, setCurrentElement] = useState("");
 
+  const [listItems, setListItems] = useState([]);
+  const [currentListItem, setCurrentListItem] = useState("");
+
+  const handleListInputChange = (event) => {
+    setCurrentListItem(event.target.value);
+  };
+
+  const handleAddListItem = () => {
+    if (currentListItem) {
+      setListItems([...listItems, currentListItem]);
+      setCurrentListItem("");
+    }
+  };
+
+  const handleAddListElement = () => {
+    if (listItems.length > 0) {
+      dispatch(
+        addElementToSlide({
+          chapterIndex,
+          slideIndex,
+          elementType: "list",
+          value: listItems, // Pass the array of list items as value
+        })
+      );
+      setListItems([]); // Clearing list items after adding
+    }
+    setCurrentElement("");
+    console.log(elements);
+  };
+
+  const handleFileInputChange = (e, element) => {
+    // const file = e.target.files[0]; // Get the first file from the input
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      dispatch(
+        updateElement({
+          chapterIndex,
+          slideIndex,
+          elementId: element.id,
+          value: reader.result, // Pass the read content (base64 encoded) to the backend
+        })
+      );
+    };
+  };
+  const renderListForm = () => (
+    <div>
+      <input
+        type="text"
+        value={currentListItem}
+        onChange={handleListInputChange}
+        placeholder="Enter list item"
+        className="border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 mr-2"
+      />
+      <button
+        onClick={handleAddListItem}
+        className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7"
+      >
+        Add Item
+      </button>
+      <button
+        onClick={handleAddListElement}
+        className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7"
+      >
+        Save List
+      </button>
+      <ul>
+        {listItems.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+
   const handleDropdownChange = (e) => {
     setCurrentElement(e.target.value);
   };
 
   const handleAddButtonClick = () => {
-    if (currentElement) {
+    // Only dispatch addElementToSlide when the add button is clicked and currentElement is not "list"
+    if (currentElement && currentElement !== "list") {
       dispatch(
         addElementToSlide({
           chapterIndex,
@@ -81,6 +156,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
         </button>
       </div>
 
+      {currentElement === "list" && renderListForm()}
       {elements.map((element, index) => (
         <div key={index} className="py-2">
           <div className="flex flex-col justify-between pb-2">
@@ -98,9 +174,8 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
             {element.type === "img" ? (
               <input
                 type="file"
-                value={element.value}
                 id={element.id}
-                onChange={(e) => handleInputChange(element.id, e.target.value)}
+                onChange={(e) => handleFileInputChange(e, element)}
                 className="w-[100%] border-2 border-accent-6 rounded-md text-primary-6 font-bold p-2"
               />
             ) : (
