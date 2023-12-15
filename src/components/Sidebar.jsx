@@ -15,13 +15,13 @@ const Sidebar = () => {
 
   const handleSubItemClick = (subItem) => {
     if (subItem === "Create course") {
-      navigate("/courses");
+      navigate("/courses"); // Updated path
     } else if (subItem === "Create SSL") {
-      navigate("/sabbathSchool");
+      navigate("/sabbathSchool"); // This remains the same
     } else if (subItem === "Create Devotional") {
-      navigate("/devotion");
+      navigate("/devotion"); // This remains the same
     } else if (subItem === "App usage") {
-      navigate("/analytics");
+      navigate("/analytics"); // This remains the same
     }
   };
 
