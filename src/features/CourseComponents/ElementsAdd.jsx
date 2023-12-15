@@ -53,7 +53,6 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
 
   const handleFileInputChange = (e, id) => {
     const file = e.target.files[0]; // Get the first file from the input
-
     dispatch(
       updateElement({
         chapterIndex,

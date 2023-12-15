@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { selectSlides } from "../../redux/courseSlice";
@@ -7,6 +8,21 @@ function SlideDataDisplay({ selectedSlideIndex }) {
     selectSlides(state, selectedSlideIndex.chapter)
   );
   const selectedSlide = slides[selectedSlideIndex.slide];
+
+  //Display image from state
+  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  useEffect(() => {
+    if (selectedSlide && selectedSlide.elements) {
+      const imgElement = selectedSlide.elements.find((e) => e.type === "img");
+      if (imgElement && imgElement.value instanceof File) {
+        const objectUrl = URL.createObjectURL(imgElement.value);
+        setImagePreviewUrl(objectUrl);
+
+        // Clean up the URL when the component unmounts
+        return () => URL.revokeObjectURL(objectUrl);
+      }
+    }
+  }, [selectedSlide]);
 
   return (
     <div className="mr-16 h-[80%]  bg-chapter-img-1 bg-no-repeat bg-cover bg-center rounded-lg">
@@ -61,9 +77,9 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   elementComponent = (
                     <img
                       key={element.type}
-                      src={element.value}
+                      src={imagePreviewUrl}
                       alt={element.id}
-                      className="w-[15%]"
+                      className="w-[40%] mx-auto"
                     />
                   );
                 }
