@@ -94,9 +94,9 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   elementComponent = (
                     <img
                       key={element.type}
-                      src={imagePreviewUrl}
-                      alt={element.value.name}
-                      className="w-[40%] mx-auto"
+                      src={element.value}
+                      alt={element.id}
+                      className="w-[15%]"
                     />
                   );
                 }
