@@ -144,7 +144,7 @@ function SlidesDisplay() {
                           return (
                             <p
                               key={element._id}
-                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-center text-2xl mb-2"
+                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-center text-2xl mt-2"
                             >
                               {element.value}
                             </p>
@@ -153,7 +153,7 @@ function SlidesDisplay() {
                           return (
                             <p
                               key={element._id}
-                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-justify text-lg mb-2"
+                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-justify text-lg mt-2"
                             >
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{element.value}
                             </p>
@@ -181,8 +181,8 @@ function SlidesDisplay() {
                           );
 
                           elementComponent = (
-                            <div className="flex flex-col items-center">
-                              <ul className="list-disc">
+                            <div className="flex flex-col items-center ml-8">
+                              <ul className="list-disc mt-2">
                                 {listItemsComponent}
                               </ul>
                             </div>
