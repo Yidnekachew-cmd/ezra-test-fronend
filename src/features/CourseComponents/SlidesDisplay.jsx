@@ -130,11 +130,12 @@ function SlidesDisplay() {
                       </h1>
                       {slides.elements.map((element) => {
                         // Check the type of the element and render it accordingly
+                        let elementComponent = null;
                         if (element.type === "title") {
                           return (
                             <li
                               key={element._id}
-                              className="text-white text-2xl font-nokia-bold pl-20"
+                              className="text-white text-3xl font-nokia-bold pl-20"
                             >
                               {element.value}
                             </li>
@@ -143,7 +144,7 @@ function SlidesDisplay() {
                           return (
                             <p
                               key={element._id}
-                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-center text-1xl mb-2"
+                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-center text-2xl mb-2"
                             >
                               {element.value}
                             </p>
@@ -167,8 +168,27 @@ function SlidesDisplay() {
                               className="w-[15%]"
                             />
                           );
+                        } else if (element.type === "list") {
+                          const listItemsComponent = element.value.map(
+                            (listItem, index) => (
+                              <li
+                                key={index}
+                                className="text-white font-nokia-bold w-[100%] self-center tracking-wide text-justify text-lg"
+                              >
+                                {listItem}
+                              </li>
+                            )
+                          );
+
+                          elementComponent = (
+                            <div className="flex flex-col items-center">
+                              <ul className="list-disc">
+                                {listItemsComponent}
+                              </ul>
+                            </div>
+                          );
                         } else {
-                          return null;
+                          return elementComponent;
                         }
                       })}
                     </div>

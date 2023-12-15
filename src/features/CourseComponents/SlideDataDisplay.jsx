@@ -50,7 +50,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   elementComponent = (
                     <li
                       key={element.type}
-                      className="text-white text-2xl font-nokia-bold text-center"
+                      className="text-white text-3xl font-nokia-bold text-center"
                     >
                       {element.value}
                     </li>
@@ -59,7 +59,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   elementComponent = (
                     <p
                       key={element.type}
-                      className="text-white font-nokia-bold w-[100%] self-center tracking-wide text-1xl text-center"
+                      className="text-white font-nokia-bold w-[100%] self-center tracking-wide text-2xl text-center"
                     >
                       {element.value}
                     </p>
@@ -72,6 +72,23 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                     >
                       {element.value}
                     </p>
+                  );
+                } else if (element.type === "list") {
+                  const listItemsComponent = element.value.map(
+                    (listItem, index) => (
+                      <li
+                        key={index}
+                        className="text-white font-nokia-bold w-[100%] self-center tracking-wide text-justify text-lg"
+                      >
+                        {listItem}
+                      </li>
+                    )
+                  );
+
+                  elementComponent = (
+                    <div className="flex flex-col items-center">
+                      <ul className="list-disc">{listItemsComponent}</ul>
+                    </div>
                   );
                 } else if (element.type === "img") {
                   elementComponent = (
