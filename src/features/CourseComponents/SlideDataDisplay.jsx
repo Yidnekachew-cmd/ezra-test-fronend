@@ -96,7 +96,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                       key={element.type}
                       src={imagePreviewUrl}
                       alt={element.id}
-                      className="w-[40%] mx-auto"
+                      className="w-[30%] mx-auto border border-accent-6 shadow-xl padding mt-2"
                     />
                   );
                 }

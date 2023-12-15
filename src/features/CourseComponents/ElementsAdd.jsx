@@ -64,7 +64,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
   };
 
   const renderListForm = () => (
-    <div className="mt-2">
+    <div className="mt-4">
       <div className="flex flex-row items-center w-[100%] gap-1">
         <input
           type="text"
@@ -173,11 +173,9 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
       {currentElement === "list" && renderListForm()}
       {elements.map((element, index) => (
         <div key={index} className="py-2">
-          <div className="flex flex-col justify-between pb-2">
+          <div className="flex flex-col justify-between">
             <div className="flex justify-between">
-              <label className="text-accent-6 font-bold mb-1">
-                {element.type}
-              </label>
+              <label className="text-accent-6 font-bold">{element.type}</label>
               <button
                 className="flex items-center text-accent-6 hover:text-accent-6"
                 onClick={() => handleDeleteButtonClick(element.id)}
@@ -190,7 +188,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
                 type="file"
                 id={element.id}
                 onChange={(e) => handleFileInputChange(e, element.id)}
-                className="w-[100%] border-2 border-accent-6 rounded-md text-primary-6 font-bold p-2"
+                className="w-[100%] border-2 border-accent-6 rounded-md text-secondary- font-bold p-2"
               />
             ) : (
               <input
@@ -198,7 +196,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
                 placeholder={`Enter ${element.type}`}
                 value={element.value}
                 onChange={(e) => handleInputChange(element.id, e.target.value)}
-                className="w-[100%] border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1"
+                className="w-[100%] border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 mt-1"
               />
             )}
           </div>

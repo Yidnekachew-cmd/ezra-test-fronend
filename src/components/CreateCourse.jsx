@@ -30,12 +30,12 @@ function CreateCourse() {
   console.log(course);
 
   return (
-    <div className="h-screen pt-9 px-20">
-      <h2 className="text-accent-6 text-2xl font-bold border-b-4 border-gray-300 pb-1">
+    <div className="h-screen w-[80%] mx-auto pt-9 font-nokia-bold">
+      <h2 className="text-accent-6 text-2xl border-b border-primary-8 pb-1">
         Create Course
       </h2>
-      <form className="grid grid-cols-1 gap-3 w-1/2 mx-auto mt-3">
-        <div className="relative col-span-12 mx-auto">
+      <form className="w-[40%] mx-auto my-10 flex flex-col gap-4 border border-accent-6 p-8 rounded-xl">
+        <div className="relative col-span-12 mx-auto h-72 w-[100%]">
           {imagePreviewUrl && (
             <img
               src={imagePreviewUrl}
@@ -43,41 +43,54 @@ function CreateCourse() {
               className="absolute inset-0 w-full h-full object-cover rounded-md"
             />
           )}
+
           <input
             type="file"
-            className="relative z-10 w-full p-24 text-white font-bold leading-tight border border-orange-300 rounded-md bg-transparent focus:outline-none focus:border-blue-500"
+            className="relative z-10 w-[100%]
+            lg:px-[30%] lg:py-[25%]
+            md:px-[20%] md:py-[20%]
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-md file:border-0
+            file:text-sm file:font-semibold
+            file:bg-accent-6 file:text-primary-1
+            hover:file:bg-accent-7 rounded-xs bg-transparent
+            focus:outline-none focus:border-accent-8 cursor-pointer"
             name="image"
             onChange={handleImageChange}
+            required
           />
+          <div className="absolute inset-0 rounded-md bg-accent-8 opacity-60"></div>
         </div>
         <div className="col-span-12">
-          <label className="block text-accent-6 font-bold">Course Title</label>
+          <label className="block text-accent-6">Course Title</label>
           <input
             type="text"
-            className="w-full px-3 py-2 text-accent-6 leading-tight border border-orange-300 rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-2 text-accent-6 leading-tight border border-orange-300 rounded-md focus:outline-none focus:shadow-lg transition-all placeholder:text-secondary-2"
             name="title"
             placeholder="Untitled Course"
             autoComplete="off"
             value={title}
             onChange={(e) => dispatch(setTitle(e.target.value))}
+            required
           />
         </div>
         <div className="col-span-12">
-          <label className="block text-accent-6 font-bold">Description</label>
+          <label className="block text-accent-6">Description</label>
           <input
             type="text"
-            className="w-full px-3 pt-2 pb-12 text-accent-6 leading-tight border border-orange-300 rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full px-3 pt-2 pb-12 text-accent-6 leading-tight border border-orange-300 rounded-md focus:outline-none focus:shadow-lg transition-all placeholder:text-secondary-2"
             name="description"
             placeholder="Add a description"
             autoComplete="off"
             value={description}
             onChange={(e) => dispatch(setDescription(e.target.value))}
+            required
           />
         </div>
         <div className="col-span-12">
           <button
             type="submit"
-            className="px-4 py-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-orange-600"
+            className="px-4 py-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7"
           >
             <Link to="/courses/create/chapters">Create</Link>
           </button>
