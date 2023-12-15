@@ -61,7 +61,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   elementComponent = (
                     <img
                       key={element.type}
-                      src={`http://localhost:5100/images/${element.value}`}
+                      src={`http://localhost:5354/images/${element.value}`}
                       alt={element.id}
                       className="w-[15%]"
                     />

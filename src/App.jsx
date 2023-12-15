@@ -18,6 +18,7 @@ import AddCourse from "./components/AddCourse";
 import ChaptersDisplay from "./features/CourseComponents/ChaptersDisplay";
 import SlidesDisplay from "./features/CourseComponents/SlidesDisplay";
 import AdminChapter from "./features/CourseComponents/AdminChapter";
+import AdminDashboard from "./routes/AdminDashboard";
 
 function App() {
   const { user } = useAuthContext();
@@ -61,6 +62,16 @@ function App() {
           <Route path="/courses/create/chapters" element={<AdminChapter />} />
           <Route path="/courses/create/add" element={<AddCourse />} />
           <Route path="*" element={<NotMatch />} />
+          <Route
+            path="/admin"
+            element={
+              user && user.role === "Admin" ? (
+                <AdminDashboard />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          />
         </Routes>
         <Footer />
       </BrowserRouter>

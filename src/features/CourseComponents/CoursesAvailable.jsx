@@ -61,7 +61,7 @@ function CoursesAvailable() {
                 className="flex flex-col justify-center items-start  border-accent-5 border-2 w-[100%] md:w-[32.3%] shadow-2xl rounded-3xl md:rounded-xl h-auto pb-6"
               >
                 <img
-                  src={`http://localhost:5100/images/` + course.image}
+                  src={`http://localhost:5354/images/` + course.image}
                   className="w-full  md:min-h-[40vh] max-h-[40vh] object-contaim  rounded-3xl p-3"
                   alt="no_image"
                 />
@@ -85,9 +85,7 @@ function CoursesAvailable() {
           })}
         </div>
       </div>
-      <Categories
-      title="Categories"
-      />
+      <Categories title="Categories" />
     </div>
   );
 }
