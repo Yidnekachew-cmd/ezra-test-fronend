@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { CaretCircleLeft } from "@phosphor-icons/react";
+// import { Splide, SplideSlide } from "@splidejs/react-splide";
 
 function SlidesDisplay() {
   const [data, setData] = useState([]);
@@ -71,7 +72,7 @@ function SlidesDisplay() {
                     className={`flex justify-between items-center text-sm font-nokia-bold border-b-2 border-accent-5 px-4 text-secondary-6 cursor-pointer py-2 ${
                       unlocked ? "text-black" : "text-gray-500"
                     }  ${index === activeIndex && "font-bold bg-[#FAE5C7]"}
-                    `} // Locked slide to gray
+                    `}
                     onClick={() => {
                       updateIndex(index);
                     }}
