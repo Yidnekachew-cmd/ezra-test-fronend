@@ -272,7 +272,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
                 type="file"
                 id={element.id}
                 onChange={(e) => handleFileInputChange(e, element.id)}
-                className="w-[100%] border-2 border-accent-6 rounded-md text-primary-6 font-bold p-2"
+                className="w-[100%] border-2 border-accent-6 rounded-md text-secondary- font-bold p-2"
               />
             ) : (
               <input
