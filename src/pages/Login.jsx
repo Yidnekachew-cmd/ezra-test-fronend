@@ -2,20 +2,20 @@ import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import { GoogleLogo, FacebookLogo } from "@phosphor-icons/react";
 import "./LoginAndSignup.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, error, isLoading } = useLogin();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const user = await login(email, password);
     if (user.role === "Admin") {
-      history.push("/dashboard");
+      navigate("/admin");
     }
   };
 
