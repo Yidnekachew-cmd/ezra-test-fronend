@@ -1,14 +1,27 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState("");
+  const navigate = useNavigate();
 
   const handleMenuClick = (menuName) => {
     if (openMenu === menuName) {
       setOpenMenu("");
     } else {
       setOpenMenu(menuName);
+    }
+  };
+
+  const handleSubItemClick = (subItem) => {
+    if (subItem === "Create course") {
+      navigate("/courses");
+    } else if (subItem === "Create SSL") {
+      navigate("/sabbathSchool");
+    } else if (subItem === "Create Devotional") {
+      navigate("/devotion");
+    } else if (subItem === "App usage") {
+      navigate("/analytics");
     }
   };
 
@@ -38,13 +51,13 @@ const Sidebar = () => {
           {item.subItems.length > 0 && openMenu === item.name && (
             <div className="mt-2 bg-white shadow rounded">
               {item.subItems.map((subItem) => (
-                <Link
+                <button
                   key={subItem}
-                  to={`/admin/${subItem.toLowerCase().replace(" ", "-")}`}
-                  className="block px-4 py-2 hover:bg-accent-6"
+                  onClick={() => handleSubItemClick(subItem)}
+                  className="block w-full text-left px-4 py-2 hover:bg-accent-6"
                 >
                   {subItem}
-                </Link>
+                </button>
               ))}
             </div>
           )}
