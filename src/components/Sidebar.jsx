@@ -25,21 +25,28 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="sidebar">
+    <div className="w-1/4 flex flex-col h-screen bg-white text-gray-800 p-4 border-r border-gray-700">
       {sidebarItems.map((item) => (
-        <div key={item.name}>
-          <Link
-            to={`/admin/${item.name.toLowerCase().replace(" ", "-")}`}
+        <div key={item.name} className="mb-2">
+          <button
             onClick={() => handleMenuClick(item.name)}
+            className="w-full text-left hover:text-accent-1 hover:bg-accent-6"
           >
             {item.name}
-          </Link>
-          {openMenu === item.name && item.subItems.length > 0 && (
-            <ul>
+          </button>
+
+          {item.subItems.length > 0 && openMenu === item.name && (
+            <div className="mt-2 bg-white shadow rounded">
               {item.subItems.map((subItem) => (
-                <li key={subItem}>{subItem}</li>
+                <Link
+                  key={subItem}
+                  to={`/admin/${subItem.toLowerCase().replace(" ", "-")}`}
+                  className="block px-4 py-2 hover:bg-accent-6"
+                >
+                  {subItem}
+                </Link>
               ))}
-            </ul>
+            </div>
           )}
         </div>
       ))}
