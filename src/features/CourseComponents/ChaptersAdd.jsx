@@ -2,7 +2,7 @@ import { useState } from "react";
 import ElementsAdd from "./ElementsAdd";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  // selectCourse,
+  selectCourse,
   selectChapters,
   selectAllSlides,
   addChapter,
@@ -17,7 +17,7 @@ import SlideDataDisplay from "./SlideDataDisplay";
 
 function ChaptersAdd() {
   const dispatch = useDispatch();
-  // const course = useSelector(selectCourse);
+  const course = useSelector(selectCourse);
   const chapters = useSelector(selectChapters) || [];
   const allSlides = useSelector(selectAllSlides);
 
@@ -59,6 +59,8 @@ function ChaptersAdd() {
       setSelectedChapterIndex(chapterIndex); // Show slides for the selected chapter
     }
   };
+
+  console.log(course);
 
   return (
     <div className="flex justify-between h-screen w-full bg-[#F1F1F1] text-secondary-6 font-nokia-bold">
