@@ -123,14 +123,12 @@ function SlidesDisplay() {
                   return (
                     <div
                       key={index}
-                      className="flex flex-col justify-center flex-grow"
+                      className="flex flex-col justify-center flex-grow w-[80%] mx-auto"
                     >
                       <h1 className="text-3xl text-[#fff] text-center font-nokia-bold">
                         {slides.slide}
                       </h1>
                       {slides.elements.map((element) => {
-                        // Check the type of the element and render it accordingly
-                        let elementComponent = null;
                         if (element.type === "title") {
                           return (
                             <li
@@ -144,7 +142,7 @@ function SlidesDisplay() {
                           return (
                             <p
                               key={element._id}
-                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-center text-2xl mt-2"
+                              className="text-white font-nokia-bold  self-center tracking-wide text-center text-2xl mt-2"
                             >
                               {element.value}
                             </p>
@@ -153,7 +151,7 @@ function SlidesDisplay() {
                           return (
                             <p
                               key={element._id}
-                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-justify text-lg mt-2"
+                              className="text-white font-nokia-bold   self-center tracking-wide text-justify text-lg mt-2"
                             >
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{element.value}
                             </p>
@@ -173,22 +171,25 @@ function SlidesDisplay() {
                             (listItem, index) => (
                               <li
                                 key={index}
-                                className="text-white font-nokia-bold w-[100%] self-center tracking-wide text-justify text-lg"
+                                className="text-white font-nokia-bold w-[100%] tracking-wide text-left text-lg"
                               >
                                 {listItem}
                               </li>
                             )
                           );
 
-                          elementComponent = (
-                            <div className="flex flex-col items-center ml-8">
+                          return (
+                            <div
+                              key={element._id}
+                              className="flex flex-col ml-8"
+                            >
                               <ul className="list-disc mt-2">
                                 {listItemsComponent}
                               </ul>
                             </div>
                           );
                         } else {
-                          return elementComponent;
+                          return null;
                         }
                       })}
                     </div>
