@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState("");
@@ -11,48 +12,37 @@ const Sidebar = () => {
     }
   };
 
+  const sidebarItems = [
+    { name: "Analytics", subItems: ["App usage", "Performance dashboard"] },
+    { name: "Course", subItems: ["Create course", "Manage course"] },
+    { name: "Sabbath School", subItems: ["Create SSL", "Manage SSL"] },
+    {
+      name: "Daily Devotional",
+      subItems: ["Create Devotional", "Manage Devotional"],
+    },
+    { name: "Users", subItems: [] },
+    { name: "Feedback Survey", subItems: [] },
+  ];
+
   return (
     <div className="sidebar">
-      <div onClick={() => handleMenuClick("analytics")}>
-        Analytics
-        {openMenu === "analytics" && (
-          <ul>
-            <li>App usage</li>
-            <li>Performance dashboard</li>
-          </ul>
-        )}
-      </div>
-      <div onClick={() => handleMenuClick("course")}>
-        Course
-        {openMenu === "course" && (
-          <ul>
-            <li>Create course</li>
-            <li>Manage course</li>
-          </ul>
-        )}
-      </div>
-      <div onClick={() => handleMenuClick("sabbathSchool")}>
-        Sabbath School
-        {openMenu === "sabbathSchool" && (
-          <ul>
-            <li>Create SSL</li>
-            <li>Manage SSL</li>
-          </ul>
-        )}
-      </div>
-      <div onClick={() => handleMenuClick("dailyDevotional")}>
-        Daily Devotional
-        {openMenu === "dailyDevotional" && (
-          <ul>
-            <li>Create Devotional</li>
-            <li>Manage Devotional</li>
-          </ul>
-        )}
-      </div>
-      <div onClick={() => handleMenuClick("users")}>Users</div>
-      <div onClick={() => handleMenuClick("feedbackSurvey")}>
-        Feedback Survey
-      </div>
+      {sidebarItems.map((item) => (
+        <div key={item.name}>
+          <Link
+            to={`/admin/${item.name.toLowerCase().replace(" ", "-")}`}
+            onClick={() => handleMenuClick(item.name)}
+          >
+            {item.name}
+          </Link>
+          {openMenu === item.name && item.subItems.length > 0 && (
+            <ul>
+              {item.subItems.map((subItem) => (
+                <li key={subItem}>{subItem}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
     </div>
   );
 };
