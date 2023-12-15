@@ -45,21 +45,18 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
     console.log(elements);
   };
 
-  const handleFileInputChange = (e, element) => {
-    // const file = e.target.files[0]; // Get the first file from the input
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      dispatch(
-        updateElement({
-          chapterIndex,
-          slideIndex,
-          elementId: element.id,
-          value: reader.result, // Pass the read content (base64 encoded) to the backend
-        })
-      );
-    };
+  const handleFileInputChange = (e, id) => {
+    const file = e.target.files[0]; // Get the first file from the input
+    dispatch(
+      updateElement({
+        chapterIndex,
+        slideIndex,
+        elementId: id,
+        value: file,
+      })
+    );
   };
+
   const renderListForm = () => (
     <div>
       <input
@@ -175,7 +172,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
               <input
                 type="file"
                 id={element.id}
-                onChange={(e) => handleFileInputChange(e, element)}
+                onChange={(e) => handleFileInputChange(e, element.id)}
                 className="w-[100%] border-2 border-accent-6 rounded-md text-primary-6 font-bold p-2"
               />
             ) : (
