@@ -9,6 +9,12 @@ export default {
     "./src/**/*.{js,jsx}",
   ],
   theme: {
+    screens: {
+      sm: '480px',
+      md: '768px',
+      lg: '976px',
+      xl: '1440px'
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -30,6 +36,12 @@ export default {
       "7xl": ["96px", { lineHeight: "110px", letterSpacing: "-0.02em" }],
     },
     extend: {
+      truncate: {
+        lines: {
+          2: '2',
+          3: '3',
+        },
+      },
       fontFamily: {
         "nokia-bold": ["Nokia Pure Headline Bold", "Inter", "sans-serif"],
         "nokia-light": ["Nokia Pure Headline Light", "Inter", "sans-serif"],
