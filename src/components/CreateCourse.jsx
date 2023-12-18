@@ -7,6 +7,7 @@ import {
   setImage,
   selectCourse,
 } from "../redux/courseSlice";
+import { Button } from "./ui/button";
 
 function CreateCourse() {
   const dispatch = useDispatch();
@@ -88,12 +89,9 @@ function CreateCourse() {
           />
         </div>
         <div className="col-span-12">
-          <button
-            type="submit"
-            className="px-4 py-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7"
-          >
+          <Button>
             <Link to="/courses/create/chapters">Create</Link>
-          </button>
+          </Button>
         </div>
       </form>
     </div>
