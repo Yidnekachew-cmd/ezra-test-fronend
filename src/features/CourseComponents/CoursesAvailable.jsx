@@ -5,6 +5,7 @@ import Categories from "./Categories";
 
 function CoursesAvailable() {
   const [data, setData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const instance = useAxiosInstance();
 
@@ -17,6 +18,14 @@ function CoursesAvailable() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredData = data.filter((course) => {
+    return course.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   return (
     <div className="h-auto flex flex-col w-[90%] md:w-[80%] mt-12 mx-auto space-y-12 mb-12">
@@ -37,6 +46,8 @@ function CoursesAvailable() {
             <input
               type="text"
               placeholder="Search"
+              value={searchTerm}
+              onChange={handleSearch}
               className=" hidden md:inline-block border-2 border-accent-6  w-[80%] outline-1 outline-accent-5 rounded-l px-4"
             />
             <img
@@ -54,7 +65,7 @@ function CoursesAvailable() {
         <hr className="border-accent-5 border-1 w-[100%] pb-3 md:w-[30%]" />
 
         <div className="flex flex-col justify-center items-center md:justify-start md:items-start w-[90%] mx-auto md:w-[95%] md:flex-row md:flex-wrap space-y-6 md:space-y-0 md:gap-3">
-          {data.map((course, index) => {
+          {filteredData.map((course, index) => {
             return (
               <div
                 key={index}
