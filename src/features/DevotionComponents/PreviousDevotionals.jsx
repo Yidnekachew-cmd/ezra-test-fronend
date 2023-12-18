@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Button } from "@/components/ui/button";
 
 const PreviousDevotionals = ({ previousDevotions, setSelectedDevotion }) => {
   return (
@@ -14,12 +15,14 @@ const PreviousDevotionals = ({ previousDevotions, setSelectedDevotion }) => {
           <hr className=" border-1 border-accent-6 w-[40%]" />
         </div>
         <div className="self-end w-[15%]">
-          <button
-            type="button"
-            className="border-2 w-[70%] border-accent-6 rounded-full  px-2 text-accent-6 text-xs"
+          <Button
+            // type="button"
+            // className="border-2 w-[70%] border-accent-6 rounded-full  px-2 text-accent-6 text-xs"
+            variant="outline"
+            size="sm"
           >
             ሙሉ ተመልከት
-          </button>
+          </Button>
         </div>
       </div>
       <div className="flex flex-wrap gap-3 w-[100%] mx-auto  ">
@@ -48,9 +51,10 @@ const PreviousDevotionals = ({ previousDevotions, setSelectedDevotion }) => {
                   </h2>
                 </div>
                 <div className="w-[20%]">
-                  <button
-                    type="button"
-                    className="text-[#fff] bg-accent-6 text-xs font-nokia-bold w-[100%] border-2  rounded-full  px-2 hover: hover:bg-accent-7"
+                  <Button
+                    // type="button"
+                    // className="text-[#fff] bg-accent-6 text-xs font-nokia-bold w-[100%] border-2  rounded-full  px-2 hover: hover:bg-accent-7"
+                    size="devotion"
                     onClick={() => {
                       // open the devotion on click
                       // console.log("clicked");
@@ -58,7 +62,7 @@ const PreviousDevotionals = ({ previousDevotions, setSelectedDevotion }) => {
                     }}
                   >
                     ክፈት
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>

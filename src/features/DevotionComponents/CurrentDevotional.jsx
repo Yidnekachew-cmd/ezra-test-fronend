@@ -9,7 +9,7 @@ const CurrentDevotional = ({
 }) => {
   const { role } = useAuthContext(); // get the authentication token
   return (
-    <div className="h-auto border-2 shadow-lg rounded-2xl p-6">
+    <div className="h-auto border border-accent-6 shadow-lg rounded-2xl p-6">
       <div>
         <h1 className="font-nokia-bold  text-3xl text-accent-5 ">
           Daily Devotional
