@@ -48,7 +48,7 @@ function CoursesAvailable() {
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearch}
-              className=" hidden md:inline-block border-2 border-accent-6  w-[80%] outline-1 outline-accent-5 rounded-l px-4"
+              className="  md:inline-block  md:border-2  border-accent-6  w-[80%] outline-1 outline-accent-5 rounded-l px-4"
             />
             <span>
               <img
@@ -75,7 +75,7 @@ function CoursesAvailable() {
               >
                 <img
                   src={`http://localhost:5100/images/` + course.image}
-                  className="w-full  md:min-h-[30vh] max-h-[30vh] object-cover  rounded-2xl p-2"
+                  className="w-full max-h-[40vh] min-h-[40vh]  md:min-h-[30vh] md:max-h-[30vh] object-cover rounded-3xl  md:rounded-2xl p-2"
                   alt="no_image"
                 />
                 <div className="space-y-2 w-[95%] md:w-[90%] mx-auto">
