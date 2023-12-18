@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { CaretCircleLeft } from "@phosphor-icons/react";
-// import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
+import "@splidejs/react-splide/css/sea-green";
+import "@splidejs/react-splide/css/core";
 
 function SlidesDisplay() {
   const [data, setData] = useState([]);
@@ -187,6 +190,33 @@ function SlidesDisplay() {
                               <ul className="list-disc mt-2">
                                 {listItemsComponent}
                               </ul>
+                            </div>
+                          );
+                        } else if (element.type === "slide") {
+                          const listItemsComponent = element.value.map(
+                            (listItem, index) => (
+                              <SplideSlide
+                                key={index}
+                                className="text-white font-nokia-bold w-[100%] tracking-wide text-left text-lg px-8"
+                              >
+                                {listItem}
+                              </SplideSlide>
+                            )
+                          );
+
+                          return (
+                            <div
+                              key={element._id}
+                              className="flex flex-col ml-8"
+                            >
+                              <Splide
+                                options={{
+                                  gap: "1rem",
+                                }}
+                                className="bg-accent-6 p-8 rounded-md list-disc mt-2"
+                              >
+                                {listItemsComponent}
+                              </Splide>
                             </div>
                           );
                         } else {
