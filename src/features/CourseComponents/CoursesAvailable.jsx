@@ -66,31 +66,31 @@ function CoursesAvailable() {
         </div>
         <hr className="border-accent-5 border-1 w-[100%] pb-3 md:w-[30%]" />
 
-        <div className="flex flex-col justify-center items-center md:justify-start md:items-start w-[90%] mx-auto md:w-[95%] md:flex-row md:flex-wrap space-y-6 md:space-y-0 md:gap-3">
+        <div className="flex flex-col justify-center items-center md:items-start w-[90%] mx-auto md:w-[98%] md:flex-row md:justify-start md:flex-wrap space-y-6 md:space-y-0 md:gap-4 ">
           {filteredData.map((course, index) => {
             return (
               <div
                 key={index}
-                className="flex flex-col justify-center items-start  border-accent-5 border-2 w-[100%] md:w-[32.3%] shadow-2xl rounded-3xl md:rounded-xl h-auto pb-6"
+                className="flex flex-col justify-center items-start  border-accent-5 border-2 w-[100%] md:w-[23.7%] shadow-xl rounded-3xl md:rounded-xl h-auto pb-6 "
               >
                 <img
                   src={`http://localhost:5100/images/` + course.image}
-                  className="w-full  md:min-h-[40vh] max-h-[40vh] object-contaim  rounded-3xl p-3"
+                  className="w-full  md:min-h-[30vh] max-h-[30vh] object-cover  rounded-2xl p-2"
                   alt="no_image"
                 />
                 <div className="space-y-2 w-[95%] md:w-[90%] mx-auto">
-                  <h2 className="text-secondary-6 text-2xl font-nokia-bold w-[80%] md:w-[85%]">
-                    {course.title}
+                  <h2 className="text-secondary-6 text-xl font-nokia-bold w-[90%] truncate">
+                  {course.title}
                   </h2>
                   <hr className="border-accent-5 border-1 w-[100%] " />
-                  <p className="text-secondary-5 text-xs font-nokia-bold  pb-4 w-[100%]  truncate  text-justify ">
+                  <p className="text-secondary-5 text-xs font-nokia-bold   w-[100%]  line-clamp-3  text-justify">
                     {course.description}
                   </p>
                   <Link
                     to={`/courses/get/` + course._id}
                     className="bg-accent-6 text-primary-6 px-3 py-1 rounded-full font-nokia-bold text-xs hover:bg-accent-7"
                   >
-                    <button type="button">ኮርሱን ክፈት</button>
+                    <button className="mt-2" type="button">ኮርሱን ክፈት</button>
                   </Link>
                 </div>
               </div>
