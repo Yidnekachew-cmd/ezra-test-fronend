@@ -50,16 +50,18 @@ function CoursesAvailable() {
               onChange={handleSearch}
               className=" hidden md:inline-block border-2 border-accent-6  w-[80%] outline-1 outline-accent-5 rounded-l px-4"
             />
-            <img
-              src="src/assets/Search-1.svg"
-              alt=""
-              className="hidden md:inline-block cursor-pointer"
-            />
-            <img
-              src="src/assets/Search.svg"
-              alt=""
-              className="md:hidden cursor-pointer"
-            />
+            <span>
+              <img
+                src="src/assets/Search-1.svg"
+                alt=""
+                className="hidden md:inline-block cursor-pointer"
+              />
+              <img
+                src="src/assets/Search.svg"
+                alt=""
+                className="md:hidden cursor-pointer"
+              />
+            </span>
           </div>
         </div>
         <hr className="border-accent-5 border-1 w-[100%] pb-3 md:w-[30%]" />
@@ -81,7 +83,7 @@ function CoursesAvailable() {
                     {course.title}
                   </h2>
                   <hr className="border-accent-5 border-1 w-[100%] " />
-                  <p className="text-secondary-5 text-xs font-nokia-bold w-[80%] pb-4 ">
+                  <p className="text-secondary-5 text-xs font-nokia-bold  pb-4 w-[100%]  truncate  text-justify ">
                     {course.description}
                   </p>
                   <Link
