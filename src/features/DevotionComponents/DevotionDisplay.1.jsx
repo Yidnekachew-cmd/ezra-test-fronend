@@ -96,7 +96,7 @@ export const DevotionDisplay = ({ devotions, handleDelete }) => {
               )} */}
 
             <img
-              src={`http://localhost:5100/images/${devotion.image}`}
+              src={`http://localhost:5100/images/${latestDevotion.image}`}
               alt="Devotion Image"
             />
           </div>
@@ -110,7 +110,7 @@ export const DevotionDisplay = ({ devotions, handleDelete }) => {
               <img
                 src={`http://localhost:5100/images/${devotion.image}`}
                 alt="Devotion Image"
-                className="h-[50%] w-[50%] mx-auto mt-4"
+                className="h-[50%] w-[50%] mx-auto"
               />
               <h1 className="font-customBold text-2xl text-justify mt-2">
                 {devotion.title}
