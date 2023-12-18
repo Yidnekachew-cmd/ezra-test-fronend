@@ -36,6 +36,12 @@ export default {
       "7xl": ["96px", { lineHeight: "110px", letterSpacing: "-0.02em" }],
     },
     extend: {
+      truncate: {
+        lines: {
+          2: '2',
+          3: '3',
+        },
+      },
       fontFamily: {
         "nokia-bold": ["Nokia Pure Headline Bold", "Inter", "sans-serif"],
         "nokia-light": ["Nokia Pure Headline Light", "Inter", "sans-serif"],
