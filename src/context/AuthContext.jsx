@@ -31,7 +31,9 @@ export const AuthContextProvider = ({ children }) => {
     setIsAuthReady(true); // Set this to true after checking localStorage
   }, []);
 
-  console.log("AuthContext state: ", state);
+  if (!isAuthReady) {
+    return <div>Loading...</div>; // Or a loading spinner
+  }
 
   return (
     <AuthContext.Provider value={{ ...state, isAuthReady, dispatch }}>

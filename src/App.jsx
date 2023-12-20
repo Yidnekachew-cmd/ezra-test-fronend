@@ -16,7 +16,11 @@ import AdminDashboard from "./routes/AdminDashboard";
 import CoursesAvailable from "./features/CourseComponents/CoursesAvailable";
 
 function App() {
-  const { user } = useAuthContext();
+  const { user, isAuthReady } = useAuthContext();
+
+  if (!isAuthReady) {
+    return <div>Loading...</div>; // Or a loading spinner
+  }
 
   // Private Route for Admin
   const PrivateAdminRoute = ({ children }) => {
