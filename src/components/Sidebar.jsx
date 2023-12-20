@@ -16,7 +16,7 @@ const Sidebar = () => {
   return (
     <div className="flex flex-col bg-gray-800 text-white h-full w-1/5">
       <div
-        className="px-4 py-3 cursor-pointer hover:bg-gray-700"
+        className="px-4 py-3 cursor-pointer hover:bg-accent-6"
         onClick={() => handleMenuClick("courses")}
       >
         Courses
@@ -30,7 +30,7 @@ const Sidebar = () => {
             </li>
             <li
               className="cursor-pointer hover:text-gray-300"
-              onClick={() => handleSubItemClick("/admin/courses/create")}
+              onClick={() => handleSubItemClick("/admin/courses/create/add")}
             >
               Manage Courses
             </li>
@@ -39,7 +39,7 @@ const Sidebar = () => {
         )}
       </div>
       <div
-        className="px-4 py-3 cursor-pointer hover:bg-gray-700"
+        className="px-4 py-3 cursor-pointer  hover:bg-accent-6"
         onClick={() => handleMenuClick("sabbathSchool")}
       >
         Sabbath School
@@ -56,7 +56,7 @@ const Sidebar = () => {
         )}
       </div>
       <div
-        className="px-4 py-3 cursor-pointer hover:bg-gray-700"
+        className="px-4 py-3 cursor-pointer  hover:bg-accent-6"
         onClick={() => handleMenuClick("devotion")}
       >
         Devotion
@@ -66,7 +66,14 @@ const Sidebar = () => {
               className="cursor-pointer hover:text-gray-300"
               onClick={() => handleSubItemClick("/admin/devotion")}
             >
-              View Devotion
+              Add Devotion
+            </li>
+
+            <li
+              className="cursor-pointer hover:text-gray-300"
+              onClick={() => handleSubItemClick("/admin/devotion")}
+            >
+              Manage Devotion
             </li>
             {/* Add more sub-items as needed */}
           </ul>

@@ -12,17 +12,14 @@ const Header = () => {
   const handleAccountClick = () => {
     setShowAccountModal((prev) => !prev);
   };
-  
-  // To access the dom element || useRef is used to create a ref(reference) object
-  const ref = useRef();
 
-  // A logic that watches for clicks outside the dropdown panel to close it
+  const ref = useRef();
   useOnClickOutside(ref, showAccountModal, () => setShowAccountModal(false));
 
   return (
     <header className="bg-header-img bg-bottom bg-cover backdrop-blur-md">
-      <div className=" flex justify-between py-6 items-center text-white font-nokia-bold w-[90%] md:w-[80%] mx-auto">
-        <div className="flex justify-center items-center space-x-3 cursor-pointer ">
+      <div className="flex justify-between py-6 items-center text-white font-nokia-bold w-[90%] md:w-[80%] mx-auto">
+        <div className="flex justify-center items-center space-x-3 cursor-pointer">
           <img src="src/assets/ezra-logo.svg" alt="" />
           <h3>
             <strong className="text-2xl">Ezra</strong> Seminary
@@ -65,6 +62,11 @@ const Header = () => {
                     <div className="px-4 py-2 border-b">
                       <NavLink to="/profile">Profile Settings</NavLink>
                     </div>
+                    {user.role === "Admin" && (
+                      <div className="px-4 py-2 border-b">
+                        <NavLink to="/admin">Dashboard</NavLink>
+                      </div>
+                    )}
                     <div className="px-4 py-2">
                       <LogoutButton />
                     </div>
