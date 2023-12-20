@@ -26,6 +26,17 @@ function ManageCourse() {
     return course.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
+  // delete property
+  const handleDelete = (id) => {
+    instance
+      .delete("/course/delete/" + id)
+      .then((res) => {
+        window.location.reload(true);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="h-auto flex flex-col w-[73%] border border-gray-300 p-11 rounded-3xl mt-12 mx-auto space-y-12 mb-12">
       <div className="space-y-3">
@@ -79,16 +90,16 @@ function ManageCourse() {
                   <p className="text-secondary-5 text-xs font-nokia-bold   w-[100%]  line-clamp-3  text-justify">
                     {course.description}
                   </p>
-                  <div>
+                  <div className="flex justify-between">
                     <Link
                       to={`/admin/edit/` + course._id}
-                      className="bg-accent-6 text-primary-6 px-3 py-1 mt-2 rounded-full font-nokia-bold text-xs hover:bg-accent-7"
+                      className="inline-block bg-accent-6 text-primary-6 px-3 py-1 rounded transition duration-300 focus:outline-none font-nokia-bold text-xs hover:bg-accent-7"
                     >
                       edit
                     </Link>
                     <button
                       onClick={() => handleDelete(course._id)}
-                      className="inline-block bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 border border-red-500 rounded transition duration-300 focus:outline-none focus:shadow-outline"
+                      className="inline-block bg-red-500 hover:bg-red-600 text-white font-nokia-bold text-xs py-1 px-3 rounded transition duration-300 focus:outline-none"
                     >
                       delete
                     </button>
