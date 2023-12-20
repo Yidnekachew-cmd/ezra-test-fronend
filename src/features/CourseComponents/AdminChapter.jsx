@@ -20,13 +20,34 @@ function AdminChapter() {
     formData.append("description", description);
     formData.append("image", image);
     formData.append("chapters", JSON.stringify(chapters)); // Convert chapters to JSON string and append it to formData
+
+    // Loop through the chapters and slides to append any image files
+    course.chapters.forEach((chapter, chapterIndex) => {
+      chapter.slides.forEach((slide, slideIndex) => {
+        slide.elements.forEach((element) => {
+          if (element.type === "img" && element.value instanceof File) {
+            // Append the file using chapter and slide indices to help reference the file on the server-side
+            formData.append(
+              `chapter_${chapterIndex}_slide_${slideIndex}_image`,
+              element.value,
+              `${chapterIndex}_${slideIndex}_${element.value.name}`
+            );
+          }
+        });
+      });
+    });
+
     console.log(formData);
 
     const payload = Object.fromEntries(formData);
     console.log(payload);
 
     axios
-      .post("/course/create", formData)
+      .post("/course/create", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         console.log(res);
         navigate("/courses");
