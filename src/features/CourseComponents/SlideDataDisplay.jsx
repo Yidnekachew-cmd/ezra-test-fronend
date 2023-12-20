@@ -95,8 +95,8 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                     <img
                       key={element.type}
                       src={imagePreviewUrl}
-                      alt={element.id}
-                      className="w-[30%] mx-auto border border-accent-6 shadow-xl padding mt-2"
+                      alt={element.value.name}
+                      className="w-[40%] mx-auto"
                     />
                   );
                 }

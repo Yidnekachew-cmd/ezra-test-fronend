@@ -77,14 +77,16 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
 
   const handleFileInputChange = (e, id) => {
     const file = e.target.files[0]; // Get the first file from the input
-    dispatch(
-      updateElement({
-        chapterIndex,
-        slideIndex,
-        elementId: id,
-        value: file,
-      })
-    );
+    if (file) {
+      dispatch(
+        updateElement({
+          chapterIndex,
+          slideIndex,
+          elementId: id,
+          value: file,
+        })
+      );
+    }
   };
 
   const handleDeleteListItem = (indexToDelete) => {
@@ -179,7 +181,8 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
   };
 
   const handleAddButtonClick = () => {
-    if (currentElement && currentElement !== "list") {
+    // Only dispatch addElementToSlide when the add button is clicked and currentElement is not "list"
+    if (currentElement && currentElement !== "list" && "img") {
       dispatch(
         addElementToSlide({
           chapterIndex,
@@ -188,6 +191,16 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
         })
       );
       setCurrentElement("");
+    } else if (currentElement && currentElement === "img") {
+      // For an image, just setup the element; don't add until an image is selected
+      dispatch(
+        addElementToSlide({
+          chapterIndex,
+          slideIndex,
+          elementType: currentElement,
+          value: null, // Initially no image file chosen
+        })
+      );
     }
   };
 
