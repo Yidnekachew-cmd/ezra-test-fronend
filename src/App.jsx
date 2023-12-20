@@ -60,6 +60,7 @@ function App() {
           />
           <Route path="/courses/create/chapters" element={<AdminChapter />} />
           <Route path="/courses/create/add" element={<AddCourse />} />
+          <Route path="/admin/course/edit/:id" element={<EditProperty />} />
           <Route path="*" element={<NotMatch />} />
         </Routes>
         <Footer />
