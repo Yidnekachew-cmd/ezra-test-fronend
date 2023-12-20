@@ -1,5 +1,4 @@
 import { useState } from "react";
-import ElementsAdd from "./ElementsAdd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCourse,
@@ -14,6 +13,7 @@ import {
 } from "../../redux/courseSlice";
 import { BookOpenText, PlusCircle, Trash } from "@phosphor-icons/react";
 import SlideDataDisplay from "./SlideDataDisplay";
+import EditElements from "./EditElements";
 
 function EditChapters() {
   const dispatch = useDispatch();
@@ -148,7 +148,7 @@ function EditChapters() {
                       {editingSlideIndex &&
                         editingSlideIndex.chapter === chapterIndex &&
                         editingSlideIndex.slide === slideIndex && (
-                          <ElementsAdd
+                          <EditElements
                             chapterIndex={chapterIndex}
                             slideIndex={slideIndex}
                           />
