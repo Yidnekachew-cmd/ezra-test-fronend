@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useAxiosInstance from "../../api/axiosInstance";
-import Categories from "./Categories";
 
 function ManageCourse() {
   const [data, setData] = useState([]);
@@ -28,19 +27,13 @@ function ManageCourse() {
   });
 
   return (
-    <div className="h-auto flex flex-col w-[90%] md:w-[80%] mt-12 mx-auto space-y-12 mb-12">
+    <div className="h-auto flex flex-col w-[73%] border border-gray-300 p-11 rounded-3xl mt-12 mx-auto space-y-12 mb-12">
       <div className="space-y-3">
         <div className="flex justify-between items-end">
           <div>
-            <h1 className="text-accent-6 text-2xl font-nokia-bold md:text-4xl tracking-wide">
-              Courses Available
+            <h1 className="text-accent-6 text-xl font-nokia-bold md:text-2xl tracking-wide">
+              Manage Courses
             </h1>
-            <h3 className="text-accent-6 text-xs font-Lato-Regular md:text-sm tracking-wide">
-              Explore Programs and Courses
-            </h3>
-            <h2 className="text-secondary-6 text-lg font-Lato-Regular md:text-sm tracking-wide">
-              Our Most Popular Classes
-            </h2>
           </div>
           <div className="flex justify-end">
             <input
@@ -86,21 +79,26 @@ function ManageCourse() {
                   <p className="text-secondary-5 text-xs font-nokia-bold   w-[100%]  line-clamp-3  text-justify">
                     {course.description}
                   </p>
-                  <Link
-                    to={`/courses/get/` + course._id}
-                    className="bg-accent-6 text-primary-6 px-3 py-1 rounded-full font-nokia-bold text-xs hover:bg-accent-7"
-                  >
-                    <button className="mt-2" type="button">
-                      ኮርሱን ክፈት
+                  <div>
+                    <Link
+                      to={`/admin/edit/` + course._id}
+                      className="bg-accent-6 text-primary-6 px-3 py-1 mt-2 rounded-full font-nokia-bold text-xs hover:bg-accent-7"
+                    >
+                      edit
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(course._id)}
+                      className="inline-block bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 border border-red-500 rounded transition duration-300 focus:outline-none focus:shadow-outline"
+                    >
+                      delete
                     </button>
-                  </Link>
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
       </div>
-      <Categories title="Categories" />
     </div>
   );
 }
