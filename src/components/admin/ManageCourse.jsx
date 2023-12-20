@@ -92,7 +92,7 @@ function ManageCourse() {
                   </p>
                   <div className="flex justify-between">
                     <Link
-                      to={`/admin/edit/` + course._id}
+                      to={`/admin/edit/course/` + course._id}
                       className="inline-block bg-accent-6 text-primary-6 px-3 py-1 rounded transition duration-300 focus:outline-none font-nokia-bold text-xs hover:bg-accent-7"
                     >
                       edit
