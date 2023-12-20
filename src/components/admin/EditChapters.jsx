@@ -12,8 +12,8 @@ import {
   deleteSlide,
 } from "../../redux/courseSlice";
 import { BookOpenText, PlusCircle, Trash } from "@phosphor-icons/react";
-import SlideDataDisplay from "./SlideDataDisplay";
 import EditElements from "./EditElements";
+import AdminCourseDisplay from "./AdminCourseDisplay";
 
 function EditChapters() {
   const dispatch = useDispatch();
@@ -175,9 +175,9 @@ function EditChapters() {
         })}
       </div>
       <div className="w-[65%]">
-        {/* Pass selectedSlideIndex to SlideDataDisplay */}
+        {/* Pass selectedSlideIndex to AdminCourseDisplay */}
         {editingSlideIndex !== null && (
-          <SlideDataDisplay selectedSlideIndex={editingSlideIndex} />
+          <AdminCourseDisplay selectedSlideIndex={editingSlideIndex} />
         )}
       </div>
     </div>

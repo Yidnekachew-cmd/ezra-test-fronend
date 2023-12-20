@@ -62,11 +62,10 @@ function EditCourse() {
       <div className="flex justify-between border-gray-200 border-2 px-6 py-2">
         <button className="font-nokia-bold text-accent-6 flex flex-row gap-2 hover:text-accent-7 transition-all">
           <Link
-            to="/courses"
+            to="/admin/course"
             className="flex flex-row gap-2 items-center justify-center mt-3"
           >
-            <ArrowCircleLeft weight="fill" size={24} />{" "}
-            <span>Back to course</span>
+            <ArrowCircleLeft weight="fill" size={24} /> <span>Back</span>
           </Link>
         </button>
         <div>
