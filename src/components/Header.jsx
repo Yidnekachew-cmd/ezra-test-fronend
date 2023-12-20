@@ -47,12 +47,16 @@ const Header = () => {
             </li>
             {user ? (
               <li ref={ref} className="relative">
-                <button
+                <div
+                  className="flex items-center space-x-2 bg-accent-6 rounded-full p-3 hover:bg-accent-7 cursor-pointer"
                   onClick={handleAccountClick}
-                  className="bg-accent-6 rounded-full p-1 hover:bg-accent-7 text-base focus:outline-none flex"
                 >
                   <FaRegUserCircle user={user} />
-                </button>
+                  <div className="text-sm font-medium text-white">
+                    {user?.email}
+                    <div className="text-xs text-white-400">{user.role}</div>
+                  </div>
+                </div>
                 {showAccountModal && (
                   <div className="absolute top-[40px] right-0 bg-accent-6 shadow-lg rounded-md z-10">
                     <div className="px-4 py-2 border-b">

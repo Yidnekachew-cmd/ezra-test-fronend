@@ -19,7 +19,7 @@ function App() {
   const { user, isAuthReady } = useAuthContext();
 
   if (!isAuthReady) {
-    return <div>Loading...</div>; // Or a loading spinner
+    return <div>Loading...</div>; // Or a  loading spinner
   }
 
   // Private Route for Admin
