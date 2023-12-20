@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import ChaptersAdd from "../../features/CourseComponents/ChaptersAdd";
 import { selectCourse } from "../../redux/courseSlice";
 import { ArrowCircleLeft, ArrowSquareOut } from "@phosphor-icons/react";
+import EditChapters from "./EditChapters";
 
 function EditCourse() {
   const navigate = useNavigate();
@@ -80,7 +80,7 @@ function EditCourse() {
           </button>
         </div>
       </div>
-      <ChaptersAdd />
+      <EditChapters />
     </div>
   );
 }

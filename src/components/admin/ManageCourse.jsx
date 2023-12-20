@@ -86,10 +86,10 @@ function ManageCourse() {
                   <h2 className="text-secondary-6 text-xl font-nokia-bold w-[90%] truncate">
                     {course.title}
                   </h2>
-                  <hr className="border-accent-5 border-1 w-[100%] " />
                   <p className="text-secondary-5 text-xs font-nokia-bold   w-[100%]  line-clamp-3  text-justify">
                     {course.description}
                   </p>
+                  <hr className="border-accent-5 border-1 w-[100%] " />
                   <div className="flex justify-between">
                     <Link
                       to={`/admin/edit/course/` + course._id}
