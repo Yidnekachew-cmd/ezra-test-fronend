@@ -9,7 +9,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
   );
   const selectedSlide = slides[selectedSlideIndex.slide];
 
-  //Display image from state
+
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   useEffect(() => {
     if (selectedSlide && selectedSlide.elements) {
@@ -50,7 +50,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   elementComponent = (
                     <li
                       key={element.type}
-                      className="text-white text-2xl font-nokia-bold text-center"
+                      className="text-white text-3xl font-nokia-bold text-center"
                     >
                       {element.value}
                     </li>
@@ -59,7 +59,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   elementComponent = (
                     <p
                       key={element.type}
-                      className="text-white font-nokia-bold w-[100%] self-center tracking-wide text-1xl text-center"
+                      className="text-white font-nokia-bold w-[100%] self-center tracking-wide text-2xl text-center"
                     >
                       {element.value}
                     </p>
@@ -68,10 +68,27 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   elementComponent = (
                     <p
                       key={element.type}
-                      className="text-white font-nokia-bold w-[100%] self-center tracking-wide text-justify text-lg"
+                      className="text-white font-nokia-bold w-[100%] self-center tracking-wide text-justify text-lg mt-2"
                     >
                       {element.value}
                     </p>
+                  );
+                } else if (element.type === "list") {
+                  const listItemsComponent = element.value.map(
+                    (listItem, index) => (
+                      <li
+                        key={index}
+                        className="text-white font-nokia-bold w-[100%] tracking-wide text-lg"
+                      >
+                        {listItem}
+                      </li>
+                    )
+                  );
+
+                  elementComponent = (
+                    <div className="flex flex-col ml-8">
+                      <ul className="list-disc mt-2">{listItemsComponent}</ul>
+                    </div>
                   );
                 } else if (element.type === "img") {
                   elementComponent = (

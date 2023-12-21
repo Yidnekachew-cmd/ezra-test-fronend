@@ -6,6 +6,7 @@ import {
   updateElement,
   deleteElement,
 } from "../../redux/courseSlice";
+import { File, PlusCircle, Trash } from "@phosphor-icons/react";
 
 function ElementsAdd({ chapterIndex, slideIndex }) {
   const dispatch = useDispatch();
@@ -17,7 +18,8 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
 
   const [listItems, setListItems] = useState([]);
   const [currentListItem, setCurrentListItem] = useState("");
-
+  const [slidesDetails, setSlidesDetails] = useState([]);
+  const [currentSlideDetails, setCurrentSlideDetails] = useState("");
   const handleListInputChange = (event) => {
     setCurrentListItem(event.target.value);
   };
@@ -36,13 +38,40 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
           chapterIndex,
           slideIndex,
           elementType: "list",
-          value: listItems, // Pass the array of list items as value
+          value: listItems,
         })
       );
-      setListItems([]); // Clearing list items after adding
+      setListItems([]);
     }
     setCurrentElement("");
     console.log(elements);
+  };
+
+
+  const handleAddSlide = () => {
+    if (currentSlideDetails) {
+      setSlidesDetails([...slidesDetails, currentSlideDetails]);
+      setCurrentSlideDetails("");
+    }
+  };
+
+  const handleDeleteSlideItem = (indexToDelete) => {
+    const updatedSlides = slidesDetails.filter(
+      (_, index) => index !== indexToDelete
+    );
+    setSlidesDetails(updatedSlides);
+  };
+
+  const handleSaveSlides = () => {
+    dispatch(
+      addElementToSlide({
+        chapterIndex,
+        slideIndex,
+        elementType: "slide",
+        value: slidesDetails,
+      })
+    );
+    setSlidesDetails([]); // Clear slides details after adding
   };
 
   const handleFileInputChange = (e, id) => {
@@ -58,36 +87,91 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
       );
     }
   };
+  const handleDeleteListItem = (indexToDelete) => {
+    const updatedList = listItems.filter((_, index) => index !== indexToDelete);
+    setListItems(updatedList);
+  };
 
   const renderListForm = () => (
-    <div>
-      <input
-        type="text"
-        value={currentListItem}
-        onChange={handleListInputChange}
-        placeholder="Enter list item"
-        className="border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 mr-2"
-      />
-      <button
-        onClick={handleAddListItem}
-        className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7"
-      >
-        Add Item
-      </button>
-      <button
-        onClick={handleAddListElement}
-        className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7"
-      >
-        Save List
-      </button>
+    <div className="mt-2">
+      <div className="flex flex-row items-center w-[100%] gap-1">
+        <input
+          type="text"
+          value={currentListItem}
+          onChange={handleListInputChange}
+          placeholder="Enter list item"
+          className="border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 w-[75%]"
+        />
+        <PlusCircle
+          onClick={handleAddListItem}
+          className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
+          size={24}
+          weight="fill"
+        />
+        <File
+          onClick={handleAddListElement}
+          className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
+          size={24}
+          weight="fill"
+        />
+      </div>
       <ul>
         {listItems.map((item, index) => (
-          <li key={index}>{item}</li>
+          <li key={index} className="flex justify-between">
+            - {item}{" "}
+            <span>
+              <Trash
+                onClick={() => handleDeleteListItem(index)}
+                className="text-red-600 hover:text-red-700 hover:cursor-pointer transition-all"
+                weight="fill"
+                size={22}
+              />
+            </span>
+          </li>
         ))}
       </ul>
     </div>
   );
-
+  const renderSlideForm = () => (
+    <div className="mt-4">
+      <div className="flex flex-row items-center w-[100%] gap-1">
+        <textarea
+          type="text"
+          value={currentSlideDetails}
+          onChange={(e) => setCurrentSlideDetails(e.target.value)}
+          placeholder="Enter slide details"
+          className="border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 w-[75%]"
+        />
+        <PlusCircle
+          onClick={handleAddSlide}
+          className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
+          size={24}
+          weight="fill"
+        />
+        <File
+          onClick={handleSaveSlides}
+          className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
+          size={24}
+          weight="fill"
+        />
+      </div>
+      <ul className="w-[100%]">
+        {slidesDetails.map((details, index) => (
+          <li key={index} className="flex justify-between break-words">
+            - {details}{" "}
+            <span>
+              <Trash
+                onClick={() => handleDeleteSlideItem(index)}
+                className="text-red-600 hover:text-red-700 hover:cursor-pointer transition-all"
+                weight="fill"
+                size={22}
+              />
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
   const handleDropdownChange = (e) => {
     setCurrentElement(e.target.value);
   };
@@ -159,13 +243,14 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
         </select>
         <button
           onClick={handleAddButtonClick}
-          className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7"
+          className="px-2 font-semibold text-white bg-accent-6 rounded-md hover:bg-accent-7 hover:cursor-pointer transition-all"
         >
           Add
         </button>
       </div>
 
       {currentElement === "list" && renderListForm()}
+      {currentElement === "slide" && renderSlideForm()}
       {elements.map((element, index) => (
         <div key={index} className="py-2">
           <div className="flex flex-col justify-between pb-2">

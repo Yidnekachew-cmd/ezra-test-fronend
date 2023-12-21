@@ -2,8 +2,9 @@ import { useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { FaRegUserCircle, FaBars,FaTimes } from "react-icons/fa";
+import { FaRegUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import { useOnClickOutside } from "./useOnClickOutside";
+import { Button } from "./ui/button";
 
 const Header = () => {
   const { user } = useAuthContext();
@@ -21,7 +22,6 @@ const Header = () => {
   const closeMenu = () => {
     setShowMenu(false);
   };
-  
   // To access the dom element || useRef is used to create a ref(reference) object
   const ref = useRef();
 
@@ -97,12 +97,7 @@ const Header = () => {
                 </li>
                 <li className="hover:text-gray-400 text-base ">
                   <NavLink to="/signup">
-                    <button
-                      type="button"
-                      className="font-nokia-bold bg-accent-6 rounded-full py-2 px-5 hover:bg-accent-7 text-white transition-colors"
-                    >
-                      Create Account
-                    </button>
+                    <Button size="round">Create Account</Button>
                   </NavLink>
                 </li>
               </>
