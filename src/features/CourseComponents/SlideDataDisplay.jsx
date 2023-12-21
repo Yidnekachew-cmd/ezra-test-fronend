@@ -9,7 +9,6 @@ function SlideDataDisplay({ selectedSlideIndex }) {
   );
   const selectedSlide = slides[selectedSlideIndex.slide];
 
-
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   useEffect(() => {
     if (selectedSlide && selectedSlide.elements) {

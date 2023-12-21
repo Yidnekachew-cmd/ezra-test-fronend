@@ -80,7 +80,7 @@ function CoursesAvailable() {
                 />
                 <div className="space-y-2 w-[95%] md:w-[90%] mx-auto">
                   <h2 className="text-secondary-6 text-xl font-nokia-bold w-[90%] truncate">
-                  {course.title}
+                    {course.title}
                   </h2>
                   <hr className="border-accent-5 border-1 w-[100%] " />
                   <p className="text-secondary-5 text-xs font-nokia-bold   w-[100%]  line-clamp-3  text-justify">
@@ -90,7 +90,9 @@ function CoursesAvailable() {
                     to={`/courses/get/` + course._id}
                     className="bg-accent-6 text-primary-6 px-3 py-1 rounded-full font-nokia-bold text-xs hover:bg-accent-7"
                   >
-                    <button className="mt-2" type="button">ኮርሱን ክፈት</button>
+                    <button className="mt-2" type="button">
+                      ኮርሱን ክፈት
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -98,9 +100,7 @@ function CoursesAvailable() {
           })}
         </div>
       </div>
-      <Categories
-      title="Categories"
-      />
+      <Categories title="Categories" />
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import { FaTrash } from "react-icons/fa";
 
+import PropTypes from "prop-types";
+
 export const DevotionDisplay = ({ devotions, handleDelete }) => {
   // Sort the devotions array in descending order of creation date
   const sortedDevotions = [...devotions].sort((a, b) =>
@@ -130,4 +132,9 @@ export const DevotionDisplay = ({ devotions, handleDelete }) => {
       </div>
     </div>
   );
+};
+
+DevotionDisplay.propTypes = {
+  devotions: PropTypes.array.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
