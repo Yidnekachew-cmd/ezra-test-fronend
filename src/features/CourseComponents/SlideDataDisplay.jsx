@@ -9,8 +9,8 @@ function SlideDataDisplay({ selectedSlideIndex }) {
   );
   const selectedSlide = slides[selectedSlideIndex.slide];
 
-  //Display image from state
-  const [setImagePreviewUrl] = useState("");
+
+  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   useEffect(() => {
     if (selectedSlide && selectedSlide.elements) {
       const imgElement = selectedSlide.elements.find((e) => e.type === "img");
@@ -94,9 +94,9 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   elementComponent = (
                     <img
                       key={element.type}
-                      src={element.value}
-                      alt={element.id}
-                      className="w-[30%] mx-auto border border-accent-6 shadow-xl padding mt-2"
+                      src={imagePreviewUrl}
+                      alt={element.value.name}
+                      className="w-[40%] mx-auto"
                     />
                   );
                 }

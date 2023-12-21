@@ -22,7 +22,6 @@ const Header = () => {
   const closeMenu = () => {
     setShowMenu(false);
   };
-
   // To access the dom element || useRef is used to create a ref(reference) object
   const ref = useRef();
 
@@ -38,55 +37,35 @@ const Header = () => {
             <strong className="text-2xl">Ezra</strong> Seminary
           </h3>
         </div>
-        <nav>
+        <nav >
           <div className="md:hidden">
-            <button
-              onClick={handleMenuClick}
-              className="text-white focus:outline-none "
-            >
-              {showMenu ? (
-                <FaTimes size={24} className="z-20 fixed top-[4%] left-[91%]" />
-              ) : (
-                <FaBars size={24} className=" fixed top-[4%] left-[91%]" />
-              )}
-            </button>
-          </div>
-          <ul
-            className={`font-Lato-Regular justify-center items-end tracking-wide space-x-4 cursor-pointer  md:flex ${
-              showMenu
-                ? "flex flex-col text-2xl font-nokia-bold h-screen bg-secondary-6 overflow-auto bg-opacity-80  w-full z-10 top-0 left-0 bottom-0 transform -translate-x-100 transition-transform ease-in-out duration-200 pr-8 space-y-3 md:flex fixed"
-                : "hidden text-sm md:flex justify-center items-center"
-            }`}
-          >
+              <button
+                onClick={handleMenuClick}
+                className="text-white focus:outline-none "
+              >
+                { showMenu ? <FaTimes  size={24} className="z-20 fixed top-[4%] left-[91%]"/> : <FaBars size={24} className=" fixed top-[4%] left-[91%]" />}
+              </button>
+            </div>
+          <ul className={`font-Lato-Regular justify-center items-end tracking-wide space-x-4 cursor-pointer  md:flex ${
+              showMenu ? "flex flex-col text-2xl font-nokia-bold h-screen bg-secondary-6 overflow-auto bg-opacity-80  w-full z-10 top-0 left-0 bottom-0 transform -translate-x-100 transition-transform ease-in-out duration-200 pr-8 space-y-3 md:flex fixed" : "hidden text-sm md:flex justify-center items-center"
+            }`}>
             <li className="hover:text-accent-6">
-              <NavLink to="/" onClick={closeMenu}>
-                Home
-              </NavLink>
+              <NavLink to="/" onClick={closeMenu}>Home</NavLink>
             </li>
             <li className="hover:text-accent-6">
-              <NavLink to="/courses" onClick={closeMenu}>
-                Courses
-              </NavLink>
+              <NavLink to="/courses" onClick={closeMenu}>Courses</NavLink>
             </li>
             <li className="hover:text-accent-6">
-              <NavLink to="/sabbathSchool" onClick={closeMenu}>
-                Sabbath School
-              </NavLink>
+              <NavLink to="/sabbathSchool" onClick={closeMenu}>Sabbath School</NavLink>
             </li>
             <li className="hover:text-accent-6">
-              <NavLink to="/devotion" onClick={closeMenu}>
-                Devotion
-              </NavLink>
+              <NavLink to="/devotion" onClick={closeMenu}>Devotion</NavLink>
             </li>
             <li className="hover:text-accent-6">
-              <NavLink to="/aboutUs" onClick={closeMenu}>
-                About Us
-              </NavLink>
+              <NavLink to="/aboutUs" onClick={closeMenu}>About Us</NavLink>
             </li>
             <li className="hover:text-accent-6">
-              <NavLink to="/contactUs" onClick={closeMenu}>
-                Contact Us
-              </NavLink>
+              <NavLink to="/contactUs" onClick={closeMenu}>Contact Us</NavLink>
             </li>
             {user ? (
               <li ref={ref} className="relative">

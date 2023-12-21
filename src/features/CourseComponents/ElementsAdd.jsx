@@ -47,6 +47,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
     console.log(elements);
   };
 
+
   const handleAddSlide = () => {
     if (currentSlideDetails) {
       setSlidesDetails([...slidesDetails, currentSlideDetails]);
@@ -90,6 +91,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
     const updatedList = listItems.filter((_, index) => index !== indexToDelete);
     setListItems(updatedList);
   };
+
   const renderListForm = () => (
     <div className="mt-2">
       <div className="flex flex-row items-center w-[100%] gap-1">
