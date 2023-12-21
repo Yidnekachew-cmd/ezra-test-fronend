@@ -10,7 +10,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
   const selectedSlide = slides[selectedSlideIndex.slide];
 
   //Display image from state
-  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [setImagePreviewUrl] = useState("");
   useEffect(() => {
     if (selectedSlide && selectedSlide.elements) {
       const imgElement = selectedSlide.elements.find((e) => e.type === "img");
