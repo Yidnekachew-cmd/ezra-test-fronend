@@ -18,10 +18,8 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
 
   const [listItems, setListItems] = useState([]);
   const [currentListItem, setCurrentListItem] = useState("");
-
   const [slidesDetails, setSlidesDetails] = useState([]);
   const [currentSlideDetails, setCurrentSlideDetails] = useState("");
-
   const handleListInputChange = (event) => {
     setCurrentListItem(event.target.value);
   };
@@ -88,14 +86,12 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
       );
     }
   };
-
   const handleDeleteListItem = (indexToDelete) => {
     const updatedList = listItems.filter((_, index) => index !== indexToDelete);
     setListItems(updatedList);
   };
-
   const renderListForm = () => (
-    <div className="mt-4">
+    <div className="mt-2">
       <div className="flex flex-row items-center w-[100%] gap-1">
         <input
           type="text"
@@ -134,7 +130,6 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
       </ul>
     </div>
   );
-
   const renderSlideForm = () => (
     <div className="mt-4">
       <div className="flex flex-row items-center w-[100%] gap-1">
@@ -175,14 +170,13 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
       </ul>
     </div>
   );
-
   const handleDropdownChange = (e) => {
     setCurrentElement(e.target.value);
   };
 
   const handleAddButtonClick = () => {
     // Only dispatch addElementToSlide when the add button is clicked and currentElement is not "list"
-    if (currentElement && currentElement !== "list") {
+    if (currentElement && currentElement !== "list" && "img") {
       dispatch(
         addElementToSlide({
           chapterIndex,
@@ -257,9 +251,11 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
       {currentElement === "slide" && renderSlideForm()}
       {elements.map((element, index) => (
         <div key={index} className="py-2">
-          <div className="flex flex-col justify-between">
+          <div className="flex flex-col justify-between pb-2">
             <div className="flex justify-between">
-              <label className="text-accent-6 font-bold">{element.type}</label>
+              <label className="text-accent-6 font-bold mb-1">
+                {element.type}
+              </label>
               <button
                 className="flex items-center text-accent-6 hover:text-accent-6"
                 onClick={() => handleDeleteButtonClick(element.id)}
@@ -272,7 +268,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
                 type="file"
                 id={element.id}
                 onChange={(e) => handleFileInputChange(e, element.id)}
-                className="w-[100%] border-2 border-accent-6 rounded-md text-secondary- font-bold p-2"
+                className="w-[100%] border-2 border-accent-6 rounded-md text-primary-6 font-bold p-2"
               />
             ) : (
               <input
@@ -280,7 +276,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
                 placeholder={`Enter ${element.type}`}
                 value={element.value}
                 onChange={(e) => handleInputChange(element.id, e.target.value)}
-                className="w-[100%] border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 mt-1"
+                className="w-[100%] border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1"
               />
             )}
           </div>
