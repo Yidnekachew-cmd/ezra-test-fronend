@@ -64,7 +64,7 @@ const Sidebar = () => {
           <ul className="pl-4 mt-2">
             <li
               className="cursor-pointer hover:text-gray-300"
-              onClick={() => handleSubItemClick("/admin/devotion")}
+              onClick={() => handleSubItemClick("/admin/devotion/create")}
             >
               Add Devotion
             </li>
