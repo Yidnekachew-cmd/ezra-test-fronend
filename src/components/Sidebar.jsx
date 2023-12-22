@@ -17,6 +17,30 @@ const Sidebar = () => {
     <div className="flex flex-col bg-gray-800 text-white h-screen">
       <div
         className="px-4 py-5 cursor-pointer hover:bg-accent-6"
+        onClick={() => handleMenuClick("analytics")}
+      >
+        Analytics
+        {openMenu === "analytics" && (
+          <ul className="pl-4 mt-2 py-2">
+            <li
+              className="cursor-pointer hover:text-gray-300 mb-2"
+              onClick={() => handleSubItemClick("")}
+            >
+              App Usage
+            </li>
+            <li
+              className="cursor-pointer hover:text-gray-300 mb-2"
+              onClick={() => handleSubItemClick("")}
+            >
+              Performace Dashboard
+            </li>
+            {/* Add more sub-items as needed */}
+          </ul>
+        )}
+      </div>
+
+      <div
+        className="px-4 py-5 cursor-pointer hover:bg-accent-6"
         onClick={() => handleMenuClick("courses")}
       >
         Courses
@@ -59,7 +83,7 @@ const Sidebar = () => {
         className="px-4 py-5 cursor-pointer  hover:bg-accent-6"
         onClick={() => handleMenuClick("devotion")}
       >
-        Devotion
+        Daily Devotional
         {openMenu === "devotion" && (
           <ul className="pl-4 mt-2 py-2">
             <li
@@ -79,7 +103,38 @@ const Sidebar = () => {
           </ul>
         )}
       </div>
-      {/* Add more menu items as needed */}
+      <div
+        className="px-4 py-5 cursor-pointer hover:bg-accent-6"
+        onClick={() => handleMenuClick("users")}
+      >
+        Users
+        {openMenu === "users" && (
+          <ul className="pl-4 mt-2 py-2">
+            <li
+              className="cursor-pointer hover:text-gray-300 mb-2"
+              onClick={() => handleSubItemClick("")}
+            >
+              Profile Page
+            </li>
+          </ul>
+        )}
+      </div>
+      <div
+        className="px-4 py-5 cursor-pointer hover:bg-accent-6"
+        onClick={() => handleMenuClick("feedback")}
+      >
+        Feedback Survey
+        {openMenu === "feedback" && (
+          <ul className="pl-4 mt-2 py-2">
+            <li
+              className="cursor-pointer hover:text-gray-300 mb-2"
+              onClick={() => handleSubItemClick("")}
+            >
+              Give us Feedback
+            </li>
+          </ul>
+        )}
+      </div>
     </div>
   );
 };
