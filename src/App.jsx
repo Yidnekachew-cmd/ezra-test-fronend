@@ -18,8 +18,8 @@ import AddCourse from "./components/AddCourse";
 import ChaptersDisplay from "./features/CourseComponents/ChaptersDisplay";
 import SlidesDisplay from "./features/CourseComponents/SlidesDisplay";
 import AdminChapter from "./features/CourseComponents/AdminChapter";
-import EditCourse from "./components/admin/EditCourse";
-import ManageCourse from "./components/admin/ManageCourse";
+// import EditCourse from "./components/admin/EditCourse";
+// import ManageCourse from "./components/admin/ManageCourse";
 
 function App() {
   const { user } = useAuthContext();
@@ -62,8 +62,8 @@ function App() {
           />
           <Route path="/courses/create/chapters" element={<AdminChapter />} />
           <Route path="/courses/create/add" element={<AddCourse />} />
-          <Route path="/admin/course" element={<ManageCourse />} />
-          <Route path="/admin/edit/course/:id" element={<EditCourse />} />
+          {/* <Route path="/admin/course" element={<ManageCourse />} />
+          <Route path="/admin/edit/course/:id" element={<EditCourse />} /> */}
           <Route path="*" element={<NotMatch />} />
         </Routes>
         <Footer />
