@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { selectSlides } from "../../redux/courseSlice";
@@ -7,6 +8,20 @@ function SlideDataDisplay({ selectedSlideIndex }) {
     selectSlides(state, selectedSlideIndex.chapter)
   );
   const selectedSlide = slides[selectedSlideIndex.slide];
+
+  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  useEffect(() => {
+    if (selectedSlide && selectedSlide.elements) {
+      const imgElement = selectedSlide.elements.find((e) => e.type === "img");
+      if (imgElement && imgElement.value instanceof File) {
+        const objectUrl = URL.createObjectURL(imgElement.value);
+        setImagePreviewUrl(objectUrl);
+
+        // Clean up the URL when the component unmounts
+        return () => URL.revokeObjectURL(objectUrl);
+      }
+    }
+  }, [selectedSlide]);
 
   return (
     <div className="mr-16 h-[80%]  bg-chapter-img-1 bg-no-repeat bg-cover bg-center rounded-lg">
@@ -34,7 +49,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   elementComponent = (
                     <li
                       key={element.type}
-                      className="text-white text-2xl font-nokia-bold text-center"
+                      className="text-white text-3xl font-nokia-bold text-center"
                     >
                       {element.value}
                     </li>
@@ -43,7 +58,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   elementComponent = (
                     <p
                       key={element.type}
-                      className="text-white font-nokia-bold w-[100%] self-center tracking-wide text-1xl text-center"
+                      className="text-white font-nokia-bold w-[100%] self-center tracking-wide text-2xl text-center"
                     >
                       {element.value}
                     </p>
@@ -52,18 +67,35 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   elementComponent = (
                     <p
                       key={element.type}
-                      className="text-white font-nokia-bold w-[100%] self-center tracking-wide text-justify text-lg"
+                      className="text-white font-nokia-bold w-[100%] self-center tracking-wide text-justify text-lg mt-2"
                     >
                       {element.value}
                     </p>
+                  );
+                } else if (element.type === "list") {
+                  const listItemsComponent = element.value.map(
+                    (listItem, index) => (
+                      <li
+                        key={index}
+                        className="text-white font-nokia-bold w-[100%] tracking-wide text-lg"
+                      >
+                        {listItem}
+                      </li>
+                    )
+                  );
+
+                  elementComponent = (
+                    <div className="flex flex-col ml-8">
+                      <ul className="list-disc mt-2">{listItemsComponent}</ul>
+                    </div>
                   );
                 } else if (element.type === "img") {
                   elementComponent = (
                     <img
                       key={element.type}
-                      src={`http://localhost:5100/images/${element.value}`}
-                      alt={element.id}
-                      className="w-[15%]"
+                      src={imagePreviewUrl}
+                      alt={element.value.name}
+                      className="w-[40%] mx-auto"
                     />
                   );
                 }

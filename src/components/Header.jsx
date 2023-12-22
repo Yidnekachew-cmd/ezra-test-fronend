@@ -2,48 +2,88 @@ import { useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaRegUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import { useOnClickOutside } from "./useOnClickOutside";
+import { Button } from "./ui/button";
 
 const Header = () => {
   const { user } = useAuthContext();
   const [showAccountModal, setShowAccountModal] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   const handleAccountClick = () => {
     setShowAccountModal((prev) => !prev);
+  };
+
+  const handleMenuClick = () => {
+    setShowMenu((prev) => !prev);
+  };
+
+  const closeMenu = () => {
+    setShowMenu(false);
   };
 
   const ref = useRef();
   useOnClickOutside(ref, showAccountModal, () => setShowAccountModal(false));
 
   return (
-    <header className="bg-header-img bg-bottom bg-cover backdrop-blur-md">
-      <div className="flex justify-between py-6 items-center text-white font-nokia-bold w-[90%] md:w-[80%] mx-auto">
-        <div className="flex justify-center items-center space-x-3 cursor-pointer">
+    <header className="bg-header-img bg-bottom bg-cover relative">
+      <div className=" flex justify-between py-6 items-center text-white font-nokia-bold w-[90%] md:w-[80%] mx-auto ">
+        <div className="flex justify-center items-center space-x-3 cursor-pointer ">
           <img src="src/assets/ezra-logo.svg" alt="" />
           <h3>
             <strong className="text-2xl">Ezra</strong> Seminary
           </h3>
         </div>
         <nav>
-          <ul className="font-Lato-Regular tracking-wide hidden md:flex space-x-4 cursor-pointer text-sm justify-center items-center">
+          <div className="md:hidden">
+            <button
+              onClick={handleMenuClick}
+              className="text-white focus:outline-none "
+            >
+              {showMenu ? (
+                <FaTimes size={24} className="z-20 fixed top-[4%] left-[91%]" />
+              ) : (
+                <FaBars size={24} className=" fixed top-[4%] left-[91%]" />
+              )}
+            </button>
+          </div>
+          <ul
+            className={`font-Lato-Regular justify-center items-end tracking-wide space-x-4 cursor-pointer  md:flex ${
+              showMenu
+                ? "flex flex-col text-2xl font-nokia-bold h-screen bg-secondary-6 overflow-auto bg-opacity-80  w-full z-10 top-0 left-0 bottom-0 transform -translate-x-100 transition-transform ease-in-out duration-200 pr-8 space-y-3 md:flex fixed"
+                : "hidden text-sm md:flex justify-center items-center"
+            }`}
+          >
             <li className="hover:text-accent-6">
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/" onClick={closeMenu}>
+                Home
+              </NavLink>
             </li>
             <li className="hover:text-accent-6">
-              <NavLink to="/courses">Courses</NavLink>
+              <NavLink to="/courses" onClick={closeMenu}>
+                Courses
+              </NavLink>
             </li>
             <li className="hover:text-accent-6">
-              <NavLink to="/sabbathSchool">Sabbath School</NavLink>
+              <NavLink to="/sabbathSchool" onClick={closeMenu}>
+                Sabbath School
+              </NavLink>
             </li>
             <li className="hover:text-accent-6">
-              <NavLink to="/devotion">Devotion</NavLink>
+              <NavLink to="/devotion" onClick={closeMenu}>
+                Devotion
+              </NavLink>
             </li>
             <li className="hover:text-accent-6">
-              <NavLink to="/aboutUs">About Us</NavLink>
+              <NavLink to="/aboutUs" onClick={closeMenu}>
+                About Us
+              </NavLink>
             </li>
             <li className="hover:text-accent-6">
-              <NavLink to="/contactUs">Contact Us</NavLink>
+              <NavLink to="/contactUs" onClick={closeMenu}>
+                Contact Us
+              </NavLink>
             </li>
             {user ? (
               <li ref={ref} className="relative">
@@ -84,12 +124,7 @@ const Header = () => {
                 </li>
                 <li className="hover:text-gray-400 text-base ">
                   <NavLink to="/signup">
-                    <button
-                      type="button"
-                      className="font-nokia-bold bg-accent-6 rounded-full py-2 px-5 hover:bg-accent-7 text-white transition-colors"
-                    >
-                      Create Account
-                    </button>
+                    <Button size="round">Create Account</Button>
                   </NavLink>
                 </li>
               </>

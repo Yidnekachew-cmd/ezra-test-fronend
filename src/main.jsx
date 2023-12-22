@@ -10,6 +10,7 @@ import store from "./redux/store";
 
 // axios.defaults.baseURL = "https://ezra-seminary-api.onrender.com";
 axios.defaults.baseURL = "http://localhost:5100";
+axios.defaults.headers.common["Content-Type"] = "multipart/form-data";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

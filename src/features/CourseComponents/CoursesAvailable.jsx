@@ -5,6 +5,7 @@ import Categories from "./Categories";
 
 function CoursesAvailable() {
   const [data, setData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const instance = useAxiosInstance();
 
@@ -17,6 +18,14 @@ function CoursesAvailable() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredData = data.filter((course) => {
+    return course.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   return (
     <div className="h-auto flex flex-col w-[90%] md:w-[80%] mt-12 mx-auto space-y-12 mb-12">
@@ -37,47 +46,53 @@ function CoursesAvailable() {
             <input
               type="text"
               placeholder="Search"
-              className=" hidden md:inline-block border-2 border-accent-6  w-[80%] outline-1 outline-accent-5 rounded-l px-4"
+              value={searchTerm}
+              onChange={handleSearch}
+              className="  md:inline-block  md:border-2  border-accent-6  w-[80%] outline-1 outline-accent-5 rounded-l px-4"
             />
-            <img
-              src="src/assets/Search-1.svg"
-              alt=""
-              className="hidden md:inline-block cursor-pointer"
-            />
-            <img
-              src="src/assets/Search.svg"
-              alt=""
-              className="md:hidden cursor-pointer"
-            />
+            <span>
+              <img
+                src="src/assets/Search-1.svg"
+                alt=""
+                className="hidden md:inline-block cursor-pointer"
+              />
+              <img
+                src="src/assets/Search.svg"
+                alt=""
+                className="md:hidden cursor-pointer"
+              />
+            </span>
           </div>
         </div>
         <hr className="border-accent-5 border-1 w-[100%] pb-3 md:w-[30%]" />
 
-        <div className="flex flex-col justify-center items-center md:justify-start md:items-start w-[90%] mx-auto md:w-[95%] md:flex-row md:flex-wrap space-y-6 md:space-y-0 md:gap-3">
-          {data.map((course, index) => {
+        <div className="flex flex-col justify-center items-center md:items-start w-[90%] mx-auto md:w-[98%] md:flex-row md:justify-start md:flex-wrap space-y-6 md:space-y-0 md:gap-4 ">
+          {filteredData.map((course, index) => {
             return (
               <div
                 key={index}
-                className="flex flex-col justify-center items-start  border-accent-5 border-2 w-[100%] md:w-[32.3%] shadow-2xl rounded-3xl md:rounded-xl h-auto pb-6"
+                className="flex flex-col justify-center items-start  border-accent-5 border-2 w-[100%] md:w-[23.7%] shadow-xl rounded-3xl md:rounded-xl h-auto pb-6 "
               >
                 <img
                   src={`http://localhost:5100/images/` + course.image}
-                  className="w-full  md:min-h-[40vh] max-h-[40vh] object-contaim  rounded-3xl p-3"
+                  className="w-full max-h-[40vh] min-h-[40vh]  md:min-h-[30vh] md:max-h-[30vh] object-cover rounded-3xl  md:rounded-2xl p-2"
                   alt="no_image"
                 />
                 <div className="space-y-2 w-[95%] md:w-[90%] mx-auto">
-                  <h2 className="text-secondary-6 text-2xl font-nokia-bold w-[80%] md:w-[85%]">
+                  <h2 className="text-secondary-6 text-xl font-nokia-bold w-[90%] truncate">
                     {course.title}
                   </h2>
                   <hr className="border-accent-5 border-1 w-[100%] " />
-                  <p className="text-secondary-5 text-xs font-nokia-bold w-[80%] pb-4 ">
+                  <p className="text-secondary-5 text-xs font-nokia-bold   w-[100%]  line-clamp-3  text-justify">
                     {course.description}
                   </p>
                   <Link
                     to={`/courses/get/` + course._id}
                     className="bg-accent-6 text-primary-6 px-3 py-1 rounded-full font-nokia-bold text-xs hover:bg-accent-7"
                   >
-                    <button type="button">ኮርሱን ክፈት</button>
+                    <button className="mt-2" type="button">
+                      ኮርሱን ክፈት
+                    </button>
                   </Link>
                 </div>
               </div>

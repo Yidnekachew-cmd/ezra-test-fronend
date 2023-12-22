@@ -2,7 +2,7 @@ import { useState } from "react";
 import ElementsAdd from "./ElementsAdd";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  // selectCourse,
+  selectCourse,
   selectChapters,
   selectAllSlides,
   addChapter,
@@ -17,7 +17,7 @@ import SlideDataDisplay from "./SlideDataDisplay";
 
 function ChaptersAdd() {
   const dispatch = useDispatch();
-  // const course = useSelector(selectCourse);
+  const course = useSelector(selectCourse);
   const chapters = useSelector(selectChapters) || [];
   const allSlides = useSelector(selectAllSlides);
 
@@ -60,6 +60,8 @@ function ChaptersAdd() {
     }
   };
 
+  console.log(course);
+
   return (
     <div className="flex justify-between h-screen w-full bg-[#F1F1F1] text-secondary-6 font-nokia-bold">
       <div className="bg-primary-1 w-[30%] p-6">
@@ -77,7 +79,7 @@ function ChaptersAdd() {
           return (
             <div key={chapterIndex}>
               <div
-                className={`flex bg-secondary-1 items-center justify-between gap-2 px-4 py-2 rounded-md mb-2 ${
+                className={`flex bg-secondary-1 items-center justify-between gap-2 px-4 py-2 rounded-md mb-2 border mt-2 ${
                   isSelected ? "bg-opacity-100" : "bg-opacity-0"
                 }`}
               >
@@ -109,16 +111,16 @@ function ChaptersAdd() {
                 />
               </div>
               {isSelected && (
-                <div className="ml-14 pl-1 border-l-2 border-secondary-2">
+                <div className="ml-7 pl-1 border-l-2 border-secondary-2">
                   {slides.map((slide, slideIndex) => (
                     <div key={slideIndex} className="flex flex-col ">
-                      <div className="flex px-4">
+                      <div className="flex px-2 items-center">
                         <input
                           type="text"
                           name={`slide-${chapterIndex}-${slideIndex}`}
                           placeholder="Slide Title"
                           autoComplete="off"
-                          className="w-full text-sm font-bold py-1 focus:outline-none mb-1"
+                          className="w-full text-sm font-bold py-1 focus:outline-none mb-1 border-b border-t px-2 mt-2"
                           value={slide.slide}
                           onChange={(e) =>
                             updateSlideHandler(

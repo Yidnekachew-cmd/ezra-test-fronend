@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { CaretCircleLeft } from "@phosphor-icons/react";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
+import "@splidejs/react-splide/css/sea-green";
+import "@splidejs/react-splide/css/core";
 
 function SlidesDisplay() {
   const [data, setData] = useState([]);
@@ -71,7 +75,7 @@ function SlidesDisplay() {
                     className={`flex justify-between items-center text-sm font-nokia-bold border-b-2 border-accent-5 px-4 text-secondary-6 cursor-pointer py-2 ${
                       unlocked ? "text-black" : "text-gray-500"
                     }  ${index === activeIndex && "font-bold bg-[#FAE5C7]"}
-                    `} // Locked slide to gray
+                    `}
                     onClick={() => {
                       updateIndex(index);
                     }}
@@ -123,18 +127,17 @@ function SlidesDisplay() {
                   return (
                     <div
                       key={index}
-                      className="flex flex-col justify-center flex-grow"
+                      className="flex flex-col justify-center flex-grow w-[80%] mx-auto"
                     >
                       <h1 className="text-3xl text-[#fff] text-center font-nokia-bold">
                         {slides.slide}
                       </h1>
                       {slides.elements.map((element) => {
-                        // Check the type of the element and render it accordingly
                         if (element.type === "title") {
                           return (
                             <li
                               key={element._id}
-                              className="text-white text-2xl font-nokia-bold pl-20"
+                              className="text-white text-3xl font-nokia-bold pl-20"
                             >
                               {element.value}
                             </li>
@@ -143,7 +146,7 @@ function SlidesDisplay() {
                           return (
                             <p
                               key={element._id}
-                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-center text-1xl mb-2"
+                              className="text-white font-nokia-bold  self-center tracking-wide text-center text-2xl mt-2"
                             >
                               {element.value}
                             </p>
@@ -152,7 +155,7 @@ function SlidesDisplay() {
                           return (
                             <p
                               key={element._id}
-                              className="text-white font-nokia-bold  w-[80%] self-center tracking-wide text-justify text-lg mb-2"
+                              className="text-white font-nokia-bold   self-center tracking-wide text-justify text-lg mt-2"
                             >
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{element.value}
                             </p>
@@ -164,8 +167,57 @@ function SlidesDisplay() {
                               // src={`https://ezra-seminary-api.onrender.com/images/${element.value}`}
                               src={`http://localhost:5100/images/${element.value}`}
                               alt={element.id}
-                              className="w-[15%]"
+                              className="w-[30%] mx-auto border border-accent-6 shadow-xl padding mt-2"
                             />
+                          );
+                        } else if (element.type === "list") {
+                          const listItemsComponent = element.value.map(
+                            (listItem, index) => (
+                              <li
+                                key={index}
+                                className="text-white font-nokia-bold w-[100%] tracking-wide text-left text-lg"
+                              >
+                                {listItem}
+                              </li>
+                            )
+                          );
+
+                          return (
+                            <div
+                              key={element._id}
+                              className="flex flex-col ml-8"
+                            >
+                              <ul className="list-disc mt-2">
+                                {listItemsComponent}
+                              </ul>
+                            </div>
+                          );
+                        } else if (element.type === "slide") {
+                          const listItemsComponent = element.value.map(
+                            (listItem, index) => (
+                              <SplideSlide
+                                key={index}
+                                className="text-white font-nokia-bold w-[100%] tracking-wide text-left text-lg px-8"
+                              >
+                                {listItem}
+                              </SplideSlide>
+                            )
+                          );
+
+                          return (
+                            <div
+                              key={element._id}
+                              className="flex flex-col ml-8"
+                            >
+                              <Splide
+                                options={{
+                                  gap: "1rem",
+                                }}
+                                className="bg-accent-6 p-8 rounded-md list-disc mt-2"
+                              >
+                                {listItemsComponent}
+                              </Splide>
+                            </div>
                           );
                         } else {
                           return null;

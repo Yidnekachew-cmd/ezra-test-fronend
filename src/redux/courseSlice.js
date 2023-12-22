@@ -82,7 +82,7 @@ export const courseSlice = createSlice({
       const newElement = {
         type: elementType,
         id: `${elementType}${Math.random().toString(36).substr(2, 9)}`, // Unique ID generation
-        value: elementType === "list" ? value : "", // Set value for list type, otherwise an empty string
+        value: elementType === "list" || elementType === "slide" ? value : "",
       };
 
       // Handle other element types and set their values accordingly
