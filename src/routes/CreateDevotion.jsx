@@ -147,19 +147,21 @@ const CreateDevotion = () => {
   };
 
   return (
-    <div className=" flex h-auto mt-12 w-[100%] mx-auto">
-      <DevotionForm
-        form={form}
-        handleParaChange={handleParaChange}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        paragraphs={paragraphs}
-        addPara={addPara}
-        handleFileChange={handleFileChange}
-        deletePara={deletePara}
-        handleDelete={handleDelete}
-        key={formSubmitCount}
-      />
+    <div className="flex h-auto mt-12 mx-auto justify-center">
+      <div className="w-2/4 ">
+        <DevotionForm
+          form={form}
+          handleParaChange={handleParaChange}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          paragraphs={paragraphs}
+          addPara={addPara}
+          handleFileChange={handleFileChange}
+          deletePara={deletePara}
+          handleDelete={handleDelete}
+          key={formSubmitCount}
+        />
+      </div>
     </div>
   );
 };

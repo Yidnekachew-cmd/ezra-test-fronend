@@ -14,7 +14,7 @@ const DevotionForm = ({
   deletePara,
 }) => {
   return (
-    <div className="flex w-[30%] border-2 shadow-lg rounded-l-2xl h-[100%] font-nokia-bold ">
+    <div className="flex border-2 shadow-lg rounded-l-2xl h-[100%] font-nokia-bold ">
       <form
         onSubmit={handleSubmit}
         className="w-[90%] mx-auto py-6 space-y-3 "

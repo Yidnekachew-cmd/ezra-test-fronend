@@ -27,7 +27,7 @@ const PreviousDevotionals = ({ previousDevotions, setSelectedDevotion }) => {
           <div key={devotion._id} className="w-[24%] ">
             <div className="rounded-lg shadow-xl  h-auto border-2 bg-[#fff] border-accent-6 text-secondary-6">
               <img
-                src={`http://localhost:5354/images/${devotion.image}`}
+                src={`http://localhost:5100/images/${devotion.image}`}
                 alt="Devotion Image"
                 className="h-auto w-[100%] mx-auto mt-4 cursor-pointer"
                 onClick={() => {

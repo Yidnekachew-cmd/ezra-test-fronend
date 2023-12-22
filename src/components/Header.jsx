@@ -51,9 +51,9 @@ const Header = () => {
                   className="flex items-center space-x-2 bg-accent-6 rounded-full p-3 hover:bg-accent-7 cursor-pointer"
                   onClick={handleAccountClick}
                 >
-                  <FaRegUserCircle user={user} />
+                  <FaRegUserCircle />
                   <div className="text-sm font-medium text-white">
-                    {user?.email}
+                    {user.firstName}
                     <div className="text-xs text-white-400">{user.role}</div>
                   </div>
                 </div>

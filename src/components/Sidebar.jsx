@@ -14,7 +14,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex flex-col bg-gray-800 text-white h-full w-1/5">
+    <div className="flex flex-col bg-gray-800 text-white h-screen">
       <div
         className="px-4 py-3 cursor-pointer hover:bg-accent-6"
         onClick={() => handleMenuClick("courses")}

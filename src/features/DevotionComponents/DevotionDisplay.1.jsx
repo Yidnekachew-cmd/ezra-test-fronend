@@ -96,7 +96,7 @@ export const DevotionDisplay = ({ devotions, handleDelete }) => {
               )} */}
 
             <img
-              src={`http://localhost:5354/images/${devotion.image}`}
+              src={`http://localhost:5100/images/${devotion.image}`}
               alt="Devotion Image"
             />
           </div>
@@ -108,7 +108,7 @@ export const DevotionDisplay = ({ devotions, handleDelete }) => {
           <div key={index} className="w-1/4 p-4 thumbnail">
             <div className="rounded w-full h-40 border-2 bg-[#fff] border-[#EA9215] text-[#3A4750]">
               <img
-                src={`http://localhost:5354/images/${devotion.image}`}
+                src={`http://localhost:5100/images/${devotion.image}`}
                 alt="Devotion Image"
                 className="h-[50%] w-[50%] mx-auto mt-4"
               />
