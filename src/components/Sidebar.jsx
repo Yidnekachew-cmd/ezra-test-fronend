@@ -38,7 +38,7 @@ const Sidebar = () => {
           </ul>
         )}
       </div>
-
+      <hr />
       <div
         className="px-4 py-5 cursor-pointer hover:bg-accent-6"
         onClick={() => handleMenuClick("courses")}
@@ -62,6 +62,7 @@ const Sidebar = () => {
           </ul>
         )}
       </div>
+      <hr />
       <div
         className="px-4 py-5 cursor-pointer  hover:bg-accent-6"
         onClick={() => handleMenuClick("sabbathSchool")}
@@ -79,6 +80,7 @@ const Sidebar = () => {
           </ul>
         )}
       </div>
+      <hr />
       <div
         className="px-4 py-5 cursor-pointer  hover:bg-accent-6"
         onClick={() => handleMenuClick("devotion")}
@@ -103,6 +105,7 @@ const Sidebar = () => {
           </ul>
         )}
       </div>
+      <hr />
       <div
         className="px-4 py-5 cursor-pointer hover:bg-accent-6"
         onClick={() => handleMenuClick("users")}
@@ -119,6 +122,7 @@ const Sidebar = () => {
           </ul>
         )}
       </div>
+      <hr />
       <div
         className="px-4 py-5 cursor-pointer hover:bg-accent-6"
         onClick={() => handleMenuClick("feedback")}
@@ -135,6 +139,7 @@ const Sidebar = () => {
           </ul>
         )}
       </div>
+      <hr />
     </div>
   );
 };
