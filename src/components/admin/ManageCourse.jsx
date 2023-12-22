@@ -38,7 +38,7 @@ function ManageCourse() {
   };
 
   return (
-    <div className="h-auto flex flex-col w-[73%] border border-gray-300 p-11 rounded-3xl mt-12 mx-auto space-y-12 mb-12">
+    <div className="h-auto flex flex-col w-[80%] border border-gray-300 p-11 rounded-3xl mt-12 mx-auto space-y-12 mb-12">
       <div className="space-y-3">
         <div className="flex justify-between items-end">
           <div>
