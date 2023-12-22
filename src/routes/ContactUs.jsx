@@ -1,8 +1,5 @@
-// import ManageCourse from "@/components/admin/ManageCourse";
-
 const ContactUs = () => {
   return (
-    // <ManageCourse />
     <div className="relative h-screen">
       <div
         className="bg-coming-soon bg-cover h-full"
