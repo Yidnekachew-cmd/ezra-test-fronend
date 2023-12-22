@@ -30,7 +30,7 @@ const PreviousDevotionals = ({ previousDevotions, setSelectedDevotion }) => {
           <div key={devotion._id} className="w-[24%] ">
             <div className="rounded-lg shadow-xl  h-auto border-2 bg-[#fff] border-accent-6 text-secondary-6 overflow-hidden">
               <img
-                src={`http://localhost:5100/images/${devotion.image}`}
+                src={`https://ezra-seminary-api.onrender.com/images/${devotion.image}`}
                 alt="Devotion Image"
                 className="h-56 w-[100%] mx-auto cursor-pointer object-cover"
                 onClick={() => {

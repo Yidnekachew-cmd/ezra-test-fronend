@@ -6,7 +6,7 @@ function useAxiosInstance() {
   const token = user?.token;
 
   const instance = axios.create({
-    baseURL: "http://localhost:5100",
+    baseURL: "https://ezra-seminary-api.onrender.com",
     headers: {
       Authorization: `Bearer ${token}`,
     },

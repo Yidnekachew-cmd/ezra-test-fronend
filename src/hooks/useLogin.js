@@ -10,28 +10,36 @@ export const useLogin = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("http://localhost:5100/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    const json = await response.json();
+    try {
+      const response = await fetch(
+        "https://ezra-seminary-api.onrender.com/users/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
+      const json = await response.json();
+      if (!response.ok) {
+        setIsLoading(false);
+        setError(json.error);
+      }
+      if (response.ok) {
+        // save the user to local storage
+        localStorage.setItem("user", JSON.stringify(json));
+        // console.log(json);
 
-    if (!response.ok) {
+        // update the auth context
+        dispatch({ type: "LOGIN", payload: json });
+
+        setIsLoading(false);
+        return json;
+      }
+    } catch (error) {
       setIsLoading(false);
-      setError(json.error);
-    }
-    if (response.ok) {
-      // save the user to local storage
-      localStorage.setItem("user", JSON.stringify(json));
-
-      // update the auth context
-      dispatch({ type: "LOGIN", payload: json });
-
-      setIsLoading(false);
-      return json;
+      setError("Failed to connect. Please check your network and try again.");
     }
   };
   return { login, error, isLoading };

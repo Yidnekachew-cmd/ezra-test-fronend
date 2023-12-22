@@ -31,9 +31,8 @@ const DevotionDisplay = ({
         setSelectedDevotion={setSelectedDevotion}
       />
       <Categories title="Lessons Available" />
-
     </div>
-);
+  );
 };
 
 DevotionDisplay.propTypes = {
