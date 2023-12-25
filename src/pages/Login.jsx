@@ -36,7 +36,7 @@ const Login = () => {
         style={{ backgroundPositionX: "-80px" }}
       >
         <div className="flex space-x-3 cursor-pointer text-white ">
-          <img src="/src/assets/ezra-logo.svg" alt="" />
+          <img src="../assets/ezra-logo.svg" alt="" />
           <h3 className="self-center text-2xl font-Lato-Regular">
             <span className="font-Lato-Bold">EZRA</span> Seminary
           </h3>

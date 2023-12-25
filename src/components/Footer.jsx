@@ -4,7 +4,7 @@ const Footer = () => {
       <div className="flex flex-col bg-secondary-6 justify-center items-center py-8 space-y-4">
         <div className="flex flex-row justify-center items-center space-x-3">
           <div>
-            <img src="/src/assets/ezra-logo.svg" alt="" />
+            <img src="../assets/ezra-logo.svg" alt="" />
           </div>
           <div className="flex flex-col">
             <h1 className="text-[#fff] ">
@@ -18,13 +18,13 @@ const Footer = () => {
         <div className="flex flex-row space-x-6 text-white">
           <div className="flex flex-row space-x-2 justify-center items-center">
             <div>
-              <img src="/src/assets/message-icon.svg" alt="" />
+              <img src="../assets/message-icon.svg" alt="" />
             </div>
             <p className="font-nokia-light">ezraseminary@gmail.com</p>
           </div>
           <div className="flex flex-row space-x-2 justify-center items-center">
             <div>
-              <img src="/src/assets/phone-icon.svg" alt="" />
+              <img src="../assets/phone-icon.svg" alt="" />
             </div>
             <p className="font-nokia-light">+251 911 12 13 14</p>
           </div>
