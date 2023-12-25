@@ -23,10 +23,10 @@ function EditCourse() {
           dispatch(
             setCourse({
               ...course,
-              title: res.data[0].title,
-              description: res.data[0].description,
-              image: res.data[0].image,
-              chapters: res.data[0].chapters,
+              title: res.data.title,
+              description: res.data.description,
+              image: res.data.image,
+              chapters: res.data.chapters,
             })
           );
           console.log(res.data);
@@ -35,8 +35,7 @@ function EditCourse() {
     } else {
       console.log("Course ID is undefined");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, dispatch]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
