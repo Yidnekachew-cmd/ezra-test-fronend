@@ -9,6 +9,9 @@ export const courseSlice = createSlice({
     chapters: [],
   },
   reducers: {
+    setCourse: (state, action) => {
+      state = action.payload;
+    },
     setTitle: (state, action) => {
       state.title = action.payload;
     },
@@ -138,6 +141,7 @@ export const courseSlice = createSlice({
 });
 
 export const {
+  setCourse,
   setTitle,
   setDescription,
   setImage,
