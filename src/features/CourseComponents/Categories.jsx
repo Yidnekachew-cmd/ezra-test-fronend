@@ -17,7 +17,7 @@ const Categories = ({title}) => {
             <div className="mx-auto w-[100%] ">
               <img
                 className="w-full object-cover"
-                src="src/assets/Category-img-1.svg"
+                src="/src/assets/Category-img-1.svg"
                 alt=""
               />
             </div>
@@ -46,7 +46,7 @@ const Categories = ({title}) => {
             <div className="mx-auto w-[100%] ">
               <img
                 className="w-full object-cover"
-                src="src/assets/Category-img-2.svg"
+                src="/src/assets/Category-img-2.svg"
                 alt=""
               />
             </div>
@@ -75,7 +75,7 @@ const Categories = ({title}) => {
             <div className="mx-auto w-[100%] ">
               <img
                 className="w-full object-cover"
-                src="src/assets/Category-img-3.svg"
+                src="/src/assets/Category-img-3.svg"
                 alt=""
               />
             </div>

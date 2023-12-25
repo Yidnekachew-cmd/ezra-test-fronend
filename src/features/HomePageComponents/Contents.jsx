@@ -8,7 +8,7 @@ const Contents = () => {
         <div className="flex flex-col w-[100%] justify-center items-center  mx-auto space-y-6 md:flex-row md:space-x-3 md:space-y-0" >
             <div className="flex flex-col w-[100%] md:w-[33.3%]">
                 <div className="mx-auto w-[100%]">
-                    <img  className="w-full" src="src/assets/content-1.svg" alt="" />
+                    <img  className="w-full" src="/src/assets/content-1.svg" alt="" />
                 </div>
                 <div className="bg-secondary-6 bg-opacity-90 text-center py-4 font-nokia-bold">
                     <h2 className="text-accent-5 text-2xl ">Course Study</h2>
@@ -18,7 +18,7 @@ const Contents = () => {
             </div>
             <div className="flex flex-col w-[100%]  md:w-[33.3%]">
                 <div className="mx-auto w-[100%]">
-                    <img  className="w-full" src="src/assets/content-2.svg" alt="" />
+                    <img  className="w-full" src="/src/assets/content-2.svg" alt="" />
                 </div>
                 <div className="bg-secondary-6 bg-opacity-90 text-center py-4 font-nokia-bold ">
                     <h2 className="text-accent-5 text-2xl ">Sabbath School Study</h2>
@@ -28,7 +28,7 @@ const Contents = () => {
             </div>
             <div className="flex flex-col w-[100%] md:w-[33.3%]">
                 <div className="mx-auto w-[100%]">
-                    <img  className="w-full" src="src/assets/content-3.svg" alt="" />
+                    <img  className="w-full" src="/src/assets/content-3.svg" alt="" />
                 </div>
                 <div className="bg-secondary-6 bg-opacity-90 text-center py-4 font-nokia-bold">
                     <h2 className="text-accent-5 text-2xl ">Devotional Study</h2>

@@ -17,10 +17,10 @@ const Hero = () => {
             </h1>
             <div className="flex justify-start md:justify-end items-center space-x-4 pt-2 md:h-32 ">
             <a href="#">
-                <img className="h-6 md:h-12" src="src/assets/google-play.svg" alt="Google Play Logo" />
+                <img className="h-6 md:h-12" src="/src/assets/google-play.svg" alt="Google Play Logo" />
                 </a>
                 <a href="#">
-                <img className="h-6 md:h-12" src="src/assets/app-logo.svg" alt="App Store Logo" />
+                <img className="h-6 md:h-12" src="/src/assets/app-logo.svg" alt="App Store Logo" />
                 </a>
             </div>
             </div>

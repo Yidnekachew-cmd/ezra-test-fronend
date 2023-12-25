@@ -12,7 +12,7 @@ const Intro = () => {
                 </p>
             </div>
             <div className="mx-auto w-[100%] cursor-pointer mt-12  md:w-[50%]">
-                <img className="w-full" src="src/assets/Intro-Video.svg" alt="Introduction Video" />
+                <img className="w-full" src="/src/assets/Intro-Video.svg" alt="Introduction Video" />
             </div>
         </div>
         <div className="hidden md:flex text-center mt-12 ">
