@@ -43,14 +43,14 @@ function EditCourse() {
     console.log(payload);
 
     axios
-      .post("/course/create", formData, {
+      .put("/course/update", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
         console.log(res);
-        navigate("/courses");
+        navigate("/admin/course");
       })
       .catch((err) => {
         console.log(err);
