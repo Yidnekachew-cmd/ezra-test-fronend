@@ -1,4 +1,4 @@
-import axios from "axios";
+import useAxiosInstance from "../../api/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -9,13 +9,14 @@ import EditChapters from "./EditChapters";
 function EditCourse() {
   const navigate = useNavigate();
   const { id } = useParams();
+  const instance = useAxiosInstance();
   const dispatch = useDispatch();
   const course = useSelector(selectCourse);
 
   //get a single course
   useEffect(() => {
     if (id) {
-      axios
+      instance
         .get("/course/get/" + id)
         .then((res) => {
           console.log(id);
@@ -71,7 +72,7 @@ function EditCourse() {
     console.log(payload);
 
     //update course
-    axios
+    instance
       .put("/course/update" + id, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
