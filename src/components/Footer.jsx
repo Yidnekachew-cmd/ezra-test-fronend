@@ -39,22 +39,22 @@ const Footer = () => {
           <ul className="flex flex-row justify-center items-center space-x-4 ">
             <a href="">
               <li className="">
-                <img src="/src/assets/instagram-logo.svg" alt="" />
+                <img src="../assets/instagram-logo.svg" alt="" />
               </li>
             </a>
             <a href="">
               <li className="">
-                <img src="/src/assets/facebook-logo.svg" alt="" />
+                <img src="../assets/facebook-logo.svg" alt="" />
               </li>
             </a>
             <a href="">
               <li className="">
-                <img src="/src/assets/telegram-logo.svg" alt="" />
+                <img src="../assets/telegram-logo.svg" alt="" />
               </li>
             </a>
             <a href="">
               <li className="">
-                <img src="/src/assets/YouTube-logo.svg" alt="" />
+                <img src="../assets/YouTube-logo.svg" alt="" />
               </li>
             </a>
           </ul>
