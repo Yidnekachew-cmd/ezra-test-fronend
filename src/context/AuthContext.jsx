@@ -31,8 +31,8 @@ export const AuthContextProvider = ({ children }) => {
 
     if (user) {
       dispatch({ type: "LOGIN", payload: user });
+      setIsAuthReady(true); // Set this to true after checking localStorage
     }
-    setIsAuthReady(true); // Set this to true after checking localStorage
   }, []);
 
   if (!isAuthReady) {
