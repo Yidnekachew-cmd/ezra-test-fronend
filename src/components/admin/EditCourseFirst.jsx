@@ -6,8 +6,8 @@ import {
   setDescription,
   setImage,
   selectCourse,
-} from "../redux/courseSlice";
-import { Button } from "./ui/button";
+} from "../../redux/courseSlice";
+import { Button } from "../ui/button";
 
 function EditCourseFirst() {
   const dispatch = useDispatch();
@@ -90,7 +90,9 @@ function EditCourseFirst() {
         </div>
         <div className="col-span-12">
           <Button>
-            <Link to="/courses/create/chapters">Create</Link>
+            <Link to={`/admin/edit/course/` + course._id + `/chapters`}>
+              Update
+            </Link>
           </Button>
         </div>
       </form>
