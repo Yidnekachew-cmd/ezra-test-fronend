@@ -39,15 +39,18 @@ function EditCourse() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { title, description, image, chapters } = course;
 
     // console.log("Chapters data:", chapters);
 
     const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("image", image);
-    formData.append("chapters", JSON.stringify(chapters)); // Convert chapters to JSON string and append it to formData
+    formData.append("title", course.title);
+    formData.append("description", course.description);
+    if (typeof course.image === "string") {
+      formData.append("image", course.image);
+    } else if (course.image instanceof File) {
+      formData.append("image", course.image, course.image.name);
+    }
+    formData.append("chapters", JSON.stringify(course.chapters)); // Convert chapters to JSON string and append it to formData
 
     // Loop through the chapters and slides to append any image files
     course.chapters.forEach((chapter, chapterIndex) => {
@@ -68,21 +71,21 @@ function EditCourse() {
     console.log(formData);
 
     const payload = Object.fromEntries(formData);
-    console.log(payload);
+    console.log("payload" + payload);
 
     //update course
     instance
-      .put("/course/update" + id, formData, {
+      .put("/course/update/" + id, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
-        console.log(res);
+        console.log("Course updated: ", res.data);
         navigate("/admin/course");
       })
       .catch((err) => {
-        console.log(err);
+        console.error("Error updating course: ", err);
       });
   };
 
