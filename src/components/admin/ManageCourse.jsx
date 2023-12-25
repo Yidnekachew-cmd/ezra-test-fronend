@@ -38,7 +38,7 @@ function ManageCourse() {
   };
 
   return (
-    <div className="h-auto flex flex-col w-[73%] border border-gray-300 p-11 rounded-3xl mt-12 mx-auto space-y-12 mb-12">
+    <div className="h-auto flex flex-col w-[80%] border border-gray-300 p-11 rounded-3xl mt-12 mx-auto space-y-12 mb-12">
       <div className="space-y-3">
         <div className="flex justify-between items-end">
           <div>
@@ -78,6 +78,7 @@ function ManageCourse() {
                 className="flex flex-col justify-center items-start  border-accent-5 border-2 w-[100%] md:w-[23.7%] shadow-xl rounded-3xl md:rounded-xl h-auto pb-6 "
               >
                 <img
+                  // src={`https://ezra-seminary-api.onrender.com/` + course.image}
                   src={`http://localhost:5100/images/` + course.image}
                   className="w-full max-h-[40vh] min-h-[40vh]  md:min-h-[30vh] md:max-h-[30vh] object-cover rounded-3xl  md:rounded-2xl p-2"
                   alt="no_image"

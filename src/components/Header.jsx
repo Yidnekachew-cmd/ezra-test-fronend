@@ -31,9 +31,11 @@ const Header = () => {
       <div className=" flex justify-between py-6 items-center text-white font-nokia-bold w-[90%] md:w-[80%] mx-auto ">
         <div className="flex justify-center items-center space-x-3 cursor-pointer ">
           <img src="src/assets/ezra-logo.svg" alt="" />
-          <h3>
-            <strong className="text-2xl">Ezra</strong> Seminary
-          </h3>
+          <NavLink to="/" onClick={closeMenu}>
+            <h3>
+              <strong className="text-2xl">Ezra</strong> Seminary
+            </h3>
+          </NavLink>
         </div>
         <nav>
           <div className="md:hidden">
