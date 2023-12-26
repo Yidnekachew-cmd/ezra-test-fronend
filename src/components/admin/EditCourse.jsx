@@ -1,25 +1,56 @@
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { selectCourse } from "../../redux/courseSlice";
+import useAxiosInstance from "../../api/axiosInstance";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { selectCourse, setCourse } from "../../redux/courseSlice";
 import { ArrowCircleLeft, ArrowSquareOut } from "@phosphor-icons/react";
 import EditChapters from "./EditChapters";
 
 function EditCourse() {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const instance = useAxiosInstance();
+  const dispatch = useDispatch();
   const course = useSelector(selectCourse);
+
+  //get a single course
+  useEffect(() => {
+    if (id) {
+      instance
+        .get("/course/get/" + id)
+        .then((res) => {
+          console.log(id);
+          dispatch(
+            setCourse({
+              ...course,
+              title: res.data.title,
+              description: res.data.description,
+              image: res.data.image,
+              chapters: res.data.chapters,
+            })
+          );
+          console.log(res.data);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      console.log("Course ID is undefined");
+    }
+  }, [id, dispatch]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { title, description, image, chapters } = course;
 
     // console.log("Chapters data:", chapters);
 
     const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("image", image);
-    formData.append("chapters", JSON.stringify(chapters)); // Convert chapters to JSON string and append it to formData
+    formData.append("title", course.title);
+    formData.append("description", course.description);
+    if (typeof course.image === "string") {
+      formData.append("image", course.image);
+    } else if (course.image instanceof File) {
+      formData.append("image", course.image, course.image.name);
+    }
+    formData.append("chapters", JSON.stringify(course.chapters)); // Convert chapters to JSON string and append it to formData
 
     // Loop through the chapters and slides to append any image files
     course.chapters.forEach((chapter, chapterIndex) => {
@@ -40,20 +71,21 @@ function EditCourse() {
     console.log(formData);
 
     const payload = Object.fromEntries(formData);
-    console.log(payload);
+    console.log("payload" + payload);
 
-    axios
-      .post("/course/create", formData, {
+    //update course
+    instance
+      .put("/course/update/" + id, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
-        console.log(res);
-        navigate("/courses");
+        console.log("Course updated: ", res.data);
+        navigate("/admin/course");
       })
       .catch((err) => {
-        console.log(err);
+        console.error("Error updating course: ", err);
       });
   };
 
