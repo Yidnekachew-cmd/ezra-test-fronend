@@ -114,7 +114,7 @@ function SlidesDisplay() {
                   EZRA seminary
                 </h1>
                 <img
-                  src="/src/assets/close-icon.svg"
+                  src="../assets/close-icon.svg"
                   className="w-[3%] z-40 cursor-pointer"
                   alt=""
                 />

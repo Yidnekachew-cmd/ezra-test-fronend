@@ -110,10 +110,10 @@ const CurrentDevotional = ({
           )}
 
           {devotionToDisplay && devotionToDisplay.previewUrl !== "" ? (
-            <img src="../../src/assets/Advert-Image.svg" alt="" />
+            <img src="../../assets/Advert-Image.svg" alt="" />
           ) : (
             <img
-              src="../../src/assets/Advert-Image.svg"
+              src="../../assets/Advert-Image.svg"
               alt=""
               className="hidden"
             />

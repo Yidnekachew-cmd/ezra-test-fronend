@@ -6,8 +6,6 @@ import SabbathSchool from "../routes/SabbathSchool";
 import CreateDevotion from "./CreateDevotion";
 import Devotion from "../routes/Devotion";
 // import AddCourse from "../components/AddCourse";
-import ChaptersDisplay from "../features/CourseComponents/ChaptersDisplay";
-import SlidesDisplay from "../features/CourseComponents/SlidesDisplay";
 import AdminChapter from "../features/CourseComponents/AdminChapter";
 import EditCourse from "../components/admin/EditCourse";
 import ManageCourse from "../components/admin/ManageCourse";
@@ -25,11 +23,7 @@ const AdminDashboard = () => {
           <Route path="sabbathSchool" element={<SabbathSchool />} />
           <Route path="devotion" element={<Devotion />} />
           <Route path="devotion/create" element={<CreateDevotion />} />
-          <Route path="courses/get/:courseId" element={<ChaptersDisplay />} />
-          <Route
-            path="courses/get/:courseId/chapter/:chapterId"
-            element={<SlidesDisplay />}
-          />
+
           <Route path="courses/create/chapters" element={<AdminChapter />} />
           <Route path="course" element={<ManageCourse />} />
           <Route path="edit/course/:id" element={<EditCourse />} />
