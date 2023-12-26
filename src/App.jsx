@@ -14,6 +14,8 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import Footer from "./components/Footer";
 import AdminDashboard from "./routes/AdminDashboard";
 import CoursesAvailable from "./features/CourseComponents/CoursesAvailable";
+import ChaptersDisplay from "./features/CourseComponents/ChaptersDisplay";
+import SlidesDisplay from "./features/CourseComponents/SlidesDisplay";
 
 function App() {
   const { user, isAuthReady } = useAuthContext();
@@ -50,6 +52,11 @@ function App() {
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
+        <Route path="courses/get/:courseId" element={<ChaptersDisplay />} />
+        <Route
+          path="courses/get/:courseId/chapter/:chapterId"
+          element={<SlidesDisplay />}
+        />
         <Route path="/sabbathSchool" element={<SabbathSchool />} />
         <Route path="/devotion" element={<Devotion />} />
         <Route path="/aboutUs" element={<AboutUs />} />
