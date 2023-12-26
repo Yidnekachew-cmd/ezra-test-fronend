@@ -10,10 +10,10 @@ export default {
   ],
   theme: {
     screens: {
-      sm: '480px',
-      md: '768px',
-      lg: '976px',
-      xl: '1440px'
+      sm: "480px",
+      md: "768px",
+      lg: "976px",
+      xl: "1440px",
     },
     container: {
       center: true,
@@ -38,8 +38,8 @@ export default {
     extend: {
       truncate: {
         lines: {
-          2: '2',
-          3: '3',
+          2: "2",
+          3: "3",
         },
       },
       fontFamily: {
@@ -55,9 +55,9 @@ export default {
       },
 
       backgroundImage: {
-        "header-img": "url('./src/assets/header-img.svg')",
-        "coming-soon": "url('./src/assets/coming-soon.png')",
-        "chapter-img-1": "url('./src/assets/chapter-img-1.svg')",
+        "header-img": "url('./assets/header-img.svg')",
+        "coming-soon": "url('./assets/coming-soon.png')",
+        "chapter-img-1": "url('./assets/chapter-img-1.svg')",
         // 'footer-texture': "url('/img/footer-texture.png')",
       },
       colors: {

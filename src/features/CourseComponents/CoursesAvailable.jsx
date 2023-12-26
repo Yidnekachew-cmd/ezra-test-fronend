@@ -52,12 +52,12 @@ function CoursesAvailable() {
             />
             <span>
               <img
-                src="src/assets/Search-1.svg"
+                src="../assets/Search-1.svg"
                 alt=""
                 className="hidden md:inline-block cursor-pointer"
               />
               <img
-                src="src/assets/Search.svg"
+                src="../assets/Search.svg"
                 alt=""
                 className="md:hidden cursor-pointer"
               />
