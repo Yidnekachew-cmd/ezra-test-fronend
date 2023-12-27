@@ -10,16 +10,13 @@ export const useSignup = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(
-      "https://ezra-seminary-api.onrender.com/users/signup",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ firstName, lastName, email, password }),
-      }
-    );
+    const response = await fetch("http://localhost:5100/users/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ firstName, lastName, email, password }),
+    });
     const json = await response.json();
     if (!response.ok) {
       setIsLoading(false);

@@ -28,9 +28,14 @@ function App() {
   const PrivateAdminRoute = ({ children }) => {
     if (user && user.role === "Admin") {
       return children;
-    } else {
+    } else if (!user && user.role !== "Admin") {
       return <Navigate to="/" replace={true} />;
-    }
+    } else
+      return user && user.role === "Admin" ? (
+        children
+      ) : (
+        <Navigate to="/admin" replace={true} />
+      );
   };
 
   PrivateAdminRoute.propTypes = {
@@ -52,7 +57,7 @@ function App() {
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
-        <Route path="courses/get/:courseId" element={<ChaptersDisplay />} />
+        <Route path="/courses/get/:courseId" element={<ChaptersDisplay />} />
         <Route
           path="courses/get/:courseId/chapter/:chapterId"
           element={<SlidesDisplay />}
