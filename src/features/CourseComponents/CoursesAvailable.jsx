@@ -75,10 +75,13 @@ function CoursesAvailable() {
               >
                 <img
                   // src={
-                  //   `https://ezra-seminary-api.onrender.com/images/` +
+                  //   `http://localhost:5100/images/` +
                   //   course.image
                   // }
-                  src={`http://localhost:5100/images/` + course.image}
+                  src={
+                    `https://ezra-seminary-api.onrender.com/images/` +
+                    course.image
+                  }
                   className="w-full max-h-[40vh] min-h-[40vh]  md:min-h-[30vh] md:max-h-[30vh] object-cover rounded-3xl  md:rounded-2xl p-2"
                   alt="no_image"
                 />

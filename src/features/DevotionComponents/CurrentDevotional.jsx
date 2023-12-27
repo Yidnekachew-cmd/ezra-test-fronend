@@ -99,7 +99,7 @@ const CurrentDevotional = ({
 
         <div className="w-[25%] mt-12 flex flex-col space-y-6">
           <img
-            src={`http://localhost:5100/images/${
+            src={`https://ezra-seminary-api.onrender.com/images/${
               devotionToDisplay && devotionToDisplay.image
             }`}
             alt="Devotion Image"

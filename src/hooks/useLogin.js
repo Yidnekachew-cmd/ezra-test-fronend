@@ -11,13 +11,16 @@ export const useLogin = () => {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:5100/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "https://ezra-seminary-api.onrender.com/users/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
       const json = await response.json();
       if (!response.ok) {
         setIsLoading(false);
