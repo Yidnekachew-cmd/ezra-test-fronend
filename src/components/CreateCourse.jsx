@@ -31,11 +31,11 @@ function CreateCourse() {
   console.log(course);
 
   return (
-    <div className="h-screen w-[80%] mx-auto pt-9 font-nokia-bold">
+    <div className="w-[80%] mx-auto pt-9 font-nokia-bold">
       <h2 className="text-accent-6 text-2xl border-b border-primary-8 pb-1">
         Create Course
       </h2>
-      <form className="w-[40%] mx-auto my-10 flex flex-col gap-4 border border-accent-6 p-8 rounded-xl">
+      <form className="w-[60%] mx-auto my-10 flex flex-col gap-4 border border-accent-6 p-8 rounded-xl">
         <div className="relative col-span-12 mx-auto h-72 w-[100%]">
           {imagePreviewUrl && (
             <img
