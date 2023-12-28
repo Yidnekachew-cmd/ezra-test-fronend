@@ -10,6 +10,7 @@ import AdminChapter from "../features/CourseComponents/AdminChapter";
 import EditCourse from "../components/admin/EditCourse";
 import ManageCourse from "../components/admin/ManageCourse";
 import CreateCourse from "@/components/CreateCourse";
+import EditCourseFirst from "@/components/admin/EditCourseFirst";
 
 const AdminDashboard = () => {
   return (
@@ -26,7 +27,8 @@ const AdminDashboard = () => {
 
           <Route path="courses/create/chapters" element={<AdminChapter />} />
           <Route path="course" element={<ManageCourse />} />
-          <Route path="edit/course/:id" element={<EditCourse />} />
+          <Route path="edit/course/:id" element={<EditCourseFirst />} />
+          <Route path="edit/course/:id/chapters" element={<EditCourse />} />
         </Routes>
       </div>
     </div>

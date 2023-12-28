@@ -93,7 +93,7 @@ function ManageCourse() {
                   <hr className="border-accent-5 border-1 w-[100%] " />
                   <div className="flex justify-between">
                     <Link
-                      to={`/admin/edit/course/` + course._id}
+                      to={`/admin/edit/course/` + course._id + `/chapters`}
                       className="inline-block bg-accent-6 text-primary-6 px-3 py-1 rounded transition duration-300 focus:outline-none font-nokia-bold text-xs hover:bg-accent-7"
                     >
                       edit
