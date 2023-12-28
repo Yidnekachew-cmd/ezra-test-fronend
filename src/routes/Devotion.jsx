@@ -5,10 +5,10 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import useAxiosInstance from "../api/axiosInstance";
 
 const Devotion = () => {
-  const { token, role, isAuthReady } = useAuthContext(); // get the authentication token
+  const { token, isAuthReady } = useAuthContext(); // get the authentication token
   const [devotions, setDevotions] = useState([]);
   const [selectedDevotion, setSelectedDevotion] = useState(null);
-  const [editingDevotion, setEditingDevotion] = useState(null);
+  // const [editingDevotion, setEditingDevotion] = useState(null);
   // const [formSubmitCount, setFormSubmitCount] = useState(0);
   const instance = useAxiosInstance(token);
 
@@ -46,14 +46,14 @@ const Devotion = () => {
   // };
 
   // useState for form
-  const [form, setForm] = useState({
-    month: "",
-    day: "",
-    title: "",
-    chapter: "",
-    verse: "",
-    prayer: "",
-  });
+  // const [form, setForm] = useState({
+  //   month: "",
+  //   day: "",
+  //   title: "",
+  //   chapter: "",
+  //   verse: "",
+  //   prayer: "",
+  // });
 
   // const handleChange = (e) => {
   //   // const file = e.target.files[0];
@@ -65,8 +65,8 @@ const Devotion = () => {
   // };
 
   const startEditing = (devotion) => {
-    setEditingDevotion(devotion);
-    setForm(devotion);
+    // setEditingDevotion(devotion);
+    // setForm(devotion);
     setParagraphs(devotion.body);
   };
 
@@ -151,6 +151,7 @@ const Devotion = () => {
   //   setSelectedFile(file);
 
   //   if (file) {
+
   //     const reader = new FileReader();
 
   //     reader.onload = () => {

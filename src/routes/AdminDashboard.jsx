@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import Courses from "../routes/Courses";
 import SabbathSchool from "../routes/SabbathSchool";
 import CreateDevotion from "./CreateDevotion";
+import ManageDevotion from "./ManageDevotion";
 import Devotion from "../routes/Devotion";
 // import AddCourse from "../components/AddCourse";
 import AdminChapter from "../features/CourseComponents/AdminChapter";
@@ -24,7 +25,7 @@ const AdminDashboard = () => {
           <Route path="sabbathSchool" element={<SabbathSchool />} />
           <Route path="devotion" element={<Devotion />} />
           <Route path="devotion/create" element={<CreateDevotion />} />
-
+          <Route path="devotion/manage" element={<ManageDevotion />} />
           <Route path="courses/create/chapters" element={<AdminChapter />} />
           <Route path="course" element={<ManageCourse />} />
           <Route path="edit/course/:id" element={<EditCourseFirst />} />
