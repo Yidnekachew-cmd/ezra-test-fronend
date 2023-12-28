@@ -38,7 +38,7 @@ function ManageCourse() {
   };
 
   return (
-    <div className="h-auto flex flex-col w-[80%] border border-gray-300 p-11 rounded-3xl mt-12 mx-auto space-y-12 mb-12">
+    <div className="h-auto flex flex-col border border-gray-300 p-11 rounded-3xl mt-12 space-y-12 mb-12">
       <div className="space-y-3">
         <div className="flex justify-between items-end">
           <div>
@@ -52,7 +52,7 @@ function ManageCourse() {
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearch}
-              className="  md:inline-block  md:border-2  border-accent-6  w-[80%] outline-1 outline-accent-5 rounded-l px-4"
+              className="md:inline-block  md:border-2  border-accent-6  w-[80%] outline-1 outline-accent-5 rounded-l px-4"
             />
             <span>
               <img
@@ -96,7 +96,7 @@ function ManageCourse() {
                   <hr className="border-accent-5 border-1 w-[100%] " />
                   <div className="flex justify-between">
                     <Link
-                      to={`/admin/edit/course/` + course._id}
+                      to={`/admin/edit/course/` + course._id + `/chapters`}
                       className="inline-block bg-accent-6 text-primary-6 px-3 py-1 rounded transition duration-300 focus:outline-none font-nokia-bold text-xs hover:bg-accent-7"
                     >
                       edit
