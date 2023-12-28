@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setTitle,
@@ -7,9 +6,10 @@ import {
   setImage,
   selectCourse,
 } from "../../redux/courseSlice";
+import PropTypes from "prop-types";
 import { Button } from "../ui/button";
 
-function EditCourseFirst() {
+function EditCourseFirst({ setShowComponent }) {
   const dispatch = useDispatch();
   const { title, description } = useSelector((state) => state.course);
   const course = useSelector(selectCourse);
@@ -30,12 +30,17 @@ function EditCourseFirst() {
 
   console.log(course);
 
+  // navigate back to the previous route
+  const handleGoBack = () => {
+    setShowComponent(false);
+  };
+
   return (
     <div className="h-screen w-[80%] mx-auto pt-9 font-nokia-bold">
       <h2 className="text-accent-6 text-2xl border-b border-primary-8 pb-1">
         Edit Course
       </h2>
-      <form className="w-[40%] mx-auto my-10 flex flex-col gap-4 border border-accent-6 p-8 rounded-xl">
+      <div className="w-[40%] mx-auto my-10 flex flex-col gap-4 border border-accent-6 p-8 rounded-xl">
         <div className="relative col-span-12 mx-auto h-72 w-[100%]">
           {imagePreviewUrl && (
             <img
@@ -58,7 +63,6 @@ function EditCourseFirst() {
             focus:outline-none focus:border-accent-8 cursor-pointer"
             name="image"
             onChange={handleImageChange}
-            required
           />
           <div className="absolute inset-0 rounded-md bg-accent-8 opacity-60"></div>
         </div>
@@ -72,7 +76,6 @@ function EditCourseFirst() {
             autoComplete="off"
             value={title}
             onChange={(e) => dispatch(setTitle(e.target.value))}
-            required
           />
         </div>
         <div className="col-span-12">
@@ -85,19 +88,18 @@ function EditCourseFirst() {
             autoComplete="off"
             value={description}
             onChange={(e) => dispatch(setDescription(e.target.value))}
-            required
           />
         </div>
         <div className="col-span-12">
-          <Button>
-            <Link to={`/admin/edit/course/` + course._id + `/chapters`}>
-              Update
-            </Link>
-          </Button>
+          <Button onClick={handleGoBack}>OK</Button>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
+
+EditCourseFirst.propTypes = {
+  setShowComponent: PropTypes.func,
+};
 
 export default EditCourseFirst;

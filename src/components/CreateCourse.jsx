@@ -90,7 +90,7 @@ function CreateCourse() {
         </div>
         <div className="col-span-12">
           <Button>
-            <Link to="/courses/create/chapters">Create</Link>
+            <Link to="/admin/courses/create/chapters">Create</Link>
           </Button>
         </div>
       </form>
