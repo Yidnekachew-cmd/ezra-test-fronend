@@ -1,6 +1,7 @@
 // DevotionFormPage.jsx
 import { useState } from "react";
 import DevotionForm from "../features/DevotionComponents/DevotionForm";
+import DevotionPreview from "@/features/DevotionComponents/DevotionPreview";
 import { useAuthContext } from "../hooks/useAuthContext";
 import useAxiosInstance from "../api/axiosInstance";
 
@@ -147,8 +148,8 @@ const CreateDevotion = () => {
   };
 
   return (
-    <div className="flex h-auto mt-12 mx-auto justify-center">
-      <div className="w-2/4 ">
+    <div className=" flex h-auto mx-auto mt-12 w-[98%] gap-4">
+        <DevotionPreview form={form} paragraphs={paragraphs} previewUrl={previewUrl} />
         <DevotionForm
           form={form}
           handleParaChange={handleParaChange}
@@ -162,7 +163,6 @@ const CreateDevotion = () => {
           key={formSubmitCount}
         />
       </div>
-    </div>
   );
 };
 

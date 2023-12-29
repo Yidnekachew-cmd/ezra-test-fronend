@@ -56,7 +56,7 @@ const CurrentDevotional = ({
                   }
                 />
                 <FaEdit
-                  className="text-gray-700 text-xl cursor-pointer self-center"
+                  className="text-gray-700 text-xl cursor-pointer self-center "
                   onClick={() => startEditing(devotionToDisplay)}
                 />
               </>
@@ -65,6 +65,9 @@ const CurrentDevotional = ({
           <h2 className=" text-lg text-accent-5">
             {devotionToDisplay && devotionToDisplay.chapter}
           </h2>
+          <p className=" text-1xl text-secondary-6">
+            {devotionToDisplay && devotionToDisplay.verse}
+          </p>
 
           {devotionToDisplay && devotionToDisplay.chapter !== "" ? (
             <hr className="border-accent-5" />
@@ -72,9 +75,7 @@ const CurrentDevotional = ({
             <hr className="hidden border-secondary-6" />
           )}
 
-          <p className=" text-1xl text-secondary-6">
-            {devotionToDisplay && devotionToDisplay.verse}
-          </p>
+         
 
           {devotionToDisplay &&
             devotionToDisplay.body.map((paragraph, paragraphIndex) => (
