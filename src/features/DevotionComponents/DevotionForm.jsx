@@ -23,7 +23,11 @@ const DevotionForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(submitForm());
+    if (form.id) {
+      dispatch(updateDevotion(form));
+    } else {
+      dispatch(createDevotion(form));
+    }
   };
 
   const addPara = () => {
