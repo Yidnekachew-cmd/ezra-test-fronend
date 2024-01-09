@@ -141,6 +141,12 @@ const devotionsSlice = createSlice({
   // ... rest of your slice
 });
 
+export const selectForm = (state) => state.devotions.form;
+
+export const selectParagraphs = (state) => state.devotions.form.paragraphs;
+
+export const selectPreviewUrl = (state) => state.devotions.form.photo;
+
 export const {
   selectDevotion,
   startEditing,
