@@ -1,10 +1,7 @@
 import PropTypes from "prop-types";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  deleteDevotion,
-  startEditingDevotion,
-} from "../../redux/devotionsSlice"; // replace with the actual path to your devotions slice
+import { deleteDevotion, startEditing } from "../../redux/devotionsSlice"; // replace with the actual path to your devotions slice
 
 const DevotionPreview = ({ form, paragraphs, previewUrl }) => {
   const devotionToDisplay = useSelector(
@@ -16,8 +13,8 @@ const DevotionPreview = ({ form, paragraphs, previewUrl }) => {
     dispatch(deleteDevotion(id));
   };
 
-  const startEditing = (devotion) => {
-    dispatch(startEditingDevotion(devotion));
+  const startEditingDevotion = (devotion) => {
+    dispatch(startEditing(devotion));
   };
 
   return (
@@ -67,7 +64,7 @@ const DevotionPreview = ({ form, paragraphs, previewUrl }) => {
                 />
                 <FaEdit
                   className="text-gray-700 text-xl cursor-pointer self-center"
-                  onClick={() => startEditing(devotionToDisplay)}
+                  onClick={() => startEditingDevotion(devotionToDisplay)}
                 />
               </>
             ) : (
