@@ -10,7 +10,7 @@ import {
   updateForm,
   addParagraph,
   updateParagraph,
-  removeParagraph,
+  deleteParagraph,
   createDevotion, // replace submitForm with createDevotion
   deleteDevotion,
   // selectFile,
@@ -41,7 +41,7 @@ const CreateDevotion = () => {
   };
 
   const deletePara = (index) => {
-    dispatch(removeParagraph(index));
+    dispatch(deleteParagraph(index));
   };
 
   const handleDelete = (id) => {
