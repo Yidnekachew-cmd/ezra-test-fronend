@@ -1,12 +1,13 @@
+import PropTypes from "prop-types";
 import { Button } from "@/components/ui/button";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { selectDevotion } from "../../redux/devotionsSlice";
 
-const PreviousDevotionals = () => {
+const PreviousDevotionals = ({ previousDevotions }) => {
   const dispatch = useDispatch();
-  const previousDevotions = useSelector(
-    (state) => state.devotions.previousDevotions
-  );
+  // const previousDevotions = useSelector(
+  //   (state) => state.devotions.previousDevotions
+  // );
 
   const handleSelectDevotion = (devotion) => {
     dispatch(selectDevotion(devotion));
@@ -36,7 +37,7 @@ const PreviousDevotionals = () => {
         </div>
       </div>
       <div className="flex flex-wrap gap-3 w-[100%] mx-auto  ">
-        {previousDevotions.map((devotion) => (
+        {(previousDevotions || []).map((devotion) => (
           <div key={devotion._id} className="w-[24%] ">
             <div className="rounded-lg shadow-xl  h-auto border-2 bg-[#fff] border-accent-6 text-secondary-6 overflow-hidden">
               <img
@@ -73,6 +74,10 @@ const PreviousDevotionals = () => {
       </div>
     </div>
   );
+};
+
+PreviousDevotionals.propTypes = {
+  previousDevotions: PropTypes.array.isRequired,
 };
 
 export default PreviousDevotionals;

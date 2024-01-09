@@ -10,18 +10,17 @@ import {
 
 const DevotionDisplay = () => {
   const dispatch = useDispatch();
-  const devotions = useSelector((state) => state.devotions.devotions);
+  const devotions = useSelector((state) => state.devotions.devotions) || [];
   const selectedDevotion = useSelector(
     (state) => state.devotions.selectedDevotion
   );
 
-  // If no devotion is selected, display the latest one
-  const devotionToDisplay = selectedDevotion || devotions[0];
-
-  // Filter out the devotion to display from the previous devotions
-  const previousDevotions = devotions.filter(
-    (devotion) => devotion._id !== devotionToDisplay._id
-  );
+  const devotionToDisplay =
+    devotions.length > 0 ? selectedDevotion || devotions[0] : undefined;
+  const previousDevotions =
+    devotions.length > 0
+      ? devotions.filter((devotion) => devotion._id !== devotionToDisplay._id)
+      : [];
 
   const handleDelete = (id) => {
     dispatch(deleteDevotion(id));
