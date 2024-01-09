@@ -4,7 +4,7 @@ import {
   addParagraph,
   updateParagraph,
   deleteParagraph,
-} from "./devotionsSlice";
+} from "../../redux/devotionsSlice";
 
 const AddParagraph = () => {
   const dispatch = useDispatch();

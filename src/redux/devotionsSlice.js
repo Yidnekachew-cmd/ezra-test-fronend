@@ -63,8 +63,15 @@ const devotionsSlice = createSlice({
       subTitles: [],
     },
     devotions: [],
+    selectedDevotion: null,
   },
   reducers: {
+    selectDevotion: (state, action) => {
+      state.selectedDevotion = action.payload;
+    },
+    startEditing: (state, action) => {
+      state.form = action.payload;
+    },
     updateForm: (state, action) => {
       state.form = { ...state.form, ...action.payload };
     },
@@ -105,10 +112,38 @@ const devotionsSlice = createSlice({
       state.form.subTitles.splice(action.payload, 1);
     },
   },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchDevotions.fulfilled, (state, action) => {
+        state.devotions = action.payload;
+      })
+      .addCase(createDevotion.fulfilled, (state, action) => {
+        state.devotions.push(action.payload);
+      })
+      .addCase(updateDevotion.fulfilled, (state, action) => {
+        const index = state.devotions.findIndex(
+          (devotion) => devotion._id === action.payload._id
+        );
+        if (index !== -1) {
+          state.devotions[index] = action.payload;
+        }
+      })
+      .addCase(deleteDevotion.fulfilled, (state, action) => {
+        const index = state.devotions.findIndex(
+          (devotion) => devotion._id === action.payload
+        );
+        if (index !== -1) {
+          state.devotions.splice(index, 1);
+        }
+      });
+  },
   // ... rest of your slice
 });
 
 export const {
+  selectDevotion,
+  startEditing,
   updateForm,
   addParagraph,
   updateParagraph,

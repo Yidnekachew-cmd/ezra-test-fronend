@@ -2,10 +2,7 @@ import PropTypes from "prop-types";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteDevotion,
-  startEditingDevotion,
-} from "../../redux/devotionsSlice";
+import { deleteDevotion, startEditing } from "../../redux/devotionsSlice";
 
 const CurrentDevotional = () => {
   const { role } = useAuthContext(); // get the authentication token
@@ -18,8 +15,8 @@ const CurrentDevotional = () => {
     dispatch(deleteDevotion(id));
   };
 
-  const startEditing = (devotion) => {
-    dispatch(startEditingDevotion(devotion));
+  const startEditingDevotion = (devotion) => {
+    dispatch(startEditing(devotion));
   }; // get the authentication token
 
   return (
@@ -71,7 +68,7 @@ const CurrentDevotional = () => {
                 />
                 <FaEdit
                   className="text-gray-700 text-xl cursor-pointer self-center "
-                  onClick={() => startEditing(devotionToDisplay)}
+                  onClick={() => startEditingDevotion(devotionToDisplay)}
                 />
               </>
             )}

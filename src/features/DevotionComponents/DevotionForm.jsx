@@ -2,12 +2,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateForm,
-  submitForm,
   addParagraph,
   updateParagraph,
   deleteParagraph,
   updateFile,
-} from "./devotionsSlice";
+  createDevotion,
+  updateDevotion,
+} from "../../redux/devotionsSlice";
 import AddParagraph from "./AddParagraph";
 import PhotoUploader from "./PhotoUploader";
 

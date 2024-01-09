@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useSelector, useDispatch } from "react-redux";
-import { setSelectedDevotion } from "./devotionsSlice";
+import { selectDevotion } from "../../redux/devotionsSlice";
 
 const PreviousDevotionals = () => {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const PreviousDevotionals = () => {
   );
 
   const handleSelectDevotion = (devotion) => {
-    dispatch(setSelectedDevotion(devotion));
+    dispatch(selectDevotion(devotion));
   };
 
   return (
