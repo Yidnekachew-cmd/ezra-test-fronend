@@ -1,11 +1,19 @@
+// devotionsSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import useAxiosInstance from "../api/axiosInstance";
+import axios from "axios";
 
 // Async thunk for fetching devotions
 export const fetchDevotions = createAsyncThunk(
   "devotions/fetchDevotions",
-  async (token) => {
-    const axiosInstance = useAxiosInstance(token);
+  async (_, { getState }) => {
+    const token = getState().auth.token; // get the token from the Redux store
+    const axiosInstance = axios.create({
+      baseURL: "https://ezra-seminary-api.onrender.com",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
     const response = await axiosInstance.get("/devotion/show");
     return response.data;
   }
@@ -15,8 +23,8 @@ export const fetchDevotions = createAsyncThunk(
 // You'll need to pass both the token and the devotion data to this thunk
 export const createDevotion = createAsyncThunk(
   "devotions/createDevotion",
-  async ({ token, devotion }) => {
-    const axiosInstance = useAxiosInstance(token);
+  async ({ devotion }) => {
+    const axiosInstance = useAxiosInstance();
     const response = await axiosInstance.post("/devotion/create", devotion, {
       headers: { Authorization: `Bearer ${token}` },
     });
