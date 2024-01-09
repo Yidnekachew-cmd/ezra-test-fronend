@@ -1,13 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import useAxiosInstance from "../api/axiosInstance";
 
 // Async thunk for fetching devotions
 export const fetchDevotions = createAsyncThunk(
   "devotions/fetchDevotions",
   async (token) => {
-    const response = await axios.get("/devotion/show", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const axiosInstance = useAxiosInstance(token);
+    const response = await axiosInstance.get("/devotion/show");
     return response.data;
   }
 );
@@ -17,7 +16,8 @@ export const fetchDevotions = createAsyncThunk(
 export const createDevotion = createAsyncThunk(
   "devotions/createDevotion",
   async ({ token, devotion }) => {
-    const response = await axios.post("/devotion/create", devotion, {
+    const axiosInstance = useAxiosInstance(token);
+    const response = await axiosInstance.post("/devotion/create", devotion, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
@@ -29,9 +29,14 @@ export const createDevotion = createAsyncThunk(
 export const updateDevotion = createAsyncThunk(
   "devotions/updateDevotion",
   async ({ token, devotion }) => {
-    const response = await axios.put(`/devotion/${devotion._id}`, devotion, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const axiosInstance = useAxiosInstance(token);
+    const response = await axiosInstance.put(
+      `/devotion/${devotion._id}`,
+      devotion,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     return response.data;
   }
 );
@@ -41,7 +46,8 @@ export const updateDevotion = createAsyncThunk(
 export const deleteDevotion = createAsyncThunk(
   "devotions/deleteDevotion",
   async ({ token, id }) => {
-    await axios.delete(`/devotion/${id}`, {
+    const axiosInstance = useAxiosInstance(token);
+    await axiosInstance.delete(`/devotion/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return id;
