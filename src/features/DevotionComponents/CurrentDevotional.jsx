@@ -9,6 +9,7 @@ const CurrentDevotional = ({ devotionToDisplay }) => {
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {
+    console.log("Deleting devotion with id: ", id);
     dispatch(deleteDevotion(id));
   };
 
