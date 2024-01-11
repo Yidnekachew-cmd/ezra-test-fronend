@@ -1,20 +1,16 @@
 // devotionsSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import createAxiosInstance from "@/api/axiosInstance";
+
 
 // Async thunk for fetching devotions
 export const fetchDevotions = createAsyncThunk(
   "devotions/fetchDevotions",
-  async (_, { getState }) => {
-    const token = getState().auth.user.token;
+  async (arg, { getState }) => {
+    const token = getState().auth.token; // get the token from the auth state
     console.log("Token:", token); // log the token
 
-    const axiosInstance = axios.create({
-      baseURL: "https://ezra-seminary-api.onrender.com",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const axiosInstance = createAxiosInstance(token);
     const response = await axiosInstance
       .get("/devotion/show")
       .catch((error) => {
@@ -28,44 +24,35 @@ export const fetchDevotions = createAsyncThunk(
 );
 
 // Async thunk for creating a devotion
-// You'll need to pass both the token and the devotion data to this thunk
 export const createDevotion = createAsyncThunk(
   "devotions/createDevotion",
-  async ({ devotion }) => {
-    const axiosInstance = useAxiosInstance();
-    const response = await axiosInstance.post("/devotion/create", devotion, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+  async ({ token, devotion }) => {
+    const axiosInstance = createAxiosInstance(token);
+    const response = await axiosInstance.post("/devotion/create", devotion);
     return response.data;
   }
 );
 
 // Async thunk for updating a devotion
-// You'll need to pass both the token and the devotion data to this thunk
 export const updateDevotion = createAsyncThunk(
   "devotions/updateDevotion",
   async ({ token, devotion }) => {
-    const axiosInstance = useAxiosInstance(token);
+    const axiosInstance = createAxiosInstance(token);
     const response = await axiosInstance.put(
       `/devotion/${devotion._id}`,
-      devotion,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
+      devotion
     );
     return response.data;
   }
 );
 
 // Async thunk for deleting a devotion
-// You'll need to pass both the token and the devotion id to this thunk
 export const deleteDevotion = createAsyncThunk(
   "devotions/deleteDevotion",
-  async ({ token, id }) => {
-    const axiosInstance = useAxiosInstance(token);
-    await axiosInstance.delete(`/devotion/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+  async (id, { getState }) => {
+    const token = getState().auth.token; // get the token from the auth state
+    const axiosInstance = createAxiosInstance(token);
+    await axiosInstance.delete(`/devotion/${id}`);
     return id;
   }
 );

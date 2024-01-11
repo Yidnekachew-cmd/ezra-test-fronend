@@ -1,4 +1,6 @@
-import { createContext, useReducer, useEffect, useState } from "react";
+import { createContext, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { login, setAuthReady } from "../redux/authSlice";
 
 export const AuthContext = createContext();
 
@@ -21,26 +23,20 @@ export const authReducer = (state, action) => {
 
 // eslint-disable-next-line react/prop-types
 export const AuthContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, {
-    user: null,
-  });
-  const [isAuthReady, setIsAuthReady] = useState(false);
+  const auth = useSelector((state) => state.auth); // get the auth state from Redux
+  const dispatch = useDispatch(); // get the dispatch function from Redux
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (user) {
-      dispatch({ type: "LOGIN", payload: user });
+      dispatch(login(user)); // dispatch the login action from authSlice
     }
-    setIsAuthReady(true); // Set this to true after checking localStorage
-  }, []);
-
-  if (!isAuthReady) {
-    return <div>Loading...</div>; // Or a loading spinner
-  }
+    dispatch(setAuthReady(true)); // dispatch the setAuthReady action
+  }, [dispatch]);
 
   return (
-    <AuthContext.Provider value={{ ...state, isAuthReady, dispatch }}>
+    <AuthContext.Provider value={{ ...auth, dispatch }}>
       {children}
     </AuthContext.Provider>
   );

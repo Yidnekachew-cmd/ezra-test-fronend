@@ -1,15 +1,12 @@
 import PropTypes from "prop-types";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteDevotion, startEditing } from "../../redux/devotionsSlice";
 
-const CurrentDevotional = () => {
+const CurrentDevotional = ({ devotionToDisplay }) => {
   const { role } = useAuthContext(); // get the authentication token
   const dispatch = useDispatch();
-  const devotionToDisplay = useSelector(
-    (state) => state.devotions.currentDevotion
-  );
 
   const handleDelete = (id) => {
     dispatch(deleteDevotion(id));

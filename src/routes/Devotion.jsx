@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import DevotionDisplay from "../features/DevotionComponents/DevotionDisplay";
-import { useAuthContext } from "../hooks/useAuthContext";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchDevotions,
@@ -9,7 +8,7 @@ import {
 } from "../redux/devotionsSlice"; // replace with the actual path to your devotions slice
 
 const Devotion = () => {
-  const { token, isAuthReady } = useAuthContext(); // get the authentication token
+  const { isAuthReady } = useSelector((state) => state.auth); // get the authentication readiness
   const devotions = useSelector((state) => state.devotions.devotions);
   const selectedDevotion = useSelector(
     (state) => state.devotions.selectedDevotion
@@ -17,13 +16,15 @@ const Devotion = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("Is auth ready:", isAuthReady); // log the isAuthReady value
     if (isAuthReady) {
-      dispatch(fetchDevotions());
+      dispatch(fetchDevotions()); // remove the token argument
     }
-  }, [isAuthReady, token, dispatch]);
+    console.log(devotions);
+  }, [isAuthReady, dispatch]);
 
   const handleDelete = (id) => {
-    dispatch(deleteDevotion({ token, id }));
+    dispatch(deleteDevotion(id)); // remove the token argument
   };
 
   const handleStartEditing = (devotion) => {
