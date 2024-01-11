@@ -6,15 +6,23 @@ import axios from "axios";
 export const fetchDevotions = createAsyncThunk(
   "devotions/fetchDevotions",
   async (_, { getState }) => {
-    const token = getState().auth.token; // get the token from the Redux store
+    const token = getState().auth.user.token;
+    console.log("Token:", token); // log the token
+
     const axiosInstance = axios.create({
       baseURL: "https://ezra-seminary-api.onrender.com",
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
       },
     });
-    const response = await axiosInstance.get("/devotion/show");
+    const response = await axiosInstance
+      .get("/devotion/show")
+      .catch((error) => {
+        console.error("Failed to fetch devotions:", error); // log any errors
+        throw error;
+      });
+    console.log("Response data:", response.data); // log the response data
+
     return response.data;
   }
 );

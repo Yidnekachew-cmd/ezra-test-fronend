@@ -18,7 +18,7 @@ const Devotion = () => {
 
   useEffect(() => {
     if (isAuthReady) {
-      dispatch(fetchDevotions(token));
+      dispatch(fetchDevotions());
     }
   }, [isAuthReady, token, dispatch]);
 
