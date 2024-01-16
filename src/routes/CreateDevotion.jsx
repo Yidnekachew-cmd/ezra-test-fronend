@@ -1,12 +1,14 @@
-// DevotionFormPage.jsx
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createDevotion, updateDevotion } from "../redux/devotionsSlice";
 import DevotionForm from "../features/DevotionComponents/DevotionForm";
 import DevotionPreview from "@/features/DevotionComponents/DevotionPreview";
 import { useAuthContext } from "../hooks/useAuthContext";
 import useAxiosInstance from "../api/axiosInstance";
 
 const CreateDevotion = () => {
-  const { token, role } = useAuthContext(); // get the authentication token
+  const dispatch = useDispatch();
+  const { token, role } = useAuthContext();
   const [devotions, setDevotions] = useState([]);
   const [editingDevotion, setEditingDevotion] = useState(null);
   const [formSubmitCount, setFormSubmitCount] = useState(0);
@@ -71,8 +73,10 @@ const CreateDevotion = () => {
           `/devotion/${editingDevotion._id}`,
           formData
         );
+        dispatch(updateDevotion(response.data));
       } else {
         response = await instance.post("/devotion/create", formData);
+        dispatch(createDevotion(response.data));
       }
 
       console.log(response);

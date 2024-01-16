@@ -1,18 +1,7 @@
 import PropTypes from "prop-types";
 import { Button } from "@/components/ui/button";
-import { useDispatch } from "react-redux";
-import { selectDevotion } from "../../redux/devotionsSlice";
 
-const PreviousDevotionals = ({ previousDevotions }) => {
-  const dispatch = useDispatch();
-  // const previousDevotions = useSelector(
-  //   (state) => state.devotions.previousDevotions
-  // );
-
-  const handleSelectDevotion = (devotion) => {
-    dispatch(selectDevotion(devotion));
-  };
-
+const PreviousDevotionals = ({ previousDevotions, setSelectedDevotion }) => {
   return (
     <div className="flex flex-col h-auto space-y-6 w-[100%] mx-auto ">
       <div className="w-[100%] flex justify-between items-center">
@@ -37,14 +26,18 @@ const PreviousDevotionals = ({ previousDevotions }) => {
         </div>
       </div>
       <div className="flex flex-wrap gap-3 w-[100%] mx-auto  ">
-        {(previousDevotions || []).map((devotion) => (
+        {previousDevotions.map((devotion) => (
           <div key={devotion._id} className="w-[24%] ">
             <div className="rounded-lg shadow-xl  h-auto border-2 bg-[#fff] border-accent-6 text-secondary-6 overflow-hidden">
               <img
                 src={`https://ezra-seminary-api.onrender.com/images/${devotion.image}`}
                 alt="Devotion Image"
                 className="h-56 w-[100%] mx-auto cursor-pointer object-cover"
-                onClick={() => handleSelectDevotion(devotion)}
+                onClick={() => {
+                  // open the devotion on click
+                  // console.log("clicked");
+                  setSelectedDevotion(devotion);
+                }}
               />
               <div className="w-[90%] mx-auto flex justify-between items-center pb-3">
                 <div className="w-[80%]">
@@ -62,7 +55,11 @@ const PreviousDevotionals = ({ previousDevotions }) => {
                     // type="button"
                     // className="text-[#fff] bg-accent-6 text-xs font-nokia-bold w-[100%] border-2  rounded-full  px-2 hover: hover:bg-accent-7"
                     size="devotion"
-                    onClick={() => handleSelectDevotion(devotion)}
+                    onClick={() => {
+                      // open the devotion on click
+                      // console.log("clicked");
+                      setSelectedDevotion(devotion);
+                    }}
                   >
                     ክፈት
                   </Button>
@@ -78,6 +75,8 @@ const PreviousDevotionals = ({ previousDevotions }) => {
 
 PreviousDevotionals.propTypes = {
   previousDevotions: PropTypes.array.isRequired,
+  setSelectedDevotion: PropTypes.func.isRequired,
+  devotions: PropTypes.array.isRequired,
 };
 
 export default PreviousDevotionals;

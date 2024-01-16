@@ -151,7 +151,6 @@ const ManageDevotion = () => {
     setSelectedFile(file);
 
     if (file) {
-
       const reader = new FileReader();
 
       reader.onload = () => {
@@ -180,19 +179,18 @@ const ManageDevotion = () => {
         handleDelete={handleDelete}
         startEditing={startEditing}
       />
-        <DevotionForm
-          form={form}
-          handleParaChange={handleParaChange}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          paragraphs={paragraphs}
-          addPara={addPara}
-          handleFileChange={handleFileChange}
-          deletePara={deletePara}
-          handleDelete={handleDelete}
-          key={formSubmitCount}
-        />
-      
+      <DevotionForm
+        form={form}
+        handleParaChange={handleParaChange}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        paragraphs={paragraphs}
+        addPara={addPara}
+        handleFileChange={handleFileChange}
+        deletePara={deletePara}
+        handleDelete={handleDelete}
+        key={formSubmitCount}
+      />
     </div>
   );
 };

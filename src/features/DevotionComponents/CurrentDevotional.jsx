@@ -1,22 +1,13 @@
 import PropTypes from "prop-types";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { useDispatch } from "react-redux";
-import { deleteDevotion, startEditing } from "../../redux/devotionsSlice";
 
-const CurrentDevotional = ({ devotionToDisplay }) => {
+const CurrentDevotional = ({
+  devotionToDisplay,
+  handleDelete,
+  startEditing,
+}) => {
   const { role } = useAuthContext(); // get the authentication token
-  const dispatch = useDispatch();
-
-  const handleDelete = (id) => {
-    console.log("Deleting devotion with id: ", id);
-    dispatch(deleteDevotion(id));
-  };
-
-  const startEditingDevotion = (devotion) => {
-    dispatch(startEditing(devotion));
-  }; // get the authentication token
-
   return (
     <div className="h-auto border-2 shadow-lg rounded-2xl p-6">
       <div>
@@ -66,7 +57,7 @@ const CurrentDevotional = ({ devotionToDisplay }) => {
                 />
                 <FaEdit
                   className="text-gray-700 text-xl cursor-pointer self-center "
-                  onClick={() => startEditingDevotion(devotionToDisplay)}
+                  onClick={() => startEditing(devotionToDisplay)}
                 />
               </>
             )}
@@ -134,6 +125,8 @@ const CurrentDevotional = ({ devotionToDisplay }) => {
 
 CurrentDevotional.propTypes = {
   devotionToDisplay: PropTypes.object.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  startEditing: PropTypes.func.isRequired,
 };
 
 export default CurrentDevotional;

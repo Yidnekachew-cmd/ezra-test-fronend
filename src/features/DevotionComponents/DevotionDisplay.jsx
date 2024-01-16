@@ -1,45 +1,29 @@
+import PropTypes from "prop-types";
 import CurrentDevotional from "./CurrentDevotional";
 import PreviousDevotionals from "./PreviousDevotionals";
 import Categories from "../CourseComponents/Categories";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  deleteDevotion,
+
+const DevotionDisplay = ({
+  devotions,
+  handleDelete,
   startEditing,
-  selectDevotion,
-} from "../../redux/devotionsSlice";
+  setSelectedDevotion,
+  selectedDevotion,
+}) => {
+  // If no devotion is selected, display the latest one
+  const devotionToDisplay = selectedDevotion || devotions[0];
 
-const DevotionDisplay = () => {
-  const dispatch = useDispatch();
-  const devotions = useSelector((state) => state.devotions.devotions) || [];
-  const selectedDevotion = useSelector(
-    (state) => state.devotions.selectedDevotion
+  // Filter out the devotion to display from the previous devotions
+  const previousDevotions = devotions.filter(
+    (devotion) => devotion._id !== devotionToDisplay._id
   );
-
-  const devotionToDisplay =
-    devotions.length > 0 ? selectedDevotion || devotions[0] : undefined;
-  const previousDevotions =
-    devotions.length > 0
-      ? devotions.filter((devotion) => devotion._id !== devotionToDisplay._id)
-      : [];
-
-  const handleDelete = (id) => {
-    dispatch(deleteDevotion(id));
-  };
-
-  const startEditingDevotion = (devotion) => {
-    dispatch(startEditing(devotion));
-  };
-
-  const setSelectedDevotion = (devotion) => {
-    dispatch(selectDevotion(devotion));
-  };
 
   return (
     <div className="w-[100%] h-auto font-nokia-bold  flex flex-col mx-auto container space-y-12 mb-12">
       <CurrentDevotional
         devotionToDisplay={devotionToDisplay}
         handleDelete={handleDelete}
-        startEditing={startEditingDevotion}
+        startEditing={startEditing}
       />
       <PreviousDevotionals
         previousDevotions={previousDevotions}
@@ -49,6 +33,14 @@ const DevotionDisplay = () => {
       <Categories title="Lessons Available" />
     </div>
   );
+};
+
+DevotionDisplay.propTypes = {
+  devotions: PropTypes.array.isRequired,
+  handleDelete: PropTypes.func,
+  startEditing: PropTypes.func,
+  setSelectedDevotion: PropTypes.func,
+  selectedDevotion: PropTypes.object,
 };
 
 export default DevotionDisplay;
