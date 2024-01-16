@@ -1,22 +1,14 @@
 import PropTypes from "prop-types";
 import { FaTrash, FaEdit } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteDevotion, startEditing } from "../../redux/devotionsSlice"; // replace with the actual path to your devotions slice
 
-const DevotionPreview = ({ form, paragraphs, previewUrl }) => {
-  const devotionToDisplay = useSelector(
-    (state) => state.devotions.selectedDevotion
-  );
-  const dispatch = useDispatch();
-
-  const handleDelete = (id) => {
-    dispatch(deleteDevotion(id));
-  };
-
-  const startEditingDevotion = (devotion) => {
-    dispatch(startEditing(devotion));
-  };
-
+const DevotionPreview = ({
+  form,
+  paragraphs,
+  previewUrl,
+  devotionToDisplay,
+  handleDelete,
+  startEditing,
+}) => {
   return (
     <div className="h-auto border-2 shadow-lg rounded-2xl p-6 w-[80%]">
       <div>
@@ -64,7 +56,7 @@ const DevotionPreview = ({ form, paragraphs, previewUrl }) => {
                 />
                 <FaEdit
                   className="text-gray-700 text-xl cursor-pointer self-center"
-                  onClick={() => startEditingDevotion(devotionToDisplay)}
+                  onClick={() => startEditing(devotionToDisplay)}
                 />
               </>
             ) : (
@@ -132,6 +124,9 @@ DevotionPreview.propTypes = {
   form: PropTypes.object.isRequired,
   paragraphs: PropTypes.array.isRequired,
   previewUrl: PropTypes.string,
+  devotionToDisplay: PropTypes.object.isRequired,
+  handleDelete: PropTypes.func,
+  startEditing: PropTypes.func,
 };
 
 export default DevotionPreview;

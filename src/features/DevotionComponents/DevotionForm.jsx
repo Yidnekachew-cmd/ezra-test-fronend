@@ -1,50 +1,18 @@
 // import Devotion from "@/routes/Devotion";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  updateForm,
-  addParagraph,
-  updateParagraph,
-  deleteParagraph,
-  updateFile,
-  createDevotion,
-  updateDevotion,
-} from "../../redux/devotionsSlice";
 import AddParagraph from "./AddParagraph";
 import PhotoUploader from "./PhotoUploader";
+import PropTypes from "prop-types";
 
-const DevotionForm = () => {
-  const dispatch = useDispatch();
-  const form = useSelector((state) => state.devotions.form);
-  const paragraphs = useSelector((state) => state.devotions.paragraphs);
-
-  const handleChange = (event) => {
-    dispatch(updateForm({ [event.target.name]: event.target.value }));
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (form.id) {
-      dispatch(updateDevotion(form));
-    } else {
-      dispatch(createDevotion(form));
-    }
-  };
-
-  const addPara = () => {
-    dispatch(addParagraph());
-  };
-
-  const handleParaChange = (event, index) => {
-    dispatch(updateParagraph({ index, value: event.target.value }));
-  };
-
-  const handleFileChange = (event) => {
-    dispatch(updateFile(event.target.files[0]));
-  };
-
-  const deletePara = (index) => {
-    dispatch(deleteParagraph(index));
-  };
+const DevotionForm = ({
+  form,
+  handleChange,
+  handleSubmit,
+  addPara,
+  handleParaChange,
+  paragraphs,
+  handleFileChange,
+  deletePara,
+}) => {
   return (
     <div className="flex border-2 shadow-lg rounded-l-2xl h-[100%] font-nokia-bold ">
       <form onSubmit={handleSubmit} className="w-[90%] mx-auto py-6 space-y-3 ">
@@ -156,6 +124,17 @@ const DevotionForm = () => {
       </form>
     </div>
   );
+};
+
+DevotionForm.propTypes = {
+  form: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  addPara: PropTypes.func.isRequired,
+  handleParaChange: PropTypes.func.isRequired,
+  paragraphs: PropTypes.array.isRequired,
+  handleFileChange: PropTypes.func.isRequired,
+  deletePara: PropTypes.func.isRequired,
 };
 
 export default DevotionForm;

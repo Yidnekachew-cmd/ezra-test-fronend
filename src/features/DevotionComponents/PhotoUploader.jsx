@@ -1,14 +1,6 @@
-import { useSelector, useDispatch } from "react-redux";
-import { updateFile } from "../../redux/devotionsSlice"; // replace with the actual path to your devotions slice
+import PropTypes from "prop-types";
 
-function PhotoUploader() {
-  const previewUrl = useSelector((state) => state.devotions.form.photo);
-  const dispatch = useDispatch();
-
-  const handleFileChange = (event) => {
-    dispatch(updateFile(event.target.files[0]));
-  };
-
+function PhotoUploader({ handleFileChange, previewUrl }) {
   return (
     <div>
       <label className=" bg-accent-6 text-[#fff] hover:bg-accent-7 rounded-full px-4 py-1  cursor-pointer text-sm  font-nokia-bold w-[27%]">
@@ -24,5 +16,10 @@ function PhotoUploader() {
     </div>
   );
 }
+
+PhotoUploader.propTypes = {
+  handleFileChange: PropTypes.func.isRequired,
+  previewUrl: PropTypes.string,
+};
 
 export default PhotoUploader;
