@@ -1,34 +1,56 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import DevotionDisplay from "../features/DevotionComponents/DevotionDisplay";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  fetchDevotions,
-  deleteDevotion,
-  startEditing,
-} from "../redux/devotionsSlice"; // replace with the actual path to your devotions slice
+import { useAuthContext } from "../hooks/useAuthContext";
+import useAxiosInstance from "../api/axiosInstance";
 
 const Devotion = () => {
-  const { isAuthReady } = useSelector((state) => state.auth); // get the authentication readiness
-  const devotions = useSelector((state) => state.devotions.devotions);
-  const selectedDevotion = useSelector(
-    (state) => state.devotions.selectedDevotion
-  );
-  const dispatch = useDispatch();
+  const { token, isAuthReady } = useAuthContext(); // get the authentication token
+  const [devotions, setDevotions] = useState([]);
+  const [selectedDevotion, setSelectedDevotion] = useState(null);
+  // eslint-disable-next-line no-unused-vars
+  const [editingDevotion, setEditingDevotion] = useState(null);
+  const instance = useAxiosInstance(token);
 
   useEffect(() => {
-    console.log("Is auth ready:", isAuthReady); // log the isAuthReady value
     if (isAuthReady) {
-      dispatch(fetchDevotions()); // remove the token argument
-    }
-    console.log(devotions);
-  }, [isAuthReady, dispatch]);
+      const fetchDevotions = async () => {
+        try {
+          const response = await instance.get("/devotion/show");
+          setDevotions(response.data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
-  const handleDelete = (id) => {
-    dispatch(deleteDevotion(id)); // remove the token argument
+      fetchDevotions();
+    }
+  }, [isAuthReady, token, instance]);
+
+  // useState for adding multiple paragraphs
+
+  // eslint-disable-next-line no-unused-vars
+  const [form, setForm] = useState({
+    month: "",
+    day: "",
+    title: "",
+    chapter: "",
+    verse: "",
+    prayer: "",
+  });
+
+  const startEditing = (devotion) => {
+    setEditingDevotion(devotion);
+    setForm(devotion);
   };
 
-  const handleStartEditing = (devotion) => {
-    dispatch(startEditing(devotion));
+  const handleDelete = async (id) => {
+    try {
+      await instance.delete(`/devotion/${id}`);
+      // Remove the deleted devotion from the devotions array
+      setDevotions(devotions.filter((devotion) => devotion._id !== id));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -36,8 +58,9 @@ const Devotion = () => {
       <DevotionDisplay
         devotions={devotions}
         selectedDevotion={selectedDevotion}
+        setSelectedDevotion={setSelectedDevotion}
         handleDelete={handleDelete}
-        startEditing={handleStartEditing}
+        startEditing={startEditing}
       />
     </div>
   );
