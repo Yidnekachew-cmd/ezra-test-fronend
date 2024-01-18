@@ -6,6 +6,7 @@ const CurrentDevotional = ({
   devotionToDisplay,
   handleDelete,
   startEditing,
+  showControls,
 }) => {
   const { role } = useAuthContext(); // get the authentication token
   return (
@@ -47,7 +48,7 @@ const CurrentDevotional = ({
             <h1 className="text-4xl text-justify text-secondary-6">
               {devotionToDisplay && devotionToDisplay.title}
             </h1>
-            {role === "Admin" && (
+            {role === "Admin" && showControls && (
               <>
                 <FaTrash
                   className="text-gray-700 text-xl cursor-pointer self-center"
@@ -127,6 +128,7 @@ CurrentDevotional.propTypes = {
   devotionToDisplay: PropTypes.object.isRequired,
   handleDelete: PropTypes.func.isRequired,
   startEditing: PropTypes.func.isRequired,
+  showControls: PropTypes.bool.isRequired,
 };
 
 export default CurrentDevotional;

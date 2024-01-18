@@ -1,31 +1,37 @@
-import { useState, useEffect } from "react";
-import { useLogin } from "../hooks/useLogin";
+import { useState } from "react";
 import { GoogleLogo, FacebookLogo } from "@phosphor-icons/react";
 import "./LoginAndSignup.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useDispatch } from "react-redux";
+import { useLoginMutation } from "../redux/api-slices/apiSlice";
+import { login as loginAction } from "../redux/authSlice";
 
 const Login = () => {
-  const { user } = useAuthContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, error, isLoading } = useLogin();
+  const [login, { isLoading, error }] = useLoginMutation(); // use the hook
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user && user.role === "Admin") {
-      navigate("/admin");
-    }
-  }, [user, navigate]);
+  const dispatch = useDispatch(); // get the dispatch function from Redux
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = await login(email, password);
+    try {
+      const result = await login({ email, password }).unwrap(); // call the mutation
+      if (result) {
+        // save the user to local storage
+        localStorage.setItem("user", JSON.stringify(result));
 
-    if (user && user.role === "Admin") {
-      navigate("/admin");
-    } else {
-      navigate("/");
+        // update the auth context
+        dispatch(loginAction(result)); // dispatch the login action from authSlice
+
+        if (result.role === "Admin") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

@@ -9,6 +9,7 @@ const DevotionDisplay = ({
   startEditing,
   setSelectedDevotion,
   selectedDevotion,
+  showControls,
 }) => {
   // If no devotion is selected, display the latest one
   const devotionToDisplay = selectedDevotion || devotions[0];
@@ -24,6 +25,7 @@ const DevotionDisplay = ({
         devotionToDisplay={devotionToDisplay}
         handleDelete={handleDelete}
         startEditing={startEditing}
+        showControls={showControls}
       />
       <PreviousDevotionals
         previousDevotions={previousDevotions}
@@ -41,6 +43,7 @@ DevotionDisplay.propTypes = {
   startEditing: PropTypes.func,
   setSelectedDevotion: PropTypes.func,
   selectedDevotion: PropTypes.object,
+  showControls: PropTypes.bool,
 };
 
 export default DevotionDisplay;

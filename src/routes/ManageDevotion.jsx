@@ -178,6 +178,7 @@ const ManageDevotion = () => {
         setSelectedDevotion={setSelectedDevotion}
         handleDelete={handleDelete}
         startEditing={startEditing}
+        showControls={true}
       />
       <DevotionForm
         form={form}

@@ -1,34 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import DevotionDisplay from "../features/DevotionComponents/DevotionDisplay";
-import { useAuthContext } from "../hooks/useAuthContext";
-import useAxiosInstance from "../api/axiosInstance";
+import { useGetDevotionsQuery } from "../redux/api-slices/apiSlice"; // import the hook from your apiSlice
 
 const Devotion = () => {
-  const { token, isAuthReady } = useAuthContext(); // get the authentication token
-  const [devotions, setDevotions] = useState([]);
   const [selectedDevotion, setSelectedDevotion] = useState(null);
-  // eslint-disable-next-line no-unused-vars
   const [editingDevotion, setEditingDevotion] = useState(null);
-  const instance = useAxiosInstance(token);
 
-  useEffect(() => {
-    if (isAuthReady) {
-      const fetchDevotions = async () => {
-        try {
-          const response = await instance.get("/devotion/show");
-          setDevotions(response.data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-      fetchDevotions();
-    }
-  }, [isAuthReady, token, instance]);
+  // Use the useGetDevotionsQuery hook to fetch devotions
+  const { data: devotions, error, isLoading } = useGetDevotionsQuery();
 
   // useState for adding multiple paragraphs
-
-  // eslint-disable-next-line no-unused-vars
   const [form, setForm] = useState({
     month: "",
     day: "",
@@ -42,6 +23,9 @@ const Devotion = () => {
     setEditingDevotion(devotion);
     setForm(devotion);
   };
+
+  if (isLoading) return "Loading...";
+  if (error) return `Error: ${error.message}`;
 
   const handleDelete = async (id) => {
     try {
@@ -61,6 +45,7 @@ const Devotion = () => {
         setSelectedDevotion={setSelectedDevotion}
         handleDelete={handleDelete}
         startEditing={startEditing}
+        showControls={false}
       />
     </div>
   );
