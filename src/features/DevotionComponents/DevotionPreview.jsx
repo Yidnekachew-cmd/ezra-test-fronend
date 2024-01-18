@@ -124,7 +124,7 @@ DevotionPreview.propTypes = {
   form: PropTypes.object.isRequired,
   paragraphs: PropTypes.array.isRequired,
   previewUrl: PropTypes.string,
-  devotionToDisplay: PropTypes.object.isRequired,
+  devotionToDisplay: PropTypes.object,
   handleDelete: PropTypes.func,
   startEditing: PropTypes.func,
 };
