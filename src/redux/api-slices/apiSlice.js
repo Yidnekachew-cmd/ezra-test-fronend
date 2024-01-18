@@ -11,7 +11,6 @@ export const apiSlice = createApi({
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       }
-      headers.set("Content-Type", "application/json"); // changed to application/json
       return headers;
     },
   }),
@@ -20,27 +19,61 @@ export const apiSlice = createApi({
       query: (credentials) => ({
         url: "/users/login",
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(credentials), // stringified the credentials
+      }),
+    }),
+    signup: builder.mutation({
+      query: ({ firstName, lastName, email, password }) => ({
+        url: "/users/signup",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ firstName, lastName, email, password }),
       }),
     }),
     getDevotions: builder.query({
       query: () => ({
         url: "/devotion/show",
       }),
+      providesTags: [{ type: "Devotions", id: "LIST" }],
     }),
     createDevotion: builder.mutation({
-      query: (newDevotion) => ({
-        url: "/devotion/create",
-        method: "POST",
-        body: JSON.stringify(newDevotion), // stringified the newDevotion
-      }),
+      query: (newDevotion) => {
+        const formData = new FormData();
+        Object.entries(newDevotion).forEach(([key, value]) => {
+          formData.append(key, value);
+        });
+        return {
+          url: "/devotion/create",
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          body: formData, // use FormData instead of JSON
+        };
+      },
+      invalidatesTags: [{ type: "Devotions", id: "LIST" }],
     }),
     updateDevotion: builder.mutation({
-      query: ({ id, updatedDevotion }) => ({
-        url: `/devotion/${id}`,
-        method: "PUT",
-        body: updatedDevotion,
-      }),
+      query: ({ id, updatedDevotion }) => {
+        const formData = new FormData();
+        Object.entries(updatedDevotion).forEach(([key, value]) => {
+          formData.append(key, value);
+        });
+
+        return {
+          url: `/devotion/${id}`,
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: formData, // use FormData instead of JSON
+        };
+      },
     }),
     deleteDevotion: builder.mutation({
       query: (id) => ({
@@ -52,6 +85,7 @@ export const apiSlice = createApi({
 });
 
 export const {
+  useSignupMutation,
   useLoginMutation,
   useGetDevotionsQuery,
   useCreateDevotionMutation,

@@ -12,6 +12,7 @@ const DevotionForm = ({
   paragraphs,
   handleFileChange,
   deletePara,
+  isCreating,
 }) => {
   return (
     <div className="flex border-2 shadow-lg rounded-l-2xl h-[100%] font-nokia-bold ">
@@ -116,7 +117,11 @@ const DevotionForm = ({
             required
           />
           <div className="space-y-1 text-sm text-accent-6">
-            <button className=" bg-accent-6 hover:bg-accent-7 text-[#fff] px-6 py-1 rounded-full cursor-pointer ">
+            <button
+              type="submit"
+              disabled={isCreating}
+              className=" bg-accent-6 hover:bg-accent-7 text-[#fff] px-6 py-1 rounded-full cursor-pointer "
+            >
               Submit
             </button>
           </div>
@@ -135,6 +140,7 @@ DevotionForm.propTypes = {
   paragraphs: PropTypes.array.isRequired,
   handleFileChange: PropTypes.func.isRequired,
   deletePara: PropTypes.func.isRequired,
+  isCreating: PropTypes.bool.isRequired,
 };
 
 export default DevotionForm;
