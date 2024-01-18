@@ -11,7 +11,11 @@ const DevotionDisplay = ({
   selectedDevotion,
   showControls,
 }) => {
-  // If no devotion is selected, display the latest one
+  // Ensure devotions is defined and has at least one element
+  if (!devotions || devotions.length === 0) {
+    return <div>No devotions available</div>;
+  }
+
   const devotionToDisplay = selectedDevotion || devotions[0];
 
   // Filter out the devotion to display from the previous devotions

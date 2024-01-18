@@ -18,6 +18,9 @@ const authSlice = createSlice({
       state.role = action.payload.role;
       state.firstName = action.payload.firstName;
       state.token = action.payload.token;
+
+      // Store the token in localStorage
+      localStorage.setItem("token", action.payload.token);
     },
     signup: (state, action) => {
       // Add this reducer
@@ -31,6 +34,9 @@ const authSlice = createSlice({
       state.role = null;
       state.firstName = null;
       state.token = null;
+
+      // Remove the token from localStorage
+      localStorage.removeItem("token");
     },
     setAuthReady: (state, action) => {
       state.isAuthReady = action.payload;
