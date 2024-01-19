@@ -1,31 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import useAxiosInstance from "../../api/axiosInstance";
 import Categories from "./Categories";
+import { useGetCoursesQuery } from "../../services/coursesApi";
 
 function CoursesAvailable() {
-  const [data, setData] = useState([]);
+  const { data: courses, error, isLoading } = useGetCoursesQuery();
   const [searchTerm, setSearchTerm] = useState("");
-
-  const instance = useAxiosInstance();
-
-  useEffect(() => {
-    instance
-      .get("/course/getall")
-      .then((res) => {
-        setData(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredData = data.filter((course) => {
+  const filteredData = courses.filter((course) => {
     return course.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="h-auto flex flex-col w-[90%] md:w-[80%] mt-12 mx-auto space-y-12 mb-12">
