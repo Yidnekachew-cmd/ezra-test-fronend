@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Categories from "./Categories";
 import { useGetCoursesQuery } from "../../services/coursesApi";
+import BeatLoader from "react-spinners/BeatLoader";
 
 function CoursesAvailable() {
   const { data: courses, error, isLoading } = useGetCoursesQuery();
@@ -11,11 +12,22 @@ function CoursesAvailable() {
     setSearchTerm(e.target.value);
   };
 
-  const filteredData = courses.filter((course) => {
+  const filteredData = courses?.filter((course) => {
     return course.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <BeatLoader
+          color={"#707070"}
+          loading
+          size={15}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    );
   if (error) return <div>Error: {error.message}</div>;
 
   return (
@@ -62,16 +74,18 @@ function CoursesAvailable() {
             return (
               <div
                 key={index}
-                className="flex flex-col justify-center items-start  border-accent-5 border-2 w-[100%] md:w-[23.7%] shadow-xl rounded-3xl md:rounded-xl h-auto pb-6 "
+                className="flex flex-col justify-center items-start  border-accent-5 border-2 w-[100%] md:w-[23.7%] shadow-xl rounded-3xl md:rounded-xl h-auto pb-6"
               >
-                <img
-                  src={
-                    `https://ezra-seminary-api.onrender.com/images/` +
-                    course.image
-                  }
-                  className="w-full max-h-[40vh] min-h-[40vh]  md:min-h-[30vh] md:max-h-[30vh] object-cover rounded-3xl  md:rounded-2xl p-2"
-                  alt="no_image"
-                />
+                <div className="w-full p-2">
+                  <img
+                    src={
+                      `https://ezra-seminary-api.onrender.com/images/` +
+                      course.image
+                    }
+                    className="w-full max-h-[40vh] min-h-[40vh]  md:min-h-[30vh] md:max-h-[30vh] object-cover rounded-3xl md:rounded-2xl bg-secondary-1"
+                    alt=""
+                  />
+                </div>
                 <div className="space-y-2 w-[95%] md:w-[90%] mx-auto">
                   <h2 className="text-secondary-6 text-xl font-nokia-bold w-[90%] truncate">
                     {course.title}
