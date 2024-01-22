@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-// Define a service using a base URL and expected endpoints
 export const coursesApi = createApi({
   reducerPath: "coursesApi",
   baseQuery: fetchBaseQuery({
@@ -11,8 +10,10 @@ export const coursesApi = createApi({
     getCourses: builder.query({
       query: () => "course/getall",
     }),
+    getCourseById: builder.query({
+      query: (id) => `course/get/${id}`,
+    }),
   }),
 });
 
-// Export hooks for usage in functional components, which are auto-generated based on the defined endpoints
-export const { useGetCoursesQuery } = coursesApi;
+export const { useGetCoursesQuery, useGetCourseByIdQuery } = coursesApi;

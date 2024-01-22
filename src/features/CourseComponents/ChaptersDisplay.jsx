@@ -1,24 +1,23 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useGetCourseByIdQuery } from "../../services/coursesApi";
 
 function ChaptersDisplay() {
-  const [data, setData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [unlockedIndex, setUnlockedIndex] = useState(0); // New state variable to track the unlocked index
 
   const { courseId } = useParams();
 
   //get single course
-  useEffect(() => {
-    axios
-      .get(`/course/get/${courseId}`)
-      .then((res) => {
-        setData(res.data.chapters);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, [courseId]);
+  const {
+    data: courseData,
+    error,
+    isLoading,
+  } = useGetCourseByIdQuery(courseId, {
+    skip: !courseId, // Skip the query if courseId is not available yet
+  });
+
+  const data = courseData?.chapters || [];
 
   const updateIndex = (newIndex) => {
     if (newIndex < 0) {
@@ -41,6 +40,21 @@ function ChaptersDisplay() {
   const isSlideUnlocked = (index) => {
     return index <= unlockedIndex; // Check if the slide is unlocked based on the unlocked index
   };
+
+  if (isLoading)
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <BeatLoader
+          color={"#707070"}
+          loading
+          size={15}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    );
+
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="flex justify-center items-center w-[80%] mx-auto">
