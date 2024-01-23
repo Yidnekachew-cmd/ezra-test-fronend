@@ -14,7 +14,7 @@ function SlidesDisplay() {
 
   const { courseId, chapterId } = useParams(); // Note the two separate parameters
 
-  //get all courses
+  //get single course
   const {
     data: courseData,
     error,
