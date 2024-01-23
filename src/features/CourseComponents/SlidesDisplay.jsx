@@ -1,36 +1,34 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CaretCircleLeft } from "@phosphor-icons/react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import "@splidejs/react-splide/css/sea-green";
 import "@splidejs/react-splide/css/core";
+import { useGetCourseByIdQuery } from "../../services/coursesApi";
+import BeatLoader from "react-spinners/BeatLoader";
 
 function SlidesDisplay() {
-  const [data, setData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [unlockedIndex, setUnlockedIndex] = useState(0); // New state variable to track the unlocked index
 
   const { courseId, chapterId } = useParams(); // Note the two separate parameters
 
   //get all courses
-  useEffect(() => {
-    axios
-      .get(`/course/get/${courseId}`) // Assuming you will change the endpoint as needed
-      .then((res) => {
-        // Now we need to find the specific chapter within the course
-        const chapter = res.data.chapters.find(
-          (chap) => chap._id === chapterId
-        );
-        if (chapter) {
-          setData(chapter.slides);
-        } else {
-          console.log("Chapter not found");
-        }
-      })
-      .catch((err) => console.log(err));
-  }, [courseId, chapterId]);
+  const {
+    data: courseData,
+    error,
+    isLoading,
+  } = useGetCourseByIdQuery(courseId);
+
+  // Extracting chapter data from the fetched course data
+  const chapter = courseData.chapters.find((chap) => chap._id === chapterId);
+  // If the chapter is not found, handle accordingly
+  if (!chapter) {
+    return <p>Chapter not found</p>;
+  }
+  // Setting the data to slides if the chapter is found
+  const data = chapter.slides;
 
   const updateIndex = (newIndex) => {
     if (newIndex < 0) {
@@ -53,6 +51,21 @@ function SlidesDisplay() {
   const isSlideUnlocked = (index) => {
     return index <= unlockedIndex; // Check if the slide is unlocked based on the unlocked index
   };
+
+  if (isLoading)
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <BeatLoader
+          color={"#707070"}
+          loading
+          size={15}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    );
+
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="flex justify-center items-center w-[80%] mx-auto">
