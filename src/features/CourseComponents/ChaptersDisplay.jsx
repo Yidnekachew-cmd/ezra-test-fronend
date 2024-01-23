@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useGetCourseByIdQuery } from "../../services/coursesApi";
+import { useGetCourseByIdQuery } from "../../services/api";
 import BeatLoader from "react-spinners/BeatLoader";
 
 function ChaptersDisplay() {

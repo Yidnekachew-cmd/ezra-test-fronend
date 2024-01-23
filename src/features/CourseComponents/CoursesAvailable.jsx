@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Categories from "./Categories";
-import { useGetCoursesQuery } from "../../services/coursesApi";
+import { useGetCoursesQuery } from "../../services/api";
 import BeatLoader from "react-spinners/BeatLoader";
 
 function CoursesAvailable() {
