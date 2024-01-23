@@ -70,7 +70,7 @@ function SlidesDisplay() {
   return (
     <div className="flex justify-center items-center w-[80%] mx-auto">
       <div className="flex w-[100%] justify-center items-center h-screen ">
-        <div className="flex flex-col justify-start items-center md:w-[30%] h-[80%] shadow-2xl  rounded-lg border-2 border-accent-5 ">
+        <div className="flex flex-col justify-start items-center md:w-[30%] h-[80%] overflow-auto shadow-2xl rounded-lg border-2 border-accent-5 ">
           {/* slide number */}
           <div className="w-[90%] mx-auto ">
             <div className="flex flex-col mt-6 border-accent-5 border-1">
@@ -79,7 +79,7 @@ function SlidesDisplay() {
               </h1>
               <hr className="border-accent-5 border-1 w-[100%] mx-auto" />
             </div>
-            <div className="flex flex-col  mt-[20px]">
+            <div className="flex flex-col mt-[20px]">
               {data.map((slides, index) => {
                 const unlocked = isSlideUnlocked(index);
                 return (
@@ -244,7 +244,7 @@ function SlidesDisplay() {
               })}
             </div>
             <div className="mb-4">
-              <hr className="border-accent-5  border-1 w-[90%] mx-auto z-50 " />
+              <hr className="border-accent-5 border-1 w-[90%] mx-auto z-50" />
               <button
                 className={`text-white text-center font-nokia-bold mt-2 py-1 px-2 bg-accent-6 hover:bg-accent-7 w-[15%] rounded-3xl mx-auto text-2xl transition-all ${
                   activeIndex === data.length - 1 ? "hidden" : "block"

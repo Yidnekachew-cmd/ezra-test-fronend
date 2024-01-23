@@ -67,9 +67,9 @@ function ChaptersDisplay() {
       </Link>
       <div className="flex justify-center items-center w-[80%] mx-auto">
         <div className="flex w-[100%] justify-center items-center h-screen ">
-          <div className="flex flex-col justify-start items-center md:w-[30%] h-[80%] shadow-2xl  rounded-lg border-2 border-accent-5 ">
+          <div className="flex flex-col justify-start items-center md:w-[30%] h-[80%] overflow-auto shadow-2xl rounded-lg border-2 border-accent-5">
             {/* slide number */}
-            <div className="w-[90%] mx-auto ">
+            <div className="w-[90%] mx-auto">
               <div className="flex flex-col mt-6 border-accent-5 border-1">
                 <h1 className="font-Lato-Black pb-1">
                   CHAPTER {currentDataNumber}/{totalDataNumber}
@@ -127,7 +127,7 @@ function ChaptersDisplay() {
                   return (
                     <div
                       key={index}
-                      className="flex flex-col justify-center py-52 flex-grow"
+                      className="flex flex-col justify-center h-52 flex-grow"
                     >
                       <h1 className="text-3xl text-[#fff] text-center font-nokia-bold">
                         {chapter.chapter}
