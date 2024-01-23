@@ -5,7 +5,7 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import "@splidejs/react-splide/css/sea-green";
 import "@splidejs/react-splide/css/core";
-import { useGetCourseByIdQuery } from "../../services/coursesApi";
+import { useGetCourseByIdQuery } from "../../services/api";
 import BeatLoader from "react-spinners/BeatLoader";
 
 function SlidesDisplay() {

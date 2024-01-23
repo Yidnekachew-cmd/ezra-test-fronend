@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const coursesApi = createApi({
-  reducerPath: "coursesApi",
+export const api = createApi({
+  reducerPath: "api",
   baseQuery: fetchBaseQuery({
     // baseUrl: "http://localhost:5100/",
     baseUrl: "https://ezra-seminary-api.onrender.com/",
@@ -16,4 +16,4 @@ export const coursesApi = createApi({
   }),
 });
 
-export const { useGetCoursesQuery, useGetCourseByIdQuery } = coursesApi;
+export const { useGetCoursesQuery, useGetCourseByIdQuery } = api;
