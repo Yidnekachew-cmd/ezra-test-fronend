@@ -27,13 +27,12 @@ const DevotionDisplay = ({
     <div className="w-[100%] h-auto font-nokia-bold  flex flex-col mx-auto container space-y-12 mb-12">
       <CurrentDevotional
         devotionToDisplay={devotionToDisplay}
-        handleDelete={handleDelete}
-        startEditing={startEditing}
+        handleDelete={showControls ? handleDelete : () => {}}
+        startEditing={showControls ? startEditing : () => {}}
         showControls={showControls}
       />
       <PreviousDevotionals
         previousDevotions={previousDevotions}
-        handleDelete={handleDelete}
         setSelectedDevotion={setSelectedDevotion}
       />
       <Categories title="Lessons Available" />
