@@ -47,14 +47,14 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <BrowserRouter b>
       <Header />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
-        <Route path="courses/get/:courseId" element={<ChaptersDisplay />} />
+        <Route path="/courses/get/:courseId" element={<ChaptersDisplay />} />
         <Route
-          path="courses/get/:courseId/chapter/:chapterId"
+          path="/courses/get/:courseId/chapter/:chapterId"
           element={<SlidesDisplay />}
         />
         <Route path="/sabbathSchool" element={<SabbathSchool />} />
