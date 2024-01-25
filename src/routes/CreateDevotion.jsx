@@ -153,23 +153,8 @@ const CreateDevotion = () => {
 
   return (
     <div className=" flex h-auto mx-auto mt-12 w-[98%] gap-4">
-      <DevotionPreview
-        form={form}
-        paragraphs={paragraphs}
-        previewUrl={previewUrl}
-      />
-      <DevotionForm
-        form={form}
-        handleParaChange={handleParaChange}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        paragraphs={paragraphs}
-        addPara={addPara}
-        handleFileChange={handleFileChange}
-        deletePara={deletePara}
-        handleDelete={handleDelete}
-        key={formSubmitCount}
-      />
+      <DevotionPreview />
+      <DevotionForm />
     </div>
   );
 };

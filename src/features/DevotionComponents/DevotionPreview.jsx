@@ -1,14 +1,31 @@
-import PropTypes from "prop-types";
 import { FaTrash, FaEdit } from "react-icons/fa";
-
-const DevotionPreview = ({
-  form,
-  paragraphs,
-  previewUrl,
-  devotionToDisplay,
-  handleDelete,
+import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  deleteDevotion,
   startEditing,
-}) => {
+  selectForm,
+  selectParagraphs,
+  selectPreviewUrl,
+  selectDevotionToDisplay, // import the selector if devotionToDisplay is from Redux
+} from "../../redux/devotionsSlice";
+
+const DevotionPreview = ({ devotionToDisplay }) => {
+  // add as a prop if it's passed from a parent component
+  const dispatch = useDispatch();
+  const form = useSelector(selectForm);
+  const paragraphs = useSelector(selectParagraphs);
+  const previewUrl = useSelector(selectPreviewUrl);
+  devotionToDisplay = useSelector(selectDevotionToDisplay); // add this line if devotionToDisplay is from Redux
+
+  const handleDelete = (id) => {
+    dispatch(deleteDevotion(id));
+  };
+
+  // const handleStartEditing = (devotion) => {
+  //   dispatch(startEditing(devotion));
+  // };
+
   return (
     <div className="h-auto border-2 shadow-lg rounded-2xl p-6 w-[80%]">
       <div>
@@ -121,12 +138,7 @@ const DevotionPreview = ({
 };
 
 DevotionPreview.propTypes = {
-  form: PropTypes.object.isRequired,
-  paragraphs: PropTypes.array.isRequired,
-  previewUrl: PropTypes.string,
   devotionToDisplay: PropTypes.object,
-  handleDelete: PropTypes.func,
-  startEditing: PropTypes.func,
 };
 
 export default DevotionPreview;

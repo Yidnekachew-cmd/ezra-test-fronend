@@ -1,18 +1,63 @@
 // import Devotion from "@/routes/Devotion";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import {
+  updateForm,
+  addParagraph,
+  updateParagraph,
+  deleteParagraph,
+  selectForm,
+  selectParagraphs,
+  createDevotion,
+  updateDevotion,
+  resetForm,
+} from "../../redux/devotionsSlice";
 import AddParagraph from "./AddParagraph";
 import PhotoUploader from "./PhotoUploader";
-import PropTypes from "prop-types";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
-const DevotionForm = ({
-  form,
-  handleChange,
-  handleSubmit,
-  addPara,
-  handleParaChange,
-  paragraphs,
-  handleFileChange,
-  deletePara,
-}) => {
+const DevotionForm = () => {
+  const { token } = useAuthContext();
+  const dispatch = useDispatch();
+  const form = useSelector(selectForm); // select the form from the Redux store
+  const paragraphs = useSelector(selectParagraphs); // select the paragraphs from the Redux store
+  const [file, setFile] = useState(null);
+
+  const handleChange = (event) => {
+    if (event.target.name === "image") {
+      setFile(event.target.file); // store the file object in the local state
+    }
+    dispatch(updateForm({ [event.target.name]: event.target.value }));
+  };
+
+  const handleParaChange = (index, value) => {
+    dispatch(updateParagraph({ index, value })); // dispatch the updateParagraph action
+  };
+  const addPara = () => {
+    dispatch(addParagraph()); // dispatch the addParagraph action
+  };
+
+  const deletePara = (index) => {
+    dispatch(deleteParagraph(index)); // dispatch the deleteParagraph action
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Create a new devotion object from the form state
+    let devotion = { ...form, paragraphs, photo: file };
+
+    // If the form has an _id, it's an existing devotion, so update it.
+    // Otherwise, create a new devotion.
+    if (form._id) {
+      dispatch(updateDevotion({ token, devotion }));
+    } else {
+      dispatch(createDevotion({ token, devotion }));
+    }
+
+    dispatch(resetForm()); // reset the form
+  };
+
   return (
     <div className="flex border-2 shadow-lg rounded-l-2xl h-[100%] font-nokia-bold ">
       <form onSubmit={handleSubmit} className="w-[90%] mx-auto py-6 space-y-3 ">
@@ -110,11 +155,7 @@ const DevotionForm = ({
           />
         </div>
         <div className="flex justify-between items-center">
-          <PhotoUploader
-            handleFileChange={handleFileChange}
-            form={form}
-            required
-          />
+          <PhotoUploader handleChange={handleChange} required />
           <div className="space-y-1 text-sm text-accent-6">
             <button
               type="submit"
@@ -127,17 +168,6 @@ const DevotionForm = ({
       </form>
     </div>
   );
-};
-
-DevotionForm.propTypes = {
-  form: PropTypes.object.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  addPara: PropTypes.func.isRequired,
-  handleParaChange: PropTypes.func.isRequired,
-  paragraphs: PropTypes.array.isRequired,
-  handleFileChange: PropTypes.func.isRequired,
-  deletePara: PropTypes.func.isRequired,
 };
 
 export default DevotionForm;

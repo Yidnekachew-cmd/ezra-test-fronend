@@ -1,12 +1,28 @@
 import { FaTrash } from "react-icons/fa";
-import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 
-const AddParagraph = ({
-  handleParaChange,
-  addPara,
-  paragraphs,
-  deletePara,
-}) => {
+import {
+  addParagraph,
+  updateParagraph,
+  deleteParagraph,
+  selectParagraphs,
+} from "../../redux/devotionsSlice";
+
+const AddParagraph = () => {
+  const dispatch = useDispatch();
+  const paragraphs = useSelector(selectParagraphs);
+  const handleParaChange = (event, index) => {
+    dispatch(updateParagraph({ index, text: event.target.value }));
+  };
+
+  const addPara = () => {
+    dispatch(addParagraph());
+  };
+
+  const deletePara = (index) => {
+    dispatch(deleteParagraph(index));
+  };
+
   return (
     <div className="space-y-3">
       {paragraphs.map((para, paragraphIndex) => (
@@ -42,13 +58,6 @@ const AddParagraph = ({
       </button>
     </div>
   );
-};
-
-AddParagraph.propTypes = {
-  handleParaChange: PropTypes.func.isRequired,
-  addPara: PropTypes.func.isRequired,
-  paragraphs: PropTypes.array.isRequired,
-  deletePara: PropTypes.func.isRequired,
 };
 
 export default AddParagraph;
