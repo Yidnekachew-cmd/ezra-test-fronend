@@ -268,13 +268,13 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
           className="border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 w-[75%]"
         />
         <PlusCircle
-          onClick={handleAddListItem}
+          onClick={handleAddQuiz}
           className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
           size={24}
           weight="fill"
         />
         <File
-          onClick={handleAddListElement}
+          onClick={handleAddQuizElement}
           className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
           size={24}
           weight="fill"
@@ -286,7 +286,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
             - {item}{" "}
             <span>
               <Trash
-                onClick={() => handleDeleteListItem(index)}
+                onClick={() => handleDeleteQuiz(index)}
                 className="text-red-600 hover:text-red-700 hover:cursor-pointer transition-all"
                 weight="fill"
                 size={22}
@@ -328,6 +328,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
 
       {currentElement === "list" && renderListForm()}
       {currentElement === "slide" && renderSlideForm()}
+      {currentElement === "quiz" && renderQuizForm()}
       {elements.map((element, index) => (
         <div key={index} className="py-2">
           <div className="flex flex-col justify-between pb-2">
