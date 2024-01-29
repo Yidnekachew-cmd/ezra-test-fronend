@@ -223,8 +223,32 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
     );
   };
 
+  //Quiz
   const handleQuizInputChange = (event) => {
     setCurrentQuiz(event.target.value);
+  };
+
+  const handleAddQuiz = () => {
+    if (currentQuiz) {
+      setQuiz([...quiz, currentQuiz]);
+      setCurrentQuiz("");
+    }
+  };
+
+  const handleAddQuizElement = () => {
+    if (quiz.length > 0) {
+      dispatch(
+        addElementToSlide({
+          chapterIndex,
+          slideIndex,
+          elementType: "quiz",
+          value: quiz,
+        })
+      );
+      setQuiz([]);
+    }
+    setCurrentElement("");
+    console.log(elements);
   };
 
   return (
