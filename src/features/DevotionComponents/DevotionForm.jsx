@@ -9,6 +9,7 @@ import {
   createDevotion,
   updateDevotion,
   resetForm,
+  setIsEditing,
 } from "../../redux/devotionsSlice";
 import AddParagraph from "./AddParagraph";
 import PhotoUploader from "./PhotoUploader";
@@ -21,12 +22,13 @@ const DevotionForm = () => {
   const paragraphs = useSelector(selectParagraphs); // select the paragraphs from the Redux store
   const [file, setFile] = useState(null);
   const [localParagraphs, setLocalParagraphs] = useState([]);
+  const isEditing = useSelector((state) => state.devotions.isEditing);
   const selectedDevotion = useSelector(
     (state) => state.devotions.selectedDevotion
   );
 
   useEffect(() => {
-    if (selectedDevotion && selectedDevotion._id) {
+    if (isEditing && selectedDevotion && selectedDevotion._id) {
       // Dispatch an action to populate the form with the selected devotion's data
       dispatch(updateForm(selectedDevotion));
       // Dispatch an action to populate the paragraphs with the selected devotion's paragraphs
@@ -43,7 +45,7 @@ const DevotionForm = () => {
     return () => {
       dispatch(resetForm());
     };
-  }, [dispatch, selectedDevotion]);
+  }, [dispatch, selectedDevotion, isEditing]);
 
   const handleChange = (event) => {
     if (event.target.name === "image") {
@@ -68,6 +70,7 @@ const DevotionForm = () => {
 
     dispatch(resetForm()); // reset the form
     setLocalParagraphs([]); // reset localParagraphs
+    dispatch(setIsEditing(false));
   };
 
   return (

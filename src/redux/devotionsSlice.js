@@ -82,6 +82,7 @@ const initialState = {
   },
   devotions: [],
   selectedDevotion: null,
+  isEditing: false,
 };
 
 const devotionsSlice = createSlice({
@@ -93,6 +94,9 @@ const devotionsSlice = createSlice({
     },
     startEditing: (state, action) => {
       state.form = action.payload;
+    },
+    setIsEditing: (state, action) => {
+      state.isEditing = action.payload;
     },
     updateForm: (state, action) => {
       state.form = { ...state.form, ...action.payload };
@@ -166,6 +170,7 @@ export const selectDevotionToDisplay = (state) =>
 export const {
   selectDevotion,
   startEditing,
+  setIsEditing,
   updateForm,
   addParagraph,
   updateParagraph,

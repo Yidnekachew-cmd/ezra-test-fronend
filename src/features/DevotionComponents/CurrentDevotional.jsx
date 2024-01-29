@@ -2,7 +2,11 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { selectDevotion, deleteDevotion } from "../../redux/devotionsSlice";
+import {
+  selectDevotion,
+  deleteDevotion,
+  setIsEditing,
+} from "../../redux/devotionsSlice";
 
 const CurrentDevotional = ({ devotionToDisplay, showControls }) => {
   const { role } = useAuthContext(); // get the authentication token
@@ -13,7 +17,9 @@ const CurrentDevotional = ({ devotionToDisplay, showControls }) => {
   };
 
   const startEditing = (devotion) => {
+    console.log(devotion); // Log the devotion object
     dispatch(selectDevotion(devotion)); // dispatch select action
+    dispatch(setIsEditing(true)); // dispatch startEditing action
   };
 
   return (
