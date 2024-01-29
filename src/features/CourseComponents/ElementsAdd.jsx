@@ -20,8 +20,6 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
   const [currentListItem, setCurrentListItem] = useState("");
   const [slidesDetails, setSlidesDetails] = useState([]);
   const [currentSlideDetails, setCurrentSlideDetails] = useState("");
-  const [quiz, setQuiz] = useState([]);
-  const [currentQuiz, setCurrentQuiz] = useState("");
 
   const handleListInputChange = (event) => {
     setCurrentListItem(event.target.value);
@@ -224,6 +222,9 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
   };
 
   //Quiz
+  const [quiz, setQuiz] = useState([]);
+  const [currentQuiz, setCurrentQuiz] = useState("");
+
   const handleQuizInputChange = (event) => {
     setCurrentQuiz(event.target.value);
   };
@@ -250,6 +251,52 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
     setCurrentElement("");
     console.log(elements);
   };
+
+  const handleDeleteQuiz = (indexToDelete) => {
+    const updatedQuiz = quiz.filter((_, index) => index !== indexToDelete);
+    setQuiz(updatedQuiz);
+  };
+
+  const renderQuizForm = () => (
+    <div className="mt-2">
+      <div className="flex flex-row items-center w-[100%] gap-1">
+        <input
+          type="text"
+          value={currentQuiz}
+          onChange={handleQuizInputChange}
+          placeholder="Enter quiz"
+          className="border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 w-[75%]"
+        />
+        <PlusCircle
+          onClick={handleAddListItem}
+          className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
+          size={24}
+          weight="fill"
+        />
+        <File
+          onClick={handleAddListElement}
+          className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
+          size={24}
+          weight="fill"
+        />
+      </div>
+      <ul>
+        {quiz.map((item, index) => (
+          <li key={index} className="flex justify-between">
+            - {item}{" "}
+            <span>
+              <Trash
+                onClick={() => handleDeleteListItem(index)}
+                className="text-red-600 hover:text-red-700 hover:cursor-pointer transition-all"
+                weight="fill"
+                size={22}
+              />
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 
   return (
     <div className="bg-white w-[100%] px-4">
