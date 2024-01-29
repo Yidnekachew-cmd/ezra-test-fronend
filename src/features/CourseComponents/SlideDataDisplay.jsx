@@ -4,6 +4,12 @@ import { useSelector } from "react-redux";
 import { selectSlides } from "../../redux/courseSlice";
 
 function SlideDataDisplay({ selectedSlideIndex }) {
+  //radio input switch
+  const [selectedChoice, setSelectedChoice] = useState(null);
+  const handleRadioChange = (choiceIndex) => {
+    setSelectedChoice(choiceIndex);
+  };
+
   const slides = useSelector((state) =>
     selectSlides(state, selectedSlideIndex.chapter)
   );
@@ -92,23 +98,37 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   );
                 } else if (element.type === "quiz") {
                   elementComponent = (
-                    <div key={uniqueKey} className="flex flex-col ml-8 mt-2">
-                      <p className="text-white font-nokia-bold w-[100%] tracking-wide text-lg">
+                    <div
+                      key={uniqueKey}
+                      className="flex flex-col justify-center items-center mb-4"
+                    >
+                      <p className="text-white font-nokia-bold text-2xl">
                         {element.value.question}
                       </p>
+
                       {element.value.choices && (
-                        <ul className="list-disc">
+                        <div className="flex flex-col mt-2">
                           {element.value.choices.map((choice, choiceIndex) => {
                             return (
-                              <li
+                              <label
                                 key={`${uniqueKey}-choice-${choiceIndex}`}
-                                className="text-white font-nokia-bold w-[100%] tracking-wide text-lg"
+                                className="inline-flex items-center"
                               >
-                                {choice.text}
-                              </li>
+                                <input
+                                  type="radio"
+                                  className="form-radio text-indigo-600"
+                                  checked={selectedChoice === choiceIndex}
+                                  onChange={() =>
+                                    handleRadioChange(choiceIndex)
+                                  }
+                                />
+                                <span className="text-white font-nokia-bold text-lg ml-2">
+                                  {choice.text}
+                                </span>
+                              </label>
                             );
                           })}
-                        </ul>
+                        </div>
                       )}
                     </div>
                   );
