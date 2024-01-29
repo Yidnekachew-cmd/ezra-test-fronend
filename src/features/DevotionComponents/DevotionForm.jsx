@@ -1,11 +1,10 @@
 // import Devotion from "@/routes/Devotion";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
+  // selectDevotion,
   updateForm,
-  addParagraph,
   updateParagraph,
-  deleteParagraph,
   selectForm,
   selectParagraphs,
   createDevotion,
@@ -22,23 +21,35 @@ const DevotionForm = () => {
   const form = useSelector(selectForm); // select the form from the Redux store
   const paragraphs = useSelector(selectParagraphs); // select the paragraphs from the Redux store
   const [file, setFile] = useState(null);
+  const selectedDevotion = useSelector(
+    (state) => state.devotions.selectedDevotion
+  );
+
+  useEffect(() => {
+    if (selectedDevotion && selectedDevotion._id) {
+      // Dispatch an action to populate the form with the selected devotion's data
+      dispatch(updateForm(selectedDevotion));
+      // Dispatch an action to populate the paragraphs with the selected devotion's paragraphs
+      if (selectedDevotion && selectedDevotion.paragraphs) {
+        selectedDevotion.paragraphs.forEach((paragraph, index) => {
+          dispatch(updateParagraph({ index, text: paragraph }));
+        });
+      }
+      // Store the existing image URL in the local state
+      setFile(selectedDevotion.photo);
+    }
+
+    // Cleanup function
+    return () => {
+      dispatch(resetForm());
+    };
+  }, [dispatch, selectedDevotion]);
 
   const handleChange = (event) => {
     if (event.target.name === "image") {
       setFile(event.target.file); // store the file object in the local state
     }
     dispatch(updateForm({ [event.target.name]: event.target.value }));
-  };
-
-  const handleParaChange = (index, value) => {
-    dispatch(updateParagraph({ index, value })); // dispatch the updateParagraph action
-  };
-  const addPara = () => {
-    dispatch(addParagraph()); // dispatch the addParagraph action
-  };
-
-  const deletePara = (index) => {
-    dispatch(deleteParagraph(index)); // dispatch the deleteParagraph action
   };
 
   const handleSubmit = (event) => {
@@ -133,15 +144,7 @@ const DevotionForm = () => {
             required
           />
         </div>
-        <AddParagraph
-          form={form}
-          handleChange={handleChange}
-          required
-          paragraphs={paragraphs}
-          addPara={addPara}
-          handleParaChange={handleParaChange}
-          deletePara={deletePara}
-        />
+        <AddParagraph paragraphs={paragraphs} />
         <div className="space-y-1 text-sm text-accent-6">
           <label>Prayer</label>
           <textarea

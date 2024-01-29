@@ -1,14 +1,21 @@
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { selectDevotion, deleteDevotion } from "../../redux/devotionsSlice";
 
-const CurrentDevotional = ({
-  devotionToDisplay,
-  handleDelete,
-  startEditing,
-  showControls,
-}) => {
+const CurrentDevotional = ({ devotionToDisplay, showControls }) => {
   const { role } = useAuthContext(); // get the authentication token
+  const dispatch = useDispatch();
+
+  const handleDelete = (id) => {
+    dispatch(deleteDevotion(id)); // dispatch delete action
+  };
+
+  const startEditing = (devotion) => {
+    dispatch(selectDevotion(devotion)); // dispatch select action
+  };
+
   return (
     <div className="h-auto border-2 shadow-lg rounded-2xl p-6">
       <div>
@@ -126,8 +133,6 @@ const CurrentDevotional = ({
 
 CurrentDevotional.propTypes = {
   devotionToDisplay: PropTypes.object.isRequired,
-  handleDelete: PropTypes.func.isRequired,
-  startEditing: PropTypes.func.isRequired,
   showControls: PropTypes.bool.isRequired,
 };
 

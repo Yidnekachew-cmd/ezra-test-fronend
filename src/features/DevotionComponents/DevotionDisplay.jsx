@@ -1,16 +1,22 @@
+import { useEffect } from "react";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDevotions, selectDevotion } from "../../redux/devotionsSlice";
 import CurrentDevotional from "./CurrentDevotional";
 import PreviousDevotionals from "./PreviousDevotionals";
 import Categories from "../CourseComponents/Categories";
 
-const DevotionDisplay = ({
-  devotions,
-  handleDelete,
-  startEditing,
-  setSelectedDevotion,
-  selectedDevotion,
-  showControls,
-}) => {
+const DevotionDisplay = ({ showControls }) => {
+  const dispatch = useDispatch();
+  const devotions = useSelector((state) => state.devotions.devotions);
+  const selectedDevotion = useSelector(
+    (state) => state.devotions.selectedDevotion
+  );
+
+  useEffect(() => {
+    dispatch(fetchDevotions());
+  }, [dispatch]);
+
   // Ensure devotions is defined and has at least one element
   if (!devotions || devotions.length === 0) {
     return <div>No devotions available</div>;
@@ -22,13 +28,14 @@ const DevotionDisplay = ({
   const previousDevotions = devotions.filter(
     (devotion) => devotion._id !== devotionToDisplay._id
   );
+  const setSelectedDevotion = (devotion) => {
+    dispatch(selectDevotion(devotion));
+  };
 
   return (
     <div className="w-[100%] h-auto font-nokia-bold  flex flex-col mx-auto container space-y-12 mb-12">
       <CurrentDevotional
         devotionToDisplay={devotionToDisplay}
-        handleDelete={showControls ? handleDelete : () => {}}
-        startEditing={showControls ? startEditing : () => {}}
         showControls={showControls}
       />
       <PreviousDevotionals
@@ -41,12 +48,7 @@ const DevotionDisplay = ({
 };
 
 DevotionDisplay.propTypes = {
-  devotions: PropTypes.array.isRequired,
-  handleDelete: PropTypes.func,
-  startEditing: PropTypes.func,
-  setSelectedDevotion: PropTypes.func,
-  selectedDevotion: PropTypes.object,
-  showControls: PropTypes.bool,
+  showControls: PropTypes.bool.isRequired,
 };
 
 export default DevotionDisplay;
