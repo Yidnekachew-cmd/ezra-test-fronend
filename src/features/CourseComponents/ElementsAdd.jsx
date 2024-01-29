@@ -226,40 +226,42 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
     );
   };
 
-  //Quiz
-  const [quiz, setQuiz] = useState([]);
-  const [currentQuiz, setCurrentQuiz] = useState("");
+  // Quiz-related state and functions
+  const [quizQuestion, setQuizQuestion] = useState("");
+  const [quizChoices, setQuizChoices] = useState([]);
 
-  const handleQuizInputChange = (event) => {
-    setCurrentQuiz(event.target.value);
+  const handleQuizQuestionChange = (event) => {
+    setQuizQuestion(event.target.value);
   };
 
-  const handleAddQuiz = () => {
-    if (currentQuiz) {
-      setQuiz([...quiz, currentQuiz]);
-      setCurrentQuiz("");
-    }
+  const handleQuizChoiceChange = (index, text) => {
+    setQuizChoices(
+      quizChoices.map((choice, i) => (i === index ? text : choice))
+    );
+  };
+
+  const handleAddQuizChoice = () => {
+    setQuizChoices([...quizChoices, ""]); // Adds a new empty choice
   };
 
   const saveQuizToRedux = () => {
-    if (quiz.length > 0) {
+    if (quizQuestion && quizChoices.length > 0) {
       dispatch(
         addElementToSlide({
           chapterIndex,
           slideIndex,
           elementType: "quiz",
-          value: quiz,
+          value: {
+            question: quizQuestion,
+            choices: quizChoices.map((text) => ({ text })),
+          },
         })
       );
-      setQuiz([]);
+      // Reset quiz state
+      setQuizQuestion("");
+      setQuizChoices([]);
     }
     setCurrentElement("");
-    console.log(elements);
-  };
-
-  const handleDeleteQuiz = (indexToDelete) => {
-    const updatedQuiz = quiz.filter((_, index) => index !== indexToDelete);
-    setQuiz(updatedQuiz);
   };
 
   const renderQuizForm = () => (
@@ -267,17 +269,18 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
       <div className="flex flex-row items-center w-[100%] gap-1">
         <input
           type="text"
-          value={currentQuiz}
-          onChange={handleQuizInputChange}
-          placeholder="Enter quiz"
+          value={quizQuestion}
+          onChange={handleQuizQuestionChange}
+          placeholder="Enter quiz question"
           className="border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 w-[75%]"
         />
         <PlusCircle
-          onClick={handleAddQuiz}
+          onClick={handleAddQuizChoice}
           className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
           size={24}
           weight="fill"
         />
+        {/* // Replace the existing File OnClick action with saveQuizToRedux */}
         <File
           onClick={saveQuizToRedux}
           className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
@@ -285,21 +288,27 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
           weight="fill"
         />
       </div>
-      <ul>
-        {quiz.map((item, index) => (
-          <li key={index} className="flex justify-between">
-            - {item}{" "}
-            <span>
-              <Trash
-                onClick={() => handleDeleteQuiz(index)}
-                className="text-red-600 hover:text-red-700 hover:cursor-pointer transition-all"
-                weight="fill"
-                size={22}
-              />
-            </span>
-          </li>
-        ))}
-      </ul>
+      {/* // Map over quizChoices to render choices */}
+      {quizChoices.map((choice, index) => (
+        <div key={index} className="flex justify-between">
+          <input
+            type="text"
+            value={choice}
+            onChange={(e) => handleQuizChoiceChange(index, e.target.value)}
+            placeholder={`Choice ${index + 1}`}
+            className="mt-1 border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 w-[75%]"
+          />
+          <Trash
+            onClick={() => {
+              // Add a function to handle removing choices
+              setQuizChoices(quizChoices.filter((_, i) => i !== index));
+            }}
+            className="text-red-600 hover:text-red-700 hover:cursor-pointer transition-all mt-1"
+            weight="fill"
+            size={22}
+          />
+        </div>
+      ))}
     </div>
   );
 
@@ -359,7 +368,11 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
               <input
                 id={element.id}
                 placeholder={`Enter ${element.type}`}
-                value={element.value}
+                value={
+                  element.type === "quiz"
+                    ? element.value.question
+                    : element.value
+                }
                 onChange={(e) => handleInputChange(element.id, e.target.value)}
                 className="w-[100%] border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1"
               />
