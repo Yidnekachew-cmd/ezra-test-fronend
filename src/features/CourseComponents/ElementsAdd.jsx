@@ -178,7 +178,12 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
 
   const handleAddButtonClick = () => {
     // Only dispatch addElementToSlide when the add button is clicked and currentElement is not "list"
-    if (currentElement && currentElement !== "list" && "img") {
+    if (
+      currentElement &&
+      currentElement !== "list" &&
+      currentElement !== "img" &&
+      currentElement !== "quiz"
+    ) {
       dispatch(
         addElementToSlide({
           chapterIndex,

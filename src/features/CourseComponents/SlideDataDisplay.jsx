@@ -89,6 +89,21 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                       <ul className="list-disc mt-2">{listItemsComponent}</ul>
                     </div>
                   );
+                } else if (element.type === "quiz") {
+                  const quizComponent = element.value.map((quiz, index) => (
+                    <li
+                      key={index}
+                      className="text-white font-nokia-bold w-[100%] tracking-wide text-lg"
+                    >
+                      {quiz}
+                    </li>
+                  ));
+
+                  elementComponent = (
+                    <div className="flex flex-col ml-8">
+                      <ul className="list-disc mt-2">{quizComponent}</ul>
+                    </div>
+                  );
                 } else if (element.type === "img") {
                   elementComponent = (
                     <img
