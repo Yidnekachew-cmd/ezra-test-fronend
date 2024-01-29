@@ -42,8 +42,9 @@ function SlideDataDisplay({ selectedSlideIndex }) {
         {selectedSlide && selectedSlide.elements && (
           <div className="flex flex-col justify-center flex-grow p-20">
             <ul>
-              {selectedSlide.elements.map((element) => {
+              {selectedSlide.elements.map((element, index) => {
                 let elementComponent = null;
+                const uniqueKey = `${element.type}-${index}`;
 
                 if (element.type === "title") {
                   elementComponent = (
@@ -76,7 +77,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   const listItemsComponent = element.value.map(
                     (listItem, index) => (
                       <li
-                        key={index}
+                        key={`${uniqueKey}-list-${index}`}
                         className="text-white font-nokia-bold w-[100%] tracking-wide text-lg"
                       >
                         {listItem}
@@ -92,7 +93,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                 } else if (element.type === "quiz") {
                   const quizComponent = element.value.map((quiz, index) => (
                     <li
-                      key={index}
+                      key={`${uniqueKey}-quiz-${index}`}
                       className="text-white font-nokia-bold w-[100%] tracking-wide text-lg"
                     >
                       {quiz}

@@ -241,7 +241,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
     }
   };
 
-  const handleAddQuizElement = () => {
+  const saveQuizToRedux = () => {
     if (quiz.length > 0) {
       dispatch(
         addElementToSlide({
@@ -279,7 +279,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
           weight="fill"
         />
         <File
-          onClick={handleAddQuizElement}
+          onClick={saveQuizToRedux}
           className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
           size={24}
           weight="fill"
