@@ -1,27 +1,40 @@
 import { FaTrash } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 
 import {
   addParagraph,
   updateParagraph,
   deleteParagraph,
+  // selectParagraphs,
+  // selectForm,
 } from "../../redux/devotionsSlice";
 
-const AddParagraph = ({ paragraphs }) => {
+const AddParagraph = ({ paragraphs, localParagraphs, setLocalParagraphs }) => {
   const dispatch = useDispatch();
-  const [localParagraphs, setLocalParagraphs] = useState(paragraphs);
+  // const paragraphs = useSelector(selectForm);
+  // console.log(paragraphs.body);
 
   useEffect(() => {
-    setLocalParagraphs(paragraphs);
+    if (paragraphs) {
+      setLocalParagraphs(paragraphs);
+    }
   }, [paragraphs]);
 
   const handleParaChange = (event, index) => {
+    const newParagraphs = [...localParagraphs];
+    newParagraphs[index] = event.target.value;
+    setLocalParagraphs(newParagraphs);
     dispatch(updateParagraph({ index, text: event.target.value }));
   };
 
   const addPara = () => {
-    dispatch(addParagraph());
+    const newParagraphs = Array.isArray(localParagraphs)
+      ? [...localParagraphs, ""]
+      : [""];
+    setLocalParagraphs(newParagraphs);
+    dispatch(addParagraph(newParagraphs));
   };
 
   const deletePara = (index) => {
@@ -66,7 +79,8 @@ const AddParagraph = ({ paragraphs }) => {
 };
 
 AddParagraph.propTypes = {
-  paragraphs: [],
+  paragraphs: PropTypes.array,
+  localParagraphs: PropTypes.array.isRequired,
+  setLocalParagraphs: PropTypes.func.isRequired,
 };
-
 export default AddParagraph;

@@ -2,7 +2,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import {
-  // selectDevotion,
   updateForm,
   updateParagraph,
   selectForm,
@@ -21,6 +20,7 @@ const DevotionForm = () => {
   const form = useSelector(selectForm); // select the form from the Redux store
   const paragraphs = useSelector(selectParagraphs); // select the paragraphs from the Redux store
   const [file, setFile] = useState(null);
+  const [localParagraphs, setLocalParagraphs] = useState([]);
   const selectedDevotion = useSelector(
     (state) => state.devotions.selectedDevotion
   );
@@ -67,6 +67,7 @@ const DevotionForm = () => {
     }
 
     dispatch(resetForm()); // reset the form
+    setLocalParagraphs([]); // reset localParagraphs
   };
 
   return (
@@ -144,7 +145,11 @@ const DevotionForm = () => {
             required
           />
         </div>
-        <AddParagraph paragraphs={paragraphs} />
+        <AddParagraph
+          paragraphs={form.body}
+          localParagraphs={localParagraphs}
+          setLocalParagraphs={setLocalParagraphs}
+        />
         <div className="space-y-1 text-sm text-accent-6">
           <label>Prayer</label>
           <textarea
