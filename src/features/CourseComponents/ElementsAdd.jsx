@@ -20,6 +20,9 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
   const [currentListItem, setCurrentListItem] = useState("");
   const [slidesDetails, setSlidesDetails] = useState([]);
   const [currentSlideDetails, setCurrentSlideDetails] = useState("");
+  const [quiz, setQuiz] = useState([]);
+  const [currentQuiz, setCurrentQuiz] = useState("");
+
   const handleListInputChange = (event) => {
     setCurrentListItem(event.target.value);
   };
@@ -46,7 +49,6 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
     setCurrentElement("");
     console.log(elements);
   };
-
 
   const handleAddSlide = () => {
     if (currentSlideDetails) {
@@ -219,6 +221,10 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
         elementId,
       })
     );
+  };
+
+  const handleQuizInputChange = (event) => {
+    setCurrentQuiz(event.target.value);
   };
 
   return (
