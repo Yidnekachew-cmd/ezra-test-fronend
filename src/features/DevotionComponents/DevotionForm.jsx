@@ -10,6 +10,7 @@ import {
   updateDevotion,
   resetForm,
   setIsEditing,
+  fetchDevotions,
 } from "../../redux/devotionsSlice";
 import AddParagraph from "./AddParagraph";
 import PhotoUploader from "./PhotoUploader";
@@ -63,9 +64,13 @@ const DevotionForm = () => {
     // If the form has an _id, it's an existing devotion, so update it.
     // Otherwise, create a new devotion.
     if (form._id) {
-      dispatch(updateDevotion({ token, devotion }));
+      dispatch(updateDevotion({ token, devotion })).then(() => {
+        dispatch(fetchDevotions());
+      });
     } else {
-      dispatch(createDevotion({ token, devotion }));
+      dispatch(createDevotion({ token, devotion })).then(() => {
+        dispatch(fetchDevotions());
+      });
     }
 
     dispatch(resetForm()); // reset the form
