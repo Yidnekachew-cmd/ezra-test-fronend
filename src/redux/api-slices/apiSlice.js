@@ -68,9 +68,6 @@ export const apiSlice = createApi({
         return {
           url: `/devotion/${id}`,
           method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
           body: formData, // use FormData instead of JSON
         };
       },

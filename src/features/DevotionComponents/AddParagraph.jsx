@@ -44,6 +44,9 @@ const AddParagraph = ({ paragraphs, localParagraphs, setLocalParagraphs }) => {
   };
 
   const deletePara = (index) => {
+    const newParagraphs = [...localParagraphs];
+    newParagraphs.splice(index, 1);
+    setLocalParagraphs(newParagraphs);
     dispatch(deleteParagraph(index));
   };
 
