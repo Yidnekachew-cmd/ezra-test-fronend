@@ -20,6 +20,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
   const [currentListItem, setCurrentListItem] = useState("");
   const [slidesDetails, setSlidesDetails] = useState([]);
   const [currentSlideDetails, setCurrentSlideDetails] = useState("");
+
   const handleListInputChange = (event) => {
     setCurrentListItem(event.target.value);
   };
@@ -46,7 +47,6 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
     setCurrentElement("");
     console.log(elements);
   };
-
 
   const handleAddSlide = () => {
     if (currentSlideDetails) {
@@ -178,7 +178,12 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
 
   const handleAddButtonClick = () => {
     // Only dispatch addElementToSlide when the add button is clicked and currentElement is not "list"
-    if (currentElement && currentElement !== "list" && "img") {
+    if (
+      currentElement &&
+      currentElement !== "list" &&
+      currentElement !== "img" &&
+      currentElement !== "quiz"
+    ) {
       dispatch(
         addElementToSlide({
           chapterIndex,
@@ -221,6 +226,92 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
     );
   };
 
+  // Quiz-related state and functions
+  const [quizQuestion, setQuizQuestion] = useState("");
+  const [quizChoices, setQuizChoices] = useState([]);
+
+  const handleQuizQuestionChange = (event) => {
+    setQuizQuestion(event.target.value);
+  };
+
+  const handleQuizChoiceChange = (index, text) => {
+    setQuizChoices(
+      quizChoices.map((choice, i) => (i === index ? text : choice))
+    );
+  };
+
+  const handleAddQuizChoice = () => {
+    setQuizChoices([...quizChoices, ""]); // Adds a new empty choice
+  };
+
+  const saveQuizToRedux = () => {
+    if (quizQuestion && quizChoices.length > 0) {
+      dispatch(
+        addElementToSlide({
+          chapterIndex,
+          slideIndex,
+          elementType: "quiz",
+          value: {
+            question: quizQuestion,
+            choices: quizChoices.map((text) => ({ text })),
+          },
+        })
+      );
+      // Reset quiz state
+      setQuizQuestion("");
+      setQuizChoices([]);
+    }
+    setCurrentElement("");
+  };
+
+  const renderQuizForm = () => (
+    <div className="mt-2">
+      <div className="flex flex-row items-center w-[100%] gap-1">
+        <input
+          type="text"
+          value={quizQuestion}
+          onChange={handleQuizQuestionChange}
+          placeholder="Enter quiz question"
+          className="border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 w-[75%]"
+        />
+        <PlusCircle
+          onClick={handleAddQuizChoice}
+          className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
+          size={24}
+          weight="fill"
+        />
+        {/* // Replace the existing File OnClick action with saveQuizToRedux */}
+        <File
+          onClick={saveQuizToRedux}
+          className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
+          size={24}
+          weight="fill"
+        />
+      </div>
+      {/* // Map over quizChoices to render choices */}
+      {quizChoices.map((choice, index) => (
+        <div key={index} className="flex justify-between">
+          <input
+            type="text"
+            value={choice}
+            onChange={(e) => handleQuizChoiceChange(index, e.target.value)}
+            placeholder={`Choice ${index + 1}`}
+            className="mt-1 border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 w-[75%]"
+          />
+          <Trash
+            onClick={() => {
+              // Add a function to handle removing choices
+              setQuizChoices(quizChoices.filter((_, i) => i !== index));
+            }}
+            className="text-red-600 hover:text-red-700 hover:cursor-pointer transition-all mt-1"
+            weight="fill"
+            size={22}
+          />
+        </div>
+      ))}
+    </div>
+  );
+
   return (
     <div className="bg-white w-[100%] px-4">
       <p className="font-bold py-2">Insert Element</p>
@@ -251,6 +342,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
 
       {currentElement === "list" && renderListForm()}
       {currentElement === "slide" && renderSlideForm()}
+      {currentElement === "quiz" && renderQuizForm()}
       {elements.map((element, index) => (
         <div key={index} className="py-2">
           <div className="flex flex-col justify-between pb-2">
@@ -276,7 +368,11 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
               <input
                 id={element.id}
                 placeholder={`Enter ${element.type}`}
-                value={element.value}
+                value={
+                  element.type === "quiz"
+                    ? element.value.question
+                    : element.value
+                }
                 onChange={(e) => handleInputChange(element.id, e.target.value)}
                 className="w-[100%] border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1"
               />
