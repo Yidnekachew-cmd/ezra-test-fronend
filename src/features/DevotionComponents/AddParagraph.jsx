@@ -22,6 +22,12 @@ const AddParagraph = ({ paragraphs, localParagraphs, setLocalParagraphs }) => {
     }
   }, [paragraphs]);
 
+  useEffect(() => {
+    localParagraphs.forEach((paragraph, index) => {
+      dispatch(updateParagraph({ index, text: paragraph }));
+    });
+  }, [localParagraphs, dispatch]);
+
   const handleParaChange = (event, index) => {
     const newParagraphs = [...localParagraphs];
     newParagraphs[index] = event.target.value;
