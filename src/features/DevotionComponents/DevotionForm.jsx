@@ -55,27 +55,25 @@ const DevotionForm = () => {
     dispatch(updateForm({ [event.target.name]: event.target.value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Create a new devotion object from the form state
     let devotion = { ...form, paragraphs, photo: file };
 
-    // If the form has an _id, it's an existing devotion, so update it.
-    // Otherwise, create a new devotion.
     if (form._id) {
-      dispatch(updateDevotion({ token, devotion })).then(() => {
-        dispatch(fetchDevotions());
-      });
+      await dispatch(updateDevotion({ token, devotion }));
     } else {
-      dispatch(createDevotion({ token, devotion })).then(() => {
-        dispatch(fetchDevotions());
-      });
+      await dispatch(createDevotion({ token, devotion }));
     }
 
-    dispatch(resetForm()); // reset the form
-    setLocalParagraphs([]); // reset localParagraphs
+    await dispatch(fetchDevotions());
+
+    dispatch(resetForm());
+    setLocalParagraphs([]);
     dispatch(setIsEditing(false));
+
+    // Reload the page
+    window.location.reload();
   };
 
   return (

@@ -7,12 +7,16 @@ import { useGetDevotionsQuery } from "../../redux/api-slices/apiSlice";
 
 const DevotionDisplay = ({ showControls }) => {
   const [selectedDevotion, setSelectedDevotion] = useState(null);
-  const { data: devotions, error, isLoading } = useGetDevotionsQuery();
+  const { data: devotions, error, isLoading, refetch } = useGetDevotionsQuery();
 
   useEffect(() => {
     if (devotions && devotions.length > 0) {
       setSelectedDevotion(devotions[0]);
     }
+  }, [devotions]);
+
+  useEffect(() => {
+    refetch();
   }, [devotions]);
 
   if (isLoading) return "Loading...";

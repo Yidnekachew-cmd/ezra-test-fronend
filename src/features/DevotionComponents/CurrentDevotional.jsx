@@ -7,17 +7,19 @@ import {
   deleteDevotion,
   setIsEditing,
 } from "../../redux/devotionsSlice";
+import { useGetDevotionsQuery } from "../../redux/api-slices/apiSlice";
 
 const CurrentDevotional = ({ devotionToDisplay, showControls }) => {
+  const { refetch } = useGetDevotionsQuery();
   const { role } = useAuthContext(); // get the authentication token
   const dispatch = useDispatch();
 
-  const handleDelete = (id) => {
-    dispatch(deleteDevotion(id)); // dispatch delete action
+  const handleDelete = async (id) => {
+    await dispatch(deleteDevotion(id)); // dispatch delete action
+    refetch(); // refetch the devotions data
   };
 
   const startEditing = (devotion) => {
-    console.log(devotion); // Log the devotion object
     dispatch(selectDevotion(devotion)); // dispatch select action
     dispatch(setIsEditing(true)); // dispatch startEditing action
   };
