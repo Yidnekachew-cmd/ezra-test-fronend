@@ -14,10 +14,9 @@ import {
 } from "../../redux/devotionsSlice";
 import AddParagraph from "./AddParagraph";
 import PhotoUploader from "./PhotoUploader";
-import { useAuthContext } from "../../hooks/useAuthContext";
 
 const DevotionForm = () => {
-  const { token } = useAuthContext();
+  const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
   const form = useSelector(selectForm); // select the form from the Redux store
   const paragraphs = useSelector(selectParagraphs); // select the paragraphs from the Redux store

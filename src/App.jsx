@@ -1,5 +1,6 @@
 // App.jsx
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 import Header from "./components/Header";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./routes/Home";
@@ -10,7 +11,6 @@ import ContactUs from "./routes/ContactUs";
 import NotMatch from "./routes/NotMatch";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import { useAuthContext } from "./hooks/useAuthContext";
 import Footer from "./components/Footer";
 import AdminDashboard from "./routes/AdminDashboard";
 import CoursesAvailable from "./features/CourseComponents/CoursesAvailable";
@@ -18,7 +18,8 @@ import ChaptersDisplay from "./features/CourseComponents/ChaptersDisplay";
 import SlidesDisplay from "./features/CourseComponents/SlidesDisplay";
 
 function App() {
-  const { user, isAuthReady } = useAuthContext();
+  const user = useSelector((state) => state.auth.user); // Access user from auth state
+  const isAuthReady = useSelector((state) => state.auth.isAuthReady); // Access isAuthReady from auth state
 
   if (!isAuthReady) {
     return <div>Loading...</div>; // Or a  loading spinner
