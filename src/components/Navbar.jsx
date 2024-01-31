@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useLogout } from "../hooks/useLogout";
+import { logout } from "@/redux/authSlice";
 
 const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
-  const { logout } = useLogout();
 
   const handleclick = () => {
+    console.log("Eyeserahu new teyign");
     logout();
     localStorage.removeItem("user");
     // window.location.reload();

@@ -1,6 +1,8 @@
 // App.jsx
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login, setAuthReady } from "./redux/authSlice";
 import Header from "./components/Header";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./routes/Home";
@@ -18,8 +20,19 @@ import ChaptersDisplay from "./features/CourseComponents/ChaptersDisplay";
 import SlidesDisplay from "./features/CourseComponents/SlidesDisplay";
 
 function App() {
-  const user = useSelector((state) => state.auth.user); // Access user from auth state
-  const isAuthReady = useSelector((state) => state.auth.isAuthReady); // Access isAuthReady from auth state
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+  const isAuthReady = useSelector((state) => state.auth.isAuthReady);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user) {
+      dispatch(login(user)); // Dispatch the login action
+    }
+
+    dispatch(setAuthReady(true)); // Dispatch the setAuthReady action
+  }, [dispatch]);
 
   if (!isAuthReady) {
     return <div>Loading...</div>; // Or a  loading spinner

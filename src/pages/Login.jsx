@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GoogleLogo, FacebookLogo } from "@phosphor-icons/react";
+import { GoogleLogo, FacebookLogo, Spinner } from "@phosphor-icons/react";
 import "./LoginAndSignup.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -96,7 +96,8 @@ const Login = () => {
             disabled={isLoading}
             className="md:w-[40%] lg:w-[69%] bg-accent-6 text-white px-16 py-1 rounded-sm hover:bg-accent-7 hover:cursor-pointer transition-all"
           >
-            Log In
+            {isLoading ? <Spinner size={32} /> : "Log In"}
+            {/* Render loading spinner if isLoading is true */}
           </button>
           <Link
             className="border border-accent-6 rounded-sm px-8 flex justify-center items-center hover:bg-secondary-6 hover:text-primary-1 hover:border-secondary-6 transition-all"
