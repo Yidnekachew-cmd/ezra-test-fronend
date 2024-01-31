@@ -1,13 +1,28 @@
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import { FaTrash, FaEdit } from "react-icons/fa";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import {
+  selectDevotion,
+  deleteDevotion,
+  setIsEditing,
+} from "../../redux/devotionsSlice";
+import { useGetDevotionsQuery } from "../../redux/api-slices/apiSlice";
 
-const CurrentDevotional = ({
-  devotionToDisplay,
-  handleDelete,
-  startEditing,
-}) => {
-  const { role } = useAuthContext(); // get the authentication token
+const CurrentDevotional = ({ devotionToDisplay, showControls }) => {
+  const { refetch } = useGetDevotionsQuery();
+  const role = useSelector((state) => state.auth.role); // get the authentication token
+  const dispatch = useDispatch();
+
+  const handleDelete = async (id) => {
+    await dispatch(deleteDevotion(id)); // dispatch delete action
+    refetch(); // refetch the devotions data
+  };
+
+  const startEditing = (devotion) => {
+    dispatch(selectDevotion(devotion)); // dispatch select action
+    dispatch(setIsEditing(true)); // dispatch startEditing action
+  };
+
   return (
     <div className="h-auto border-2 shadow-lg rounded-2xl p-6">
       <div>
@@ -47,7 +62,7 @@ const CurrentDevotional = ({
             <h1 className="text-4xl text-justify text-secondary-6">
               {devotionToDisplay && devotionToDisplay.title}
             </h1>
-            {role === "Admin" && (
+            {role === "Admin" && showControls && (
               <>
                 <FaTrash
                   className="text-gray-700 text-xl cursor-pointer self-center"
@@ -74,8 +89,6 @@ const CurrentDevotional = ({
           ) : (
             <hr className="hidden border-secondary-6" />
           )}
-
-         
 
           {devotionToDisplay &&
             devotionToDisplay.body.map((paragraph, paragraphIndex) => (
@@ -127,8 +140,7 @@ const CurrentDevotional = ({
 
 CurrentDevotional.propTypes = {
   devotionToDisplay: PropTypes.object.isRequired,
-  handleDelete: PropTypes.func.isRequired,
-  startEditing: PropTypes.func.isRequired,
+  showControls: PropTypes.bool.isRequired,
 };
 
 export default CurrentDevotional;

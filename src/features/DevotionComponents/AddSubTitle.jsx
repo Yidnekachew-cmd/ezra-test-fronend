@@ -1,20 +1,30 @@
 import { FaTrash } from "react-icons/fa";
-import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { addSubtitle, changeSubtitle, removeSubtitle } from "./devotionsSlice";
 
-const AddSubTitle = ({
-    handleSubTitleChange,
-    handleAddSubtitle,
-  subTitles,
-  deleteSubTitle,
-}) => {
+const AddSubTitle = () => {
+  const dispatch = useDispatch();
+  const subTitles = useSelector((state) => state.devotions.form.subTitles);
+
+  const handleSubTitleChange = (e, subtitleIndex) => {
+    dispatch(changeSubtitle({ subtitleIndex, value: e.target.value }));
+  };
+
+  const handleAddSubtitle = () => {
+    dispatch(addSubtitle());
+  };
+
+  const deleteSubTitle = (subtitleIndex) => {
+    dispatch(removeSubtitle(subtitleIndex));
+  };
   return (
     <div className="space-y-3">
-      
       {subTitles.map((subtitle, subtitleIndex) => (
-        <div key={subtitleIndex} className="flex flex-col space-y-1 text-sm text-accent-6">
-          <label>
-            Sub Title {subtitleIndex + 1}
-          </label>
+        <div
+          key={subtitleIndex}
+          className="flex flex-col space-y-1 text-sm text-accent-6"
+        >
+          <label>Sub Title {subtitleIndex + 1}</label>
           <div className="flex">
             <textarea
               type="text"
@@ -33,23 +43,15 @@ const AddSubTitle = ({
           </div>
         </div>
       ))}
-     <button
-   type="button"
-   onClick={handleAddSubtitle}
-   className="bg-accent-6 hover:bg-accent-7 text-[#fff] px-4 py-1 rounded-full cursor-pointer"
->
-   Add Subtitle
-</button>
+      <button
+        type="button"
+        onClick={handleAddSubtitle}
+        className="bg-accent-6 hover:bg-accent-7 text-[#fff] px-4 py-1 rounded-full cursor-pointer"
+      >
+        Add Subtitle
+      </button>
     </div>
   );
-};
-
-AddSubTitle.propTypes = {
-  handleSubTitleChange: PropTypes.func.isRequired,
-    handleAddSubtitle: PropTypes.func.isRequired,
-//   addSubTitle: PropTypes.func.isRequired,
-  subTitles: PropTypes.array.isRequired,
-  deleteSubTitle: PropTypes.func.isRequired,
 };
 
 export default AddSubTitle;

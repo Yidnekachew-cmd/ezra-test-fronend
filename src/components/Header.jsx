@@ -1,18 +1,19 @@
 import { useState, useRef } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
-import { useAuthContext } from "../hooks/useAuthContext";
 import { FaRegUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import { useOnClickOutside } from "./useOnClickOutside";
 import { Button } from "./ui/button";
 import bgImage from "../assets/header-img.svg";
 
 const Header = () => {
-  const { user } = useAuthContext();
+  const user = useSelector((state) => state.auth.user);
   const [showAccountModal, setShowAccountModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
   const handleAccountClick = () => {
+    console.log("user details", user);
     setShowAccountModal((prev) => !prev);
   };
 
@@ -41,7 +42,7 @@ const Header = () => {
         {/* Navigation and Logo */}
         <div className="flex justify-between py-6 items-center text-white font-nokia-bold w-[90%] md:w-[80%] mx-auto">
           <div className="flex justify-center items-center space-x-3 cursor-pointer ">
-            <img src="../assets/ezra-logo.svg" alt="" />
+            <img src="/assets/ezra-logo.svg" alt="" />
             <NavLink to="/" onClick={closeMenu}>
               <h3>
                 <strong className="text-2xl">Ezra</strong> Seminary

@@ -76,7 +76,6 @@ const PreviousDevotionals = ({ previousDevotions, setSelectedDevotion }) => {
 PreviousDevotionals.propTypes = {
   previousDevotions: PropTypes.array.isRequired,
   setSelectedDevotion: PropTypes.func.isRequired,
-  devotions: PropTypes.array.isRequired,
 };
 
 export default PreviousDevotionals;
