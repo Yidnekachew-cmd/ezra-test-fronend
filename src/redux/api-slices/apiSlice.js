@@ -35,6 +35,12 @@ export const apiSlice = createApi({
         body: JSON.stringify({ firstName, lastName, email, password }),
       }),
     }),
+    getCourses: builder.query({
+      query: () => "course/getall",
+    }),
+    getCourseById: builder.query({
+      query: (id) => `course/get/${id}`,
+    }),
     getDevotions: builder.query({
       query: () => ({
         url: "/devotion/show",
@@ -84,6 +90,8 @@ export const apiSlice = createApi({
 export const {
   useSignupMutation,
   useLoginMutation,
+  useGetCoursesQuery,
+  useGetCourseByIdQuery,
   useGetDevotionsQuery,
   useCreateDevotionMutation,
   useUpdateDevotionMutation,

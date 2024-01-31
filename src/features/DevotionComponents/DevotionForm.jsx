@@ -14,7 +14,7 @@ import {
 } from "../../redux/devotionsSlice";
 import AddParagraph from "./AddParagraph";
 import PhotoUploader from "./PhotoUploader";
-import { Spinner } from "@phosphor-icons/react";
+import { CircleNotch } from "@phosphor-icons/react";
 
 const DevotionForm = () => {
   const token = useSelector((state) => state.auth.token);
@@ -177,7 +177,7 @@ const DevotionForm = () => {
           <PhotoUploader handleChange={handleChange} required />
           <div className="space-y-1 text-sm text-accent-6">
             {isSubmitting ? (
-              <Spinner size={50} /> // Display the spinner while the form is being submitted
+              <CircleNotch size={32} /> // Display the spinner while the form is being submitted
             ) : (
               <button
                 type="submit"
