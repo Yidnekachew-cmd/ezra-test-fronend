@@ -31,7 +31,9 @@ function PhotoUploader({ handleChange }) {
 
   return (
     <div>
-      {previewUrl && <img src={previewUrl} alt="Preview" />}
+      {previewUrl && (
+        <img src={previewUrl} alt="Preview" className="w-32 h-auto" />
+      )}
       <label className=" bg-accent-6 text-[#fff] hover:bg-accent-7 rounded-full px-4 py-1  cursor-pointer text-sm  font-nokia-bold w-[27%]">
         <span className="placeholder-secondary-6">Upload Image</span>
         <input

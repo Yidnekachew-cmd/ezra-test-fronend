@@ -14,6 +14,7 @@ import {
 } from "../../redux/devotionsSlice";
 import AddParagraph from "./AddParagraph";
 import PhotoUploader from "./PhotoUploader";
+import { Spinner } from "@phosphor-icons/react";
 
 const DevotionForm = () => {
   const token = useSelector((state) => state.auth.token);
@@ -26,6 +27,7 @@ const DevotionForm = () => {
   const selectedDevotion = useSelector(
     (state) => state.devotions.selectedDevotion
   );
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (isEditing && selectedDevotion && selectedDevotion._id) {
@@ -57,6 +59,8 @@ const DevotionForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    setIsSubmitting(true);
+
     let devotion = { ...form, paragraphs, photo: file };
 
     if (form._id) {
@@ -70,6 +74,8 @@ const DevotionForm = () => {
     dispatch(resetForm());
     setLocalParagraphs([]);
     dispatch(setIsEditing(false));
+
+    setIsSubmitting(false); // Set isSubmitting back to false when the form submission is complete
 
     // Reload the page
     window.location.reload();
@@ -170,12 +176,16 @@ const DevotionForm = () => {
         <div className="flex justify-between items-center">
           <PhotoUploader handleChange={handleChange} required />
           <div className="space-y-1 text-sm text-accent-6">
-            <button
-              type="submit"
-              className=" bg-accent-6 hover:bg-accent-7 text-[#fff] px-6 py-1 rounded-full cursor-pointer "
-            >
-              Submit
-            </button>
+            {isSubmitting ? (
+              <Spinner size={50} /> // Display the spinner while the form is being submitted
+            ) : (
+              <button
+                type="submit"
+                className=" bg-accent-6 hover:bg-accent-7 text-[#fff] px-6 py-1 rounded-full cursor-pointer "
+              >
+                Submit
+              </button>
+            )}
           </div>
         </div>
       </form>
