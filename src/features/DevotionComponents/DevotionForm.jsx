@@ -1,24 +1,89 @@
 // import Devotion from "@/routes/Devotion";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import {
+  updateForm,
+  updateParagraph,
+  selectForm,
+  selectParagraphs,
+  createDevotion,
+  updateDevotion,
+  resetForm,
+  setIsEditing,
+  fetchDevotions,
+} from "../../redux/devotionsSlice";
 import AddParagraph from "./AddParagraph";
 import PhotoUploader from "./PhotoUploader";
-import PropTypes from "prop-types";
+import { CircleNotch } from "@phosphor-icons/react";
 
-const DevotionForm = ({
-  form,
-  handleChange,
-  handleSubmit,
-  addPara,
-  handleParaChange,
-  paragraphs,
-  handleFileChange,
-  deletePara,
-}) => {
+const DevotionForm = () => {
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
+  const form = useSelector(selectForm); // select the form from the Redux store
+  const paragraphs = useSelector(selectParagraphs); // select the paragraphs from the Redux store
+  const [file, setFile] = useState(null);
+  const [localParagraphs, setLocalParagraphs] = useState([]);
+  const isEditing = useSelector((state) => state.devotions.isEditing);
+  const selectedDevotion = useSelector(
+    (state) => state.devotions.selectedDevotion
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (isEditing && selectedDevotion && selectedDevotion._id) {
+      // Dispatch an action to populate the form with the selected devotion's data
+      dispatch(updateForm(selectedDevotion));
+      // Dispatch an action to populate the paragraphs with the selected devotion's paragraphs
+      if (selectedDevotion && selectedDevotion.paragraphs) {
+        selectedDevotion.paragraphs.forEach((paragraph, index) => {
+          dispatch(updateParagraph({ index, text: paragraph }));
+        });
+      }
+      // Store the existing image URL in the local state
+      setFile(selectedDevotion.photo);
+    }
+
+    // Cleanup function
+    return () => {
+      dispatch(resetForm());
+    };
+  }, [dispatch, selectedDevotion, isEditing]);
+
+  const handleChange = (event) => {
+    if (event.target.name === "image") {
+      setFile(event.target.file); // store the file object in the local state
+    }
+    dispatch(updateForm({ [event.target.name]: event.target.value }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    setIsSubmitting(true);
+
+    let devotion = { ...form, paragraphs, photo: file };
+
+    if (form._id) {
+      await dispatch(updateDevotion({ token, devotion }));
+    } else {
+      await dispatch(createDevotion({ token, devotion }));
+    }
+
+    await dispatch(fetchDevotions());
+
+    dispatch(resetForm());
+    setLocalParagraphs([]);
+    dispatch(setIsEditing(false));
+
+    setIsSubmitting(false); // Set isSubmitting back to false when the form submission is complete
+
+    // Reload the page
+    window.location.reload();
+  };
+
   return (
     <div className="flex border-2 shadow-lg rounded-l-2xl h-[100%] font-nokia-bold ">
-      <form
-        onSubmit={handleSubmit}
-        className="w-[90%] mx-auto py-6 space-y-3 "
-      >
+      <form onSubmit={handleSubmit} className="w-[90%] mx-auto py-6 space-y-3 ">
         <div>
           <select
             className="border-2 border-accent-6 bg-[#fff] outline-accent-7  rounded-md px-2 py-1 text-secondary-6 cursor-pointer text-xs  mr-6"
@@ -91,15 +156,11 @@ const DevotionForm = ({
             required
           />
         </div>
-          <AddParagraph
-            form={form}
-            handleChange={handleChange}
-            required
-            paragraphs={paragraphs}
-            addPara={addPara}
-            handleParaChange={handleParaChange}
-            deletePara={deletePara}
-          />
+        <AddParagraph
+          paragraphs={form.body}
+          localParagraphs={localParagraphs}
+          setLocalParagraphs={setLocalParagraphs}
+        />
         <div className="space-y-1 text-sm text-accent-6">
           <label>Prayer</label>
           <textarea
@@ -113,31 +174,23 @@ const DevotionForm = ({
           />
         </div>
         <div className="flex justify-between items-center">
-          <PhotoUploader
-            handleFileChange={handleFileChange}
-            form={form}
-            required
-          />
+          <PhotoUploader handleChange={handleChange} required />
           <div className="space-y-1 text-sm text-accent-6">
-            <button className=" bg-accent-6 hover:bg-accent-7 text-[#fff] px-6 py-1 rounded-full cursor-pointer ">
-              Submit
-            </button>
+            {isSubmitting ? (
+              <CircleNotch size={32} /> // Display the spinner while the form is being submitted
+            ) : (
+              <button
+                type="submit"
+                className=" bg-accent-6 hover:bg-accent-7 text-[#fff] px-6 py-1 rounded-full cursor-pointer "
+              >
+                Submit
+              </button>
+            )}
           </div>
         </div>
       </form>
     </div>
   );
-};
-
-DevotionForm.propTypes = {
-  form: PropTypes.object.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  addPara: PropTypes.func.isRequired,
-  handleParaChange: PropTypes.func.isRequired,
-  paragraphs: PropTypes.array.isRequired,
-  handleFileChange: PropTypes.func.isRequired,
-  deletePara: PropTypes.func.isRequired,
 };
 
 export default DevotionForm;

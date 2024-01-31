@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { useSignup } from "../hooks/useSignup";
+import { useDispatch } from "react-redux"; // Import useDispatch
+import { useSignupMutation } from "../redux/api-slices/apiSlice"; // Import the useSignupMutation hook
+import { signup as signupAction } from "../redux/authSlice"; // Import the signup action
 import { GoogleLogo, FacebookLogo } from "@phosphor-icons/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -9,12 +11,31 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { signup, error, isLoading } = useSignup();
+  const [signupMutation, { isLoading, error }] = useSignupMutation(); // Use the useSignupMutation hook
+  const dispatch = useDispatch(); // Use useDispatch
+  const navigate = useNavigate(); // Use useNavigate
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await signup(firstName, lastName, email, password);
+    try {
+      const result = await signupMutation({
+        firstName,
+        lastName,
+        email,
+        password,
+      }).unwrap();
+
+      // save the user to local storage
+      localStorage.setItem("user", JSON.stringify(result));
+
+      // update the auth context
+      dispatch(signupAction(result)); // Dispatch the signup action
+
+      navigate("/"); // Navigate to the home page
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -24,7 +45,7 @@ const Signup = () => {
         style={{ backgroundPositionX: "-80px" }}
       >
         <div className="flex space-x-3 cursor-pointer text-white ">
-          <img src="../assets/ezra-logo.svg" alt="" />
+          <img src="/assets/ezra-logo.svg" alt="" />
           <h3 className="self-center text-2xl font-Lato-Regular">
             <span className="font-Lato-Bold">EZRA</span> Seminary
           </h3>

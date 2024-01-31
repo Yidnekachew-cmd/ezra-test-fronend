@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useAuthContext } from "./useAuthContext";
+import { useDispatch } from "react-redux";
+import { login as loginAction } from "../redux/authSlice"; // import the login action from your authSlice
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
-  const { dispatch } = useAuthContext();
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch(); // get the dispatch function from Redux
 
   const login = async (email, password) => {
     setIsLoading(true);
@@ -29,10 +30,9 @@ export const useLogin = () => {
       if (response.ok) {
         // save the user to local storage
         localStorage.setItem("user", JSON.stringify(json));
-        // console.log(json);
 
         // update the auth context
-        dispatch({ type: "LOGIN", payload: json });
+        dispatch(loginAction(json)); // dispatch the login action from authSlice
 
         setIsLoading(false);
         return json;
