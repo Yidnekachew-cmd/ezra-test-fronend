@@ -1,31 +1,34 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import useAxiosInstance from "../../api/axiosInstance";
 import Categories from "./Categories";
+import { useGetCoursesQuery } from "../../services/api";
+import BeatLoader from "react-spinners/BeatLoader";
 
 function CoursesAvailable() {
-  const [data, setData] = useState([]);
+  const { data: courses, error, isLoading } = useGetCoursesQuery();
   const [searchTerm, setSearchTerm] = useState("");
-
-  const instance = useAxiosInstance();
-
-  useEffect(() => {
-    instance
-      .get("/course/getall")
-      .then((res) => {
-        setData(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredData = data.filter((course) => {
+  const filteredData = courses?.filter((course) => {
     return course.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
+
+  if (isLoading)
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <BeatLoader
+          color={"#707070"}
+          loading
+          size={15}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    );
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="h-auto flex flex-col w-[90%] md:w-[80%] mt-12 mx-auto space-y-12 mb-12">
@@ -71,20 +74,18 @@ function CoursesAvailable() {
             return (
               <div
                 key={index}
-                className="flex flex-col justify-center items-start  border-accent-5 border-2 w-[100%] md:w-[23.7%] shadow-xl rounded-3xl md:rounded-xl h-auto pb-6 "
+                className="flex flex-col justify-center items-start  border-accent-5 border-2 w-[100%] md:w-[23.7%] shadow-xl rounded-3xl md:rounded-xl h-auto pb-6"
               >
-                <img
-                  // src={
-                  //   `http://localhost:5100/images/` +
-                  //   course.image
-                  // }
-                  src={
-                    `https://ezra-seminary-api.onrender.com/images/` +
-                    course.image
-                  }
-                  className="w-full max-h-[40vh] min-h-[40vh]  md:min-h-[30vh] md:max-h-[30vh] object-cover rounded-3xl  md:rounded-2xl p-2"
-                  alt="no_image"
-                />
+                <div className="w-full p-2">
+                  <img
+                    src={
+                      `https://ezra-seminary-api.onrender.com/images/` +
+                      course.image
+                    }
+                    className="w-full max-h-[40vh] min-h-[40vh]  md:min-h-[30vh] md:max-h-[30vh] object-cover rounded-3xl md:rounded-2xl bg-secondary-1"
+                    alt=""
+                  />
+                </div>
                 <div className="space-y-2 w-[95%] md:w-[90%] mx-auto">
                   <h2 className="text-secondary-6 text-xl font-nokia-bold w-[90%] truncate">
                     {course.title}

@@ -5,6 +5,7 @@ import devotionsReducer from "./devotionsSlice";
 import authReducer from "./authSlice"; // import the auth reducer
 import { apiSlice } from "./api-slices/apiSlice"; // import the api reducer
 
+
 const store = configureStore({
   reducer: {
     course: courseReducer,
