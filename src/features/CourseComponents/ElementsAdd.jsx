@@ -245,6 +245,10 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
     setQuizChoices([...quizChoices, ""]); // Adds a new empty choice
   };
 
+  const handleCorrectAnswerChange = (value) => {
+    setCorrectAnswer(value);
+  };
+
   const saveQuizToRedux = () => {
     if (quizQuestion && quizChoices.length > 0) {
       dispatch(
@@ -255,7 +259,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
           value: {
             question: quizQuestion,
             choices: quizChoices.map((text) => ({ text })),
-            correctAnswer: correctAnswer,
+            correctAnswer,
           },
         })
       );
@@ -317,7 +321,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
         Correct Answer:
         <select
           value={correctAnswer}
-          onChange={(e) => handleCorrectAnswerChange(questionIndex, e)}
+          onChange={(e) => handleCorrectAnswerChange(e.target.value)}
           required
         >
           <option value="">Select the correct answer</option>
