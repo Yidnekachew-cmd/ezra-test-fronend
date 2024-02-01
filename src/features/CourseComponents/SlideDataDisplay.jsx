@@ -4,10 +4,33 @@ import { useSelector } from "react-redux";
 import { selectSlides } from "../../redux/courseSlice";
 
 function SlideDataDisplay({ selectedSlideIndex }) {
+  //Quiz Related functions
+  //track whether the selected answer is correct or not.
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
+
   //radio input switch
   const [selectedChoice, setSelectedChoice] = useState(null);
-  const handleRadioChange = (choiceIndex) => {
+  const handleRadioChange = (choiceIndex, choiceValue) => {
     setSelectedChoice(choiceIndex);
+    //logic to determine whether the selected answer is correct.
+    if (selectedSlide.elements.some((el) => el.type === "quiz")) {
+      const quizElement = selectedSlide.elements.find(
+        (el) => el.type === "quiz"
+      );
+      const isCorrect = choiceValue === quizElement.value.correctAnswer;
+      setIsAnswerCorrect(isCorrect);
+    }
+  };
+
+  //isCorrect switch
+  const renderQuizFeedback = () => {
+    if (isAnswerCorrect === null) return null; // Don't show feedback before a choice has been made
+
+    if (isAnswerCorrect) {
+      return <p className="text-green-500 font-bold">Correct!</p>;
+    } else {
+      return <p className="text-red-500 font-bold">Incorrect!</p>;
+    }
   };
 
   const slides = useSelector((state) =>
@@ -102,10 +125,11 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                       key={uniqueKey}
                       className="flex flex-col justify-center items-center mb-4"
                     >
+                      {/* Questions */}
                       <p className="text-white font-nokia-bold text-2xl">
                         {element.value.question}
                       </p>
-
+                      {/* Choices */}
                       {element.value.choices && (
                         <div className="flex flex-col mt-2">
                           {element.value.choices.map((choice, choiceIndex) => {
@@ -130,6 +154,8 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                           })}
                         </div>
                       )}
+                      {/* Correct Answer */}
+                      {renderQuizFeedback()}
                     </div>
                   );
                 } else if (element.type === "img") {
