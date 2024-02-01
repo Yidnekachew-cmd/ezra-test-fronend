@@ -229,6 +229,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
   // Quiz-related state and functions
   const [quizQuestion, setQuizQuestion] = useState("");
   const [quizChoices, setQuizChoices] = useState([]);
+  const [correctAnswer, setCorrectAnswer] = useState("");
 
   const handleQuizQuestionChange = (event) => {
     setQuizQuestion(event.target.value);
@@ -254,12 +255,14 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
           value: {
             question: quizQuestion,
             choices: quizChoices.map((text) => ({ text })),
+            correctAnswer: correctAnswer,
           },
         })
       );
       // Reset quiz state
       setQuizQuestion("");
       setQuizChoices([]);
+      setCorrectAnswer("");
     }
     setCurrentElement("");
   };
@@ -309,6 +312,22 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
           />
         </div>
       ))}
+      {/* choose the correct answer on the dropdown */}
+      <label>
+        Correct Answer:
+        <select
+          value={correctAnswer}
+          onChange={(e) => handleCorrectAnswerChange(questionIndex, e)}
+          required
+        >
+          <option value="">Select the correct answer</option>
+          {quizChoices.map((a, index) => (
+            <option key={index} value={a}>
+              {a}
+            </option>
+          ))}
+        </select>
+      </label>
     </div>
   );
 
