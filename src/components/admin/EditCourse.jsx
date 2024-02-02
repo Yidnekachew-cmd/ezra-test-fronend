@@ -83,7 +83,7 @@ function EditCourse() {
       })
       .then((res) => {
         console.log("Course updated: ", res.data);
-        navigate("/admin/course");
+        navigate("/admin/course/edit");
       })
       .catch((err) => {
         console.error("Error updating course: ", err);

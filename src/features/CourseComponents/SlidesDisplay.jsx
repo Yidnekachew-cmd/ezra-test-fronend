@@ -225,7 +225,7 @@ function SlidesDisplay() {
                           return (
                             <div
                               key={element._id}
-                              className="flex flex-col ml-8"
+                              className="flex flex-col justify-center items-center ml-8"
                             >
                               <ul className="list-disc mt-2">
                                 {listItemsComponent}
