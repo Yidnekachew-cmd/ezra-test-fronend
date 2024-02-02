@@ -4,10 +4,33 @@ import { useSelector } from "react-redux";
 import { selectSlides } from "../../redux/courseSlice";
 
 function SlideDataDisplay({ selectedSlideIndex }) {
+  //Quiz Related functions
+  //track whether the selected answer is correct or not.
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
+
   //radio input switch
   const [selectedChoice, setSelectedChoice] = useState(null);
-  const handleRadioChange = (choiceIndex) => {
+  const handleRadioChange = (choiceIndex, choiceValue) => {
     setSelectedChoice(choiceIndex);
+    //logic to determine whether the selected answer is correct.
+    if (selectedSlide.elements.some((el) => el.type === "quiz")) {
+      const quizElement = selectedSlide.elements.find(
+        (el) => el.type === "quiz"
+      );
+      const isCorrect = choiceValue === quizElement.value.correctAnswer;
+      setIsAnswerCorrect(isCorrect);
+    }
+  };
+
+  //isCorrect switch
+  const renderQuizResult = () => {
+    if (isAnswerCorrect === null) return null; // Don't show feedback before a choice has been made
+
+    if (isAnswerCorrect) {
+      return <p className="text-green-800 font-bold text-xl">Correct!</p>;
+    } else {
+      return <p className="text-red-700 font-bold text-xl">Wrong!</p>;
+    }
   };
 
   const slides = useSelector((state) =>
@@ -102,10 +125,11 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                       key={uniqueKey}
                       className="flex flex-col justify-center items-center mb-4"
                     >
+                      {/* Questions */}
                       <p className="text-white font-nokia-bold text-2xl">
                         {element.value.question}
                       </p>
-
+                      {/* Choices */}
                       {element.value.choices && (
                         <div className="flex flex-col mt-2">
                           {element.value.choices.map((choice, choiceIndex) => {
@@ -116,10 +140,10 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                               >
                                 <input
                                   type="radio"
-                                  className="form-radio text-indigo-600"
+                                  className="w-5 h-5 appearance-none bg-white focus:bg-orange-400 rounded-full transition-all"
                                   checked={selectedChoice === choiceIndex}
                                   onChange={() =>
-                                    handleRadioChange(choiceIndex)
+                                    handleRadioChange(choiceIndex, choice.text)
                                   }
                                 />
                                 <span className="text-white font-nokia-bold text-lg ml-2">
@@ -130,6 +154,8 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                           })}
                         </div>
                       )}
+                      {/* Correct Answer */}
+                      {renderQuizResult()}
                     </div>
                   );
                 } else if (element.type === "img") {
