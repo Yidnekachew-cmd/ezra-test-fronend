@@ -209,6 +209,115 @@ function EditElements({ chapterIndex, slideIndex }) {
     </div>
   );
 
+  // Quiz-related state and functions
+  const [quizQuestion, setQuizQuestion] = useState("");
+  const [quizChoices, setQuizChoices] = useState([]);
+  const [correctAnswer, setCorrectAnswer] = useState("");
+
+  const handleQuizQuestionChange = (event) => {
+    setQuizQuestion(event.target.value);
+  };
+
+  const handleQuizChoiceChange = (index, text) => {
+    setQuizChoices(
+      quizChoices.map((choice, i) => (i === index ? text : choice))
+    );
+  };
+
+  const handleAddQuizChoice = () => {
+    setQuizChoices([...quizChoices, ""]); // Adds a new empty choice
+  };
+
+  const handleCorrectAnswerChange = (value) => {
+    setCorrectAnswer(value);
+  };
+
+  const saveQuizToRedux = () => {
+    if (quizQuestion && quizChoices.length > 0) {
+      dispatch(
+        addElementToSlide({
+          chapterIndex,
+          slideIndex,
+          elementType: "quiz",
+          value: {
+            question: quizQuestion,
+            choices: quizChoices.map((text) => ({ text })),
+            correctAnswer,
+          },
+        })
+      );
+      // Reset quiz state
+      setQuizQuestion("");
+      setQuizChoices([]);
+      setCorrectAnswer("");
+    }
+    setCurrentElement("");
+  };
+
+  const renderQuizForm = () => (
+    <div className="mt-2">
+      <div className="flex flex-row items-center w-[100%] gap-1">
+        <input
+          type="text"
+          value={quizQuestion}
+          onChange={handleQuizQuestionChange}
+          placeholder="Enter quiz question"
+          className="border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 w-[75%]"
+        />
+        <PlusCircle
+          onClick={handleAddQuizChoice}
+          className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
+          size={24}
+          weight="fill"
+        />
+        {/* // Replace the existing File OnClick action with saveQuizToRedux */}
+        <File
+          onClick={saveQuizToRedux}
+          className="text-accent-6 hover:text-accent-7 hover:cursor-pointer transition-all"
+          size={24}
+          weight="fill"
+        />
+      </div>
+      {/* // Map over quizChoices to render choices */}
+      {quizChoices.map((choice, index) => (
+        <div key={index} className="flex justify-between">
+          <input
+            type="text"
+            value={choice}
+            onChange={(e) => handleQuizChoiceChange(index, e.target.value)}
+            placeholder={`Choice ${index + 1}`}
+            className="mt-1 border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1 w-[75%]"
+          />
+          <Trash
+            onClick={() => {
+              // Add a function to handle removing choices
+              setQuizChoices(quizChoices.filter((_, i) => i !== index));
+            }}
+            className="text-red-600 hover:text-red-700 hover:cursor-pointer transition-all mt-1"
+            weight="fill"
+            size={22}
+          />
+        </div>
+      ))}
+      {/* choose the correct answer on the dropdown */}
+      <label>
+        Correct Answer:
+        <select
+          value={correctAnswer}
+          onChange={(e) => handleCorrectAnswerChange(e.target.value)}
+          required
+        >
+          <option value="">Select the correct answer</option>
+          {quizChoices.map((a, index) => (
+            <option key={index} value={a}>
+              {a}
+            </option>
+          ))}
+        </select>
+      </label>
+    </div>
+  );
+
   return (
     <div className="bg-white w-[100%] px-4">
       <p className="font-bold py-2">Insert Element</p>
