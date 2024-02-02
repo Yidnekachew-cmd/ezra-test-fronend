@@ -172,6 +172,7 @@ function ElementsAdd({ chapterIndex, slideIndex }) {
       </ul>
     </div>
   );
+
   const handleDropdownChange = (e) => {
     setCurrentElement(e.target.value);
   };
