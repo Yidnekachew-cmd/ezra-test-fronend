@@ -27,9 +27,9 @@ function SlideDataDisplay({ selectedSlideIndex }) {
     if (isAnswerCorrect === null) return null; // Don't show feedback before a choice has been made
 
     if (isAnswerCorrect) {
-      return <p className="text-green-500 font-bold">Correct!</p>;
+      return <p className="text-green-800 font-bold text-xl">Correct!</p>;
     } else {
-      return <p className="text-red-500 font-bold">Incorrect!</p>;
+      return <p className="text-red-700 font-bold text-xl">Wrong!</p>;
     }
   };
 
@@ -143,7 +143,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                                   className="form-radio text-indigo-600"
                                   checked={selectedChoice === choiceIndex}
                                   onChange={() =>
-                                    handleRadioChange(choiceIndex)
+                                    handleRadioChange(choiceIndex, choice.text)
                                   }
                                 />
                                 <span className="text-white font-nokia-bold text-lg ml-2">
