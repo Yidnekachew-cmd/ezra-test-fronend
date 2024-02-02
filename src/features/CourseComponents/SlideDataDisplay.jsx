@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { selectSlides } from "../../redux/courseSlice";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
+import "@splidejs/react-splide/css/sea-green";
+import "@splidejs/react-splide/css/core";
 
 function SlideDataDisplay({ selectedSlideIndex }) {
   //Quiz Related functions
@@ -156,6 +160,33 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                       )}
                       {/* Correct Answer */}
                       {renderQuizResult()}
+                    </div>
+                  );
+                } else if (element.type === "slide") {
+                  const listItemsComponent = element.value.map(
+                    (listItem, index) => (
+                      <SplideSlide
+                        key={index}
+                        className="flex justify-center items-center text-white font-nokia-bold w-full tracking-wide text-left text-lg px-8"
+                      >
+                        {listItem}
+                      </SplideSlide>
+                    )
+                  );
+
+                  return (
+                    <div
+                      key={element._id}
+                      className="flex flex-col w-full ml-8"
+                    >
+                      <Splide
+                        options={{
+                          gap: "1rem",
+                        }}
+                        className="w-full p-8 rounded-md list-disc mt-2"
+                      >
+                        {listItemsComponent}
+                      </Splide>
                     </div>
                   );
                 } else if (element.type === "img") {

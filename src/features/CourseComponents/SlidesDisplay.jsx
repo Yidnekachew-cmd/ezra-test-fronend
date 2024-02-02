@@ -237,7 +237,7 @@ function SlidesDisplay() {
                             (listItem, index) => (
                               <SplideSlide
                                 key={index}
-                                className="text-white font-nokia-bold w-[100%] tracking-wide text-left text-lg px-8"
+                                className="flex justify-center items-center text-white font-nokia-bold w-full tracking-wide text-left text-lg px-8"
                               >
                                 {listItem}
                               </SplideSlide>
@@ -247,13 +247,13 @@ function SlidesDisplay() {
                           return (
                             <div
                               key={element._id}
-                              className="flex flex-col ml-8"
+                              className="flex flex-col w-full ml-8"
                             >
                               <Splide
                                 options={{
                                   gap: "1rem",
                                 }}
-                                className="bg-accent-6 p-8 rounded-md list-disc mt-2"
+                                className="w-full p-8 rounded-md list-disc mt-2"
                               >
                                 {listItemsComponent}
                               </Splide>
