@@ -29,6 +29,7 @@ function SlidesDisplay() {
   }
   // Setting the data to slides if the chapter is found
   const data = chapter.slides;
+  // console.log(data);
 
   const updateIndex = (newIndex) => {
     if (newIndex < 0) {
@@ -50,6 +51,33 @@ function SlidesDisplay() {
 
   const isSlideUnlocked = (index) => {
     return index <= unlockedIndex; // Check if the slide is unlocked based on the unlocked index
+  };
+
+  //Quiz Related functions
+  //track whether the selected answer is correct or not.
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
+
+  //radio input switch
+  const [selectedChoice, setSelectedChoice] = useState(null);
+  const handleRadioChange = (
+    choiceIndex,
+    choiceValue,
+    elementCorrectAnswer
+  ) => {
+    setSelectedChoice(choiceIndex);
+    //logic to determine whether the selected answer is correct.
+    setIsAnswerCorrect(choiceValue === elementCorrectAnswer);
+  };
+
+  //isCorrect switch
+  const renderQuizResult = () => {
+    if (isAnswerCorrect === null) return null; // Don't show feedback before a choice has been made
+
+    if (isAnswerCorrect) {
+      return <p className="text-green-800 font-bold text-xl">Correct!</p>;
+    } else {
+      return <p className="text-red-700 font-bold text-xl">Wrong!</p>;
+    }
   };
 
   if (isLoading)
@@ -229,6 +257,53 @@ function SlidesDisplay() {
                               >
                                 {listItemsComponent}
                               </Splide>
+                            </div>
+                          );
+                        } else if (element.type === "quiz") {
+                          return (
+                            <div
+                              key={element._id}
+                              className="flex flex-col justify-center items-center mb-4"
+                            >
+                              {/* Questions */}
+                              <p className="text-white font-nokia-bold text-2xl">
+                                {element.value.question}
+                              </p>
+                              {/* Choices */}
+                              {element.value.choices && (
+                                <div className="flex flex-col mt-2">
+                                  {element.value.choices.map(
+                                    (choice, choiceIndex) => {
+                                      return (
+                                        <label
+                                          key={`${element._id}-choice-${choiceIndex}`}
+                                          className="inline-flex items-center"
+                                        >
+                                          <input
+                                            type="radio"
+                                            className="w-5 h-5 appearance-none bg-white focus:bg-orange-400 rounded-full transition-all"
+                                            checked={
+                                              selectedChoice === choiceIndex
+                                            }
+                                            onChange={() =>
+                                              handleRadioChange(
+                                                choiceIndex,
+                                                choice.text,
+                                                element.value.correctAnswer
+                                              )
+                                            }
+                                          />
+                                          <span className="text-white font-nokia-bold text-lg ml-2">
+                                            {choice.text}
+                                          </span>
+                                        </label>
+                                      );
+                                    }
+                                  )}
+                                </div>
+                              )}
+                              {/* Correct Answer */}
+                              {renderQuizResult()}
                             </div>
                           );
                         } else {

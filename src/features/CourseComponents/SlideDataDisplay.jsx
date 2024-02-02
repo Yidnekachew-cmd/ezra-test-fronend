@@ -23,7 +23,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
   };
 
   //isCorrect switch
-  const renderQuizFeedback = () => {
+  const renderQuizResult = () => {
     if (isAnswerCorrect === null) return null; // Don't show feedback before a choice has been made
 
     if (isAnswerCorrect) {
@@ -140,7 +140,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                               >
                                 <input
                                   type="radio"
-                                  className="form-radio text-indigo-600"
+                                  className="w-5 h-5 appearance-none bg-white focus:bg-orange-400 rounded-full transition-all"
                                   checked={selectedChoice === choiceIndex}
                                   onChange={() =>
                                     handleRadioChange(choiceIndex, choice.text)
@@ -155,7 +155,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                         </div>
                       )}
                       {/* Correct Answer */}
-                      {renderQuizFeedback()}
+                      {renderQuizResult()}
                     </div>
                   );
                 } else if (element.type === "img") {
