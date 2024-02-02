@@ -4,6 +4,35 @@ import { useSelector } from "react-redux";
 import { selectSlides } from "../../redux/courseSlice";
 
 function AdminCourseDisplay({ selectedSlideIndex }) {
+  //Quiz Related functions
+  //track whether the selected answer is correct or not.
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
+
+  //radio input switch
+  const [selectedChoice, setSelectedChoice] = useState(null);
+  const handleRadioChange = (choiceIndex, choiceValue) => {
+    setSelectedChoice(choiceIndex);
+    //logic to determine whether the selected answer is correct.
+    if (selectedSlide.elements.some((el) => el.type === "quiz")) {
+      const quizElement = selectedSlide.elements.find(
+        (el) => el.type === "quiz"
+      );
+      const isCorrect = choiceValue === quizElement.value.correctAnswer;
+      setIsAnswerCorrect(isCorrect);
+    }
+  };
+
+  //isCorrect switch
+  const renderQuizResult = () => {
+    if (isAnswerCorrect === null) return null; // Don't show feedback before a choice has been made
+
+    if (isAnswerCorrect) {
+      return <p className="text-green-800 font-bold text-xl">Correct!</p>;
+    } else {
+      return <p className="text-red-700 font-bold text-xl">Wrong!</p>;
+    }
+  };
+
   const slides = useSelector((state) =>
     selectSlides(state, selectedSlideIndex.chapter)
   );
@@ -43,9 +72,9 @@ function AdminCourseDisplay({ selectedSlideIndex }) {
         {selectedSlide && selectedSlide.elements && (
           <div className="flex flex-col justify-center flex-grow p-20">
             <ul>
-              {selectedSlide.elements.map((element) => {
+              {selectedSlide.elements.map((element, index) => {
                 let elementComponent = null;
-
+                const uniqueKey = `${element.type}-${index}`;
                 if (element.type === "title") {
                   elementComponent = (
                     <li
@@ -81,6 +110,62 @@ function AdminCourseDisplay({ selectedSlideIndex }) {
                       alt={element.value.name}
                       className="w-[40%] mx-auto"
                     />
+                  );
+                } else if (element.type === "list") {
+                  const listItemsComponent = element.value.map(
+                    (listItem, index) => (
+                      <li
+                        key={`${uniqueKey}-list-${index}`}
+                        className="text-white font-nokia-bold w-[100%] tracking-wide text-lg"
+                      >
+                        {listItem}
+                      </li>
+                    )
+                  );
+
+                  elementComponent = (
+                    <div className="flex flex-col ml-8">
+                      <ul className="list-disc mt-2">{listItemsComponent}</ul>
+                    </div>
+                  );
+                } else if (element.type === "quiz") {
+                  elementComponent = (
+                    <div
+                      key={uniqueKey}
+                      className="flex flex-col justify-center items-center mb-4"
+                    >
+                      {/* Questions */}
+                      <p className="text-white font-nokia-bold text-2xl">
+                        {element.value.question}
+                      </p>
+                      {/* Choices */}
+                      {element.value.choices && (
+                        <div className="flex flex-col mt-2">
+                          {element.value.choices.map((choice, choiceIndex) => {
+                            return (
+                              <label
+                                key={`${uniqueKey}-choice-${choiceIndex}`}
+                                className="inline-flex items-center"
+                              >
+                                <input
+                                  type="radio"
+                                  className="w-5 h-5 appearance-none bg-white focus:bg-orange-400 rounded-full transition-all"
+                                  checked={selectedChoice === choiceIndex}
+                                  onChange={() =>
+                                    handleRadioChange(choiceIndex, choice.text)
+                                  }
+                                />
+                                <span className="text-white font-nokia-bold text-lg ml-2">
+                                  {choice.text}
+                                </span>
+                              </label>
+                            );
+                          })}
+                        </div>
+                      )}
+                      {/* Correct Answer */}
+                      {renderQuizResult()}
+                    </div>
                   );
                 }
 
