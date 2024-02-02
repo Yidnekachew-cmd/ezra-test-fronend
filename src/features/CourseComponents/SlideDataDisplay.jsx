@@ -74,6 +74,9 @@ function SlideDataDisplay({ selectedSlideIndex }) {
         </div>
         {selectedSlide && selectedSlide.elements && (
           <div className="flex flex-col justify-center flex-grow p-20">
+            <h1 className="text-3xl text-[#fff] text-center font-nokia-bold">
+              {selectedSlide.slide}
+            </h1>
             <ul>
               {selectedSlide.elements.map((element, index) => {
                 let elementComponent = null;
@@ -119,7 +122,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   );
 
                   elementComponent = (
-                    <div className="flex flex-col ml-8">
+                    <div className="flex flex-col justify-center items-center ml-8">
                       <ul className="list-disc mt-2">{listItemsComponent}</ul>
                     </div>
                   );
