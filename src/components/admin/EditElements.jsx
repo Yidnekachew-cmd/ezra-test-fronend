@@ -6,6 +6,7 @@ import {
   updateElement,
   deleteElement,
 } from "../../redux/courseSlice";
+import { File, PlusCircle, Trash } from "@phosphor-icons/react";
 
 function EditElements({ chapterIndex, slideIndex }) {
   const dispatch = useDispatch();
@@ -374,7 +375,11 @@ function EditElements({ chapterIndex, slideIndex }) {
               <input
                 id={element.id}
                 placeholder={`Enter ${element.type}`}
-                value={element.value}
+                value={
+                  element.type === "quiz"
+                    ? element.value.question
+                    : element.value
+                }
                 onChange={(e) => handleInputChange(element.id, e.target.value)}
                 className="w-[100%] border-2 border-accent-6 rounded-md text-accent-6 font-bold px-2 py-1"
               />
