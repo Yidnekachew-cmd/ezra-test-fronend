@@ -58,7 +58,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
 
   return (
     <div className="mr-16 h-[80%]  bg-chapter-img-1 bg-no-repeat bg-cover bg-center rounded-lg">
-      <div className="flex flex-col justify-between h-full">
+      <div className="flex flex-col justify-between w-full h-full">
         <div>
           <div className="w-[90%] pt-4 pb-2 flex justify-between mx-auto items-center">
             <h1 className="text-[#fff] text-sm font-Lato-Black">
@@ -73,11 +73,11 @@ function SlideDataDisplay({ selectedSlideIndex }) {
           <hr className="border-accent-5 border-1 w-[90%] mx-auto" />
         </div>
         {selectedSlide && selectedSlide.elements && (
-          <div className="flex flex-col justify-center flex-grow p-20">
+          <div className="flex flex-col justify-center items-center flex-grow p-5 w-full h-full overflow-y-hidden">
             <h1 className="text-3xl text-[#fff] text-center font-nokia-bold">
               {selectedSlide.slide}
             </h1>
-            <ul>
+            <ul className="flex flex-col justify-center items-center w-full h-full overflow-y-auto scrollbar-thin relative">
               {selectedSlide.elements.map((element, index) => {
                 let elementComponent = null;
                 const uniqueKey = `${element.type}-${index}`;
