@@ -58,8 +58,8 @@ function AdminCourseDisplay({ selectedSlideIndex }) {
   }, [selectedSlide]);
 
   return (
-    <div className="mr-16 h-[80%]  bg-chapter-img-1 bg-no-repeat bg-cover bg-center rounded-lg">
-      <div className="flex flex-col justify-between h-full">
+    <div className="mr-16 h-[80%] bg-chapter-img-1 bg-no-repeat bg-cover bg-center rounded-lg">
+      <div className="flex flex-col justify-between w-full h-full">
         <div>
           <div className="w-[90%] pt-4 pb-2 flex justify-between mx-auto items-center">
             <h1 className="text-[#fff] text-sm font-Lato-Black">
@@ -74,8 +74,11 @@ function AdminCourseDisplay({ selectedSlideIndex }) {
           <hr className="border-accent-5 border-1 w-[90%] mx-auto" />
         </div>
         {selectedSlide && selectedSlide.elements && (
-          <div className="flex flex-col justify-center flex-grow p-20">
-            <ul>
+          <div className="flex flex-col justify-center items-center flex-grow p-5 w-full h-full overflow-y-hidden">
+            <h1 className="text-3xl text-[#fff] text-center font-nokia-bold">
+              {selectedSlide.slide}
+            </h1>
+            <ul className="flex flex-col justify-center items-center w-full h-full overflow-y-auto scrollbar-thin relative">
               {selectedSlide.elements.map((element, index) => {
                 let elementComponent = null;
                 const uniqueKey = `${element.type}-${index}`;
@@ -128,7 +131,7 @@ function AdminCourseDisplay({ selectedSlideIndex }) {
                   );
 
                   elementComponent = (
-                    <div className="flex flex-col ml-8">
+                    <div className="flex flex-col justify-center items-center ml-8">
                       <ul className="list-disc mt-2">{listItemsComponent}</ul>
                     </div>
                   );
@@ -203,6 +206,15 @@ function AdminCourseDisplay({ selectedSlideIndex }) {
                 return elementComponent;
               })}
             </ul>
+            <button
+              className="absolute bottom-20 p-1 bg-black opacity-60 rounded-full text-white text-3xl"
+              onClick={() => {
+                const container = document.querySelector(".overflow-y-auto");
+                container.scrollTop += 50; // Adjust the scroll amount as needed
+              }}
+            >
+              ▼
+            </button>
           </div>
         )}
         <div className="mb-4 w-[100%] flex flex-col items-center justify-center">

@@ -147,7 +147,7 @@ function SlidesDisplay() {
           </div>
         </div>
         {/* slides */}
-        <div className=" md:w-[70%] justify-start items-center mx-auto h-[80%]  bg-chapter-img-1 bg-no-repeat bg-cover bg-center rounded-lg">
+        <div className=" md:w-[70%] justify-start items-center mx-auto h-[80%] bg-chapter-img-1 bg-no-repeat bg-cover bg-center rounded-lg">
           <div className="flex flex-col justify-between h-full">
             <div>
               <div className="w-[90%] pt-4 pb-2 flex justify-between mx-auto items-center">
@@ -162,17 +162,18 @@ function SlidesDisplay() {
               </div>
               <hr className="border-accent-5 border-1 w-[90%] mx-auto" />
             </div>
-            <div>
-              {data.map((slides, index) => {
-                if (index === activeIndex) {
-                  return (
-                    <div
-                      key={index}
-                      className="flex flex-col justify-center flex-grow w-[80%] mx-auto"
-                    >
-                      <h1 className="text-3xl text-[#fff] text-center font-nokia-bold">
-                        {slides.slide}
-                      </h1>
+
+            {data.map((slides, index) => {
+              if (index === activeIndex) {
+                return (
+                  <div
+                    key={index}
+                    className="flex flex-col justify-center items-center flex-grow w-[80%] mx-auto h-full overflow-y-hidden"
+                  >
+                    <h1 className="text-3xl text-[#fff] text-center font-nokia-bold">
+                      {slides.slide}
+                    </h1>
+                    <div className="flex flex-col justify-center items-center h-[80%] overflow-y-auto scrollbar-thin">
                       {slides.elements.map((element) => {
                         if (element.type === "title") {
                           return (
@@ -225,7 +226,7 @@ function SlidesDisplay() {
                           return (
                             <div
                               key={element._id}
-                              className="flex flex-col ml-8"
+                              className="flex flex-col justify-center items-center ml-8"
                             >
                               <ul className="list-disc mt-2">
                                 {listItemsComponent}
@@ -311,12 +312,13 @@ function SlidesDisplay() {
                         }
                       })}
                     </div>
-                  );
-                } else {
-                  return null; // Hide the slide if it doesn't match the activeIndex
-                }
-              })}
-            </div>
+                  </div>
+                );
+              } else {
+                return null; // Hide the slide if it doesn't match the activeIndex
+              }
+            })}
+
             <div className="mb-4">
               <hr className="border-accent-5 border-1 w-[90%] mx-auto z-50" />
               <button
