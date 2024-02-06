@@ -9,14 +9,19 @@ const SSLHome = () => {
   console.log(ssl);
 
   return (
-    <div>
+    <div className="h-auto flex flex-row w-[90%] md:w-[80%] mt-12 mx-auto space-y-12 mb-12">
       SSLHome
       {ssl &&
         ssl.map((item, index) => (
-          <div key={index}>
-            <h2>{item.title}</h2>
-            <p>{item.description}</p>
-            {/* ... render other properties as needed */}
+          <div
+            key={index}
+            className="border border-accent-6 p-2 rounded-lg font-nokia-bold w-1/3"
+          >
+            <img src={item.cover} alt="" className="w-48 rounded-md" />
+            <div>
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+            </div>
           </div>
         ))}
     </div>
