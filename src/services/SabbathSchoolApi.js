@@ -9,7 +9,10 @@ export const api = createApi({
     getSSLs: builder.query({
       query: () => "am/quarterlies/index.json",
     }),
+    getSSLOfQuarter: builder.query({
+      query: (path) => `${path}/index.json`,
+    }),
   }),
 });
 
-export const { useGetSSLsQuery } = api;
+export const { useGetSSLsQuery, useGetSSLOfQuarterQuery } = api;

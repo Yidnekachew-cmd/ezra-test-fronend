@@ -16,6 +16,7 @@ const SSLHome = () => {
           <Link
             key={index}
             className="flex bg-white shadow-md rounded-md border border-accent-6"
+            to={item.path}
           >
             <img
               src={item.cover}

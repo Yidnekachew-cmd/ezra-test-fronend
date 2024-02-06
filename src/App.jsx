@@ -18,6 +18,7 @@ import AdminDashboard from "./routes/AdminDashboard";
 import CoursesAvailable from "./features/CourseComponents/CoursesAvailable";
 import ChaptersDisplay from "./features/CourseComponents/ChaptersDisplay";
 import SlidesDisplay from "./features/CourseComponents/SlidesDisplay";
+import SSLQuarter from "./features/SabbathSchoolComponent/SSLQuarter";
 
 function App() {
   const dispatch = useDispatch();
@@ -72,6 +73,7 @@ function App() {
           element={<SlidesDisplay />}
         />
         <Route path="/sabbathSchool" element={<SabbathSchool />} />
+        <Route path="/sabbathSchool/:quarterPath" element={<SSLQuarter />} />
         <Route path="/devotion" element={<Devotion />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/contactUs" element={<ContactUs />} />
