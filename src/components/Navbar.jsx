@@ -6,7 +6,6 @@ const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
 
   const handleclick = () => {
-    console.log("Eyeserahu new teyign");
     logout();
     localStorage.removeItem("user");
     // window.location.reload();
