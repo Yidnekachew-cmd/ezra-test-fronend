@@ -3,12 +3,13 @@ import { useParams, Link } from "react-router-dom";
 import { useGetSSLOfQuarterQuery } from "./../../services/SabbathSchoolApi";
 
 function SSLQuarter() {
-  const { quarterPath } = useParams();
+  const { quarter } = useParams();
+  console.log(quarter);
   const {
     data: lessonDetails,
     error,
     isLoading,
-  } = useGetSSLOfQuarterQuery(quarterPath);
+  } = useGetSSLOfQuarterQuery(quarter);
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   return (
