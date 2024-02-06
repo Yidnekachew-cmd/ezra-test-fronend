@@ -19,6 +19,7 @@ import CoursesAvailable from "./features/CourseComponents/CoursesAvailable";
 import ChaptersDisplay from "./features/CourseComponents/ChaptersDisplay";
 import SlidesDisplay from "./features/CourseComponents/SlidesDisplay";
 import SSLQuarter from "./features/SabbathSchoolComponent/SSLQuarter";
+import SSLDay from "./features/SabbathSchoolComponent/SSLDay";
 
 function App() {
   const dispatch = useDispatch();
@@ -73,10 +74,8 @@ function App() {
           element={<SlidesDisplay />}
         />
         <Route path="/sabbathSchool" element={<SabbathSchool />} />
-        <Route
-          path="/sabbathSchool/am/quarterlies/2023-04"
-          element={<SSLQuarter />}
-        />
+        <Route path="/sabbathSchool/:quarter" element={<SSLQuarter />} />
+        <Route path="/sabbathSchool/:quarter/lessons/02" element={<SSLDay />} />
         <Route path="/devotion" element={<Devotion />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/contactUs" element={<ContactUs />} />

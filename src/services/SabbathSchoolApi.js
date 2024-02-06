@@ -10,9 +10,17 @@ export const api = createApi({
       query: () => "am/quarterlies/index.json",
     }),
     getSSLOfQuarter: builder.query({
-      query: (path) => `${path}/index.json`,
+      query: (path) => `am/quarterlies/${path}/index.json`,
+    }),
+    getSSLOfDay: builder.query({
+      query: (path, date) => {
+        console.log("Path:", path);
+        console.log("Day:", date);
+        return `am/quarterlies/${path}/lessons/${date}/index.json`;
+      },
     }),
   }),
 });
 
-export const { useGetSSLsQuery, useGetSSLOfQuarterQuery } = api;
+export const { useGetSSLsQuery, useGetSSLOfQuarterQuery, useGetSSLOfDayQuery } =
+  api;
