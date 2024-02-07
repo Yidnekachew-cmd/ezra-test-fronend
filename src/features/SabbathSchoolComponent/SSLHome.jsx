@@ -11,25 +11,26 @@ const SSLHome = () => {
   return (
     <div className="container mx-auto px-4 w-[90%] md:w-[80%] py-12 font-nokia-bold ">
       <h1 className="text-3xl mb-6">Sabbath School Lessons</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {ssl.map((item, index) => (
           <Link
             key={index}
-            className="flex bg-white shadow-md rounded-md border border-accent-6"
+            className="flex bg-white shadow-md rounded-md border border-accent-6 p-1 gap-2"
             to={item.id}
           >
             <img
               src={item.cover}
               alt={item.title}
-              className="rounded-l-md h-42 w-1/2"
+              className="rounded-md h-42 w-1/2"
             />
-            <div className="flex flex-col justify-between p-4">
-              <div className="flex flex-col h-48">
-                <h2 className="text-xl mb-2 whitespace-normal">{item.title}</h2>
-                <p className="text-gray-600 overflow-hidden overflow-ellipsis">
-                  {item.description}
-                </p>
-              </div>
+            <div className="flex flex-col gap-1" style={{ maxHeight: "300px" }}>
+              {" "}
+              {/* 168px is 4 lines of text with line height of 42px */}
+              <p className="text-accent-6 text-sm">{item.human_date}</p>
+              <h2 className="text-2xl text-secondary-6 mb-2 ">{item.title}</h2>
+              <p className="text-secondary-5 text-sm overflow-hidden overflow-ellipsis">
+                {item.description}
+              </p>
             </div>
           </Link>
         ))}
