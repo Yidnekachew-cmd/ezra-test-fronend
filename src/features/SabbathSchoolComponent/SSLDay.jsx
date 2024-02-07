@@ -1,9 +1,11 @@
 import { useParams, Link, Outlet, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import {
   useGetSSLOfDayQuery,
   useGetSSLOfQuarterQuery,
 } from "./../../services/SabbathSchoolApi";
 import DateConverter from "./DateConverter";
+
 function SSLDay() {
   const { quarter, id } = useParams();
   const {
@@ -15,6 +17,19 @@ function SSLDay() {
   const daysOfWeek = ["ቅዳሜ", "እሁድ", "ሰኞ", "ማክሰኞ", "ረቡዕ", "ሐሙስ", "አርብ"];
   let navigate = useNavigate();
   const goBack = () => navigate(-1);
+  const [selectedDayId, setSelectedDayId] = useState(null);
+
+  useEffect(() => {
+    if (lessonDetails?.days?.length && !selectedDayId) {
+      const firstDayId = lessonDetails.days[0].id;
+      setSelectedDayId(firstDayId);
+      navigate(
+        `/sabbathSchool/${quarter}/lessons/${id}/days/${firstDayId}/read`,
+        { replace: true }
+      );
+    }
+  }, [lessonDetails, quarter, id, selectedDayId, navigate]);
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -45,8 +60,11 @@ function SSLDay() {
             {lessonDetails.days.map((item, index) => (
               <Link
                 key={index}
-                className="flex flex-col text-right"
+                className={`flex flex-col text-right ${
+                  item.id === selectedDayId ? "bg-gray-200" : ""
+                }`}
                 to={`/sabbathSchool/${quarter}/lessons/${id}/days/${item.id}/read`}
+                onClick={() => setSelectedDayId(item.id)}
               >
                 <p className="flex flex-row text-secondary-3 text-xs justify-end">
                   {daysOfWeek[index % 7]}፣&nbsp;&nbsp;
@@ -58,7 +76,7 @@ function SSLDay() {
           </div>
         </div>
         <div className="w-4/5">
-          <Outlet />
+          <Outlet selectedDayId={selectedDayId} />
         </div>
       </div>
     </div>
