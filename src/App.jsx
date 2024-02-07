@@ -75,7 +75,10 @@ function App() {
         />
         <Route path="/sabbathSchool" element={<SabbathSchool />} />
         <Route path="/sabbathSchool/:quarter" element={<SSLQuarter />} />
-        <Route path="/sabbathSchool/:quarter/lessons/02" element={<SSLDay />} />
+        <Route
+          path="/sabbathSchool/:quarter/lessons/:id"
+          element={<SSLDay />}
+        />
         <Route path="/devotion" element={<Devotion />} />
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/contactUs" element={<ContactUs />} />

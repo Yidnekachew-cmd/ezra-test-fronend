@@ -21,7 +21,7 @@ function SSLQuarter() {
           <Link
             className="flex flex-col justify-between p-4"
             key={index}
-            to={`/sabbathSchool/${quarter}/lessons/02`}
+            to={`/sabbathSchool/${quarter}/lessons/${item.id}`}
           >
             <div className="flex flex-col h-48">
               <h2 className="text-xl mb-2 whitespace-normal">{item.title}</h2>

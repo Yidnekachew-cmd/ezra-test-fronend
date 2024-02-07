@@ -13,11 +13,8 @@ export const api = createApi({
       query: (path) => `am/quarterlies/${path}/index.json`,
     }),
     getSSLOfDay: builder.query({
-      query: (path, date) => {
-        console.log("Path:", path);
-        console.log("Day:", date);
-        return `am/quarterlies/${path}/lessons/${date}/index.json`;
-      },
+      query: ({ path, id }) =>
+        `am/quarterlies/${path}/lessons/${id}/index.json`,
     }),
   }),
 });
