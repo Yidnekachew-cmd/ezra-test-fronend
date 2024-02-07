@@ -17,14 +17,18 @@ function SSLDay() {
       <h1 className="text-3xl mb-6">Sabbath School Lessons</h1>
       <div className="">
         {lessonDetails.days.map((item, index) => (
-          <div className="flex flex-col justify-between p-4" key={index}>
+          <Link
+            className="flex flex-col justify-between p-4"
+            key={index}
+            to={`/sabbathSchool/${quarter}/lessons/${id}/days/${item.id}/read`}
+          >
             <div className="flex flex-col">
               <h2 className="text-xl mb-2 whitespace-normal">{item.title}</h2>
               <p className="text-gray-600 overflow-hidden overflow-ellipsis">
                 {item.date}
               </p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
