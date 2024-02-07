@@ -35,16 +35,19 @@ function SSLQuarter() {
           </div>
           {lessonDetails.lessons.map((item, index) => (
             <Link
-              className="py-2"
+              className="w-[60%] py-3 border border-secondary-2 hover:bg-secondary-1 rounded-md shadow-md px-4 my-2 flex justify-between items-center gap-4 transition-all"
               key={index}
               to={`/sabbathSchool/${quarter}/lessons/${item.id}`}
             >
-              <div className="flex text-xl gap-2">
-                <p>{index + 1}</p>
-                <h2 className="whitespace-normal">{item.title}</h2>
-                <div className="flex">
-                  <DateConverter gregorianDate={item.start_date} /> -{" "}
-                  <DateConverter gregorianDate={item.end_date} />
+              <div className="flex text-2xl gap-3">
+                <p className="text-4xl text-secondary-3">{index + 1}</p>
+                <div>
+                  <h2 className="whitespace-normal">{item.title}</h2>
+                  <div className="flex text-lg text-secondary-3">
+                    <DateConverter gregorianDate={item.start_date} />
+                    &nbsp;- &nbsp;
+                    <DateConverter gregorianDate={item.end_date} />
+                  </div>
                 </div>
               </div>
             </Link>
