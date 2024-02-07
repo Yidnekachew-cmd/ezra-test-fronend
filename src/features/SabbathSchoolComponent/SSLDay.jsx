@@ -31,7 +31,7 @@ function SSLDay() {
           </div>
         </div>
         <div className="w-2/3">
-          <Outlet /> {/* This will render the child route component */}
+          <Outlet />
         </div>
       </div>
     </div>
