@@ -16,8 +16,16 @@ export const api = createApi({
       query: ({ path, id }) =>
         `am/quarterlies/${path}/lessons/${id}/index.json`,
     }),
+    getSSLOfDayLesson: builder.query({
+      query: ({ path, id, day }) =>
+        `am/quarterlies/${path}/lessons/${id}/days/${day}/read/index.json`,
+    }),
   }),
 });
 
-export const { useGetSSLsQuery, useGetSSLOfQuarterQuery, useGetSSLOfDayQuery } =
-  api;
+export const {
+  useGetSSLsQuery,
+  useGetSSLOfQuarterQuery,
+  useGetSSLOfDayQuery,
+  useGetSSLOfDayLessonQuery,
+} = api;
