@@ -11,6 +11,7 @@ function SSLQuarter() {
   } = useGetSSLOfQuarterQuery(quarter);
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
+
   return (
     <div className="container mx-auto px-4 w-[90%] md:w-[80%] py-12 font-nokia-bold text-secondary-6">
       <h1 className="text-3xl mb-6">Sabbath School Lessons</h1>
@@ -37,7 +38,13 @@ function SSLQuarter() {
             <Link
               className="w-[60%] py-3 border border-secondary-2 hover:bg-secondary-1 rounded-md shadow-md px-4 my-2 flex justify-between items-center gap-4 transition-all"
               key={index}
-              to={`/sabbathSchool/${quarter}/lessons/${item.id}`}
+              to={{
+                pathname: `/sabbathSchool/${quarter}/lessons/${item.id}`,
+                state: {
+                  quarterlyTitle: lessonDetails.quarterly.title,
+                  quarterlyCover: lessonDetails.quarterly.cover,
+                },
+              }}
             >
               <div className="flex text-2xl gap-3">
                 <p className="text-4xl text-secondary-3">{index + 1}</p>

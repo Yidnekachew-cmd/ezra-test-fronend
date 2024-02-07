@@ -1,6 +1,9 @@
-import { useParams, Link, Outlet } from "react-router-dom";
-import { useGetSSLOfDayQuery } from "./../../services/SabbathSchoolApi";
-
+import { useParams, Link, Outlet, useNavigate } from "react-router-dom";
+import {
+  useGetSSLOfDayQuery,
+  useGetSSLOfQuarterQuery,
+} from "./../../services/SabbathSchoolApi";
+import DateConverter from "./DateConverter";
 function SSLDay() {
   const { quarter, id } = useParams();
   const {
@@ -8,21 +11,37 @@ function SSLDay() {
     error,
     isLoading,
   } = useGetSSLOfDayQuery({ path: quarter, id: id });
-
+  const { data: quarterDetails } = useGetSSLOfQuarterQuery(quarter);
+  let navigate = useNavigate();
+  const goBack = () => navigate(-1);
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="container mx-auto px-4 w-[90%] md:w-[80%] py-12 font-nokia-bold">
+    <div className="container mx-auto px-4 w-[90%] md:w-[80%] py-12 font-nokia-bold text-secondary-6">
       <h1 className="text-3xl mb-6">Sabbath School Lessons</h1>
-      <div className="flex">
-        <div className="w-1/3">
-          <h2 className="text-xl mb-4">Days</h2>
+      <div className="flex justify-end">
+        <div className="flex flex-col w-1/5 items-end">
+          <div className="flex flex-col gap-2">
+            <img
+              src={quarterDetails.quarterly.cover}
+              alt={quarterDetails.quarterly.title}
+              className="rounded-md "
+            />
+            <div className="flex text-sm text-secondary-3 justify-end">
+              <DateConverter gregorianDate={lessonDetails.lesson.start_date} />
+              &nbsp;- &nbsp;
+              <DateConverter gregorianDate={lessonDetails.lesson.end_date} />
+            </div>
+          </div>
+          <button className="text-xl my-2" onClick={goBack}>
+            {quarterDetails.quarterly.title}
+          </button>
           <div>
             {lessonDetails.days.map((item, index) => (
               <Link
                 key={index}
-                className="block mb-2 text-blue-600"
+                className="block mb-2 text-blue-600 text-right"
                 to={`/sabbathSchool/${quarter}/lessons/${id}/days/${item.id}/read`}
               >
                 {item.title}
@@ -30,7 +49,7 @@ function SSLDay() {
             ))}
           </div>
         </div>
-        <div className="w-2/3">
+        <div className="w-4/5">
           <Outlet />
         </div>
       </div>
