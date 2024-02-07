@@ -56,7 +56,7 @@ function SSLDay() {
           >
             {quarterDetails.quarterly.title}
           </button>
-          <di className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2">
             {lessonDetails.days.map((item, index) => (
               <Link
                 key={index}
@@ -73,7 +73,7 @@ function SSLDay() {
                 <p className="block mb-2 text-lg">{item.title}</p>
               </Link>
             ))}
-          </di>
+          </div>
         </div>
         <div className="w-4/5 ml-8">
           <Outlet selectedDayId={selectedDayId} />
