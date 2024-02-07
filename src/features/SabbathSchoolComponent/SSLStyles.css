@@ -9,9 +9,9 @@ blockquote p {
     text-indent: 0;
 }
 
-p {
+/* p {
     text-indent: 20px; 
-  }
+  } */
 
 a {
     text-decoration: underline;
@@ -22,7 +22,7 @@ a:hover {
     cursor: pointer;
     transition: ease-in-out 0.3s;
 }
-p em {
+em {
     text-indent: 0;
     margin-top: 20px;
 }
