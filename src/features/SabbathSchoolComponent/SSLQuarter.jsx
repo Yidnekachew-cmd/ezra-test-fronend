@@ -16,11 +16,12 @@ function SSLQuarter() {
     <div className="container mx-auto px-4 w-[90%] md:w-[80%] py-12 font-nokia-bold text-secondary-6">
       <h1 className="text-3xl mb-6">Sabbath School Lessons</h1>
       <div className="flex flex-row gap-4">
-        <div className="w-[20%] h-[10%]">
+        <div className="w-auto">
           <img
             src={lessonDetails.quarterly.cover}
             alt={lessonDetails.quarterly.title}
-            className="rounded-md"
+            className="rounded-md shadow-md"
+            width={600}
           />
           <p className="text-right mt-2">
             {lessonDetails.quarterly.human_date}

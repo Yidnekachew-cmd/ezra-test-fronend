@@ -12,6 +12,7 @@ function SSLDay() {
     isLoading,
   } = useGetSSLOfDayQuery({ path: quarter, id: id });
   const { data: quarterDetails } = useGetSSLOfQuarterQuery(quarter);
+  const daysOfWeek = ["ቅዳሜ", "እሁድ", "ሰኞ", "ማክሰኞ", "ረቡዕ", "ሐሙስ", "አርብ"];
   let navigate = useNavigate();
   const goBack = () => navigate(-1);
   if (isLoading) return <div>Loading...</div>;
@@ -34,17 +35,24 @@ function SSLDay() {
               <DateConverter gregorianDate={lessonDetails.lesson.end_date} />
             </div>
           </div>
-          <button className="text-xl my-2" onClick={goBack}>
+          <button
+            className="text-3xl mb-4 text-right leading-10 hover:text-accent-7 transition-all"
+            onClick={goBack}
+          >
             {quarterDetails.quarterly.title}
           </button>
           <div>
             {lessonDetails.days.map((item, index) => (
               <Link
                 key={index}
-                className="block mb-2 text-blue-600 text-right"
+                className="flex flex-col text-right"
                 to={`/sabbathSchool/${quarter}/lessons/${id}/days/${item.id}/read`}
               >
-                {item.title}
+                <p className="flex flex-row text-secondary-3 text-xs justify-end">
+                  {daysOfWeek[index % 7]}፣&nbsp;&nbsp;
+                  <DateConverter gregorianDate={item.date} />
+                </p>
+                <p className="block mb-2 text-lg">{item.title}</p>
               </Link>
             ))}
           </div>
