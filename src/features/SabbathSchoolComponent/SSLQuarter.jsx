@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useGetSSLOfQuarterQuery } from "./../../services/SabbathSchoolApi";
+import DateConverter from "./DateConverter";
 
 function SSLQuarter() {
   const { quarter } = useParams();
@@ -29,6 +30,7 @@ function SSLQuarter() {
             {lessonDetails.quarterly.title}
           </div>
           <div className="text-lg my-4 leading-tight">
+            {" "}
             {lessonDetails.quarterly.description}
           </div>
           {lessonDetails.lessons.map((item, index) => (
@@ -39,7 +41,11 @@ function SSLQuarter() {
             >
               <div className="flex text-xl gap-2">
                 <p>{index + 1}</p>
-                <h2 className=" whitespace-normal">{item.title}</h2>
+                <h2 className="whitespace-normal">{item.title}</h2>
+                <div className="flex">
+                  <DateConverter gregorianDate={item.start_date} /> -{" "}
+                  <DateConverter gregorianDate={item.end_date} />
+                </div>
               </div>
             </Link>
           ))}
