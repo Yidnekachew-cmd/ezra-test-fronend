@@ -56,12 +56,12 @@ function SSLDay() {
           >
             {quarterDetails.quarterly.title}
           </button>
-          <div>
+          <di className="flex flex-col gap-2">
             {lessonDetails.days.map((item, index) => (
               <Link
                 key={index}
-                className={`flex flex-col text-right ${
-                  item.id === selectedDayId ? "bg-gray-200" : ""
+                className={`flex flex-col text-right px-2 border border-secondary-3 rounded-md ${
+                  item.id === selectedDayId ? "bg-secondary-1" : ""
                 }`}
                 to={`/sabbathSchool/${quarter}/lessons/${id}/days/${item.id}/read`}
                 onClick={() => setSelectedDayId(item.id)}
@@ -73,9 +73,9 @@ function SSLDay() {
                 <p className="block mb-2 text-lg">{item.title}</p>
               </Link>
             ))}
-          </div>
+          </di>
         </div>
-        <div className="w-4/5">
+        <div className="w-4/5 ml-8">
           <Outlet selectedDayId={selectedDayId} />
         </div>
       </div>
