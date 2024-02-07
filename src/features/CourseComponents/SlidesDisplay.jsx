@@ -177,12 +177,12 @@ function SlidesDisplay() {
                       {slides.elements.map((element) => {
                         if (element.type === "title") {
                           return (
-                            <li
+                            <h1
                               key={element._id}
                               className="text-white text-3xl font-nokia-bold pl-20"
                             >
                               {element.value}
-                            </li>
+                            </h1>
                           );
                         } else if (element.type === "sub") {
                           return (
@@ -197,7 +197,7 @@ function SlidesDisplay() {
                           return (
                             <p
                               key={element._id}
-                              className="text-white font-nokia-bold   self-center tracking-wide text-justify text-lg mt-2"
+                              className="text-white font-nokia-bold self-center tracking-wide text-justify text-lg mt-2"
                             >
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{element.value}
                             </p>
