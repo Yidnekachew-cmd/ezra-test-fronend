@@ -84,12 +84,12 @@ function AdminCourseDisplay({ selectedSlideIndex }) {
                 const uniqueKey = `${element.type}-${index}`;
                 if (element.type === "title") {
                   elementComponent = (
-                    <li
+                    <h1
                       key={element.type}
                       className="text-white text-2xl font-nokia-bold text-center"
                     >
                       {element.value}
-                    </li>
+                    </h1>
                   );
                 } else if (element.type === "sub") {
                   elementComponent = (

@@ -84,12 +84,12 @@ function SlideDataDisplay({ selectedSlideIndex }) {
 
                 if (element.type === "title") {
                   elementComponent = (
-                    <li
+                    <h1
                       key={element.type}
                       className="text-white text-3xl font-nokia-bold text-center"
                     >
                       {element.value}
-                    </li>
+                    </h1>
                   );
                 } else if (element.type === "sub") {
                   elementComponent = (
