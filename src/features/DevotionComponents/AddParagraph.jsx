@@ -13,8 +13,6 @@ import {
 
 const AddParagraph = ({ paragraphs, localParagraphs, setLocalParagraphs }) => {
   const dispatch = useDispatch();
-  // const paragraphs = useSelector(selectForm);
-  // console.log(paragraphs.body);
 
   useEffect(() => {
     if (paragraphs) {
