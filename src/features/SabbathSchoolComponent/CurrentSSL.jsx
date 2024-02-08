@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import useCalculateLessonIndex from "./hooks/useCalculateLessonIndex";
+import { Link } from "react-router-dom";
 import {
   useGetSSLOfDayQuery,
   useGetSSLOfQuarterQuery,
@@ -71,10 +72,19 @@ function CurrentSSL() {
               <div className="border border-b-accent-6 my-2" />
             </div>
             <div className="flex flex-col gap-2 items-end">
-              <button className="px-4 py-1 bg-accent-6 text-primary-1 rounded-full text-xs">
+              <Link
+                className="px-4 py-1 bg-accent-6 text-primary-1 rounded-full text-xs hover:bg-accent-7 transition-all"
+                to={{
+                  pathname: `/sabbathSchool/${quarter}/lessons/${week}`,
+                  state: {
+                    quarterlyTitle: quarterDetails.quarterly.title,
+                    quarterlyCover: quarterDetails.quarterly.cover,
+                  },
+                }}
+              >
                 ትምህርቱን ክፈት
-              </button>
-              <button className="px-2 border border-accent-6 text-accent-6 text-xs flex rounded-full items-center gap-2">
+              </Link>
+              <button className="px-2 border border-accent-6 text-accent-6 text-xs flex rounded-full items-center gap-2 hover:border-accent-7 hover:text-accent-7">
                 Watch on YouTube <YoutubeLogo size={24} weight="fill" />
               </button>
             </div>
