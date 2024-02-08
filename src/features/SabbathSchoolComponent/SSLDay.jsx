@@ -81,6 +81,7 @@ function SSLDay() {
                   {daysOfWeek[index % 7]}፣&nbsp;&nbsp;
                   <DateConverter gregorianDate={item.date} />
                 </p>
+
                 <p className="block mb-2 text-lg">{item.title}</p>
               </Link>
             ))}

@@ -24,7 +24,6 @@ const SSLHome = () => {
             />
             <div className="flex flex-col gap-1" style={{ maxHeight: "300px" }}>
               {" "}
-              {/* 168px is 4 lines of text with line height of 42px */}
               <p className="text-accent-6 text-sm">{item.human_date}</p>
               <h2 className="text-2xl text-secondary-6 mb-2 ">{item.title}</h2>
               <p className="text-secondary-5 text-sm overflow-hidden overflow-ellipsis">

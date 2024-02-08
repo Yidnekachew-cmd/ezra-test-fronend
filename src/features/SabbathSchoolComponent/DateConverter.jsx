@@ -4,6 +4,9 @@ import { EthDateTime } from "ethiopian-calendar-date-converter";
 const DateConverter = ({ gregorianDate }) => {
   const [day, month, year] = gregorianDate.split("/").map(Number);
 
+  if (isNaN(day) || isNaN(month) || isNaN(year)) {
+    return <div>Invalid date format: {gregorianDate}</div>;
+  }
   const ethDateTime = EthDateTime.fromEuropeanDate(
     new Date(year, month - 1, day)
   );
