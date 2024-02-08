@@ -41,7 +41,6 @@ function SSLDay() {
 
   return (
     <div className="container mx-auto px-4 w-[90%] md:w-[80%] py-12 font-nokia-bold text-secondary-6">
-      <h1 className="text-3xl mb-6">Sabbath School Lessons</h1>
       <div className="flex justify-end">
         <div className="flex flex-col w-1/5 items-end">
           <div className="flex flex-col gap-2">

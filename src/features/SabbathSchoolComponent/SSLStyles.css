@@ -1,21 +1,21 @@
 
 .wrapper blockquote {
-        border-left: 4px solid #EA9215;
-        padding-left: 10px;
-        margin: 20px;
-      }
+    border-left: 4px solid #EA9215;
+    padding-left: 10px;
+    margin: 20px 0;
+}
     
 .wrapper blockquote p {
         font-size: 22px;
         text-indent: 0;
-    }
+}
     
- .wrapper p {
+.wrapper p {
         text-indent: 20px; 
       }
-      .wrapper a {
+.wrapper a {
         text-decoration: underline;
-    }
+}
     .wrapper a:hover {
         color: #a46712;
         cursor: pointer;
@@ -27,7 +27,15 @@
     
     .wrapper code {
         font-family: "Nokia Pure Headline Bold", "Inter", sans-serif;
-        font-style: italic;
+        
         padding-top: 4em;
-        color: #EA9215;
+        color: #ce8013;
     }
+
+.wrapper p > em {
+    font-size: 40px;
+}
+
+.wrapper strong {
+    font-size: 24px;
+}

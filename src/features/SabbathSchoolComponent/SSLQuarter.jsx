@@ -13,8 +13,7 @@ function SSLQuarter() {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="container mx-auto px-4 w-[90%] md:w-[80%] py-12 font-nokia-bold text-secondary-6">
-      <h1 className="text-3xl mb-6">Sabbath School Lessons</h1>
+    <div className="container mx-auto px-4 w-[90%] md:w-[80%] py-8 font-nokia-bold text-secondary-6">
       <div className="flex flex-row gap-4">
         <div className="w-auto">
           <img
