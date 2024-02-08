@@ -57,7 +57,7 @@ function DisplaySSLLesson() {
             <DateConverter gregorianDate={lessonDetails.date} />
           </p>
           <div className="border-b border-accent-4 w-full mb-2" />
-          <div className="text-4xl text-primary-0">{lessonDetails.title}</div>
+          <div className="text-3xl text-primary-0">{lessonDetails.title}</div>
         </div>
       </div>
 
