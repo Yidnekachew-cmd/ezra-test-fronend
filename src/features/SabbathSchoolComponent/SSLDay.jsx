@@ -5,15 +5,18 @@ import {
   useGetSSLOfQuarterQuery,
 } from "./../../services/SabbathSchoolApi";
 import DateConverter from "./DateConverter";
-
 function SSLDay() {
   const { quarter, id } = useParams();
   const {
     data: lessonDetails,
-    error,
-    isLoading,
+    error: lessonError,
+    isLoading: lessonIsLoading,
   } = useGetSSLOfDayQuery({ path: quarter, id: id });
-  const { data: quarterDetails } = useGetSSLOfQuarterQuery(quarter);
+  const {
+    data: quarterDetails,
+    error: quarterError,
+    isLoading: quarterIsLoading,
+  } = useGetSSLOfQuarterQuery(quarter);
   const daysOfWeek = ["ቅዳሜ", "እሁድ", "ሰኞ", "ማክሰኞ", "ረቡዕ", "ሐሙስ", "አርብ"];
   let navigate = useNavigate();
   const goBack = () => navigate(-1);
@@ -30,25 +33,33 @@ function SSLDay() {
     }
   }, [lessonDetails, quarter, id, selectedDayId, navigate]);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (lessonIsLoading || quarterIsLoading) return <div>Loading...</div>;
+  if (lessonError) return <div>Error: {lessonError.message}</div>;
+  if (quarterError) return <div>Error: {quarterError.message}</div>;
+
+  if (!quarterDetails || !lessonDetails) return <div>Missing data...</div>;
 
   return (
     <div className="container mx-auto px-4 w-[90%] md:w-[80%] py-12 font-nokia-bold text-secondary-6">
-      <h1 className="text-3xl mb-6">Sabbath School Lessons</h1>
       <div className="flex justify-end">
         <div className="flex flex-col w-1/5 items-end">
           <div className="flex flex-col gap-2">
-            <img
-              src={quarterDetails.quarterly.cover}
-              alt={quarterDetails.quarterly.title}
-              className="rounded-md "
-            />
-            <div className="flex text-sm text-secondary-3 justify-end">
-              <DateConverter gregorianDate={lessonDetails.lesson.start_date} />
-              &nbsp;- &nbsp;
-              <DateConverter gregorianDate={lessonDetails.lesson.end_date} />
-            </div>
+            {quarterDetails && quarterDetails.quarterly && (
+              <img
+                src={quarterDetails.quarterly.cover}
+                alt={quarterDetails.quarterly.title}
+                className="rounded-md"
+              />
+            )}
+            {quarterDetails && quarterDetails.quarterly && (
+              <div className="flex text-sm text-secondary-3 justify-end">
+                <DateConverter
+                  gregorianDate={lessonDetails.lesson.start_date}
+                />
+                &nbsp;- &nbsp;
+                <DateConverter gregorianDate={lessonDetails.lesson.end_date} />
+              </div>
+            )}
           </div>
           <button
             className="text-3xl mb-4 text-right leading-10 hover:text-accent-7 transition-all"
@@ -70,6 +81,7 @@ function SSLDay() {
                   {daysOfWeek[index % 7]}፣&nbsp;&nbsp;
                   <DateConverter gregorianDate={item.date} />
                 </p>
+
                 <p className="block mb-2 text-lg">{item.title}</p>
               </Link>
             ))}
