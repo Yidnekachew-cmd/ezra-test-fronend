@@ -9,7 +9,7 @@ const SSLHome = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="container mx-auto px-4 w-[90%] md:w-[80%] py-12 font-nokia-bold ">
+    <div className="">
       <h1 className="text-3xl mb-6">Sabbath School Lessons</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {ssl.map((item, index) => (

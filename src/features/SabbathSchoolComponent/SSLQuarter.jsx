@@ -13,7 +13,7 @@ function SSLQuarter() {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="container mx-auto px-4 w-[90%] md:w-[80%] py-8 font-nokia-bold text-secondary-6">
+    <div className="">
       <button
         className="text-accent-6 border border-accent-6 rounded-full my-2 px-4 py-1 hover:bg-accent-6 hover:text-primary-1 transition-all"
         onClick={() => window.history.back()}

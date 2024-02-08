@@ -35,7 +35,7 @@ function CurrentSSL() {
   if (!quarterDetails || !lessonDetails) return <div>Missing data...</div>;
 
   return (
-    <div className="container mx-auto px-4 w-[90%] md:w-[80%] py-12 font-nokia-bold text-secondary-6">
+    <div className="">
       <div className="flex gap-4 w-full border border-accent-6 p-2 rounded-xl">
         <div
           className="flex rounded-md w-[35%] h-48 text-primary-1 p-4 items-end"
