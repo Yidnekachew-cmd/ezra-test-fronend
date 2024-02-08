@@ -1,5 +1,5 @@
 // DisplaySSLLesson.jsx
-import "./SSLStyles.module.css";
+import "./SSLStyles.css";
 import { useParams } from "react-router-dom";
 import { useGetSSLOfDayLessonQuery } from "./../../services/SabbathSchoolApi";
 import parse from "html-react-parser";
@@ -18,7 +18,7 @@ function DisplaySSLLesson() {
   return (
     <div>
       <div className="text-3xl mb-2 text-accent-6">{lessonDetails.title}</div>
-      <div className="text-secondary-6 text-justify">{html}</div>
+      <div className="text-secondary-6 text-justify wrapper">{html}</div>
     </div>
   );
 }

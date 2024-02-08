@@ -1,0 +1,33 @@
+
+.wrapper blockquote {
+        border-left: 4px solid #EA9215;
+        padding-left: 10px;
+        margin: 20px;
+      }
+    
+.wrapper blockquote p {
+        font-size: 22px;
+        text-indent: 0;
+    }
+    
+ .wrapper p {
+        text-indent: 20px; 
+      }
+      .wrapper a {
+        text-decoration: underline;
+    }
+    .wrapper a:hover {
+        color: #a46712;
+        cursor: pointer;
+        transition: ease-in-out 0.3s;
+    }
+    .wrapper em {
+        margin-top: 20px;
+    }
+    
+    .wrapper code {
+        font-family: "Nokia Pure Headline Bold", "Inter", sans-serif;
+        font-style: italic;
+        padding-top: 4em;
+        color: #EA9215;
+    }

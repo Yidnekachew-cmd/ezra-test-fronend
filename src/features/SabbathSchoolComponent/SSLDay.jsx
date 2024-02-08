@@ -5,7 +5,6 @@ import {
   useGetSSLOfQuarterQuery,
 } from "./../../services/SabbathSchoolApi";
 import DateConverter from "./DateConverter";
-
 function SSLDay() {
   const { quarter, id } = useParams();
   const {
