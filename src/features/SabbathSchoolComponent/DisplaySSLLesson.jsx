@@ -1,5 +1,5 @@
 // DisplaySSLLesson.jsx
-import "./SSLStyles.css";
+import "./SSLStyles.module.css";
 import { useParams } from "react-router-dom";
 import { useGetSSLOfDayLessonQuery } from "./../../services/SabbathSchoolApi";
 import parse from "html-react-parser";

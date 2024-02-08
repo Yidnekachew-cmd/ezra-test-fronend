@@ -1,7 +1,7 @@
 blockquote {
     border-left: 4px solid #EA9215;
     padding-left: 10px;
-    margin: 10px 0;
+    margin: 20px;
   }
 
 blockquote p {
@@ -9,20 +9,25 @@ blockquote p {
     text-indent: 0;
 }
 
-/* p {
+p {
     text-indent: 20px; 
-  } */
+  }
 
 a {
     text-decoration: underline;
-    color: #838B91;
 }
 a:hover {
-    color: #40484f;
+    color: #a46712;
     cursor: pointer;
     transition: ease-in-out 0.3s;
 }
 em {
-    text-indent: 0;
     margin-top: 20px;
+}
+
+code {
+    font-family: "Nokia Pure Headline Bold", "Inter", sans-serif;
+    font-style: italic;
+    padding-top: 4em;
+    color: #EA9215;
 }
