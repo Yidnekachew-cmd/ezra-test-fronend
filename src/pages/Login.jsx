@@ -9,6 +9,7 @@ import { login as loginAction } from "../redux/authSlice";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [login, { isLoading, error }] = useLoginMutation(); // use the hook
   const navigate = useNavigate();
   const dispatch = useDispatch(); // get the dispatch function from Redux
@@ -73,17 +74,27 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <label>Password</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"} // change type based on showPassword state
             className="border rounded-lg border-accent-6  placeholder:text-accent-3 text-xs1 p-2 "
             placeholder="********"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <p className="self-end">Forgot Password?</p>
-          <div className="flex gap-2">
+          <div className="mt-4 flex justify-between gap-2">
+            <div className=" flex gap-2">
+              <label>Show Password</label>
+              <input
+                type="checkbox"
+                className="appearance-none border-2 border-accent-6 rounded-md w-5 h-5 checked:bg-accent-6 checked:border-transparent text-white"
+                checked={showPassword}
+                onChange={(e) => setShowPassword(e.target.checked)} // toggle showPassword state when checkbox is clicked
+              />
+            </div>
+            <p className="self-end">Forgot Password?</p>
+          </div>
+          <div className="flex mt-4 gap-2">
             <input
               type="checkbox"
               className="appearance-none border-2 border-accent-6 rounded-md w-5 h-5 checked:bg-accent-6 checked:border-transparent text-white"

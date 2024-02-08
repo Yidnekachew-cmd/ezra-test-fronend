@@ -13,7 +13,6 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const handleAccountClick = () => {
-    console.log("user details", user);
     setShowAccountModal((prev) => !prev);
   };
 
@@ -110,8 +109,9 @@ const Header = () => {
                   >
                     <FaRegUserCircle />
                     <div className="text-sm font-medium text-white">
-                      {user.firstName}
-                      <div className="text-xs text-white-400">{user.role}</div>
+                      <div className="text-xs text-white-400">
+                        {user.firstName}
+                      </div>
                     </div>
                   </div>
                   {showAccountModal && (
