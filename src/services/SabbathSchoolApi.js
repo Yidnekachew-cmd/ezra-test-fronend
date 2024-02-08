@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const api = createApi({
-  reducerPath: "api",
+export const SSLapi = createApi({
+  reducerPath: "SSLapi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://sabbath-school-stage.adventech.io/api/v2/",
   }),
@@ -28,4 +28,4 @@ export const {
   useGetSSLOfQuarterQuery,
   useGetSSLOfDayQuery,
   useGetSSLOfDayLessonQuery,
-} = api;
+} = SSLapi;
