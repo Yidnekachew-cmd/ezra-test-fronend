@@ -10,7 +10,6 @@ const SSLHome = () => {
 
   return (
     <div className="">
-      <h1 className="text-3xl mb-6">Sabbath School Lessons</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {ssl.map((item, index) => (
           <Link
