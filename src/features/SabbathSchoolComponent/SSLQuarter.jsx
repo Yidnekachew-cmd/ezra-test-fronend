@@ -14,6 +14,12 @@ function SSLQuarter() {
 
   return (
     <div className="container mx-auto px-4 w-[90%] md:w-[80%] py-8 font-nokia-bold text-secondary-6">
+      <button
+        className="text-accent-6 border border-accent-6 rounded-full my-2 px-4 py-1 hover:bg-accent-6 hover:text-primary-1 transition-all"
+        onClick={() => window.history.back()}
+      >
+        All Sabbath School Lessons
+      </button>
       <div className="flex flex-row gap-4">
         <div className="w-auto">
           <img
