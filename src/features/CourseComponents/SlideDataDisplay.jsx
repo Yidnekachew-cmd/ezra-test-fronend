@@ -2,12 +2,39 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { selectSlides } from "../../redux/courseSlice";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
+import "@splidejs/react-splide/css/sea-green";
+import "@splidejs/react-splide/css/core";
 
 function SlideDataDisplay({ selectedSlideIndex }) {
+  //Quiz Related functions
+  //track whether the selected answer is correct or not.
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
+
   //radio input switch
   const [selectedChoice, setSelectedChoice] = useState(null);
-  const handleRadioChange = (choiceIndex) => {
+  const handleRadioChange = (choiceIndex, choiceValue) => {
     setSelectedChoice(choiceIndex);
+    //logic to determine whether the selected answer is correct.
+    if (selectedSlide.elements.some((el) => el.type === "quiz")) {
+      const quizElement = selectedSlide.elements.find(
+        (el) => el.type === "quiz"
+      );
+      const isCorrect = choiceValue === quizElement.value.correctAnswer;
+      setIsAnswerCorrect(isCorrect);
+    }
+  };
+
+  //isCorrect switch
+  const renderQuizResult = () => {
+    if (isAnswerCorrect === null) return null; // Don't show feedback before a choice has been made
+
+    if (isAnswerCorrect) {
+      return <p className="text-green-800 font-bold text-xl">Correct!</p>;
+    } else {
+      return <p className="text-red-700 font-bold text-xl">Wrong!</p>;
+    }
   };
 
   const slides = useSelector((state) =>
@@ -31,7 +58,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
 
   return (
     <div className="mr-16 h-[80%]  bg-chapter-img-1 bg-no-repeat bg-cover bg-center rounded-lg">
-      <div className="flex flex-col justify-between h-full">
+      <div className="flex flex-col justify-between w-full h-full">
         <div>
           <div className="w-[90%] pt-4 pb-2 flex justify-between mx-auto items-center">
             <h1 className="text-[#fff] text-sm font-Lato-Black">
@@ -46,20 +73,23 @@ function SlideDataDisplay({ selectedSlideIndex }) {
           <hr className="border-accent-5 border-1 w-[90%] mx-auto" />
         </div>
         {selectedSlide && selectedSlide.elements && (
-          <div className="flex flex-col justify-center flex-grow p-20">
-            <ul>
+          <div className="flex flex-col justify-center items-center flex-grow p-5 w-full h-full overflow-y-hidden">
+            <h1 className="text-3xl text-[#fff] text-center font-nokia-bold">
+              {selectedSlide.slide}
+            </h1>
+            <ul className="flex flex-col justify-center items-center w-full h-full overflow-y-auto scrollbar-thin relative">
               {selectedSlide.elements.map((element, index) => {
                 let elementComponent = null;
                 const uniqueKey = `${element.type}-${index}`;
 
                 if (element.type === "title") {
                   elementComponent = (
-                    <li
+                    <h1
                       key={element.type}
                       className="text-white text-3xl font-nokia-bold text-center"
                     >
                       {element.value}
-                    </li>
+                    </h1>
                   );
                 } else if (element.type === "sub") {
                   elementComponent = (
@@ -92,7 +122,7 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                   );
 
                   elementComponent = (
-                    <div className="flex flex-col ml-8">
+                    <div className="flex flex-col justify-center items-center ml-8">
                       <ul className="list-disc mt-2">{listItemsComponent}</ul>
                     </div>
                   );
@@ -102,10 +132,11 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                       key={uniqueKey}
                       className="flex flex-col justify-center items-center mb-4"
                     >
+                      {/* Questions */}
                       <p className="text-white font-nokia-bold text-2xl">
                         {element.value.question}
                       </p>
-
+                      {/* Choices */}
                       {element.value.choices && (
                         <div className="flex flex-col mt-2">
                           {element.value.choices.map((choice, choiceIndex) => {
@@ -116,10 +147,10 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                               >
                                 <input
                                   type="radio"
-                                  className="form-radio text-indigo-600"
+                                  className="w-5 h-5 appearance-none bg-white focus:bg-orange-400 rounded-full transition-all"
                                   checked={selectedChoice === choiceIndex}
                                   onChange={() =>
-                                    handleRadioChange(choiceIndex)
+                                    handleRadioChange(choiceIndex, choice.text)
                                   }
                                 />
                                 <span className="text-white font-nokia-bold text-lg ml-2">
@@ -130,6 +161,35 @@ function SlideDataDisplay({ selectedSlideIndex }) {
                           })}
                         </div>
                       )}
+                      {/* Correct Answer */}
+                      {renderQuizResult()}
+                    </div>
+                  );
+                } else if (element.type === "slide") {
+                  const listItemsComponent = element.value.map(
+                    (listItem, index) => (
+                      <SplideSlide
+                        key={index}
+                        className="flex justify-center items-center text-white font-nokia-bold w-full tracking-wide text-left text-lg px-8"
+                      >
+                        {listItem}
+                      </SplideSlide>
+                    )
+                  );
+
+                  return (
+                    <div
+                      key={element._id}
+                      className="flex flex-col w-full ml-8"
+                    >
+                      <Splide
+                        options={{
+                          gap: "1rem",
+                        }}
+                        className="w-full p-8 rounded-md list-disc mt-2"
+                      >
+                        {listItemsComponent}
+                      </Splide>
                     </div>
                   );
                 } else if (element.type === "img") {

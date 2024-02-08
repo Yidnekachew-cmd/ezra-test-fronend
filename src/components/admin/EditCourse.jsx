@@ -83,7 +83,7 @@ function EditCourse() {
       })
       .then((res) => {
         console.log("Course updated: ", res.data);
-        navigate("/admin/course");
+        navigate("/admin/course/edit");
       })
       .catch((err) => {
         console.error("Error updating course: ", err);
@@ -103,7 +103,7 @@ function EditCourse() {
         <div className="flex justify-center items-center my-auto">
           <button className="font-nokia-bold text-accent-6 flex flex-row gap-2 hover:text-accent-7 transition-all pr-3 border-r border-accent-6">
             <Link
-              to="/admin/course"
+              to="/admin/course/edit"
               className="flex flex-row gap-2 items-center justify-center mt-3"
             >
               <ArrowCircleLeft weight="fill" size={24} />

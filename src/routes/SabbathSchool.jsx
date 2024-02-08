@@ -18,7 +18,7 @@ const SabbathSchool = () => {
     // </div>
     <>
       <SSLHome />
-      <CreateSSL />
+      {/* <CreateSSL /> */}
     </>
   );
 };

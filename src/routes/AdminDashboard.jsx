@@ -21,13 +21,13 @@ const AdminDashboard = () => {
         <Routes>
           <Route path="/" element={<div>Admin Home</div>} />
           <Route path="courses" element={<Courses />} />
-          <Route path="courses/create/add" element={<CreateCourse />} />
+          <Route path="courses/create" element={<CreateCourse />} />
           <Route path="sabbathSchool" element={<SabbathSchool />} />
           <Route path="devotion" element={<Devotion />} />
           <Route path="devotion/create" element={<CreateDevotion />} />
           <Route path="devotion/manage" element={<ManageDevotion />} />
           <Route path="courses/create/chapters" element={<AdminChapter />} />
-          <Route path="course" element={<ManageCourse />} />
+          <Route path="course/edit" element={<ManageCourse />} />
           <Route path="edit/course/:id" element={<EditCourseFirst />} />
           <Route path="edit/course/:id/chapters" element={<EditCourse />} />
         </Routes>

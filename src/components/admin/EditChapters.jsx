@@ -64,7 +64,7 @@ function EditChapters() {
 
   return (
     <div className="flex justify-between h-screen w-full bg-[#F1F1F1] text-secondary-6 font-nokia-bold">
-      <div className="bg-primary-1 w-[30%] p-6">
+      <div className="bg-primary-1 w-[30%] h-screen overflow-auto p-6">
         <button
           className="flex justify-center items-center text-white bg-accent-6 hover:bg-accent-6 rounded-3xl mb-4 p-2"
           onClick={addChapterHandler}
