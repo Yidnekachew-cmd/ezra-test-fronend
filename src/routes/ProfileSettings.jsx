@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useUpdateUserMutation } from "@/redux/api-slices/apiSlice";
+import { updateUser } from "@/redux/authSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
@@ -16,7 +17,7 @@ const ProfileSettings = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const [updateUser] = useUpdateUserMutation();
+  const [updateUserMutation] = useUpdateUserMutation();
 
   // Effect to set the form fields with current user details when they are available
   useEffect(() => {
@@ -42,7 +43,7 @@ const ProfileSettings = () => {
       email !== currentUser.email ||
       password !== currentUser.password
     ) {
-      updateUser({ firstName, lastName, email, password })
+      updateUserMutation({ firstName, lastName, email, password })
         .unwrap()
         .then((updatedUser) => {
           // Dispatch an action to update the user in the store, if necessary
