@@ -10,16 +10,23 @@ const UserProfile = () => {
   return (
     <div className="bg-gray-100 container mx-auto p-4 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full">
-        <h1 className="text-2xl font-bold underline text-center mb-4">
-          My Profile
-        </h1>
+        <h1 className="text-2xl font-bold text-center mb-4">My Profile</h1>
+
+        {/* User Avatar and Email */}
+        <div className="flex flex-col items-center mb-4">
+          <img
+            src="/assets/avatar.JPG" // Will be Replaced with the actual avatar URL from the backend later
+            alt="User Avatar"
+            className="rounded-full w-24 h-24"
+          />
+          <span>{user.email}</span>
+        </div>
+
         <div className="space-y-5">
           {/* User Info */}
           <div className="flex items-center space-x-2 mb-4">
             <div className="font-bold">Name:</div>
-            <div>
-              {user.firstName} {user.lastName}
-            </div>
+            <div>{user.firstName}</div>
           </div>
 
           {/* Achievements */}
@@ -70,7 +77,7 @@ const UserProfile = () => {
               // Handle contact support action
               console.log("Contact support clicked");
             }}
-            className="ml-4 bg-accent-6 text-white px-3 py-1 rounded hover:bg-blue-600"
+            className="ml-4 bg-accent-6 text-white px-3 py-1 rounded hover:bg-accent-4 hover:text-accent-7"
           >
             Contact support
           </button>
