@@ -37,7 +37,7 @@ export const apiSlice = createApi({
     }),
     updateUser: builder.mutation({
       query: ({ firstName, lastName, email, password }) => ({
-        url: `/profile`,
+        url: `/users/profile`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
