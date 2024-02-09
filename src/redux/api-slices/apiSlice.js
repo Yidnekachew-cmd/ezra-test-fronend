@@ -35,6 +35,16 @@ export const apiSlice = createApi({
         body: JSON.stringify({ firstName, lastName, email, password }),
       }),
     }),
+    updateUser: builder.mutation({
+      query: ({ userId, firstName, lastName, email, password }) => ({
+        url: `/users/${userId}`,
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ firstName, lastName, email, password }),
+      }),
+    }),
     getCourses: builder.query({
       query: () => "course/getall",
     }),
