@@ -111,7 +111,7 @@ const Header = () => {
                     <FaRegUserCircle />
                     <div className="text-sm font-medium text-white">
                       <div className="text-xs text-white-400">
-                        {user.firstName}
+                        {user.lastName}
                       </div>
                     </div>
                   </div>
