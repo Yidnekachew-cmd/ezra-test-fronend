@@ -13,6 +13,7 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const handleAccountClick = () => {
+    console.log(user);
     setShowAccountModal((prev) => !prev);
   };
 

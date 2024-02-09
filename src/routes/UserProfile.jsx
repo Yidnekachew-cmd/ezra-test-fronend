@@ -66,7 +66,7 @@ const UserProfile = () => {
 
           {/* Account Settings */}
           <h2 className="py-2 text-xl font-bold text-accent-6 transform transition duration-500 hover:scale-110">
-            <a href="#account-settings">Account Settings</a>
+            <a href="profile/settings">Account Settings</a>
           </h2>
         </div>
 

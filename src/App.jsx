@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./routes/Home";
 import SabbathSchool from "./routes/SabbathSchool";
 import UserProfile from "./routes/UserProfile";
+import ProfileSettings from "./routes/ProfileSettings";
 import Devotion from "./routes/Devotion";
 import AboutUs from "./routes/AboutUs";
 import ContactUs from "./routes/ContactUs";
@@ -101,6 +102,14 @@ function App() {
           element={
             <PrivateUserRoute>
               <UserProfile />
+            </PrivateUserRoute>
+          }
+        />
+        <Route
+          path="/profile/settings"
+          element={
+            <PrivateUserRoute>
+              <ProfileSettings />
             </PrivateUserRoute>
           }
         />
