@@ -100,6 +100,7 @@ export const apiSlice = createApi({
 export const {
   useSignupMutation,
   useLoginMutation,
+  useUpdateUserMutation,
   useGetCoursesQuery,
   useGetCourseByIdQuery,
   useGetDevotionsQuery,
