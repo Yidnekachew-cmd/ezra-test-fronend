@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./routes/Home";
 import SabbathSchool from "./routes/SabbathSchool";
+import UserProfile from "./routes/UserProfile";
 import Devotion from "./routes/Devotion";
 import AboutUs from "./routes/AboutUs";
 import ContactUs from "./routes/ContactUs";
@@ -54,6 +55,18 @@ function App() {
     children: PropTypes.node.isRequired,
   };
 
+  const PrivateUserRoute = ({ children }) => {
+    if (user) {
+      return children;
+    } else {
+      return <Navigate to="/login" replace={true} />;
+    }
+  };
+
+  PrivateUserRoute.propTypes = {
+    children: PropTypes.node.isRequired,
+  };
+
   // Public Route (redirect if logged in)
   const PublicRoute = ({ children }) => {
     return !user ? children : <Navigate to="/" replace={true} />;
@@ -83,6 +96,14 @@ function App() {
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/courses" element={<CoursesAvailable />} />
+        <Route
+          path="/profile"
+          element={
+            <PrivateUserRoute>
+              <UserProfile />
+            </PrivateUserRoute>
+          }
+        />
 
         {/* Protected Routes */}
         <Route
