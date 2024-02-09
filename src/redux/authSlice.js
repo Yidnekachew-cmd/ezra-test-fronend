@@ -50,6 +50,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { login, signup, logout, setAuthReady } = authSlice.actions; // Export the signup action
+export const { login, signup, updateUser, logout, setAuthReady } =
+  authSlice.actions; // Export the signup action
 
 export default authSlice.reducer;
