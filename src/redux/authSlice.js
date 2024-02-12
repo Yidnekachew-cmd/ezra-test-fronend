@@ -5,6 +5,7 @@ const initialState = {
   user: null,
   role: null,
   firstName: null,
+  lastName: null,
   token: null,
   isAuthReady: false,
 };
@@ -17,6 +18,7 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.role = action.payload.role;
       state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
       state.token = action.payload.token;
 
       // Store the token in localStorage
@@ -27,12 +29,21 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.role = action.payload.role;
       state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
+      state.token = action.payload.token;
+    },
+    updateUser: (state, action) => {
+      state.user = action.payload;
+      state.role = action.payload.role;
+      state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
       state.token = action.payload.token;
     },
     logout: (state) => {
       state.user = null;
       state.role = null;
       state.firstName = null;
+      state.lastName = null;
       state.token = null;
 
       // Remove the token from localStorage
@@ -44,6 +55,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { login, signup, logout, setAuthReady } = authSlice.actions; // Export the signup action
+export const { login, signup, updateUser, logout, setAuthReady } =
+  authSlice.actions; // Export the signup action
 
 export default authSlice.reducer;

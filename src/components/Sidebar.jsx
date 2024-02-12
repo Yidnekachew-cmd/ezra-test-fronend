@@ -118,7 +118,7 @@ const Sidebar = () => {
             <ul className="pl-4 mt-2 py-2">
               <li
                 className="cursor-pointer hover:text-gray-300 mb-2"
-                onClick={() => handleSubItemClick("")}
+                onClick={() => handleSubItemClick("/profile")}
               >
                 Profile Page
               </li>
@@ -135,7 +135,7 @@ const Sidebar = () => {
             <ul className="pl-4 mt-2 py-2">
               <li
                 className="cursor-pointer hover:text-gray-300 mb-2"
-                onClick={() => handleSubItemClick("")}
+                onClick={() => handleSubItemClick("/feedback")}
               >
                 Give us Feedback
               </li>
