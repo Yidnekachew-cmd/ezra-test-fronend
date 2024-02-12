@@ -78,7 +78,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter b>
+    <BrowserRouter>
       <Header />
       <Routes>
         {/* Public Routes */}

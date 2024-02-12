@@ -1,7 +1,5 @@
 const NotMatch = () => {
-  return (
-    <div>NotMatch</div>
-  )
-}
+  return <div>NotMatch</div>;
+};
 
-export default NotMatch
+export default NotMatch;
