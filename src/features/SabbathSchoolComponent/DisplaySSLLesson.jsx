@@ -13,7 +13,7 @@ import DateConverter from "./DateConverter";
 function DisplaySSLLesson() {
   const { quarter, id, day, selectedDayId } = useParams();
   const [backgroundImage, setBackgroundImage] = useState("");
-  const daysOfWeek = ["ቅዳሜ", "እሁድ", "ሰኞ", "ማክሰኞ", "ረቡዕ", "ሐሙስ", "አርብ"];
+  const daysOfWeek = ["አርብ", "ቅዳሜ", "እሁድ", "ሰኞ", "ማክሰኞ", "ረቡዕ", "ሐሙስ"];
   const {
     data: lessonDetails,
     error,
@@ -53,7 +53,7 @@ function DisplaySSLLesson() {
         </div>
         <div className="flex flex-col">
           <p className="flex flex-row text-primary-5 text-lg">
-            {daysOfWeek[(day % 7) - 1]}፣&nbsp;&nbsp;
+            {daysOfWeek[day % 7]}፣&nbsp;&nbsp;
             <DateConverter gregorianDate={lessonDetails.date} />
           </p>
           <div className="border-b border-accent-4 w-full mb-2" />
