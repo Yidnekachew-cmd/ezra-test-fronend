@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   ArrowLeft,
@@ -8,14 +8,82 @@ import {
   CalendarCheck,
   ChatCircle,
   Cross,
+  User,
   UserCircle,
 } from "@phosphor-icons/react";
 import { Graph } from "@phosphor-icons/react/dist/ssr";
 const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState("");
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const [activeMenu, setActiveMenu] = useState("");
 
+  const isActive = (path) => {
+    return location.pathname.includes(path);
+  };
+
+  const menuItems = [
+    {
+      label: "Analytics",
+      icon: Graph,
+      subItems: [
+        { label: "App Usage", path: "/admin/analytics/usage" },
+        { label: "Performance Dashboard", path: "/admin/analytics/dashboard" },
+      ],
+    },
+    {
+      label: "Courses",
+      icon: BookOpen,
+      subItems: [
+        { label: "Create Course", path: "/admin/courses/create" },
+        { label: "Manage Courses", path: "/admin/course/edit" },
+      ],
+    },
+    {
+      label: "Sabbath School",
+      icon: Cross,
+      subItems: [{ label: "SSL Section", path: "/admin/sabbathSchool" }],
+    },
+    {
+      label: "Devotion",
+      icon: CalendarCheck,
+      subItems: [
+        { label: "Create Devotion", path: "/admin/devotion/create" },
+        { label: "Manage Devotion", path: "/admin/devotion/manage" },
+      ],
+    },
+    {
+      label: "Users",
+      icon: UserCircle,
+      subItems: [
+        { label: "Create User", path: "/admin/users/create" },
+        { label: "Manage Users", path: "/admin/users/manage" },
+      ],
+    },
+    {
+      label: "Feedback Center",
+      icon: ChatCircle,
+      subItems: [{ label: "Feedback", path: "/admin/feedback" }],
+    },
+  ];
+  const SidebarItem = ({ icon: Icon, label, active, children, onClick }) => {
+    return (
+      <div
+        className={`px-4 py-5 cursor-pointer hover:bg-accent-6 ${
+          active ? "bg-accent-6" : ""
+        }`}
+        onClick={onClick}
+      >
+        <div className={`flex ${!isCollapsed ? "gap-2" : ""}`}>
+          <Icon className="text-primary-1" size={24} weight="fill" />
+          {!isCollapsed && <span>{label}</span>}
+        </div>
+        {children}
+      </div>
+    );
+  };
   const SidebarMenu = ({ menuName, children, openMenu, handleMenuClick }) => (
     <div
       className={`px-2 cursor-pointer hover:bg-accent-6 ${
@@ -23,17 +91,17 @@ const Sidebar = () => {
       }`}
       onClick={() => handleMenuClick(menuName)}
     >
-      {/* Show icon and text when not collapsed */}
-      {!isCollapsed && (
-        <div className="flex gap-2">
-          {children}
-          <span>{menuName}</span>
-        </div>
-      )}
-      {/* Show only icon when collapsed */}
-      {isCollapsed && children}
+      {children}
     </div>
   );
+
+  SidebarItem.propTypes = {
+    icon: PropTypes.elementType.isRequired,
+    label: PropTypes.string.isRequired,
+    active: PropTypes.bool.isRequired,
+    children: PropTypes.node,
+    onClick: PropTypes.func.isRequired,
+  };
 
   SidebarMenu.propTypes = {
     menuName: PropTypes.string.isRequired,
@@ -42,17 +110,25 @@ const Sidebar = () => {
     handleMenuClick: PropTypes.func.isRequired,
   };
 
-  const handleMenuClick = (menuName) => {
-    setOpenMenu((prevMenu) => (prevMenu === menuName ? "" : menuName));
+  const handleItemClick = (item, event) => {
+    if (item.subItems.length === 1) {
+      // Navigate directly if there's only one subItem
+      navigate(item.subItems[0].path);
+    } else {
+      // Toggle active menu otherwise
+      setActiveMenu(activeMenu !== item.label ? item.label : "");
+      event.stopPropagation(); // Prevent Sidebar from closing on clicking
+    }
   };
 
-  const handleSubItemClick = (subItem) => {
-    navigate(subItem); // Redirect to the selected sub-item's route
+  // This function is now only responsible for sub-item navigation.
+  const handleSubItemClick = (path, event) => {
+    event.stopPropagation(); // Prevents triggering the parent's onClick event.
+    navigate(path);
   };
-
   return (
     <div
-      className={`flex flex-col text-white bg-accent-8 h-full ${
+      className={`flex flex-col text-white bg-accent-8 h-full pt-12 ${
         isCollapsed ? "w-16" : "w-64"
       }`}
       style={{
@@ -62,7 +138,6 @@ const Sidebar = () => {
     >
       <div className="font-Lato-Bold relative">
         <h1 className="text-center py-4">Dashboard</h1>
-        <hr className="w-[100]" />
         <div
           className="absolute top-2 right-4 transform translate-x-full"
           onClick={() => setIsCollapsed(!isCollapsed)}
@@ -81,167 +156,41 @@ const Sidebar = () => {
             />
           )}
         </div>
-        <div
-          className="px-4 py-5 cursor-pointer hover:bg-accent-6"
-          onClick={() => handleMenuClick("analytics")}
-        >
-          <SidebarMenu
-            menuName="Analytics"
-            openMenu={openMenu}
-            handleMenuClick={handleMenuClick}
+        {menuItems.map((item) => (
+          <SidebarItem
+            key={item.label}
+            icon={item.icon}
+            label={item.label}
+            active={isActive(item.label.toLowerCase())}
+            onClick={(event) => {
+              if (isCollapsed) {
+                // When collapsed, navigate to the path of the first subitem
+                navigate(item.subItems[[0]].path);
+              } else {
+                // When not collapsed, handle the item click normally
+                handleItemClick(item, event);
+              }
+            }}
           >
-            <Graph className="text-primary-1" size={24} />
-          </SidebarMenu>
-          {openMenu === "analytics" && (
-            <ul className="pl-4 mt-2 py-2">
-              <li
-                className="cursor-pointer hover:text-gray-300 mb-2"
-                onClick={() => handleSubItemClick("")}
-              >
-                App Usage
-              </li>
-              <li
-                className="cursor-pointer hover:text-gray-300 mb-2"
-                onClick={() => handleSubItemClick("")}
-              >
-                Performace Dashboard
-              </li>
-              {/* Add more sub-items as needed */}
-            </ul>
-          )}
-        </div>
-        <hr className="w-[100]" />
-        <div
-          className="px-4 py-5 cursor-pointer hover:bg-accent-6"
-          onClick={() => handleMenuClick("courses")}
-        >
-          <SidebarMenu
-            menuName="Courses"
-            openMenu={openMenu}
-            handleMenuClick={handleMenuClick}
-          >
-            <BookOpen className="text-primary-1" weight="fill" size={24} />
-          </SidebarMenu>
-          {openMenu === "courses" && (
-            <ul className="pl-4 mt-2 py-2">
-              <li
-                className="cursor-pointer hover:text-gray-300"
-                onClick={() => handleSubItemClick("/admin/courses/create")}
-              >
-                Create Course
-              </li>
-              <li
-                className="cursor-pointer hover:text-gray-300"
-                onClick={() => handleSubItemClick("/admin/course/edit")}
-              >
-                Manage Courses
-              </li>
-              {/* Add more sub-items as needed */}
-            </ul>
-          )}
-        </div>
-        <hr />
-        <div
-          className="px-4 py-5 cursor-pointer  hover:bg-accent-6"
-          onClick={() => handleMenuClick("sabbathSchool")}
-        >
-          <SidebarMenu
-            menuName="Sabbath School"
-            openMenu={openMenu}
-            handleMenuClick={handleMenuClick}
-          >
-            <Cross className="text-primary-1" weight="fill" size={24} />
-          </SidebarMenu>
-          {openMenu === "sabbathSchool" && (
-            <ul className="pl-4 mt-2 py-2">
-              <li
-                className="cursor-pointer hover:text-gray-300 mb-2"
-                onClick={() => handleSubItemClick("/admin/sabbathSchool")}
-              >
-                Create Sabbath School
-              </li>
-              {/* Add more sub-items as needed */}
-            </ul>
-          )}
-        </div>
-        <hr />
-        <div
-          className="px-4 py-5 cursor-pointer  hover:bg-accent-6"
-          onClick={() => handleMenuClick("devotion")}
-        >
-          <SidebarMenu
-            menuName="Daily Devotional"
-            openMenu={openMenu}
-            handleMenuClick={handleMenuClick}
-          >
-            <CalendarCheck className="text-primary-1" weight="fill" size={24} />
-          </SidebarMenu>
-          {openMenu === "devotion" && (
-            <ul className="pl-4 mt-2 py-2">
-              <li
-                className="cursor-pointer hover:text-gray-300 mb-2"
-                onClick={() => handleSubItemClick("/admin/devotion/create")}
-              >
-                Add Devotion
-              </li>
-
-              <li
-                className="cursor-pointer hover:text-gray-300 mb-2"
-                onClick={() => handleSubItemClick("/admin/devotion/manage")}
-              >
-                Manage Devotion
-              </li>
-              {/* Add more sub-items as needed */}
-            </ul>
-          )}
-        </div>
-        <hr />
-        <div
-          className="px-4 py-5 cursor-pointer hover:bg-accent-6"
-          onClick={() => handleMenuClick("users")}
-        >
-          <SidebarMenu
-            menuName="Users"
-            openMenu={openMenu}
-            handleMenuClick={handleMenuClick}
-          >
-            <UserCircle className="text-primary-1" weight="fill" size={24} />
-          </SidebarMenu>
-          {openMenu === "users" && (
-            <ul className="pl-4 mt-2 py-2">
-              <li
-                className="cursor-pointer hover:text-gray-300 mb-2"
-                onClick={() => handleSubItemClick("")}
-              >
-                Profile Page
-              </li>
-            </ul>
-          )}
-        </div>
-        <hr />
-        <div
-          className=" px-4 py-5 cursor-pointer hover:bg-accent-6"
-          onClick={() => handleMenuClick("feedback")}
-        >
-          <SidebarMenu
-            menuName="Feedback Survey"
-            openMenu={openMenu}
-            handleMenuClick={handleMenuClick}
-          >
-            <ChatCircle className="text-primary-1" weight="fill" size={24} />
-          </SidebarMenu>
-          {openMenu === "feedback" && (
-            <ul className="pl-4 mt-2 py-2">
-              <li
-                className="cursor-pointer hover:text-gray-300 mb-2"
-                onClick={() => handleSubItemClick("")}
-              >
-                Give us Feedback
-              </li>
-            </ul>
-          )}
-        </div>
-        <hr />
+            {!isCollapsed &&
+              activeMenu === item.label &&
+              item.subItems.map((subItem) => (
+                <div
+                  key={subItem.path}
+                  className="pl-8 menu-item py-1 hover:bg-accent-8 rounded-lg transition-all"
+                  onClick={(e) => handleSubItemClick(subItem.path, e)}
+                >
+                  {subItem.label}
+                </div>
+              ))}
+          </SidebarItem>
+        ))}
+      </div>
+      <div>
+        <UserCircle
+          size={28}
+          className="text-primary-1 absolute bottom-8 left-4 cursor-pointer hover:bg-accent-6 rounded-full transition-all"
+        />
       </div>
     </div>
   );
