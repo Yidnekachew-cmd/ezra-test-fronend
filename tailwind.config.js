@@ -36,6 +36,9 @@ export default {
       "7xl": ["96px", { lineHeight: "110px", letterSpacing: "-0.02em" }],
     },
     extend: {
+      gridTemplateColumns: {
+        "admin-dashboard": "auto 1fr",
+      },
       truncate: {
         lines: {
           2: "2",

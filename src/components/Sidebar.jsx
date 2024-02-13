@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import { ArrowLeft, ArrowRight } from "@phosphor-icons/react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  CalendarCheck,
+  ChatCircle,
+  Cross,
+  UserCircle,
+} from "@phosphor-icons/react";
 import { Graph } from "@phosphor-icons/react/dist/ssr";
 const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState("");
@@ -10,13 +18,20 @@ const Sidebar = () => {
 
   const SidebarMenu = ({ menuName, children, openMenu, handleMenuClick }) => (
     <div
-      className={`px-4 py-5 cursor-pointer hover:bg-accent-6 ${
+      className={`px-2 cursor-pointer hover:bg-accent-6 ${
         openMenu === menuName ? "bg-accent-6" : ""
       }`}
       onClick={() => handleMenuClick(menuName)}
     >
-      {/* Show menu label or icon based on `isCollapsed` */}
-      {children}
+      {/* Show icon and text when not collapsed */}
+      {!isCollapsed && (
+        <div className="flex gap-2">
+          {children}
+          <span>{menuName}</span>
+        </div>
+      )}
+      {/* Show only icon when collapsed */}
+      {isCollapsed && children}
     </div>
   );
 
@@ -40,7 +55,10 @@ const Sidebar = () => {
       className={`flex flex-col text-white bg-accent-8 h-full ${
         isCollapsed ? "w-16" : "w-64"
       }`}
-      style={{ height: "100vh", transition: "width 0.3s" }}
+      style={{
+        height: "100vh",
+        transition: "width 0.3s",
+      }}
     >
       <div className="font-Lato-Bold relative">
         <h1 className="text-center py-4">Dashboard</h1>
@@ -64,11 +82,16 @@ const Sidebar = () => {
           )}
         </div>
         <div
-          className="flex gap-2 px-4 py-5 cursor-pointer hover:bg-accent-6"
+          className="px-4 py-5 cursor-pointer hover:bg-accent-6"
           onClick={() => handleMenuClick("analytics")}
         >
-          <Graph className="text-primary-1" size={24} />
-          Analytics
+          <SidebarMenu
+            menuName="Analytics"
+            openMenu={openMenu}
+            handleMenuClick={handleMenuClick}
+          >
+            <Graph className="text-primary-1" size={24} />
+          </SidebarMenu>
           {openMenu === "analytics" && (
             <ul className="pl-4 mt-2 py-2">
               <li
@@ -92,7 +115,13 @@ const Sidebar = () => {
           className="px-4 py-5 cursor-pointer hover:bg-accent-6"
           onClick={() => handleMenuClick("courses")}
         >
-          Courses
+          <SidebarMenu
+            menuName="Courses"
+            openMenu={openMenu}
+            handleMenuClick={handleMenuClick}
+          >
+            <BookOpen className="text-primary-1" weight="fill" size={24} />
+          </SidebarMenu>
           {openMenu === "courses" && (
             <ul className="pl-4 mt-2 py-2">
               <li
@@ -116,7 +145,13 @@ const Sidebar = () => {
           className="px-4 py-5 cursor-pointer  hover:bg-accent-6"
           onClick={() => handleMenuClick("sabbathSchool")}
         >
-          Sabbath School
+          <SidebarMenu
+            menuName="Sabbath School"
+            openMenu={openMenu}
+            handleMenuClick={handleMenuClick}
+          >
+            <Cross className="text-primary-1" weight="fill" size={24} />
+          </SidebarMenu>
           {openMenu === "sabbathSchool" && (
             <ul className="pl-4 mt-2 py-2">
               <li
@@ -134,7 +169,13 @@ const Sidebar = () => {
           className="px-4 py-5 cursor-pointer  hover:bg-accent-6"
           onClick={() => handleMenuClick("devotion")}
         >
-          Daily Devotional
+          <SidebarMenu
+            menuName="Daily Devotional"
+            openMenu={openMenu}
+            handleMenuClick={handleMenuClick}
+          >
+            <CalendarCheck className="text-primary-1" weight="fill" size={24} />
+          </SidebarMenu>
           {openMenu === "devotion" && (
             <ul className="pl-4 mt-2 py-2">
               <li
@@ -159,7 +200,13 @@ const Sidebar = () => {
           className="px-4 py-5 cursor-pointer hover:bg-accent-6"
           onClick={() => handleMenuClick("users")}
         >
-          Users
+          <SidebarMenu
+            menuName="Users"
+            openMenu={openMenu}
+            handleMenuClick={handleMenuClick}
+          >
+            <UserCircle className="text-primary-1" weight="fill" size={24} />
+          </SidebarMenu>
           {openMenu === "users" && (
             <ul className="pl-4 mt-2 py-2">
               <li
@@ -173,10 +220,16 @@ const Sidebar = () => {
         </div>
         <hr />
         <div
-          className="px-4 py-5 cursor-pointer hover:bg-accent-6"
+          className=" px-4 py-5 cursor-pointer hover:bg-accent-6"
           onClick={() => handleMenuClick("feedback")}
         >
-          Feedback Survey
+          <SidebarMenu
+            menuName="Feedback Survey"
+            openMenu={openMenu}
+            handleMenuClick={handleMenuClick}
+          >
+            <ChatCircle className="text-primary-1" weight="fill" size={24} />
+          </SidebarMenu>
           {openMenu === "feedback" && (
             <ul className="pl-4 mt-2 py-2">
               <li
