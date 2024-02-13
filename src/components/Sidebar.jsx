@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   ArrowLeft,
@@ -8,17 +9,22 @@ import {
   CalendarCheck,
   ChatCircle,
   Cross,
-  User,
+  X,
   UserCircle,
+  Graph,
 } from "@phosphor-icons/react";
-import { Graph } from "@phosphor-icons/react/dist/ssr";
+import LogoutButton from "./LogoutButton";
 const Sidebar = () => {
-  const [openMenu, setOpenMenu] = useState("");
+  const user = useSelector((state) => state.auth.user);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const [activeMenu, setActiveMenu] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   const isActive = (path) => {
     return location.pathname.includes(path);
@@ -110,6 +116,26 @@ const Sidebar = () => {
     handleMenuClick: PropTypes.func.isRequired,
   };
 
+  const ProfileModal = () => {
+    return (
+      <div className="fixed bottom-24 left-2 flex justify-center items-center z-50">
+        <div className="bg-primary-3 p-2 rounded-lg shadow-lg w-48">
+          <div className="flex flex-col items-center">
+            <Link
+              to="/profile"
+              className="py-2 hover:bg-accent-2 w-full text-center text-accent-6"
+            >
+              Profile Settings
+            </Link>
+            <div className="py-2 hover:bg-accent-2 w-full text-center text-accent-6">
+              <LogoutButton />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const handleItemClick = (item, event) => {
     if (item.subItems.length === 1) {
       // Navigate directly if there's only one subItem
@@ -121,14 +147,13 @@ const Sidebar = () => {
     }
   };
 
-  // This function is now only responsible for sub-item navigation.
   const handleSubItemClick = (path, event) => {
-    event.stopPropagation(); // Prevents triggering the parent's onClick event.
+    event.stopPropagation();
     navigate(path);
   };
   return (
     <div
-      className={`flex flex-col text-white bg-accent-8 h-full pt-12 ${
+      className={`flex flex-col text-white bg-accent-8 h-full pt-12 font-Lato-Bold  ${
         isCollapsed ? "w-16" : "w-64"
       }`}
       style={{
@@ -136,7 +161,7 @@ const Sidebar = () => {
         transition: "width 0.3s",
       }}
     >
-      <div className="font-Lato-Bold relative">
+      <div className="relative">
         <h1 className="text-center py-4">Dashboard</h1>
         <div
           className="absolute top-2 right-4 transform translate-x-full"
@@ -186,11 +211,15 @@ const Sidebar = () => {
           </SidebarItem>
         ))}
       </div>
-      <div>
-        <UserCircle
-          size={28}
-          className="text-primary-1 absolute bottom-8 left-4 cursor-pointer hover:bg-accent-6 rounded-full transition-all"
-        />
+      {isModalOpen && <ProfileModal />}
+      <div
+        className="absolute bottom-8 left-4 hover:bg-accent-6 rounded-full transition-all px-3 py-1 cursor-pointer hover:shadow-lg"
+        onClick={toggleModal}
+      >
+        <div className="flex items-center gap-2">
+          <UserCircle size={28} className="text-primary-1 cursor-pointer " />
+          {user.role}
+        </div>
       </div>
     </div>
   );
