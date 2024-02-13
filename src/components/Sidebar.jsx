@@ -1,9 +1,31 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import PropTypes from "prop-types";
+import { ArrowLeft, ArrowRight } from "@phosphor-icons/react";
+import { Graph } from "@phosphor-icons/react/dist/ssr";
 const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState("");
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const navigate = useNavigate();
+
+  const SidebarMenu = ({ menuName, children, openMenu, handleMenuClick }) => (
+    <div
+      className={`px-4 py-5 cursor-pointer hover:bg-accent-6 ${
+        openMenu === menuName ? "bg-accent-6" : ""
+      }`}
+      onClick={() => handleMenuClick(menuName)}
+    >
+      {/* Show menu label or icon based on `isCollapsed` */}
+      {children}
+    </div>
+  );
+
+  SidebarMenu.propTypes = {
+    menuName: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
+    openMenu: PropTypes.string.isRequired,
+    handleMenuClick: PropTypes.func.isRequired,
+  };
 
   const handleMenuClick = (menuName) => {
     setOpenMenu((prevMenu) => (prevMenu === menuName ? "" : menuName));
@@ -14,14 +36,38 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex flex-col text-white  bg-secondary-7 w-[100%] ">
-      <div className="w-[100%]  h-auto  font-Lato-Bold">
-        <h1 className="text-center">DashBoard</h1>
+    <div
+      className={`flex flex-col text-white bg-accent-8 h-full ${
+        isCollapsed ? "w-16" : "w-64"
+      }`}
+      style={{ height: "100vh", transition: "width 0.3s" }}
+    >
+      <div className="font-Lato-Bold relative">
+        <h1 className="text-center py-4">Dashboard</h1>
         <hr className="w-[100]" />
         <div
-          className="px-4 py-5 cursor-pointer hover:bg-accent-6"
+          className="absolute top-2 right-4 transform translate-x-full"
+          onClick={() => setIsCollapsed(!isCollapsed)}
+        >
+          {isCollapsed ? (
+            <ArrowRight
+              size={20}
+              weight="bold"
+              className="h-8 w-8 text-accent-8 border border-accent-8 bg-primary-1 rounded-full p-2"
+            />
+          ) : (
+            <ArrowLeft
+              size={20}
+              weight="bold"
+              className="h-8 w-8 text-accent-8 border border-accent-8 bg-primary-1 rounded-full p-2"
+            />
+          )}
+        </div>
+        <div
+          className="flex gap-2 px-4 py-5 cursor-pointer hover:bg-accent-6"
           onClick={() => handleMenuClick("analytics")}
         >
+          <Graph className="text-primary-1" size={24} />
           Analytics
           {openMenu === "analytics" && (
             <ul className="pl-4 mt-2 py-2">

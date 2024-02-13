@@ -4,7 +4,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login, setAuthReady } from "./redux/authSlice";
 import Header from "./components/Header";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import Home from "./routes/Home";
 import SabbathSchool from "./routes/SabbathSchool";
 import Devotion from "./routes/Devotion";
@@ -63,6 +69,9 @@ function App() {
     children: PropTypes.node.isRequired,
   };
 
+  const isCurrentRouteAdminDashboard = () => {
+    return location.pathname.includes("/admin");
+  };
   return (
     <BrowserRouter b>
       <Header />
@@ -115,7 +124,7 @@ function App() {
         {/* Not Found Route */}
         <Route path="*" element={<NotMatch />} />
       </Routes>
-      <Footer />
+      {!isCurrentRouteAdminDashboard() && <Footer />}
     </BrowserRouter>
   );
 }
