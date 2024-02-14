@@ -9,21 +9,17 @@ import { login as loginAction } from "../redux/authSlice";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login, { isLoading, error }] = useLoginMutation(); // use the hook
+  const [login, { isLoading, error }] = useLoginMutation();
   const navigate = useNavigate();
-  const dispatch = useDispatch(); // get the dispatch function from Redux
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await login({ email, password }).unwrap(); // call the mutation
+      const result = await login({ email, password }).unwrap();
       if (result) {
-        // save the user to local storage
         localStorage.setItem("user", JSON.stringify(result));
-
-        // update the auth context
-        dispatch(loginAction(result)); // dispatch the login action from authSlice
-
+        dispatch(loginAction(result));
         if (result.role === "Admin") {
           navigate("/admin");
         } else {
@@ -31,7 +27,7 @@ const Login = () => {
         }
       }
     } catch (err) {
-      console.error(err);
+      console.error("Failed to login:", err);
     }
   };
 
@@ -97,7 +93,6 @@ const Login = () => {
             className="md:w-[40%] lg:w-[69%] bg-accent-6 text-white px-16 py-1 rounded-sm hover:bg-accent-7 hover:cursor-pointer transition-all"
           >
             {isLoading ? <Spinner size={32} /> : "Log In"}
-            {/* Render loading spinner if isLoading is true */}
           </button>
           <Link
             className="border border-accent-6 rounded-sm px-8 flex justify-center items-center hover:bg-secondary-6 hover:text-primary-1 hover:border-secondary-6 transition-all"

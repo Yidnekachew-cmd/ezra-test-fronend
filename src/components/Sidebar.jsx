@@ -123,11 +123,11 @@ const Sidebar = () => {
           <div className="flex flex-col items-center">
             <Link
               to="/profile"
-              className="py-2 hover:bg-accent-2 w-full text-center text-accent-6"
+              className="py-2 hover:bg-accent-2 w-full text-center text-accent-6 transition-all"
             >
               Profile Settings
             </Link>
-            <div className="py-2 hover:bg-accent-2 w-full text-center text-accent-6">
+            <div className="py-2 hover:bg-accent-2 w-full text-center text-accent-6 transition-all">
               <LogoutButton />
             </div>
           </div>

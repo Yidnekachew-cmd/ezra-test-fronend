@@ -10,6 +10,7 @@ import {
   Route,
   Navigate,
   useLocation,
+  useNavigation,
 } from "react-router-dom";
 import Home from "./routes/Home";
 import SabbathSchool from "./routes/SabbathSchool";
@@ -124,7 +125,7 @@ function App() {
         {/* Not Found Route */}
         <Route path="*" element={<NotMatch />} />
       </Routes>
-      {!isCurrentRouteAdminDashboard() && <Footer />}
+      <Footer />
     </BrowserRouter>
   );
 }
