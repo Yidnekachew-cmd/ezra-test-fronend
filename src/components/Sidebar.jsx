@@ -89,16 +89,6 @@ const Sidebar = () => {
       </div>
     );
   };
-  const SidebarMenu = ({ menuName, children, openMenu, handleMenuClick }) => (
-    <div
-      className={`px-2 cursor-pointer hover:bg-accent-6 ${
-        openMenu === menuName ? "bg-accent-6" : ""
-      }`}
-      onClick={() => handleMenuClick(menuName)}
-    >
-      {children}
-    </div>
-  );
 
   SidebarItem.propTypes = {
     icon: PropTypes.elementType.isRequired,
@@ -106,13 +96,6 @@ const Sidebar = () => {
     active: PropTypes.bool.isRequired,
     children: PropTypes.node,
     onClick: PropTypes.func.isRequired,
-  };
-
-  SidebarMenu.propTypes = {
-    menuName: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
-    openMenu: PropTypes.string.isRequired,
-    handleMenuClick: PropTypes.func.isRequired,
   };
 
   const ProfileModal = () => {
