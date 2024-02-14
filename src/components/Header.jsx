@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
@@ -11,6 +11,13 @@ const Header = () => {
   const user = useSelector((state) => state.auth.user);
   const [showAccountModal, setShowAccountModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+
+  // useEffect(() => {
+  //   if (user?.role === "Admin") {
+  //     // Redirect to admin dashboard
+  //     window.location.href = "/admin";
+  //   }
+  // }, [user]);
 
   const handleAccountClick = () => {
     console.log("user details", user);

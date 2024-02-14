@@ -9,7 +9,6 @@ import {
   CalendarCheck,
   ChatCircle,
   Cross,
-  X,
   UserCircle,
   Graph,
 } from "@phosphor-icons/react";
