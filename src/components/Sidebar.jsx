@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { resetCourse } from "@/redux/courseSlice";
 
 const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleMenuClick = (menuName) => {
     setOpenMenu((prevMenu) => (prevMenu === menuName ? "" : menuName));
@@ -11,6 +14,7 @@ const Sidebar = () => {
 
   const handleSubItemClick = (subItem) => {
     navigate(subItem); // Redirect to the selected sub-item's route
+    dispatch(resetCourse()); //reset the state to the initial values
   };
 
   return (
