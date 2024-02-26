@@ -144,6 +144,15 @@ export const courseSlice = createSlice({
       const { chapterIndex, slideIndex } = action.payload;
       state.chapters[chapterIndex].slides.splice(slideIndex, 1);
     },
+
+    resetCourse: () => {
+      return {
+        title: "",
+        description: "",
+        image: "",
+        chapters: [],
+      };
+    },
   },
 });
 
@@ -167,6 +176,7 @@ export const {
   setCurrentSlide,
   selectCurrentChapter,
   selectCurrentSlide,
+  resetCourse,
 } = courseSlice.actions;
 
 export default courseSlice.reducer;
